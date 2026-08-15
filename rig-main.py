@@ -1371,6 +1371,48 @@ def intersections(pose_nom):
     return trouve
 
 
+def ou_ca_traverse():
+    """Quels OS portent les sommets qui se traversent, et non quelles familles.
+
+    « thumb/index » ne dit pas s'il s'agit de deux doigts qui se croisent ou de
+    l'éminence thénar qui se replie contre la base de l'index — deux défauts
+    qui ne se corrigent pas au même endroit. Ce diagnostic n'existait que pour
+    `Hand_Pinky_Thumb`, écrit à la main sur un seul couple : les deux autres
+    contacts se corrigeaient donc à l'aveugle. Il est ici générique, et rendu
+    trié par nombre de sommets décroissant.
+    """
+    _p, _n = sommets_evalues()
+    par = {}
+    for i, nm in _dom.items():
+        f = famille(nm)
+        if f is not None:
+            par.setdefault(f, []).append(i)
+    arbres = {}
+    for f, idx in par.items():
+        t = mathutils.kdtree.KDTree(len(idx))
+        for k, i in enumerate(idx):
+            t.insert(_p[i], k)
+        t.balance()
+        arbres[f] = (t, idx)
+    ou = {}
+    fams = [f for f in ("thumb", "index", "middle", "ring", "pinky", "hand")
+            if f in arbres]
+    for _x in range(len(fams)):
+        for _y in range(_x + 1, len(fams)):
+            for _src, _dst in ((fams[_x], fams[_y]), (fams[_y], fams[_x])):
+                tb_, ib = arbres[_dst]
+                for i in par[_src]:
+                    co, k, d = tb_.find(_p[i])
+                    j = ib[k]
+                    if (d < 0.008
+                            and (_p[j] - _p[i]).dot(_n[j]) > PROFONDEUR_MINIMALE
+                            and (_p_repos_global[i] - _p_repos_global[j]).length
+                            > ECART_REPOS_MINIMAL):
+                        cle = f"{_dom[i]} → {_dom[j]}"
+                        ou[cle] = ou.get(cle, 0) + 1
+    return dict(sorted(ou.items(), key=lambda kv: -kv[1]))
+
+
 # ═══ CALIBRER LA SONDE AVANT DE LIRE SON VERDICT ═══
 # Un doigt qui se plie COMPRIME sa peau palmaire : c'est normal, pas un
 # pincement. Sans repère, je prendrais un pli pour un défaut. On mesure donc la
@@ -1712,10 +1754,57 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
     return m_f, best[2], best[3]
 
 
+def axes_de_degagement(doigt_a, doigt_b, deja):
+    """Les doigts ÉTRANGERS au contact doivent pouvoir sortir du chemin.
+
+    ═══ ON A CORRIGÉ L'INSTRUMENT SANS ROUVRIR L'ESPACE QU'IL CONDAMNE ═══
+
+    Mesuré sur la baseline du chat 2, reproduite depuis le commit public :
+
+        ATLAS_DEUX_TEMPS  après approche   1,08 mm — 17 traversées
+                          après nettoyage  3,19 mm —  0 traversée
+
+    La recherche SAIT venir à 1,08 mm. Aucune pose propre n'existe à cette
+    distance dans les axes qu'on lui donne, alors le nettoyeur fait la seule
+    chose qu'il peut : il RECULE le pouce, et rend 3,19 mm pour un seuil à
+    1,00 mm.
+
+    Les axes de `PINCH` étaient `Index_Curl`, `Thumb_Curl`,
+    `Thumb_Opposition`, `Relax` et six corrections FK sur l'index et le pouce.
+    Pas un seul sur le majeur, l'annulaire ou l'auriculaire. Or depuis que la
+    sonde compte les 15 couples dans les deux sens, ces trois doigts sont
+    JUGÉS — sans avoir aucun moyen de s'écarter. C'est la même faute de forme
+    que la sonde aveugle, prise par l'autre bout.
+
+    UNE seule liberté par doigt libre, et c'est l'écartement. Dans une vraie
+    main, un doigt évite son voisin LATÉRALEMENT — c'est le même fait que
+    « les doigts divergent en se fermant », établi plus haut par la mesure.
+    Lui donner aussi la flexion serait lui permettre de changer de geste :
+    l'optimiseur ouvrirait le poing pour le rendre propre, et rendrait un
+    poing qui n'en est plus un.
+
+    L'amplitude est celle de la butée anatomique de la phase E (±15°) et pas
+    un degré de plus : au-delà, la contrainte écrête et l'optimiseur explore
+    une plage morte où deux valeurs différentes donnent la même pose.
+
+    `deja` porte les clés déjà pilotées par l'appelant : sans cette
+    déduplication, deux entrées écriraient la même rotation et le vecteur de
+    l'optimiseur ne correspondrait plus à ce qu'il croit régler.
+    """
+    return [("os", (f"CTRL_{n}_01{SIDE}", AXE_ECART), -15.0, 15.0)
+            for n in NOMS4
+            if n not in (doigt_a, doigt_b)
+            and (f"CTRL_{n}_01{SIDE}", AXE_ECART) not in deja]
+
+
 def chercher_contact(doigt_a, doigt_b, axes, base_props=None):
     """Deux temps : approcher, puis nettoyer sans lâcher le contact."""
     BARRIERE[0] = 60.0                      # le pouce peut traverser en chemin
     m1, etat1, v1 = optimiser_contact(doigt_a, doigt_b, axes, base_props, tours=10)
+    # On NOMME ce qui traverse avant de le corriger : sans ça, élargir les axes
+    # serait un coup de dés de plus.
+    print(f"ATLAS_OU_CA_TRAVERSE_APPROCHE {doigt_a}/{doigt_b} "
+          + json.dumps(ou_ca_traverse(), ensure_ascii=False))
     # ═══ LA BARRIÈRE DE NETTOYAGE EST HAUTE, PAS INFINIE ═══
     # À 10⁶, un unique sommet marginal valait plus que tout le contact : la
     # phase 2 abandonnait un appui à 0,86 mm pour aller à 16 mm. Bornée à
@@ -1729,6 +1818,11 @@ def chercher_contact(doigt_a, doigt_b, axes, base_props=None):
     axes_serres = [(g, c, max(lo, v - (hi - lo) * 0.22),
                     min(hi, v + (hi - lo) * 0.22))
                    for (g, c, lo, hi), v in zip(axes, v1)]
+    # Le dégagement n'entre qu'ici, pas dans l'approche : approcher n'a pas
+    # besoin des doigts libres, et les lui donner coûterait la moitié du temps
+    # de recherche pour rien.
+    axes_serres += axes_de_degagement(doigt_a, doigt_b,
+                                      {c for _g, c, _lo, _hi in axes})
     m2, etat2, v2 = optimiser_contact(doigt_a, doigt_b, axes_serres,
                                       base_props, tours=18)
     CIBLE_DISTANCE[0] = 0.0
@@ -1738,8 +1832,12 @@ def chercher_contact(doigt_a, doigt_b, axes, base_props=None):
          "apres_approche_mm": round(m1["distance_mm"], 2),
          "traversees_apres_approche": m1.get("intersection_des_doigts"),
          "apres_nettoyage_mm": round(m2["distance_mm"], 2),
-         "traversees_apres_nettoyage": m2.get("intersection_des_doigts")},
+         "traversees_apres_nettoyage": m2.get("intersection_des_doigts"),
+         "axes_de_degagement": len(axes_serres) - len(axes)},
         ensure_ascii=False))
+    if m2.get("intersection_des_doigts"):
+        print(f"ATLAS_OU_CA_TRAVERSE_NETTOYAGE {doigt_a}/{doigt_b} "
+              + json.dumps(ou_ca_traverse(), ensure_ascii=False))
     return m2, etat2, v2
 
 
