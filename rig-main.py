@@ -67,6 +67,7 @@ import humain                       # noqa: E402
 import articulations as A           # noqa: E402
 import mains                        # noqa: E402
 import portillon                    # noqa: E402
+import eclairage                    # noqa: E402
 
 portillon.exiger("humain-rig-main")
 
@@ -2548,35 +2549,31 @@ print("ATLAS_PHASE_H terminée")
 # ═══════════════════════════════════════════════════════════════════
 if not SANS_RENDU:
     sc = bpy.context.scene
-    sc.render.engine = "CYCLES"
+    # ═══ L'ÉCLAIRAGE N'EST PLUS IMPROVISÉ ICI ═══
+    #
+    # `atelier/eclairage.py` existait depuis le chat 1, prouvé isolément —
+    # 18 rendus, 0,000 % d'écrêtage, key mesurée à 75,0° de la normale — et
+    # n'avait JAMAIS été exécuté dans le pipeline. Pendant ce temps ce bloc
+    # posait trois lampes à la main, avec des puissances rattrapées deux fois
+    # (« 260 W saturait », « à 30 W tout partait en blanc »). Deux éclairages
+    # pour un même dépôt, dont un seul était mesuré.
+    #
+    # Le module devient la seule source : exposition verrouillée pour toute la
+    # série, clay lambertien, distance des sources calculée sur la largeur du
+    # sujet — donc un gros plan n'est pas plus brûlé qu'un plan large — et un
+    # histogramme rendu à chaque image, qui fait échouer la construction si
+    # l'écrêtage dépasse la limite.
+    _verrous = eclairage.poser_studio(sc, materiau_clay=True, objets_clay=[geo])
     try:
         sc.cycles.device = "GPU"
     except Exception:
         pass
-    sc.cycles.samples = 96
-    sc.cycles.use_denoising = True
-    sc.render.resolution_x = sc.render.resolution_y = 900
-    sc.view_settings.view_transform = "AgX"
-    sc.render.film_transparent = False
-
-    # ═══ UNE MATIÈRE QUI NE CACHE RIEN ═══
-    # Les rendus précédents étaient trop clairs : volumes, plis et
-    # intersections y devenaient illisibles. Une argile grise moyenne, plus
-    # rugueuse, révèle les jointures au lieu de les noyer.
-    peau = bpy.data.materials.new("argile")
-    peau.use_nodes = True
-    _bs = peau.node_tree.nodes["Principled BSDF"]
-    _bs.inputs["Base Color"].default_value = (0.46, 0.45, 0.44, 1.0)
-    _bs.inputs["Roughness"].default_value = 0.62
-    if "Specular IOR Level" in _bs.inputs:
-        _bs.inputs["Specular IOR Level"].default_value = 0.35
-    geo.data.materials.clear()
-    geo.data.materials.append(peau)
-
-    _monde = bpy.data.worlds.new("fond")
-    _monde.use_nodes = True
-    _monde.node_tree.nodes["Background"].inputs[0].default_value = (0.05, 0.05, 0.06, 1)
-    sc.world = _monde
+    dire("studio_verrouille", {k: (v if isinstance(v, (int, float, str, bool,
+                                                       list, tuple))
+                                   else str(v))
+                               for k, v in _verrous.items()})
+    ECRETAGE_MAX = 2.0          # en % — la limite que l'agent lumière s'est fixée
+    _histos = {}
 
     # ═══ QUEL CÔTÉ EST LA PAUME : MESURÉ, PAS SUPPOSÉ ═══
     # Le signe d'une normale construite par produit vectoriel dépend de l'ordre
@@ -2601,9 +2598,15 @@ if not SANS_RENDU:
     PLANS = {"paume": PALMAIRE, "dos": -PALMAIRE,
              "pouce": Tp, "auriculaire": -Tp}
 
-    def rendre(nom_pose, plan, direction, cadre=0.205, vise_sur=None):
-        for o in [x for x in bpy.data.objects if x.type in ("CAMERA", "LIGHT", "EMPTY")]:
-            bpy.data.objects.remove(o, do_unlink=True)
+    def rendre(nom_image, direction, cadre=0.205, vise_sur=None, cote=1):
+        """Une image, sous lumière rasante mesurée, et son histogramme.
+
+        `direction` va de la cible vers la caméra : c'est donc aussi la
+        normale de la surface qu'on photographie, et c'est elle qu'on fait
+        raser. `cote` vaut +1 ou −1 — les deux directions rasantes opposées
+        que le cahier exige pour la paume et le dos, parce qu'un pli que la
+        première noie, la seconde le révèle.
+        """
         _p, _ = sommets_evalues()
         # On vise la MAIN, pas le bras : les sommets tenus par DEF_hand
         # appartiennent au moignon d'avant-bras, et les inclure repoussait la
@@ -2613,46 +2616,40 @@ if not SANS_RENDU:
         else:
             _ii = [i for i, n in _dom.items() if n != f"DEF_hand{SIDE}"]
             vise = sum((_p[i] for i in _ii), mathutils.Vector((0, 0, 0))) / len(_ii)
-        cam = bpy.data.cameras.new("cam"); cam.lens = 85.0
-        oc = bpy.data.objects.new("cam", cam)
-        bpy.context.collection.objects.link(oc)
-        sc.camera = oc
-        recul = (cadre / 2.0) / math.tan(cam.angle / 2.0)
-        cam.clip_start, cam.clip_end = recul / 400.0, recul * 400.0
-        oc.location = vise + direction.normalized() * recul
-        cible = bpy.data.objects.new("cible", None)
-        bpy.context.collection.objects.link(cible)
-        cible.location = vise
-        c = oc.constraints.new("TRACK_TO"); c.target = cible
-        # Puissances revues : 260 W à 45 cm saturait complètement l'image, elle
-        # sortait blanche. Une source de 0,35 m à cette distance éclaire une
-        # main avec quelques dizaines de watts.
-        # ═══ UNE EXPOSITION QUI LAISSE VOIR ═══
-        # À 30 W, tout partait en blanc : plis, volumes et intersections
-        # devenaient invisibles, ce que le tutoriel interdit expressément. La
-        # puissance suit maintenant le carré de la distance, si bien qu'un gros
-        # plan n'est pas plus brûlé qu'un plan large.
-        _dist = max(0.18, recul * 0.55)
-        _k = (_dist / 0.45) ** 2
-        for _v, _e in ((direction.normalized() * 0.6 + N * 0.5, 7.0),
-                       (direction.normalized() * 0.5 - T * 0.7, 2.6),
-                       (-direction.normalized() * 0.4 + AXE * 0.6, 1.7)):
-            ld = bpy.data.lights.new("l", "AREA")
-            ld.energy = _e * _k
-            ld.size = 0.35 * min(1.0, _dist / 0.45)
-            ol = bpy.data.objects.new("l", ld)
-            bpy.context.collection.objects.link(ol)
-            ol.location = vise + _v.normalized() * _dist
-            cl = ol.constraints.new("TRACK_TO"); cl.target = cible
-        sc.render.filepath = os.path.join(DOSSIER, f"{nom_pose}-{plan}.png")
-        bpy.ops.render.render(write_still=True)
+        eclairage.cadrer(geo, direction, vise, cadre, scene=sc)
+        _e = eclairage.eclairer_rasant(vise, direction, direction, cote,
+                                       largeur_sujet=cadre, scene=sc)
+        _chemin = os.path.join(DOSSIER, f"{nom_image}.png")
+        _h = eclairage.rendre(_chemin, sc)
+        # ═══ PAS DE VALEUR PAR DÉFAUT SUR UNE MESURE ═══
+        # Premier jet : je lisais `_h.get("ecretage", 0.0)` alors que la clé
+        # s'appelle `ecretage_pct`. Chaque image aurait rendu 0 % d'écrêtage et
+        # 0° de rasance, et le critère serait passé en ne mesurant RIEN. Un
+        # zéro se lit comme une mesure. On indexe donc directement : une clé
+        # absente doit lever, pas valoir zéro.
+        _histos[nom_image] = {
+            "ecretage_pct": _h["ecretage_pct"],
+            "ombres_pct": _h["ombres_pct"],
+            "luminance_max": _h["luminance_max"],
+            "luminance_moyenne": _h["luminance_moyenne"],
+            "couverture_pct": _h.get("couverture_pct"),
+            "key_contre_normale_deg": round(_e["key_angle_vs_normale_deg"], 1)}
+        return _h
 
-    # Les treize poses obligatoires, sous les quatre angles.
+    # ═══ DEUX DIRECTIONS RASANTES POUR LA PAUME ET LE DOS ═══
+    # Le cahier les exige, et pour une raison qui se mesure : une lumière
+    # rasante ne révèle que les plis PERPENDICULAIRES à elle. Une seule
+    # direction laisse donc invisible la moitié du relief. Les tranches
+    # (pouce, auriculaire) n'en reçoivent qu'une : leur silhouette suffit à
+    # les juger, et doubler y coûterait 26 images pour rien.
+    VUES = [("paume-A", PALMAIRE, +1), ("paume-B", PALMAIRE, -1),
+            ("dos-A", -PALMAIRE, +1), ("dos-B", -PALMAIRE, -1),
+            ("pouce", Tp, +1), ("auriculaire", -Tp, +1)]
     for nom_pose, reglages, os_pose in POSES:
         poser_etat(reglages, os_pose)
-        for plan, direction in PLANS.items():
-            rendre(nom_pose, plan, direction)
-        print(f"ATLAS_RENDU {nom_pose} — 4 plans")
+        for _nv, _dir, _cote in VUES:
+            rendre(f"{nom_pose}-{_nv}", _dir, cote=_cote)
+        print(f"ATLAS_RENDU {nom_pose} — {len(VUES)} vues")
     # Gros plans des trois contacts critiques et de la zone qui échoue.
     for nom_pose, reglages, os_pose in POSES:
         if nom_pose not in ("Hand_Pinch", "Hand_OK", "Hand_Pinky_Thumb",
@@ -2672,10 +2669,36 @@ if not SANS_RENDU:
         _cible_gp = (_pv[_ia] + _pv[EMP[_b][_t.find(_pv[_ia])[1]]]) / 2.0
         for plan, direction in (("paume", PLANS["paume"]),
                                 ("pouce", PLANS["pouce"])):
-            rendre(f"gros-plan-{nom_pose}", plan, direction, cadre=0.055,
+            rendre(f"gros-plan-{nom_pose}-{plan}", direction, cadre=0.055,
                    vise_sur=_cible_gp)
         print(f"ATLAS_GROS_PLAN {nom_pose}")
     regler()
+
+    # ═══ UNE IMAGE ILLISIBLE EST UN DÉFAUT, PAS UN DÉTAIL ═══
+    # Le chat 1 avait relevé `gros-plan-Hand_Pinky_Thumb-pouce.png` : écart-type
+    # de luminance 14,9 sur 255 contre 41,8 au minimum ailleurs. Remesuré ici :
+    # confirmé au chiffre près. Un contact qu'on ne peut pas voir ne peut pas
+    # être jugé, donc l'écrêtage ET le contraste entrent dans les critères.
+    dire("histogrammes", _histos)
+    _brulees = {k: v["ecretage_pct"] for k, v in _histos.items()
+                if v["ecretage_pct"] > ECRETAGE_MAX}
+    exiger("aucune image écrêtée", not _brulees, _brulees or "aucune",
+           f"≤ {ECRETAGE_MAX:.1f} % par image")
+    _rasances = {v["key_contre_normale_deg"] for v in _histos.values()}
+    exiger("la key rase vraiment la surface",
+           bool(_rasances) and all(70.0 <= x <= 80.0 for x in _rasances),
+           sorted(_rasances) or "aucune image rendue",
+           "75° ± 5 par rapport à la normale")
+    # Le contraste : c'est LUI qui a condamné `gros-plan-Hand_Pinky_Thumb-pouce`
+    # au chat 1, et l'écrêtage ne l'aurait jamais vu — une image plate n'est ni
+    # brûlée ni bouchée, elle est simplement illisible. Seuil pris sur la série
+    # elle-même et non inventé : le pire des 60 rendus de `b17e548` valait 5,86,
+    # le deuxième 16,38. Un écart de trois pour un, donc la coupure est nette.
+    _plates = {k: v["luminance_max"] - v["luminance_moyenne"]
+               for k, v in _histos.items()
+               if v["luminance_max"] - v["luminance_moyenne"] < 0.10}
+    exiger("aucune image sans relief lisible", not _plates,
+           _plates or "aucune", "amplitude de luminance ≥ 0,10")
 
 
 # ═══════════════════════════════════════════════════════════════════
