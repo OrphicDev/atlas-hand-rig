@@ -1077,7 +1077,8 @@ def famille(n):
 _contamine, _somme_fausse, _melange_paume = 0, 0, 0
 _dom = {}
 for v in geo.data.vertices:
-    gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+    gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
     if not gs:
         continue
     _dom[v.index] = max(gs)[1]
@@ -1163,7 +1164,8 @@ _corriges = 0
 for _passe in range(6):
   _avant_passe = _corriges
   for v in geo.data.vertices:
-      gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+      gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
       if not gs:
           continue
       dom = max(gs)[1]
@@ -1203,7 +1205,8 @@ bpy.ops.object.vertex_group_normalize_all(lock_active=False)
 _gnom = {g.index: g.name for g in geo.vertex_groups}
 _reste, _dom = 0, {}
 for v in geo.data.vertices:
-    gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+    gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
     if not gs:
         continue
     _dom[v.index] = max(gs)[1]
@@ -2800,7 +2803,8 @@ dire("phase_g", {
 _commissures = COMMISSURES
 _dans_le_creux, _ailleurs = 0, 0
 for v in geo.data.vertices:
-    gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+    gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
     if not gs:
         continue
     if len({famille(n) for _w, n in gs
@@ -2816,7 +2820,8 @@ for v in geo.data.vertices:
 # corriger, pour que la correction soit vérifiable.
 _restants = []
 for v in geo.data.vertices:
-    gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+    gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
     if not gs:
         continue
     fams = {famille(n) for _w, n in gs if not n.endswith(f"_meta{SIDE}")} - {"hand"}
@@ -2829,7 +2834,8 @@ if _restants:
     print("ATLAS_SOMMETS_CONTAMINES " + json.dumps(_restants, ensure_ascii=False))
     for r_ in _restants:
         v = geo.data.vertices[r_["sommet"]]
-        gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+        gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
         _ph = [(w, n) for w, n in gs if not n.endswith(f"_meta{SIDE}")
                and n != f"DEF_hand{SIDE}"]
         _garde = famille(max(_ph)[1])
@@ -2843,7 +2849,8 @@ if _restants:
     _gnom = {g.index: g.name for g in geo.vertex_groups}
     _dom = {}
     for v in geo.data.vertices:
-        gs = [(g.weight, _gnom.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+        gs = [(g.weight, _gnom[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _gnom]
         if gs:
             _dom[v.index] = max(gs)[1]
 

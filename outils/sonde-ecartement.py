@@ -98,7 +98,8 @@ neutre()
 P_REPOS, _ = evalue()
 DOM = {}
 for v in geo.data.vertices:
-    gs = [(g.weight, _ng.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+    gs = [(g.weight, _ng[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _ng]
     if gs:
         DOM[v.index] = max(gs)[1]
 

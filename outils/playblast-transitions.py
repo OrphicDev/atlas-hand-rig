@@ -131,7 +131,8 @@ neutre()
 _ng = {g.index: g.name for g in geo.vertex_groups}
 _dom = {}
 for v in geo.data.vertices:
-    gs = [(g.weight, _ng.get(g.group, "")) for g in v.groups if g.weight > 0.01]
+    gs = [(g.weight, _ng[g.group]) for g in v.groups
+            if g.weight > 0.01 and g.group in _ng]
     if gs:
         _dom[v.index] = max(gs)[1]
 _bouts = [i for i, n in _dom.items() if n.endswith(f"_03{SIDE}")]
