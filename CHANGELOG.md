@@ -3,7 +3,7 @@
 ## wip/chat-1-honest-probe — checkpoint de transmission (NON VALIDE)
 
 Base : `b17e54806f942736e47c4dcfd477a91b7fd6f262`
-SHA de ce checkpoint : `610b84444a7f0383734095549682a718f1f879ec`
+SHA de ce checkpoint : `3454e5c61fb6f80acd5cec7a6286220c229cc03e`
 
 **Aucun `.blend` de cette branche ne reflète ces corrections.** Le
 `RIG_Hand.L-NON-VALIDE.blend` présent date de la base et n'a pas été remplacé.

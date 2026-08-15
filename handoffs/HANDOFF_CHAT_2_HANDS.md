@@ -6,7 +6,7 @@
 | --- | --- |
 | dépôt | `OrphicDev/atlas-hand-rig` |
 | **branche à reprendre** | `wip/chat-1-honest-probe` |
-| **SHA du checkpoint** | `610b84444a7f0383734095549682a718f1f879ec` |
+| **SHA du checkpoint** | `3454e5c61fb6f80acd5cec7a6286220c229cc03e` |
 | base auditée, intacte | `b17e54806f942736e47c4dcfd477a91b7fd6f262` (`main`) |
 | Blender | **5.1.2**, aucun add-on |
 

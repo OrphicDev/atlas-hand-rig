@@ -11,9 +11,15 @@ lecteur ne puisse s'y tromper.
 | --- | --- |
 | base publique auditée | `b17e54806f942736e47c4dcfd477a91b7fd6f262` (branche `main`) |
 | branche de ce checkpoint | `wip/chat-1-honest-probe` |
-| commit de ce checkpoint | `610b84444a7f0383734095549682a718f1f879ec` |
+| commit de ce checkpoint | `3454e5c61fb6f80acd5cec7a6286220c229cc03e` |
 | `.blend` reflétant ces corrections | **aucun** |
 | processus encore actifs | **aucun** |
+
+
+> **Sur les deux SHA.** Le commit de contenu est `3454e5c61fb6f80acd5cec7a6286220c229cc03e`. Le
+> commit qui porte l'étiquette de tête ajoute uniquement l'inscription
+> de ce SHA dans les documents — un fichier ne peut pas contenir sa
+> propre empreinte. Clone la **tête de branche** : elle contient tout.
 
 **`main` n'est pas touchée.** Aucun `force push`, aucune réécriture d'historique,
 aucun merge, aucun tag.
