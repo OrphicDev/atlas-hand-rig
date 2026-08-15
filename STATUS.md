@@ -9,17 +9,31 @@ lecteur ne puisse s'y tromper.
 
 | | |
 | --- | --- |
-| base publique auditée | `b17e54806f942736e47c4dcfd477a91b7fd6f262` (branche `main`) |
-| branche de ce checkpoint | `wip/chat-1-honest-probe` |
-| commit de ce checkpoint | `3454e5c61fb6f80acd5cec7a6286220c229cc03e` |
+| **statut global** | **NON-VALIDE** |
+| dernière étape terminée | correction de l'instrument de mesure, puis checkpoint public |
+| étape suivante | reprendre les trois contacts contre la sonde honnête (chat 2) |
+| branche active | `wip/chat-1-honest-probe` |
+| commit de départ | `b17e54806f942736e47c4dcfd477a91b7fd6f262` |
+| commit final | `4750c21b0722594a3c600489d5e70888fb1dcb5b` |
+| **main gauche** | rig existant, **non validé** |
+| **main droite** | **inexistante** |
+| **critères réussis** | **22** |
+| **critères échoués** | **9** |
 | `.blend` reflétant ces corrections | **aucun** |
 | processus encore actifs | **aucun** |
 
+## Défauts ouverts
 
-> **Sur les deux SHA.** Le commit de contenu est `3454e5c61fb6f80acd5cec7a6286220c229cc03e`. Le
-> commit qui porte l'étiquette de tête ajoute uniquement l'inscription
-> de ce SHA dans les documents — un fichier ne peut pas contenir sa
-> propre empreinte. Clone la **tête de branche** : elle contient tout.
+1. `Hand_Point` — 978 sommets traversants
+2. `Hand_Pinky_Thumb` — 717
+3. `Hand_Fist_75` — 118
+4. `Hand_Cupped` — 80
+5. quatre transitions sur six fautives (`Neutral→` Fist, Point, Cupped, Pinky_Thumb)
+6. **main droite absente**
+7. `atelier/eclairage.py` jamais intégré au pipeline
+
+Détail et localisation : [`audit/AUDIT_PACKET_HANDS.md`](audit/AUDIT_PACKET_HANDS.md).
+Reprise : [`handoffs/HANDOFF_CHAT_2_HANDS.md`](handoffs/HANDOFF_CHAT_2_HANDS.md).
 
 **`main` n'est pas touchée.** Aucun `force push`, aucune réécriture d'historique,
 aucun merge, aucun tag.
