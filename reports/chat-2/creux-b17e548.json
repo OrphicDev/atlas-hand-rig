@@ -1,0 +1,102 @@
+{
+ "fichier": "RIG_Hand.L-NON-VALIDE.blend",
+ "balayage": [
+  {
+   "cup": 0.0,
+   "fige_toute_la_paume_mm": 21.0,
+   "fige_sans_le_pouce_mm": 21.0,
+   "arc_transverse_mm": 29.99,
+   "largeur_paume_mm": 71.99,
+   "pouce_auriculaire_mm": 102.27
+  },
+  {
+   "cup": 0.1,
+   "fige_toute_la_paume_mm": 21.21,
+   "fige_sans_le_pouce_mm": 21.21,
+   "arc_transverse_mm": 27.83,
+   "largeur_paume_mm": 72.14,
+   "pouce_auriculaire_mm": 101.23
+  },
+  {
+   "cup": 0.2,
+   "fige_toute_la_paume_mm": 21.4,
+   "fige_sans_le_pouce_mm": 21.4,
+   "arc_transverse_mm": 25.58,
+   "largeur_paume_mm": 72.6,
+   "pouce_auriculaire_mm": 100.38
+  },
+  {
+   "cup": 0.3,
+   "fige_toute_la_paume_mm": 21.56,
+   "fige_sans_le_pouce_mm": 21.56,
+   "arc_transverse_mm": 23.25,
+   "largeur_paume_mm": 73.36,
+   "pouce_auriculaire_mm": 99.75
+  },
+  {
+   "cup": 0.4,
+   "fige_toute_la_paume_mm": 21.7,
+   "fige_sans_le_pouce_mm": 21.7,
+   "arc_transverse_mm": 22.03,
+   "largeur_paume_mm": 74.43,
+   "pouce_auriculaire_mm": 99.33
+  },
+  {
+   "cup": 0.5,
+   "fige_toute_la_paume_mm": 21.81,
+   "fige_sans_le_pouce_mm": 21.81,
+   "arc_transverse_mm": 21.49,
+   "largeur_paume_mm": 75.77,
+   "pouce_auriculaire_mm": 99.13
+  },
+  {
+   "cup": 0.6,
+   "fige_toute_la_paume_mm": 21.9,
+   "fige_sans_le_pouce_mm": 21.9,
+   "arc_transverse_mm": 20.99,
+   "largeur_paume_mm": 77.38,
+   "pouce_auriculaire_mm": 99.14
+  },
+  {
+   "cup": 0.7,
+   "fige_toute_la_paume_mm": 21.96,
+   "fige_sans_le_pouce_mm": 21.96,
+   "arc_transverse_mm": 20.53,
+   "largeur_paume_mm": 79.23,
+   "pouce_auriculaire_mm": 99.38
+  },
+  {
+   "cup": 0.8,
+   "fige_toute_la_paume_mm": 21.99,
+   "fige_sans_le_pouce_mm": 21.99,
+   "arc_transverse_mm": 20.05,
+   "largeur_paume_mm": 81.3,
+   "pouce_auriculaire_mm": 99.84
+  },
+  {
+   "cup": 0.9,
+   "fige_toute_la_paume_mm": 22.0,
+   "fige_sans_le_pouce_mm": 22.0,
+   "arc_transverse_mm": 19.57,
+   "largeur_paume_mm": 83.58,
+   "pouce_auriculaire_mm": 100.51
+  },
+  {
+   "cup": 1.0,
+   "fige_toute_la_paume_mm": 21.98,
+   "fige_sans_le_pouce_mm": 21.98,
+   "arc_transverse_mm": 19.1,
+   "largeur_paume_mm": 86.03,
+   "pouce_auriculaire_mm": 101.39
+  }
+ ],
+ "gains_de_Cup_0_a_1_mm": {
+  "fige_toute_la_paume_mm": 0.98,
+  "fige_sans_le_pouce_mm": 0.98,
+  "arc_transverse_mm": -10.89,
+  "largeur_paume_mm": 14.04,
+  "pouce_auriculaire_mm": -0.88
+ },
+ "maximum_de_la_grandeur_figee_tenu_par": "DEF_pinky_meta.L",
+ "verdict": "les deux grandeurs s'accordent"
+}
