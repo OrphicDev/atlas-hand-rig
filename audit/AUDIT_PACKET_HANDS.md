@@ -1,69 +1,79 @@
-# Audit packet — Hands
+# Audit packet — Hands (chat 2)
 
 - Repository: https://github.com/OrphicDev/atlas-hand-rig
-- Branch: wip/chat-1-honest-probe
-- Base commit: b17e54806f942736e47c4dcfd477a91b7fd6f262
-- Final commit: 4750c21b0722594a3c600489d5e70888fb1dcb5b
-- Compare URL: https://github.com/OrphicDev/atlas-hand-rig/compare/b17e54806f942736e47c4dcfd477a91b7fd6f262...4750c21b0722594a3c600489d5e70888fb1dcb5b
-- Status: NON-VALIDE
-- Blender version: 5.1.2
-- Operating system: macOS 26.5 (darwin, Apple Silicon)
+- Branch: hands/chat-2-photoreal-v2
+- Base commit: e2d4b1c9e05949531d9348d68367c225b2169872
+- Final commit: voir `git rev-parse HEAD` — dernier publié au moment de cette rédaction : 2a73572
+- Compare URL: https://github.com/OrphicDev/atlas-hand-rig/compare/e2d4b1c9e05949531d9348d68367c225b2169872...hands/chat-2-photoreal-v2
+- Status: **NON-VALIDE**
+- Blender version: 5.1.2 (hash `ec6e62d40fa9`, 2026-05-19)
+- Operating system: macOS 26.5 (darwin, Apple Silicon), 10 cœurs, 16 Go
+- Base mesh: `human-base-meshes-bundle-v1.4.1` (Blender Studio, CC0), 49 420 489 octets, SHA-256 `3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137`
 - Generation command: `blender --background --factory-startup --python-exit-code 1 --python rig-main.py -- ./sortie homme g 110 mesure` (requiert `ATLAS_BASE_MESH`)
 - Validation command: `blender --background --factory-startup --python-exit-code 1 --python verifier-rig.py -- RIG_Hand.L-NON-VALIDE.blend`
-- Generation exit code: NON MESURÉ — la dernière reconstruction a été interrompue avant la fin ; aucun `.blend` n'en est issu
-- Validation exit code: 2
+- **Generation exit code: 1 — plantage**, 53 min, 16 critères réussis, 15 échoués, aucun `.blend` produit. Cause trouvée et corrigée (`8727990`) ; la reconstruction qui doit le prouver n'a pas encore abouti.
+- Validation exit code: 2 (22 réussis, 9 échoués) — reproduit depuis le commit public sur le `.blend` de `b17e548`
 - Git status: clean
 - Running processes: aucun
-- Mandatory failures: 9
-- Known limitations: voir la liste ci-dessous
-- Reports: https://github.com/OrphicDev/atlas-hand-rig/tree/4750c21b0722594a3c600489d5e70888fb1dcb5b/reports/wip-chat-1
-- Still renders: https://github.com/OrphicDev/atlas-hand-rig/tree/4750c21b0722594a3c600489d5e70888fb1dcb5b/images · https://github.com/OrphicDev/atlas-hand-rig/tree/4750c21b0722594a3c600489d5e70888fb1dcb5b/renders/wip-chat-1/preuves-lumiere
-- Contact sheets: https://github.com/OrphicDev/atlas-hand-rig/blob/4750c21b0722594a3c600489d5e70888fb1dcb5b/renders/wip-chat-1/planche-lumiere.html
-- Transition videos: AUCUNE — non produites, tâche transmise au chat 2
-- Blend files: https://github.com/OrphicDev/atlas-hand-rig/blob/4750c21b0722594a3c600489d5e70888fb1dcb5b/RIG_Hand.L-NON-VALIDE.blend (main gauche, **antérieur aux corrections de scripts de cette branche**) · main droite : **inexistante**
-- SHA-256 manifest: https://github.com/OrphicDev/atlas-hand-rig/blob/4750c21b0722594a3c600489d5e70888fb1dcb5b/audit/manifest-sha256.txt
+- Mandatory failures: 15 à la génération, 9 à la validation
+- Reports: https://github.com/OrphicDev/atlas-hand-rig/tree/hands/chat-2-photoreal-v2/reports/chat-2
+- Still renders: **aucun produit par ces scripts.** Les 60 images de `images/` datent de `b17e548`
+- Contact sheets: aucune produite par ces scripts
+- Transition videos: **AUCUNE** — l'outil existe (`outils/playblast-transitions.py`), il n'a jamais été exécuté
+- Blend files: **aucun reflétant ces scripts.** `RIG_Hand.L-NON-VALIDE.blend` date de `b17e548` · main droite : **inexistante**
+- SHA-256 manifest: `audit/manifest-sha256.txt`
 
 ---
 
-## Résultat de la validation
+## Résultat de la baseline — étape B du cahier
 
-**22 critères passent, 9 échouent.** Code de sortie 2.
+**16 critères réussis, 15 échoués. Code de sortie 1 (plantage).**
 
-| critère en échec | sommets | couples |
-| --- | ---: | --- |
-| `Hand_Point` | 978 | thumb/middle, thumb/ring, index/middle, middle/ring |
-| `Hand_Pinky_Thumb` | 717 | thumb/index, thumb/middle, thumb/pinky, thumb/hand |
-| `Hand_Fist_75` | 118 | thumb/index, index/middle, middle/ring |
-| `Hand_Cupped` | 80 | middle/ring |
-| transition `Neutral→Hand_Fist` | 492 | thumb/index |
-| transition `Neutral→Hand_Point` | — | plusieurs, dès l'étape 0,3 |
-| transition `Neutral→Hand_Cupped` | — | middle/ring, dès l'étape 0,7 |
-| transition `Neutral→Hand_Pinky_Thumb` | — | plusieurs, dès l'étape 0,4 |
+| critère en échec | mesuré | exigé |
+| --- | --- | --- |
+| `Hand_Pinch` · les pulpes se touchent | 3,19 mm | ≤ 1,00 mm |
+| `Hand_OK` · les pulpes se touchent | 1,04 mm | ≤ 1,00 mm |
+| `Hand_OK` · les pulpes se font face | −0,46 | ≤ −0,50 |
+| `Hand_Pinky_Thumb` · les pulpes se touchent | 2,46 mm | ≤ 1,00 mm |
+| `Hand_Pinky_Thumb` · les pulpes se font face | −0,079 | ≤ −0,50 |
+| `Hand_Fist_75` · aucune auto-intersection | 779 + 24 + … | aucune |
+| `Hand_Point` · aucune auto-intersection | 440 + 445 + … | aucune |
+| `Hand_Cupped` · aucune auto-intersection | 1 | aucune |
+| `Hand_Pinky_Thumb` · aucune auto-intersection | 127 + … | aucune |
+| transition `Neutral→Hand_Fist` | dès t = 0,7 | aucune à chaque étape |
+| transition `Neutral→Hand_Point` | dès t = 0,3 | aucune à chaque étape |
+| transition `Neutral→Hand_OK` | dès t = 0,8 | aucune à chaque étape |
+| transition `Neutral→Hand_Cupped` | dès t = 0,7 | aucune à chaque étape |
+| transition `Neutral→Hand_Pinky_Thumb` | dès t = 0,4 | aucune à chaque étape |
+| la paume creuse se creuse vraiment | **1,0 mm** | ≥ 6 mm |
 
-Le `.blend` mesuré date de `b17e548`. Ces échecs décrivent l'état audité vu
-par un instrument enfin honnête — **ce n'est pas une régression**.
+Journal complet : `reports/chat-2/baseline/journal-generation.txt`.
+Rapport JSON : `reports/chat-2/baseline/rapport-rig.L.json`.
 
 ## Known limitations, en clair
 
-1. **Aucun `.blend` ne contient les corrections de scripts** de cette branche.
-   La reconstruction a été arrêtée avant la fin ; rien n'a été republié sous un
-   nom laissant croire le contraire.
-2. **La main droite n'existe pas.** Le cahier des charges exige qu'elle dérive
-   d'une main gauche validée, qui ne l'est pas.
-3. **Aucune vidéo ni playblast de transition** n'a été produit — seuls les
-   échantillons numériques à 11 étapes existent.
-4. **`atelier/eclairage.py` n'a jamais été exécuté dans le pipeline.** Il est
-   prouvé isolément : 0 % d'écrêtage sur 18 images, key à 75° de la normale.
-5. **Le code de sortie de la génération complète n'a jamais été relevé.** Trois
-   tentatives, aucune menée à terme.
-6. **`Spread = 1` ferait se traverser majeur et annulaire** (80 paires) selon
-   une détection BVH indépendante — non confirmé par le pipeline principal.
+1. **Aucune reconstruction n'a encore abouti.** La baseline plante en code 1
+   après la phase G ; la cause est corrigée mais non éprouvée.
+2. **Aucun `.blend` ne contient les corrections de scripts.**
+3. **La main droite n'existe pas.** Le cahier exige qu'elle dérive d'une main
+   gauche validée, qui ne l'est pas.
+4. **Aucune vidéo ni playblast.** L'outil existe et n'a jamais tourné.
+5. **Aucun rendu produit par ces scripts.** L'éclairage rasant est intégré au
+   pipeline mais toutes les exécutions ont tourné en mode `mesure`.
+6. **Sept correctifs versés et non prouvés.** Ils sont argumentés et publics ;
+   il leur manque une mesure.
 7. Une image à refaire : `gros-plan-Hand_Pinky_Thumb-pouce.png`, écart-type de
-   luminance 14,94 contre 41,76 minimum ailleurs.
+   luminance **14,9/255** contre 41,8 minimum ailleurs — vérifié
+   indépendamment, le chiffre du chat 1 est exact.
 
-## Ce que cette itération a réellement établi
+## Ce que cette itération a établi
 
-L'ancienne sonde d'auto-intersection **ne voyait que 22 % des traversées** —
-672 sur 3 009 — parce qu'elle testait 5 couples de familles sur 15, dans un seul
-sens, sur 4 poses sur 13. Tout ce que le commit `b17e548` déclarait validé
-reposait sur elle.
+Cinq des sept causes sont la même erreur de méthode : **un instrument a été
+corrigé sans que l'espace, la doctrine ou la boucle qui l'entourent le soient.**
+La sonde d'intersection est passée à 15 couples sans que la recherche de pose
+reçoive d'axes ; la règle « ce qui est obligatoire ne se négocie pas » n'a été
+câblée que pour un critère sur quatre ; les transitions ont été mesurées sans
+être corrigées ; le module d'éclairage a été prouvé sans être branché.
+
+Et un critère nommé « aucune interpénétration » ne regardait qu'un patch de
+5 mm : il se déclarait vert avec **213 sommets traversants** dans la main.

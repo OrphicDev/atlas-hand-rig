@@ -1,5 +1,71 @@
 # CHANGELOG
 
+## hands/chat-2-photoreal-v2 — sept causes, et le plantage qui cachait tout
+
+Base : `e2d4b1c9e05949531d9348d68367c225b2169872`
+
+**Toujours NON-VALIDE.** Aucun `.blend` ne reflète encore ces correctifs : la
+reconstruction qui devait les prouver est le travail suivant.
+
+### Le fait qui explique les trois tentatives avortées du chat 1
+
+`rig-main.py` **plantait** en fin de course, après les rendus et avant la
+sauvegarde : `KeyError: ''`. `_gnom.get(g.group, "")` rendait la chaîne vide
+pour un groupe de sommets inconnu, et ce nom vide traversait tous les filtres.
+D'où l'absence de tout `.blend` à jour dans ce dépôt, et la ligne « le code de
+sortie d'une génération complète n'a jamais été relevé ».
+
+Le même défaut était **latent** dans `verifier-rig.py` et les deux sondes, où
+il ne plantait pas : il pouvait faire élire la chaîne vide comme groupe
+*dominant* d'un sommet, qui sortait alors de toute famille et de toute mesure
+d'intersection, sans un mot.
+
+### Les sept causes
+
+- **le sens de l'écartement est mesuré, plus décrété.** `Spread` entier était
+  retourné — monter `Spread` REFERMAIT l'éventail sur les trois couples
+  voisins, et `Hand_Open` était la main la plus serrée de la bibliothèque. Ce
+  n'était pas l'annulaire : `ECART` est monotone et les drivers l'appliquaient
+  au dixième de degré. La phase D mesure désormais `SIGNE_ECART` comme la
+  phase C mesure `SENS_FLEXION` ;
+- **les doigts étrangers au contact peuvent sortir du chemin.** La sonde jugeait
+  15 couples ; la recherche n'avait d'axes que sur deux doigts, et le nettoyeur
+  n'avait d'autre issue que de reculer le pouce — 1,08 mm devenait 3,19 mm ;
+- **ce qui est obligatoire ne se négocie plus, pour aucun critère.** La doctrine
+  n'était câblée que pour l'interpénétration ; distance, orientation et anneau
+  s'échangeaient. `Hand_OK` passait de 0,53 mm propre à 1,04 mm après
+  « nettoyage » ;
+- **les transitions sont corrigées, plus seulement mesurées.** Elles faisaient
+  échouer la construction depuis le chat 1 sans que rien ne les touche ;
+- **la chaîne distale des deux pulpes en contact est cherchable.** Les 17
+  traversées de `Hand_Pinch` étaient entre les deux phalanges distales
+  elles-mêmes : l'index ne pouvait pas présenter sa pulpe à plat ;
+- **l'éclairage rasant entre dans le pipeline.** Prouvé isolément depuis le
+  chat 1, jamais exécuté. Six vues par pose, et trois critères mesurés image
+  par image ;
+- **deux mesures ne mesuraient pas ce qu'elles annonçaient** : le critère
+  « aucune interpénétration » ne regardait qu'un patch de 5 mm — vert avec
+  213 sommets traversants — et la fermeture du poing dite « sans le pouce »
+  était mesurée avec un pouce au repos en travers du chemin, ce qui bridait le
+  poing à 60 %.
+
+### Réfuté
+
+Les « 80 paires majeur/annulaire à `Spread = 1` » : **0 traversée aux 21 pas**
+du balayage, et 6,84 mm d'écart au pas incriminé.
+
+### Corrigé dans la documentation
+
+`Hand_Point` vaut **1 528** sommets et `Hand_Pinky_Thumb` **1 271** — non 978
+et 717. Mêmes poses, mêmes couples, verdict inchangé.
+
+### Trois outils
+
+`outils/sonde-ecartement.py`, `outils/comparer-rapports.py`,
+`outils/playblast-transitions.py`. Tous trois sortent en code non nul sur
+verdict négatif ; le dernier n'a jamais été exécuté.
+
+
 ## wip/chat-1-honest-probe — checkpoint de transmission (NON VALIDE)
 
 Base : `b17e54806f942736e47c4dcfd477a91b7fd6f262`
