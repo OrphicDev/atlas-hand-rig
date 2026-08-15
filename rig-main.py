@@ -1323,12 +1323,19 @@ ECART_REPOS_MINIMAL = 0.014       # 14 mm : au-delà, deux surfaces distinctes
 PROFONDEUR_MINIMALE = 0.0005      # 0,5 mm
 
 
-def intersections(pose_nom):
+def intersections(pose_nom, familles=None):
+    """Les traversées, par couple de familles.
+
+    `familles` restreint la question à un sous-ensemble. Sans lui, on ne
+    pouvait pas demander « est-ce que les quatre doigts se traversent ENTRE
+    EUX ? » — la réponse incluait toujours le pouce, même immobile, même
+    quand il n'était pas le sujet.
+    """
     _p, _n = sommets_evalues()
     par_groupe = {}
     for i, nm in _dom.items():
         _f = famille(nm)
-        if _f is not None:
+        if _f is not None and (familles is None or _f in familles):
             par_groupe.setdefault(_f, []).append(i)
     arbres = {}
     for f, idx in par_groupe.items():
@@ -2205,8 +2212,18 @@ for _nom_c, _a, _b, _axes, _fond in (
     exiger(f"{_nom_c} · les pulpes se font face",
            _m["face_local"] <= SEUIL_FACE, round(_m["face_local"], 3),
            f"≤ {SEUIL_FACE:.2f}".replace(".", ","))
+    # ═══ UN CRITÈRE VERT QUI MENTAIT ═══
+    # Il ne lisait que `penetration` — les sommets qui se traversent DANS LE
+    # PATCH des deux pulpes. Mesuré sur la baseline, `Hand_Pinky_Thumb` rendait
+    # « aucune interpénétration · 0 · OK » avec 213 sommets traversants ailleurs
+    # dans la main. C'est très exactement la cécité que tout le chat 1 a
+    # corrigée, survivante à un endroit qu'on n'avait pas regardé. Les deux
+    # comptes sont désormais exigés, et tous deux affichés.
     exiger(f"{_nom_c} · aucune interpénétration",
-           _m["penetration"] == 0, _m["penetration"], "0 sommet")
+           _m["penetration"] == 0 and not _m.get("intersection_des_doigts"),
+           {"dans_les_pulpes": _m["penetration"],
+            "dans_la_main_entiere": _m.get("intersection_des_doigts")},
+           "0 sommet, pulpes ET main entière")
 
 POSE_PINCE = CONTACTS["Hand_Pinky_Thumb"]["props"]
 dire("pince_auriculaire_pouce", {
@@ -2238,12 +2255,34 @@ DIVERGENCE_RETENUE = 0.0
 # SEULS, sans pouce, à différentes fermetures : si la main se traverse déjà
 # sans lui, l'amplitude de fermeture est trop forte pour ce maillage, et c'est
 # un fait sur le maillage, pas un réglage à forcer.
+#
+# ═══ « SANS POUCE » NE L'ÉTAIT PAS ═══
+#
+# `regler(Fist=f)` ne bouge QUE les quatre doigts — le pouce a ses commandes
+# propres depuis la correction de l'écrasement. Il reste donc AU REPOS, en
+# travers du chemin, et les quatre doigts se referment dessus. La mesure
+# comptait ces chocs-là et les attribuait à la fermeture : à 0,7 elle rendait
+# 2 429 traversées dont 1 272 sur le couple `thumb/index`, dans un relevé qui
+# se disait « mesuré sans le pouce ».
+#
+# La conséquence n'était pas cosmétique : `FERMETURE` retombait à 0,6, et le
+# poing livré n'était fermé qu'à 60 %. Un poing qui n'en est pas un, à cause
+# d'un pouce qu'on n'avait pas posé.
+#
+# On restreint donc la question aux quatre doigts, ce qui est ce qu'elle a
+# toujours prétendu être.
+_QUATRE = ("index", "middle", "ring", "pinky")
 _diag_poing = {}
 for _f in (0.6, 0.7, 0.8, 0.9, 1.0):
     regler(Fist=_f)
-    _ii = intersections(f"fist{_f}")
+    _ii = intersections(f"fist{_f}", familles=_QUATRE)
     _diag_poing[_f] = {"total": sum(x["sommets_dedans"] for x in _ii),
-                       "detail": _ii}
+                       "detail": _ii,
+                       # On garde le compte AVEC le pouce au repos : il ne
+                       # décide plus de la fermeture, mais il dit quand le
+                       # pouce devra s'écarter pour laisser passer.
+                       "avec_le_pouce_au_repos": sum(
+                           x["sommets_dedans"] for x in intersections(f"fistT{_f}"))}
 regler()
 dire("traversees_des_quatre_doigts_seuls", _diag_poing)
 # On retient la fermeture la plus franche qui reste propre : le tutoriel range
