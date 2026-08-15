@@ -1832,9 +1832,63 @@ def axes_de_degagement(doigt_a, doigt_b, deja):
             and (f"CTRL_{n}_01{SIDE}", AXE_ECART) not in deja]
 
 
-def chercher_contact(doigt_a, doigt_b, axes, base_props=None):
-    """Deux temps : approcher, puis nettoyer sans lâcher le contact."""
+def axes_de_presentation(doigt_a, doigt_b, deja):
+    """Les articulations qui PRÉSENTENT les deux pulpes l'une à l'autre.
+
+    ═══ LE DIAGNOSTIC A RÉFUTÉ MA PREMIÈRE HYPOTHÈSE ═══
+
+    J'avais conclu des 17 traversées de `Hand_Pinch` que les doigts libres
+    barraient le chemin. Le diagnostic générique dit autre chose, et il est
+    sans appel :
+
+        ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb
+            DEF_index_03.L → DEF_thumb_02.L : 12
+            DEF_thumb_02.L → DEF_index_03.L :  5
+
+    Les 17 sommets sont ENTRE LES DEUX PHALANGES DISTALES DU CONTACT — les
+    deux pulpes qui se pincent, et rien d'autre. Aucun doigt libre n'y est
+    pour quoi que ce soit.
+
+    La cause se lit en comparant les deux recherches. `ANNEAU` porte
+    `CTRL_index_02` ; `PINCH` n'a que `CTRL_index_01` ; aucune des deux n'a
+    `CTRL_index_03`. Et `Hand_OK`, qui a une articulation de plus, approche
+    PROPRE à 0,53 mm là où `Hand_Pinch` approche à 1,08 mm avec 17 traversées.
+    Les articulations qui orientent la pulpe n'étaient pas dans la recherche :
+    l'index ne pouvait pas présenter sa pulpe à plat, il l'enfonçait par la
+    tranche.
+
+    La règle est générale et vaut pour les trois contacts : la chaîne
+    distale des DEUX doigts en contact doit être cherchable. Une pulpe qui ne
+    peut pas s'orienter ne peut se poser que de travers.
+
+    Pas d'écartement ici : la phase E verrouille le Z des phalanges au-delà de
+    la métacarpo-phalangienne, parce qu'une interphalangienne est une
+    CHARNIÈRE. On ne cherche donc que la flexion, à l'amplitude que `PINCH`
+    emploie déjà pour l'index (±30°).
+    """
+    ax = []
+    for _d in (doigt_a, doigt_b):
+        for _suf in (("01", "02") if _d == "thumb" else ("01", "02", "03")):
+            cle = (f"CTRL_{_d}_{_suf}{SIDE}", 0)
+            if cle not in deja:
+                ax.append(("os", cle, -30.0, 30.0))
+    return ax
+
+
+def chercher_contact(doigt_a, doigt_b, axes, base_props=None, presentation=True):
+    """Deux temps : approcher, puis nettoyer sans lâcher le contact.
+
+    `presentation=False` pour le poing : sa proximité pouce/index n'est jugée
+    par AUCUN `exiger` — c'est un sous-produit de l'enroulement, pas un
+    critère. Sa silhouette, elle, en est un. Ouvrir l'index jusqu'à 30° pour
+    améliorer un non-critère troquerait donc le poing contre rien.
+    """
     BARRIERE[0] = 60.0                      # le pouce peut traverser en chemin
+    # La présentation entre dès l'APPROCHE : c'est là que le contact se forme,
+    # et un contact formé de travers ne se redresse pas au nettoyage.
+    if presentation:
+        axes = axes + axes_de_presentation(doigt_a, doigt_b,
+                                           {c for _g, c, _lo, _hi in axes})
     m1, etat1, v1 = optimiser_contact(doigt_a, doigt_b, axes, base_props, tours=10)
     # On NOMME ce qui traverse avant de le corriger : sans ça, élargir les axes
     # serait un coup de dés de plus.
@@ -2228,7 +2282,7 @@ _m_poing, _etat_poing, _ = chercher_contact(
      ("os", (f"CTRL_thumb_meta{SIDE}", 2), -45.0, 45.0),
      ("os", (f"CTRL_thumb_01{SIDE}", 0), -40.0, 40.0),
      ("os", (f"CTRL_thumb_02{SIDE}", 0), -40.0, 40.0)],
-    {})
+    {}, presentation=False)
 POSE_POING = (_etat_poing[0], _etat_poing[1])
 dire("pouce_du_poing", {
     "distance_a_l_index_mm": round(_m_poing["distance_mm"], 2),
