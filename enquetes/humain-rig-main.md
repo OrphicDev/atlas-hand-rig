@@ -43,6 +43,30 @@ paume**, donc aucune pose n'existait à trouver.
   déplacement du bout — mx 118,8 mm, mz 50,8 mm, my 19,4 mm ; retournement de la
   pulpe — mz 0,881, my 0,602, mx 0,08.
 
+- **Le sens de l'écartement était retourné, et ce n'était pas l'annulaire.**
+  Le checkpoint transmettait, sans l'avoir confirmé par le pipeline, que
+  `Spread = 1` ferait se traverser majeur et annulaire (80 paires), « signe ou
+  axe probablement inversé sur l'annulaire ». Remesuré deux fois, par deux
+  chemins séparés :
+  1. `outils/sonde-ecartement.py` sur le `.blend` de `b17e548`, balayage de −1 à
+     +1 par pas de 0,1 : monter `Spread` REFERME l'éventail sur les **trois**
+     couples — index/majeur 17,06 → 6,62 mm, majeur/annulaire 15,27 → 6,84 mm,
+     annulaire/auriculaire 30,10 → 24,21 mm. Les rotations appliquées valent
+     exactement `ECART` (+10,0 / +1,0 / −6,0 / −12,0°) : les drivers ne se
+     trompaient pas, la suite est monotone, aucun doigt ne double son voisin.
+  2. la mesure ajoutée en phase D, sur un rig reconstruit : à `+ECART`
+     5,78 / 7,54 / 24,68 mm, à `−ECART` 27,44 / 23,75 / 36,26 mm.
+
+  C'est donc le **sens global** de la rotation autour de la normale de la paume
+  qui était faux — et le signe d'une normale construite est arbitraire, ce que
+  la phase C sait déjà pour la flexion. Conséquence visible : `Hand_Open`
+  (`Spread = 1`) était la main la plus SERRÉE de la bibliothèque et
+  `Hand_Spread_Min` la plus ouverte.
+
+  **Réfuté au passage :** aucune traversée à aucun des 21 pas. Les 80 paires
+  n'existent pas sur ce fichier ; à `Spread = +1`, majeur et annulaire restent
+  à 6,84 mm l'un de l'autre.
+
 ## 3. CE QUE LA GÉOMÉTRIE DIT
 
 - Portée de la chaîne du pouce : **117,7 mm** pour une cible à 46,8 mm
@@ -76,6 +100,14 @@ c'est le placement des métacarpiens qu'il faut reprendre, et non la pose.
   contrôle ne parle ni de pose ni d'amplitude, et c'est sa raison d'être : c'est
   lui qui attrape la contamination des poids automatiques, que trois mesures de
   pose ne montreraient jamais.
+- **Écarter doit AUGMENTER l'écart entre bouts de doigts voisins**, et sur les
+  trois couples, pas seulement sur leur somme — un doigt qui doublerait son
+  voisin passerait sinon inaperçu derrière un total flatteur. Le sens est
+  mesuré en phase D, jamais inscrit à la main : un nombre retourné au jugé sur
+  la gauche retomberait faux sur la droite, dont la normale de paume est
+  inversée. La construction s'arrête si les deux sens rendent le même éventail
+  — une sonde qui ne peut pas échouer ne prouve rien.
+
 - **L'INVARIANT : la chair de chaque doigt reste d'un seul tenant.** Deux
   transferts de poids successifs avaient déjà débité le pouce en morceaux cette
   nuit, et c'est Sacha qui l'avait vu à l'œil avant moi.

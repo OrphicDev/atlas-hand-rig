@@ -1,0 +1,12 @@
+# Sorties de travail : les livrables sont recopiés explicitement à la racine,
+# dans mesures/, reports/, images/, renders/ et videos/. Le dossier brut d'une
+# exécution n'a pas à entrer dans l'historique.
+sortie/
+sortie-*/
+
+# Écrit par atelier/portillon.py à chaque exécution.
+enquetes/journal.txt
+
+# Caches Python.
+__pycache__/
+*.pyc

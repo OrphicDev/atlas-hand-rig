@@ -801,6 +801,83 @@ ECART = {"index": 10.0, "middle": 1.0, "ring": -6.0, "pinky": -12.0}
 # son amplitude par la mesure — on ne la pose pas.
 DIVERGENCE = {"index": 1.0, "middle": 0.35, "ring": -0.35, "pinky": -1.0}
 K_DIVERGENCE = [8.0]        # cherché plus bas, en degrés
+
+# ═══ LE SENS DE L'ÉCARTEMENT SE MESURE, IL NE SE DÉCRÈTE PAS ═══
+#
+# Mesuré sur le `.blend` de `b17e548` avec `outils/sonde-ecartement.py` : monter
+# `Spread` REFERMAIT l'éventail sur les trois couples voisins — index/majeur de
+# 17,06 à 6,62 mm, majeur/annulaire de 15,27 à 6,84 mm, annulaire/auriculaire de
+# 30,10 à 24,21 mm. `Hand_Open`, qui vaut `Spread = 1`, était donc la main la
+# PLUS serrée de la bibliothèque, et `Hand_Spread_Min` la plus ouverte : deux
+# poses portaient le nom de leur contraire.
+#
+# Le checkpoint supposait un signe inversé SUR L'ANNULAIRE. C'est faux : la
+# suite `ECART` est monotone (+10, +1, −6, −12), aucun doigt ne double son
+# voisin, et les drivers l'appliquaient au dixième de degré près. Ce qui était
+# retourné, c'est le SENS GLOBAL de la rotation autour de la normale de la
+# paume — et le signe d'une normale construite est ARBITRAIRE. C'est très
+# exactement la faute que la phase C corrige déjà pour la flexion, en MESURANT
+# `SENS_FLEXION` au lieu de le supposer.
+#
+# Retourner `ECART` à la main réparerait la gauche et casserait la droite, dont
+# la normale de paume est inversée. On mesure donc, comme pour la flexion : on
+# écarte dans un sens, on regarde si l'éventail s'ouvre, et on garde le sens
+# qui ouvre.
+_VOISINS = (("index", "middle"), ("middle", "ring"), ("ring", "pinky"))
+
+
+def eventail_des_bouts(_p):
+    """Écart minimal, en mm, entre les chairs de deux bouts de doigts voisins.
+
+    Sur la CHAIR et non sur l'os : c'est elle qui se traverse, et un os peut
+    diverger pendant que la chair converge.
+    """
+    out = {}
+    for a, b in _VOISINS:
+        ib = bouts_de(b)
+        t = mathutils.kdtree.KDTree(len(ib))
+        for k, i in enumerate(ib):
+            t.insert(_p[i], k)
+        t.balance()
+        out[f"{a}/{b}"] = min(t.find(_p[i])[2] for i in bouts_de(a)) * 1000.0
+    return out
+
+
+_essai_ecart = {}
+for _s in (+1.0, -1.0):
+    poser_os({f"MCH_{_n}_01_result{SIDE}": (0.0, 0.0, _s * ECART[_n])
+              for _n in NOMS4})
+    _essai_ecart[_s] = eventail_des_bouts(sommets_evalues()[0])
+au_repos()
+_eventail_repos = eventail_des_bouts(sommets_evalues()[0])
+SIGNE_ECART = max(_essai_ecart, key=lambda s: sum(_essai_ecart[s].values()))
+_gain_ecart = {c: _essai_ecart[SIGNE_ECART][c] - _eventail_repos[c]
+               for c in _eventail_repos}
+dire("sens_de_l_ecartement", {
+    "eventail_au_repos_mm": {c: round(v, 2) for c, v in _eventail_repos.items()},
+    "eventail_a_plus_ECART_mm": {c: round(v, 2)
+                                 for c, v in _essai_ecart[+1.0].items()},
+    "eventail_a_moins_ECART_mm": {c: round(v, 2)
+                                  for c, v in _essai_ecart[-1.0].items()},
+    "signe_retenu": SIGNE_ECART,
+    "gain_du_sens_retenu_mm": {c: round(v, 2) for c, v in _gain_ecart.items()},
+    "regle": "écarter doit AUGMENTER l'écart entre bouts de doigts voisins"})
+# ═══ UNE SONDE QUI NE PEUT PAS ÉCHOUER NE PROUVE RIEN ═══
+# Deux exigences, et la construction s'arrête si l'une manque :
+#   · les deux sens doivent VRAIMENT différer, sinon on lirait du bruit et le
+#     `max` ci-dessus trancherait à pile ou face ;
+#   · le sens retenu doit ouvrir LES TROIS couples, pas seulement leur somme —
+#     un doigt qui doublerait son voisin passerait sinon inaperçu derrière un
+#     total flatteur.
+if abs(sum(_essai_ecart[+1.0].values())
+       - sum(_essai_ecart[-1.0].values())) < 1.0:
+    raise RuntimeError("les deux sens d'écartement rendent le même éventail : "
+                       "la sonde ne mesure pas ce qu'elle prétend mesurer")
+_ecart_muet = [c for c, g in _gain_ecart.items() if g <= 0.5]
+if _ecart_muet:
+    raise RuntimeError(f"l'écartement ne sépare pas {_ecart_muet} : "
+                       f"gains mesurés {_gain_ecart}")
+
 for nom in NOMS4:
     # ═══ PAS DE PRODUIT DE DEUX VARIABLES DANS UN DRIVER ═══
     # J'avais écrit `fist * div * K`. Mesuré : la propriété était bien lue
@@ -816,7 +893,8 @@ for nom in NOMS4:
     # totalement silencieux — la rotation restait à +0,00° sans le moindre
     # message.
     driver(f"MCH_{nom}_01_result{SIDE}", AXE_ECART,
-           f"spread * {math.radians(ECART[nom]):.6f}", {"spread": "Spread"})
+           f"spread * {SIGNE_ECART * math.radians(ECART[nom]):.6f}",
+           {"spread": "Spread"})
 # Le creusement agit sur les MÉTACARPIENS, faiblement côté index, fortement côté
 # auriculaire. C'est lui qui rapproche l'auriculaire du pouce — le cerclage
 # rouge de Sacha.
