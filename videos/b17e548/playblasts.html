@@ -1,0 +1,42 @@
+<!doctype html><meta charset="utf-8">
+<title>Playblasts des transitions — RIG_Hand.L-NON-VALIDE.blend</title>
+<style>
+body{background:#14151a;color:#d8d8dc;font:14px/1.5 system-ui,sans-serif;
+margin:0;padding:24px}
+h1{font-size:17px;font-weight:600;margin:0 0 4px}
+p.note{color:#8b8d98;max-width:60ch;margin:0 0 24px}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:18px}
+figure{margin:0}
+figcaption{font-size:12px;color:#8b8d98;margin-bottom:6px}
+img{width:100%;border-radius:6px;background:#000;display:block}
+</style>
+<h1>Playblasts des transitions — RIG_Hand.L-NON-VALIDE.blend</h1>
+<p class="note">Chaque geste va du repos à la pose en 25
+images, à la fraction exacte que <code>verifier-rig.py</code> mesure. Cette
+build de Blender est compilée sans FFmpeg et la machine n'a pas de binaire
+<code>ffmpeg</code> : la sortie est donc une séquence d'images, animée ici sans
+aucun codec.</p>
+<div class="grille">
+<figure><figcaption>Neutral→Hand_Fist — 25 images</figcaption>
+<img data-suite="Neutral-vers-Hand_Fist" data-n="25" src="Neutral-vers-Hand_Fist/0001.png" alt=""></figure>
+<figure><figcaption>Neutral→Hand_Point — 25 images</figcaption>
+<img data-suite="Neutral-vers-Hand_Point" data-n="25" src="Neutral-vers-Hand_Point/0001.png" alt=""></figure>
+<figure><figcaption>Neutral→Hand_Pinch — 25 images</figcaption>
+<img data-suite="Neutral-vers-Hand_Pinch" data-n="25" src="Neutral-vers-Hand_Pinch/0001.png" alt=""></figure>
+<figure><figcaption>Neutral→Hand_OK — 25 images</figcaption>
+<img data-suite="Neutral-vers-Hand_OK" data-n="25" src="Neutral-vers-Hand_OK/0001.png" alt=""></figure>
+<figure><figcaption>Neutral→Hand_Cupped — 25 images</figcaption>
+<img data-suite="Neutral-vers-Hand_Cupped" data-n="25" src="Neutral-vers-Hand_Cupped/0001.png" alt=""></figure>
+<figure><figcaption>Neutral→Hand_Pinky_Thumb — 25 images</figcaption>
+<img data-suite="Neutral-vers-Hand_Pinky_Thumb" data-n="25" src="Neutral-vers-Hand_Pinky_Thumb/0001.png" alt=""></figure>
+</div>
+<script>
+const n = document.querySelectorAll('img[data-suite]');
+let f = 1;
+setInterval(() => {
+  f = f % 25 + 1;
+  const s = String(f).padStart(4, '0');
+  n.forEach(i => i.src = i.dataset.suite + '/' + s + '.png');
+}, 1000 / 25);
+</script>
