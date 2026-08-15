@@ -237,3 +237,100 @@ if SORTIE:
 print(f"\nGains de Cup 0 → 1 : {gains}")
 print(f"Le maximum de la grandeur figée est tenu par : {tenu_par}")
 print(f"Verdict : {resultat['verdict']}")
+
+
+# ═══════════════════════════════════════════════════════════════════
+#   QUEL AXE CREUSE VRAIMENT ? — ON L'ÉPROUVE, ON NE LE DÉCRÈTE PAS
+# ═══════════════════════════════════════════════════════════════════
+# `CUP` pilote l'axe 0 des métacarpiens et `CUP_AXIAL` leur axe 1. Ces deux
+# choix n'ont jamais été mesurés : ils ont été DÉDUITS d'une convention
+# d'axes, exactement comme l'était le sens de l'écartement avant qu'on le
+# mesure. On pose donc la question à la géométrie.
+#
+# Un vrai creusement fait DEUX choses à la fois, et une seule ne suffit pas :
+#   · il RESSERRE la paume — la largeur index↔auriculaire diminue ;
+#   · il CREUSE l'arc — la flèche transverse augmente.
+# Un axe qui ne fait que l'un des deux n'est pas l'axe du creusement.
+# ═══ UN DRIVER RÉÉCRIT SA VOIE : IL FAUT LE TAIRE POUR SONDER ═══
+# Premier jet de ce test : les axes 0 et 1 rendaient +0,00 sur TOUTES les
+# grandeurs, et j'ai failli y lire « ces axes ne creusent pas ». C'était un
+# artefact : `Cup` pilote précisément ces deux voies par driver, et un driver
+# réécrit la sienne à chaque évaluation du graphe. Ma rotation manuelle était
+# effacée avant d'être mesurée. L'axe 2, seul non piloté, était le seul à
+# répondre — ce qui rendait le tableau parfaitement cohérent et parfaitement
+# faux. On tait donc les drivers des métacarpiens le temps du test, et on les
+# rétablit après.
+_MUETS = []
+if rig.animation_data:
+    for _d in rig.animation_data.drivers:
+        if "_meta_result" in _d.data_path and "rotation_euler" in _d.data_path:
+            _MUETS.append(_d)
+
+
+def taire(oui):
+    for _d in _MUETS:
+        _d.mute = oui
+    rafraichir()
+
+
+def poser_meta(axe, deg, doigts=("ring", "pinky")):
+    neutre()
+    taire(True)
+    for n in doigts:
+        pb = rig.pose.bones[f"MCH_{n}_meta_result{SIDE}"]
+        pb.rotation_mode = "XYZ"
+        r = [0.0, 0.0, 0.0]
+        r[axe] = deg * 3.14159265358979 / 180.0
+        pb.rotation_euler = r
+    rafraichir()
+
+
+print(f"\n{len(_MUETS)} driver(s) de métacarpien tus le temps du test.")
+print(f"\n{'axe':>4} {'angle':>7} {'largeur':>9} {'Δlarg':>7} {'arc':>8} "
+      f"{'Δarc':>7} {'pouce-auric':>12} {'Δp-a':>7}   verdict")
+neutre()
+taire(True)
+_p = evalue()
+_ref = (largeur_paume(), arc_transverse(_p), pouce_auriculaire())
+_essais = []
+for _axe in (0, 1, 2):
+    for _deg in (+20.0, -20.0):
+        poser_meta(_axe, _deg)
+        _p = evalue()
+        _l, _a, _pa = largeur_paume(), arc_transverse(_p), pouce_auriculaire()
+        _dl, _da, _dpa = _l - _ref[0], _a - _ref[1], _pa - _ref[2]
+        # Le critère est CONJOINT : resserrer ET creuser.
+        _ok = _dl < -1.0 and _da > 1.0
+        _essais.append({"axe": _axe, "angle_deg": _deg,
+                        "largeur_mm": round(_l, 2), "delta_largeur_mm": round(_dl, 2),
+                        "arc_mm": round(_a, 2), "delta_arc_mm": round(_da, 2),
+                        "pouce_auriculaire_mm": round(_pa, 2),
+                        "delta_pouce_auriculaire_mm": round(_dpa, 2),
+                        "creuse": _ok})
+        print(f"{_axe:>4} {_deg:>+7.0f} {_l:9.2f} {_dl:>+7.2f} {_a:8.2f} "
+              f"{_da:>+7.2f} {_pa:12.2f} {_dpa:>+7.2f}   "
+              f"{'CREUSE' if _ok else '—'}")
+taire(False)
+neutre()
+
+# ═══ LA CONTRE-ÉPREUVE DU TEST LUI-MÊME ═══
+# Si taire les drivers n'avait rien changé, c'est que je ne pilotais rien —
+# et les six lignes ci-dessus vaudraient toujours zéro.
+if all(abs(e["delta_largeur_mm"]) < 0.01 for e in _essais):
+    raise RuntimeError("aucun axe ne déplace quoi que ce soit : la sonde "
+                       "n'atteint pas les os qu'elle prétend tourner")
+
+_bons = [e for e in _essais if e["creuse"]]
+print("\nATLAS_AXE_DU_CREUSEMENT " + json.dumps(
+    {"reference_au_repos": {"largeur_mm": round(_ref[0], 2),
+                            "arc_mm": round(_ref[1], 2),
+                            "pouce_auriculaire_mm": round(_ref[2], 2)},
+     "essais": _essais,
+     "axes_qui_creusent": [{"axe": e["axe"], "angle_deg": e["angle_deg"]}
+                           for e in _bons] or "aucun",
+     "axe_actuellement_pilote_par_CUP": 0,
+     "regle": "creuser doit RESSERRER la paume ET augmenter la flèche de l'arc"},
+    ensure_ascii=False))
+print(f"\nAxes qui creusent vraiment : "
+      f"{[(e['axe'], e['angle_deg']) for e in _bons] or 'AUCUN'}")
+print("CUP pilote actuellement l'axe 0.")
