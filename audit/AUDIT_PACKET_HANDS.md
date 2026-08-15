@@ -19,7 +19,7 @@
 - Reports: https://github.com/OrphicDev/atlas-hand-rig/tree/hands/chat-2-photoreal-v2/reports/chat-2
 - Still renders: **aucun produit par ces scripts.** Les 60 images de `images/` datent de `b17e548`
 - Contact sheets: aucune produite par ces scripts
-- Transition videos: **AUCUNE** — l'outil existe (`outils/playblast-transitions.py`), il n'a jamais été exécuté
+- Transition videos: **les six playblasts existent** — `videos/b17e548/`, 150 images (6 × 25) + `playblasts.html` qui les anime. **Rendus depuis le `.blend` de `b17e548`** : ils documentent les défauts de CE rig, pas l'effet des correctifs du chat 2. Pas de MP4 : cette build de Blender est compilée sans FFmpeg (énumération sans aucun conteneur vidéo) et la machine n'a pas de binaire `ffmpeg`
 - Blend files: **aucun reflétant ces scripts.** `RIG_Hand.L-NON-VALIDE.blend` date de `b17e548` · main droite : **inexistante**
 - SHA-256 manifest: `audit/manifest-sha256.txt`
 
@@ -57,7 +57,9 @@ Rapport JSON : `reports/chat-2/baseline/rapport-rig.L.json`.
 2. **Aucun `.blend` ne contient les corrections de scripts.**
 3. **La main droite n'existe pas.** Le cahier exige qu'elle dérive d'une main
    gauche validée, qui ne l'est pas.
-4. **Aucune vidéo ni playblast.** L'outil existe et n'a jamais tourné.
+4. **Les playblasts existent mais viennent de l'ancien `.blend`.** Ils prouvent
+   l'outil et documentent les transitions fautives ; ils ne prouvent aucun
+   correctif. Aucun MP4 n'est possible dans cet environnement.
 5. **Aucun rendu produit par ces scripts.** L'éclairage rasant est intégré au
    pipeline mais toutes les exécutions ont tourné en mode `mesure`.
 6. **Sept correctifs versés et non prouvés.** Ils sont argumentés et publics ;

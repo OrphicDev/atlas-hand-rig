@@ -18,7 +18,7 @@ lecteur ne puisse s'y tromper.
 | **main droite** | **inexistante** |
 | `.blend` reflétant les scripts | **aucun** |
 | rendus produits par ces scripts | **aucun** |
-| vidéos de transition | **aucune** |
+| playblasts de transition | **les six existent**, mais rendus depuis l'ancien `.blend` |
 | processus encore actifs | **aucun** |
 
 `main` et `wip/chat-1-honest-probe` n'ont pas bougé. Aucun force push, aucune
@@ -170,8 +170,12 @@ argumentés, versés et poussés ; il leur manque une reconstruction qui aboutis
 | `outils/comparer-rapports.py` | tableau de régression ; distingue régression, aggravation chiffrée, correction et absence |
 | `outils/playblast-transitions.py` | les six playblasts, rejoués exactement comme le vérificateur les mesure |
 
-Les trois sortent en code non nul quand leur verdict est négatif. Le dernier
-n'a **jamais été exécuté**.
+Les trois sortent en code non nul quand leur verdict est négatif. Le dernier a
+livré **trois bugs** à son premier lancement, dont un qui n'est pas de lui :
+**cette build de Blender est compilée sans FFmpeg** et la machine n'a pas de
+binaire `ffmpeg`, donc aucun MP4 n'est possible. La sortie est une séquence
+PNG plus un lecteur HTML sans codec — 150 images, écrêtage **0,000 %**, et
+c'est la première exécution réelle de `atelier/eclairage.py`.
 
 ---
 
@@ -182,6 +186,7 @@ n'a **jamais été exécuté**.
    jointures ;
 3. les rendus — l'éclairage est intégré mais **jamais exécuté** ;
 4. la main droite — le cahier exige qu'elle dérive d'une gauche *validée* ;
-5. playblasts, revue visuelle argumentée, clone propre.
+5. les playblasts du rig CORRIGÉ — ceux qui existent viennent de `b17e548` ;
+6. revue visuelle argumentée, clone propre.
 
 Reprise : [`handoffs/HANDOFF_CHAT_2_NEXT.md`](handoffs/HANDOFF_CHAT_2_NEXT.md).
