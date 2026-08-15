@@ -1650,6 +1650,13 @@ def penetration_familles(fa, fb):
 BARRIERE = [1e6]
 CIBLE_DISTANCE = [0.0]      # 0 = la distance compte toujours
 ANNEAU_EXIGE = [0.0]        # ouverture minimale du trou, en mm (0 = sans objet)
+# ═══ LA RECHERCHE OPTIMISE EXACTEMENT LE CRITÈRE QUI LA JUGE ═══
+# Ces deux seuils étaient écrits en clair à DEUX endroits : dans le score de
+# l'optimiseur et dans les `exiger` qui prononcent le verdict. Deux copies d'un
+# même nombre finissent toujours par diverger, et une recherche qui vise autre
+# chose que son juge ne peut réussir que par chance.
+SEUIL_CONTACT_MM = 1.0
+SEUIL_FACE = -0.5
 
 
 def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
@@ -1697,9 +1704,37 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
         # s'éloignant, ce qu'il a fait quatre fois de suite.
         _d_eff = (max(0.0, m["distance_mm"] - CIBLE_DISTANCE[0])
                   if CIBLE_DISTANCE[0] else m["distance_mm"])
-        sc = ((inter + m["penetration"]) * BARRIERE[0]
+        # ═══ LA DOCTRINE N'ÉTAIT CÂBLÉE QUE POUR L'INTERPÉNÉTRATION ═══
+        #
+        # « Ce qui est obligatoire ne se négocie pas » ne valait que pour les
+        # traversées. La distance, l'orientation et l'anneau, eux, étaient de
+        # simples poids — donc ils s'ÉCHANGEAIENT. Mesuré sur `Hand_OK` :
+        #
+        #     après approche   0,53 mm — 0 traversée
+        #     après nettoyage  1,04 mm — 0 traversée   →  ÉCHEC
+        #
+        # Le nettoyage a DÉGRADÉ un contact déjà propre. Sous 1,00 mm la
+        # distance ne coûtait plus rien, et l'exigence d'anneau — 400 points
+        # par millimètre manquant — est antagoniste du contact : écarter le
+        # pouce de l'index ouvre l'anneau ET éloigne les pulpes. L'optimiseur a
+        # donc dépensé toute la marge, puis franchi le seuil de 0,04 mm parce
+        # que le millimètre d'anneau gagné valait plus que le dépassement.
+        #
+        # On compte donc les critères OBLIGATOIRES violés, et cette somme entre
+        # dans la barrière. Aucune pose qui en viole un ne peut alors battre une
+        # pose qui les respecte tous, quel que soit son avantage ailleurs : les
+        # termes continus ne servent plus qu'à guider vers eux et à départager
+        # entre poses également acceptables.
+        _violes = ((1 if inter + m["penetration"] > 0 else 0)
+                   + (1 if m["distance_mm"] > SEUIL_CONTACT_MM else 0)
+                   + (1 if m["face_local"] > SEUIL_FACE else 0)
+                   + (1 if (ANNEAU_EXIGE[0]
+                            and m.get("ouverture_anneau_mm", 0.0)
+                            < ANNEAU_EXIGE[0]) else 0))
+        sc = (_violes * BARRIERE[0]
+              + (inter + m["penetration"]) * BARRIERE[0]
               + _d_eff * 300.0
-              + max(0.0, m["distance_mm"] - 1.0) * 9000.0
+              + max(0.0, m["distance_mm"] - SEUIL_CONTACT_MM) * 9000.0
               + (m["face_local"] + 1.0) * 2500.0
               - min(m["sommets_a_moins_de_1_5_mm"], 120) * 2.0
               + (max(0.0, ANNEAU_EXIGE[0] - m.get("ouverture_anneau_mm", 0.0))
@@ -1812,7 +1847,13 @@ def chercher_contact(doigt_a, doigt_b, axes, base_props=None):
     # priorité, pas assez pour justifier de lâcher la pince. Le critère
     # d'acceptation final, lui, reste strict : zéro.
     BARRIERE[0] = 20000.0
-    CIBLE_DISTANCE[0] = 1.0
+    # La zone franche s'arrête AVANT le seuil d'acceptation, pas dessus. Calée
+    # sur le seuil lui-même, l'optimiseur dépensait la marge jusqu'au dernier
+    # centième et rendait 1,04 mm — et `ATLAS_ECART_OPTIMISEUR` existe
+    # justement parce que la mesure prise pendant la recherche et celle prise
+    # après repose ne coïncident pas toujours. Les 20 % restants continuent
+    # donc de coûter.
+    CIBLE_DISTANCE[0] = SEUIL_CONTACT_MM * 0.8
     # On repart de la pose approchée : les graines de `optimiser_contact`
     # partiraient de loin et retomberaient dans le même piège.
     axes_serres = [(g, c, max(lo, v - (hi - lo) * 0.22),
@@ -2104,9 +2145,11 @@ for _nom_c, _a, _b, _axes, _fond in (
         "sommets_a_moins_de_1_5_mm": _m["sommets_a_moins_de_1_5_mm"],
         "penetration": _m["penetration"]})
     exiger(f"{_nom_c} · les pulpes se touchent",
-           _m["distance_mm"] <= 1.0, f'{_m["distance_mm"]:.2f} mm', "≤ 1,00 mm")
+           _m["distance_mm"] <= SEUIL_CONTACT_MM,
+           f'{_m["distance_mm"]:.2f} mm', f"≤ {SEUIL_CONTACT_MM:.2f} mm")
     exiger(f"{_nom_c} · les pulpes se font face",
-           _m["face_local"] <= -0.5, round(_m["face_local"], 3), "≤ −0,50")
+           _m["face_local"] <= SEUIL_FACE, round(_m["face_local"], 3),
+           f"≤ {SEUIL_FACE:.2f}".replace(".", ","))
     exiger(f"{_nom_c} · aucune interpénétration",
            _m["penetration"] == 0, _m["penetration"], "0 sommet")
 
