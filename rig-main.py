@@ -2326,12 +2326,100 @@ dire("poses_de_validation", _controle)
 # Une pose finale sans collision ne prouve rien si les doigts se traversent au
 # milieu du geste. On échantillonne le chemin depuis le repos.
 _POSES_D = {n: (pr, o) for n, pr, o in POSES}
+
+
+def etapes_fautives(pr, o):
+    """Les fractions du trajet où la main se traverse, et de combien."""
+    out = {}
+    for _k in range(11):
+        _u = _k / 10.0
+        poser_etat({kk: vv * _u for kk, vv in pr.items()},
+                   {kk: vv * _u for kk, vv in o.items()})
+        _n = sum(x["sommets_dedans"] for x in intersections(f"chemin@{_u}"))
+        if _n:
+            out[round(_u, 1)] = _n
+    return out
+
+
+def nettoyer_transition(nom_pose, pr, o, axes, rondes=3, tours=6):
+    """Corriger le CHEMIN, et pas seulement son point d'arrivée.
+
+    ═══ CE QU'ON MESURE SANS LE CORRIGER RESTE FAUX ═══
+
+    `rig-main.py` échantillonnait déjà les six transitions à onze étapes et
+    faisait échouer la construction dessus — mais rien ne les corrigeait
+    jamais. Quatre des neuf critères en échec du checkpoint sont des
+    transitions, dont une, `Neutral→Hand_Fist`, dont les DEUX extrémités sont
+    propres : le pouce traverse l'index à t = 0,8 et 0,9, puis en ressort.
+    Nettoyer la pose d'arrivée ne pouvait pas l'atteindre.
+
+    Les corrections FK d'une pose sont interpolées avec elle : les régler
+    déplace donc tout le trajet d'un coup. On cherche celles qui rendent
+    propres LES ÉTAPES FAUTIVES et l'arrivée — jamais l'arrivée seule, sans
+    quoi le nettoyage rachèterait le milieu du geste avec sa fin.
+
+    L'échantillonnage est ADAPTATIF : évaluer les onze étapes à chaque essai
+    coûterait onze fois le prix pour une information qu'on a déjà. On ne garde
+    que les étapes réellement fautives, plus l'arrivée, et on relit le trajet
+    entier entre deux rondes — corriger une étape peut en salir une autre.
+    """
+    for _ronde in range(rondes):
+        fautives = etapes_fautives(pr, o)
+        if not fautives:
+            return o, {}
+        echantillon = sorted(set(list(fautives) + [1.0]))
+        print(f"ATLAS_TRANSITION_A_NETTOYER {nom_pose} ronde {_ronde + 1} : "
+              + json.dumps({str(k): v for k, v in fautives.items()},
+                           ensure_ascii=False))
+
+        def evaluer(vec):
+            corr = {cle: v for (_g, cle, _lo, _hi), v in zip(axes, vec)}
+            o2 = {**o, **{k: o.get(k, 0.0) + v for k, v in corr.items()}}
+            total = 0
+            for _u in echantillon:
+                poser_etat({kk: vv * _u for kk, vv in pr.items()},
+                           {kk: vv * _u for kk, vv in o2.items()})
+                total += sum(x["sommets_dedans"]
+                             for x in intersections(f"{nom_pose}@{_u}"))
+            # Le second terme garde la correction MINIMALE parmi celles qui
+            # nettoient : une transition propre obtenue en défigurant la pose
+            # d'arrivée ne serait pas un progrès.
+            return total * 1e5 + sum(abs(v) for v in vec) / max(1, len(vec)) * 12.0, total, o2
+
+        milieu = [0.0] * len(axes)
+        best = evaluer(milieu) + (list(milieu),)
+        pas = [(hi - lo) / 4.0 for _g, _c, lo, hi in axes]
+        for _t in range(tours):
+            bouge = False
+            for i in range(len(axes)):
+                for signe in (-1.0, 1.0):
+                    v = list(best[3])
+                    v[i] = max(axes[i][2], min(axes[i][3], v[i] + signe * pas[i]))
+                    r = evaluer(v)
+                    if r[0] < best[0]:
+                        best = r + (v,)
+                        bouge = True
+            if not bouge:
+                pas = [x * 0.55 for x in pas]
+        print(f"ATLAS_TRANSITION_NETTOYEE {nom_pose} ronde {_ronde + 1} : "
+              f"{best[1]} sommets traversants sur {len(echantillon)} étapes")
+        if best[1] == 0:
+            return best[2], {"rondes": _ronde + 1}
+        o = best[2]
+    return o, {"rondes": rondes, "reste": etapes_fautives(pr, o)}
+
+
 _transitions = {}
-for _cible in ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
-               "Hand_Cupped", "Hand_Pinky_Thumb"):
+_TRANSITIONS = ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
+                "Hand_Cupped", "Hand_Pinky_Thumb")
+for _cible in _TRANSITIONS:
     if _cible not in _POSES_D:
         continue
     _pr, _o = _POSES_D[_cible]
+    if etapes_fautives(_pr, _o):
+        _o, _info = nettoyer_transition(_cible, _pr, _o, AXES_NETTOYAGE)
+        _POSES_D[_cible] = (_pr, _o)
+        POSES = [(n, p, (_o if n == _cible else oo)) for n, p, oo in POSES]
     _fautes_t = {}
     for _k in range(11):
         _u = _k / 10.0
@@ -2345,6 +2433,20 @@ for _cible in ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
            not _fautes_t, _fautes_t or "aucune", "aucune à chaque étape")
 regler()
 dire("transitions", _transitions)
+
+# ═══ NETTOYER UN CHEMIN PEUT SALIR SON ARRIVÉE ═══
+# Les corrections de transition s'appliquent aussi à la pose finale, puisque
+# c'est l'étape t = 1,0 du même trajet. On remesure donc TOUTES les poses après
+# coup : sans ce contrôle, on troquerait un échec de transition contre un échec
+# de pose sans que rien ne le dise.
+for nom_pose, reglages, os_pose in POSES:
+    poser_etat(reglages, os_pose)
+    _inter2 = intersections(nom_pose)
+    if _inter2 != _controle[nom_pose]["auto_intersections"]:
+        _controle[nom_pose]["auto_intersections_apres_transitions"] = _inter2
+        exiger(f"{nom_pose} · aucune auto-intersection après nettoyage "
+               f"des transitions", not _inter2, _inter2 or "aucune", "aucune")
+regler()
 
 # ═══ PINCH ET OK DOIVENT ÊTRE DEUX GESTES ═══
 # Ils rendaient exactement la même course et la même distance : c'était la même
