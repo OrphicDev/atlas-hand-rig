@@ -1,0 +1,796 @@
+{
+  "cote": "gauche",
+  "side": ".L",
+  "audit_maillage": {
+    "objet": "GEO_Hand.L",
+    "sauvegarde": "GEO_Hand_BACKUP.L",
+    "echelle": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "rotation_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sommets_avant": 54019,
+    "sommets_apres": 54019,
+    "doublons_soudes": 0,
+    "aretes_non_manifold": 170,
+    "note_non_manifold": "le bord de coupe du moignon en fait partie"
+  },
+  "audit_articulations": {
+    "boucles_par_articulation": {
+      "index_MCP": 15,
+      "index_PIP": 15,
+      "index_DIP": 15,
+      "middle_MCP": 15,
+      "middle_PIP": 15,
+      "middle_DIP": 15,
+      "ring_MCP": 15,
+      "ring_PIP": 15,
+      "ring_DIP": 15,
+      "pinky_MCP": 15,
+      "pinky_PIP": 15,
+      "pinky_DIP": 14,
+      "thumb_MCP": 15,
+      "thumb_IP": 15
+    },
+    "sous_le_minimum_de_3": {}
+  },
+  "squelette_deformation": {
+    "os_de_la_main": "DEF_hand.L",
+    "longueur_paume_mm": 56.0,
+    "chaines": {
+      "index": [
+        "DEF_index_meta.L",
+        "DEF_index_01.L",
+        "DEF_index_02.L",
+        "DEF_index_03.L"
+      ],
+      "middle": [
+        "DEF_middle_meta.L",
+        "DEF_middle_01.L",
+        "DEF_middle_02.L",
+        "DEF_middle_03.L"
+      ],
+      "ring": [
+        "DEF_ring_meta.L",
+        "DEF_ring_01.L",
+        "DEF_ring_02.L",
+        "DEF_ring_03.L"
+      ],
+      "pinky": [
+        "DEF_pinky_meta.L",
+        "DEF_pinky_01.L",
+        "DEF_pinky_02.L",
+        "DEF_pinky_03.L"
+      ],
+      "thumb": [
+        "DEF_thumb_meta.L",
+        "DEF_thumb_01.L",
+        "DEF_thumb_02.L"
+      ]
+    },
+    "nombre_os_def": 20
+  },
+  "sens_de_flexion": {
+    "distance_moyenne_bout_paume_a_+30_mm": 100.3,
+    "distance_moyenne_bout_paume_a_-30_mm": 125.6,
+    "sens_retenu": 30.0,
+    "regle": "fléchir vers la paume rapproche le bout du centre de la paume"
+  },
+  "test_bone_roll": {
+    "par_doigt": {
+      "index": {
+        "rapprochement_mm": 27.1,
+        "axe_de_flexion_contre_travers": -0.997,
+        "course_mm": 63.6
+      },
+      "middle": {
+        "rapprochement_mm": 31.9,
+        "axe_de_flexion_contre_travers": -1.0,
+        "course_mm": 71.7
+      },
+      "ring": {
+        "rapprochement_mm": 34.6,
+        "axe_de_flexion_contre_travers": -0.986,
+        "course_mm": 65.9
+      },
+      "pinky": {
+        "rapprochement_mm": 23.7,
+        "axe_de_flexion_contre_travers": -0.888,
+        "course_mm": 52.2
+      },
+      "thumb": {
+        "rapprochement_mm": 19.5,
+        "axe_de_flexion_contre_travers": 0.742,
+        "course_mm": 34.1
+      }
+    },
+    "sens_des_quatre_doigts": [
+      [
+        "index",
+        -1
+      ],
+      [
+        "middle",
+        -1
+      ],
+      [
+        "ring",
+        -1
+      ],
+      [
+        "pinky",
+        -1
+      ]
+    ],
+    "fautes": []
+  },
+  "phase_d": {
+    "os_ctrl": 21,
+    "os_mch": 19,
+    "os_def": 20,
+    "proprietes": [
+      "Fist",
+      "Index_Curl",
+      "Middle_Curl",
+      "Ring_Curl",
+      "Pinky_Curl",
+      "Thumb_Curl",
+      "Thumb_Opposition",
+      "Spread",
+      "Cup",
+      "Relax"
+    ],
+    "melange_des_rotations": "ADD",
+    "signe_de_flexion": 1.0,
+    "axe_flexion_euler": 0,
+    "axe_ecartement_euler": 2
+  },
+  "phase_e": {
+    "contraintes_de_butee": 38,
+    "mcp_deg": [
+      -20.0,
+      90.0
+    ],
+    "pip_deg": [
+      -0.0,
+      110.0
+    ],
+    "dip_deg": [
+      -10.0,
+      80.0
+    ],
+    "pouce_mcp_deg": [
+      -0.0,
+      60.0
+    ],
+    "pouce_ip_deg": [
+      -0.0,
+      80.0
+    ],
+    "ecartement_max_deg": 15.0
+  },
+  "phase_f": {
+    "sommets_contamines_entre_phalanges": 3620,
+    "sommets_melangeant_deux_metacarpiens": 22085,
+    "note_paume": "le mélange entre métacarpiens voisins est demandé par la règle 7 du tutoriel : la paume est une chair continue",
+    "sommets_dont_la_somme_des_poids_n_est_pas_1": 0,
+    "morceaux_par_doigt": {
+      "index": {
+        "morceaux": 1,
+        "plus_gros": 9743
+      },
+      "middle": {
+        "morceaux": 1,
+        "plus_gros": 7916
+      },
+      "ring": {
+        "morceaux": 1,
+        "plus_gros": 7695
+      },
+      "pinky": {
+        "morceaux": 1,
+        "plus_gros": 10632
+      },
+      "thumb": {
+        "morceaux": 1,
+        "plus_gros": 7974
+      }
+    },
+    "groupes": 20
+  },
+  "phase_f_correction": {
+    "sommets_corriges": 2949,
+    "contamination_restante": 671,
+    "chair_encore_d_un_seul_tenant": {
+      "index": 1,
+      "middle": 1,
+      "ring": 1,
+      "pinky": 1,
+      "thumb": 1
+    }
+  },
+  "retour_au_repos": {
+    "ecart_max_mm": 0.0,
+    "course_du_poing_mm": 121.6,
+    "verdict": "exact"
+  },
+  "empreintes": {
+    "thumb": {
+      "sommets": 760,
+      "part_de_la_phalange": 0.33
+    },
+    "index": {
+      "sommets": 743,
+      "part_de_la_phalange": 0.31
+    },
+    "pinky": {
+      "sommets": 638,
+      "part_de_la_phalange": 0.29
+    }
+  },
+  "opposition_mesuree": {
+    "angles_du_metacarpien_deg": [
+      -4.3,
+      60.6,
+      -75.0
+    ],
+    "ecart_des_empreintes_mm": 2.82,
+    "se_font_face": -0.919,
+    "creusement": 0.6,
+    "repli_auriculaire": 0.4,
+    "ce_que_j_avais_suppose_deg": [
+      40.0,
+      -55.0,
+      22.0
+    ]
+  },
+  "contact_Hand_Pinch": {
+    "entre": "index et thumb",
+    "distance_mm": 3.19,
+    "orientation_locale": -0.536,
+    "sommets_du_patch": 100,
+    "sommets_a_moins_de_1_5_mm": 0,
+    "penetration": 0
+  },
+  "contact_Hand_OK": {
+    "entre": "index et thumb",
+    "distance_mm": 1.04,
+    "orientation_locale": -0.46,
+    "sommets_du_patch": 131,
+    "sommets_a_moins_de_1_5_mm": 7,
+    "penetration": 0
+  },
+  "contact_Hand_Pinky_Thumb": {
+    "entre": "pinky et thumb",
+    "distance_mm": 2.46,
+    "orientation_locale": -0.079,
+    "sommets_du_patch": 66,
+    "sommets_a_moins_de_1_5_mm": 0,
+    "penetration": 0
+  },
+  "pince_auriculaire_pouce": {
+    "ecart_des_empreintes_mm": 2.46,
+    "se_font_face": -0.079
+  },
+  "traversees_des_quatre_doigts_seuls": {
+    "0.6": {
+      "total": 1,
+      "detail": [
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 1
+        }
+      ]
+    },
+    "0.7": {
+      "total": 2429,
+      "detail": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 1272
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 96
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets_dedans": 241
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 106
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 363
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 351
+        }
+      ]
+    },
+    "0.8": {
+      "total": 2086,
+      "detail": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 718
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 485
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets_dedans": 5
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 463
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 164
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 251
+        }
+      ]
+    },
+    "0.9": {
+      "total": 2203,
+      "detail": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 835
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 414
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets_dedans": 63
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 344
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 187
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 360
+        }
+      ]
+    },
+    "1.0": {
+      "total": 2466,
+      "detail": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 913
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 408
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets_dedans": 86
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 378
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 223
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 458
+        }
+      ]
+    }
+  },
+  "fermeture_retenue": {
+    "valeur": 0.6,
+    "raison": "la plus franche qui ne traverse pas, mesurée sans le pouce"
+  },
+  "pouce_du_poing": {
+    "distance_a_l_index_mm": 1.54,
+    "penetration": 0,
+    "reglages": {
+      "Fist": 0.55,
+      "Thumb_Curl": 0.233,
+      "Thumb_Opposition": 0.126
+    },
+    "corrections_fk_deg": {
+      "CTRL_index_01.L[2]": -7.9,
+      "CTRL_middle_01.L[2]": 8.0,
+      "CTRL_ring_01.L[2]": -6.0,
+      "CTRL_pinky_01.L[2]": -10.1,
+      "CTRL_thumb_meta.L[0]": -23.5,
+      "CTRL_thumb_meta.L[1]": -25.6,
+      "CTRL_thumb_meta.L[2]": -32.4,
+      "CTRL_thumb_01.L[0]": -38.9,
+      "CTRL_thumb_02.L[0]": 27.6
+    }
+  },
+  "poses_de_validation": {
+    "Hand_Neutral": {
+      "course_max_mm": 0.0,
+      "auriculaire_au_pouce_mm": 125.4,
+      "index_au_pouce_mm": 59.6,
+      "auto_intersections": []
+    },
+    "Hand_Relaxed": {
+      "course_max_mm": 54.5,
+      "auriculaire_au_pouce_mm": 107.1,
+      "index_au_pouce_mm": 49.8,
+      "auto_intersections": []
+    },
+    "Hand_Open": {
+      "course_max_mm": 15.1,
+      "auriculaire_au_pouce_mm": 117.0,
+      "index_au_pouce_mm": 65.9,
+      "auto_intersections": []
+    },
+    "Hand_Spread_Min": {
+      "course_max_mm": 15.1,
+      "auriculaire_au_pouce_mm": 132.9,
+      "index_au_pouce_mm": 53.2,
+      "auto_intersections": []
+    },
+    "Hand_Fist": {
+      "course_max_mm": 133.6,
+      "auriculaire_au_pouce_mm": 45.6,
+      "index_au_pouce_mm": 1.5,
+      "auto_intersections": []
+    },
+    "Hand_Fist_25": {
+      "course_max_mm": 63.9,
+      "auriculaire_au_pouce_mm": 110.6,
+      "index_au_pouce_mm": 38.5,
+      "auto_intersections": []
+    },
+    "Hand_Fist_50": {
+      "course_max_mm": 128.0,
+      "auriculaire_au_pouce_mm": 88.0,
+      "index_au_pouce_mm": 20.2,
+      "auto_intersections": []
+    },
+    "Hand_Fist_75": {
+      "course_max_mm": 123.9,
+      "auriculaire_au_pouce_mm": 81.4,
+      "index_au_pouce_mm": 26.4,
+      "auto_intersections": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 779
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 24
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 240
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 230
+        }
+      ]
+    },
+    "Hand_Point": {
+      "course_max_mm": 121.4,
+      "auriculaire_au_pouce_mm": 50.6,
+      "index_au_pouce_mm": 55.8,
+      "auto_intersections": [
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 440
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 445
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 189
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 277
+        }
+      ]
+    },
+    "Hand_Pinch": {
+      "course_max_mm": 92.7,
+      "auriculaire_au_pouce_mm": 91.6,
+      "index_au_pouce_mm": 3.2,
+      "auto_intersections": []
+    },
+    "Hand_OK": {
+      "course_max_mm": 106.4,
+      "auriculaire_au_pouce_mm": 76.1,
+      "index_au_pouce_mm": 1.0,
+      "auto_intersections": []
+    },
+    "Hand_Cupped": {
+      "course_max_mm": 58.4,
+      "auriculaire_au_pouce_mm": 129.3,
+      "index_au_pouce_mm": 54.7,
+      "auto_intersections": [
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 1
+        }
+      ]
+    },
+    "Hand_Pinky_Thumb": {
+      "course_max_mm": 134.5,
+      "auriculaire_au_pouce_mm": 2.5,
+      "index_au_pouce_mm": 54.4,
+      "auto_intersections": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 127
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 1
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 25
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 59
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 1
+        }
+      ]
+    }
+  },
+  "transitions": {
+    "Neutral→Hand_Fist": {
+      "0.7": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 188
+        }
+      ],
+      "0.8": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 1623
+        }
+      ],
+      "0.9": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 905
+        }
+      ]
+    },
+    "Neutral→Hand_Point": {
+      "0.3": [
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 7
+        }
+      ],
+      "0.4": [
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 100
+        }
+      ],
+      "0.5": [
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 177
+        }
+      ],
+      "0.6": [
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 196
+        }
+      ],
+      "0.7": [
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 649
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 522
+        }
+      ],
+      "0.8": [
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 449
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 513
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 279
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 282
+        }
+      ],
+      "0.9": [
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 423
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 407
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 323
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 276
+        }
+      ],
+      "1.0": [
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 440
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 445
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 189
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 277
+        }
+      ]
+    },
+    "Neutral→Hand_Pinch": "aucune collision",
+    "Neutral→Hand_OK": {
+      "0.8": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 655
+        }
+      ],
+      "0.9": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 497
+        }
+      ]
+    },
+    "Neutral→Hand_Cupped": {
+      "0.7": [
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 1
+        }
+      ],
+      "0.8": [
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 4
+        }
+      ],
+      "1.0": [
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 1
+        }
+      ]
+    },
+    "Neutral→Hand_Pinky_Thumb": {
+      "0.4": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 4
+        }
+      ],
+      "0.5": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 21
+        }
+      ],
+      "0.6": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 46
+        }
+      ],
+      "0.7": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 1127
+        }
+      ],
+      "0.8": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 1350
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 1
+        }
+      ],
+      "0.9": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 470
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 9
+        }
+      ],
+      "1.0": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 127
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 1
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 25
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 59
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 1
+        }
+      ]
+    }
+  },
+  "pinch_contre_ok": {
+    "ecart_maximal_entre_les_deux_poses_mm": 47.8,
+    "ouverture_de_l_anneau_pinch_mm": 19.3,
+    "ouverture_de_l_anneau_ok_mm": 20.6
+  },
+  "creux_de_la_paume": {
+    "au_repos_mm": 21.0,
+    "en_paume_creuse_mm": 22.0,
+    "gain_mm": 1.0
+  }
+}
