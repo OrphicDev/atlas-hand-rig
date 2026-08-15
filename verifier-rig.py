@@ -15,6 +15,17 @@ import math
 import os
 import sys
 
+# ═══ NE PAS TAMPONNER LA SORTIE ═══
+# Mesuré : deux lancements de 11 et 16 minutes n'avaient écrit ZÉRO octet, et
+# une exception laissait un journal vide. On ne peut alors distinguer un calcul
+# long d'un blocage, ni lire l'erreur qui a tout arrêté. Blender tamponne en
+# amont de Python ; il faut le lui dire ligne par ligne.
+try:
+    sys.stdout.reconfigure(line_buffering=True)
+    sys.stderr.reconfigure(line_buffering=True)
+except Exception:
+    pass
+
 import bpy
 import mathutils
 
@@ -57,8 +68,12 @@ def neutre():
     if rig.animation_data:
         rig.animation_data.action = None
     for pb in rig.pose.bones:
-        pb.rotation_mode = "XYZ"
-        pb.rotation_euler = (0.0, 0.0, 0.0)
+        # On ne force plus le mode de rotation : un vérificateur ne modifie pas
+        # l'objet qu'il juge. On remet à zéro dans le mode où l'os se trouve.
+        if pb.rotation_mode == "QUATERNION":
+            pb.rotation_quaternion = (1.0, 0.0, 0.0, 0.0)
+        else:
+            pb.rotation_euler = (0.0, 0.0, 0.0)
     for k in list(pbh.keys()):
         if isinstance(pbh[k], float):
             pbh[k] = 0.0
@@ -86,10 +101,15 @@ for v in geo.data.vertices:
 
 
 def famille(n):
+    # ═══ SEULS LES GROUPES D'OS SONT DES FAMILLES ═══
+    # `ZONES_ARTICULAIRES`, créé pour le lissage correctif, n'est l'os de
+    # personne — et il domine 203 sommets. Rangé dans « hand », il fabriquait
+    # des intersections fantômes sur Pinch et OK et en cachait de vraies sur
+    # Point. Un groupe qui n'est pas un os n'appartient à aucune famille.
     for f in NOMS4 + ["thumb"]:
         if n.startswith(f"DEF_{f}_"):
             return f
-    return "hand"
+    return "hand" if n.startswith("DEF_") else None
 
 
 def empreinte(doigt):
@@ -140,25 +160,37 @@ def traversees():
     _p, _n = evalue()
     par = {}
     for i, nm in DOM.items():
-        par.setdefault(famille(nm), []).append(i)
-    out = []
-    for fa, fb in (("thumb", "index"), ("thumb", "middle"), ("index", "middle"),
-                   ("middle", "ring"), ("ring", "pinky")):
-        if fa not in par or fb not in par:
-            continue
-        t = mathutils.kdtree.KDTree(len(par[fb]))
-        for k, i in enumerate(par[fb]):
+        f = famille(nm)
+        if f is not None:
+            par.setdefault(f, []).append(i)
+    # Les 15 couples, dans les DEUX sens. La version précédente n'en testait
+    # que 5 dans un seul sens et ne voyait donc que 22 % des traversées.
+    arbres = {}
+    for f, idx in par.items():
+        t = mathutils.kdtree.KDTree(len(idx))
+        for k, i in enumerate(idx):
             t.insert(_p[i], k)
         t.balance()
-        n = 0
-        for i in par[fa]:
-            co, k, d = t.find(_p[i])
-            j = par[fb][k]
-            if (d < 0.008 and (_p[j] - _p[i]).dot(_n[j]) > PROFONDEUR_MINIMALE
-                    and (P_REPOS[i] - P_REPOS[j]).length > ECART_REPOS_MINIMAL):
-                n += 1
-        if n:
-            out.append({"entre": f"{fa}/{fb}", "sommets": n})
+        arbres[f] = (t, idx)
+    out = []
+    fams = [f for f in ("thumb", "index", "middle", "ring", "pinky", "hand")
+            if f in arbres]
+    for x in range(len(fams)):
+        for y in range(x + 1, len(fams)):
+            fa, fb = fams[x], fams[y]
+            n = 0
+            for src, dst in ((fa, fb), (fb, fa)):
+                t, idx = arbres[dst]
+                for i in par[src]:
+                    co, k, d = t.find(_p[i])
+                    j = idx[k]
+                    if (d < 0.008
+                            and (_p[j] - _p[i]).dot(_n[j]) > PROFONDEUR_MINIMALE
+                            and (P_REPOS[i] - P_REPOS[j]).length
+                            > ECART_REPOS_MINIMAL):
+                        n += 1
+            if n:
+                out.append({"entre": f"{fa}/{fb}", "sommets": n})
     return out
 
 
@@ -195,6 +227,10 @@ for pose, a, b in (("Hand_Pinch", "index", "thumb"),
                    ("Hand_OK", "index", "thumb"),
                    ("Hand_Pinky_Thumb", "pinky", "thumb")):
     if pose not in ACTIONS:
+        # Une pose absente passait en silence : un .blend sans aucune des poses
+        # contrôlées sortait en code 0. L'absence est un échec.
+        exiger(f"{pose} · la pose existe dans le fichier", False, "absente",
+               "présente")
         continue
     appliquer(ACTIONS[pose])
     c = contact(a, b)
@@ -207,11 +243,54 @@ for pose, a, b in (("Hand_Pinch", "index", "thumb"),
            round(c["face"], 3), "≤ −0,50")
     exiger(f"{pose} · aucune auto-intersection", not t, t or "aucune", "aucune")
 
-if "Hand_Fist" in ACTIONS:
-    appliquer(ACTIONS["Hand_Fist"])
-    t = traversees()
-    resultat["Hand_Fist"] = {"traversees": t}
-    exiger("Hand_Fist · aucune auto-intersection", not t, t or "aucune", "aucune")
+# ═══ TOUTES LES POSES, PAS QUATRE ═══
+# Le vérificateur n'en contrôlait que quatre : Pinch, OK, Pinky_Thumb et Fist.
+# Les neuf autres n'étaient donc jamais regardées — et c'est exactement là que
+# l'audit a trouvé le gros des traversées (Point 1 540, Fist_75 118,
+# Cupped 80). Ce qu'on ne mesure pas, on ne le corrige pas.
+resultat["toutes_les_poses"] = {}
+for _nom in sorted(ACTIONS):
+    appliquer(ACTIONS[_nom])
+    _t = traversees()
+    resultat["toutes_les_poses"][_nom] = _t or "aucune"
+    exiger(f"{_nom} · aucune auto-intersection", not _t, _t or "aucune", "aucune")
+
+# ═══ LES TRANSITIONS, PAS SEULEMENT LES POSES FINALES ═══
+# Une pose finale propre ne prouve rien si les doigts se traversent au milieu
+# du geste : l'audit a relevé 355 traversées à l'étape 0,9 de Neutral→Fist,
+# alors que les deux extrémités sont nettes.
+resultat["transitions"] = {}
+for _cible in ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
+               "Hand_Cupped", "Hand_Pinky_Thumb"):
+    if _cible not in ACTIONS:
+        continue
+    _fautes = {}
+    for _k in range(11):
+        _u = _k / 10.0
+        neutre()
+        rig.animation_data_create()
+        rig.animation_data.action = ACTIONS[_cible]
+        bpy.context.scene.frame_set(1)
+        bpy.context.view_layer.update()
+        # Interpolation depuis le repos : on relit la pose cible puis on la
+        # ramène à la fraction voulue, os par os et propriété par propriété.
+        _cible_rot = {pb.name: tuple(pb.rotation_euler) for pb in rig.pose.bones}
+        _cible_prop = {k: float(pbh[k]) for k in pbh.keys()
+                       if isinstance(pbh[k], float)}
+        neutre()
+        for _nb, _r in _cible_rot.items():
+            rig.pose.bones[_nb].rotation_euler = tuple(x * _u for x in _r)
+        for _kp, _vp in _cible_prop.items():
+            pbh[_kp] = _vp * _u
+        rig.update_tag()
+        bpy.context.scene.frame_set(bpy.context.scene.frame_current)
+        bpy.context.view_layer.update()
+        _t = traversees()
+        if _t:
+            _fautes[f"{_u:.1f}"] = _t
+    resultat["transitions"][f"Neutral→{_cible}"] = _fautes or "aucune"
+    exiger(f"transition Neutral→{_cible} · aucune auto-intersection",
+           not _fautes, _fautes or "aucune", "aucune à chaque étape")
 
 # ── les drivers ──
 drv = [d.data_path for d in (rig.animation_data.drivers

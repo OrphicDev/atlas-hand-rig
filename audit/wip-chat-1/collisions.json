@@ -1,0 +1,3817 @@
+{
+  "fichier": "RIG_Hand.L-NON-VALIDE.blend",
+  "methode": {
+    "rayon_mm": 8.0,
+    "profondeur_minimale_mm": 0.5,
+    "ecart_au_repos_minimal_mm": 14.0,
+    "couples_examines": 15,
+    "sens": "les deux",
+    "etapes_par_transition": 11
+  },
+  "groupes_de_sommets_sans_os": [
+    "ZONES_ARTICULAIRES"
+  ],
+  "sommets_dominés_par_un_groupe_sans_os": 203,
+  "controle_de_la_sonde": {
+    "repos_tout_a_zero": 0,
+    "Hand_Neutral": 0,
+    "Hand_Fist": 3
+  },
+  "classement_permissif": {
+    "poses": {
+      "Hand_Neutral": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Relaxed": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Open": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Spread_Min": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Fist_25": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Fist_50": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Fist_75": {
+        "total": 118,
+        "couples": [
+          {
+            "entre": "index/middle",
+            "sommets": 72,
+            "index_dans_middle": 43,
+            "middle_dans_index": 29
+          },
+          {
+            "entre": "thumb/index",
+            "sommets": 42,
+            "thumb_dans_index": 6,
+            "index_dans_thumb": 36
+          },
+          {
+            "entre": "middle/ring",
+            "sommets": 4,
+            "middle_dans_ring": 4,
+            "ring_dans_middle": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_index_01.L → DEF_middle_01.L",
+            "sommets": 43
+          },
+          {
+            "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+            "sommets": 36
+          },
+          {
+            "couple": "DEF_middle_01.L → DEF_index_01.L",
+            "sommets": 29
+          }
+        ]
+      },
+      "Hand_Fist": {
+        "total": 3,
+        "couples": [
+          {
+            "entre": "middle/hand",
+            "sommets": 2,
+            "middle_dans_hand": 2,
+            "hand_dans_middle": 0
+          },
+          {
+            "entre": "ring/hand",
+            "sommets": 1,
+            "ring_dans_hand": 1,
+            "hand_dans_ring": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_middle_01.L → ZONES_ARTICULAIRES",
+            "sommets": 2
+          },
+          {
+            "couple": "DEF_ring_02.L → ZONES_ARTICULAIRES",
+            "sommets": 1
+          }
+        ]
+      },
+      "Hand_Point": {
+        "total": 1745,
+        "couples": [
+          {
+            "entre": "index/middle",
+            "sommets": 478,
+            "index_dans_middle": 25,
+            "middle_dans_index": 453
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets": 442,
+            "thumb_dans_middle": 122,
+            "middle_dans_thumb": 320
+          },
+          {
+            "entre": "ring/pinky",
+            "sommets": 336,
+            "ring_dans_pinky": 317,
+            "pinky_dans_ring": 19
+          },
+          {
+            "entre": "middle/ring",
+            "sommets": 214,
+            "middle_dans_ring": 75,
+            "ring_dans_middle": 139
+          },
+          {
+            "entre": "ring/hand",
+            "sommets": 69,
+            "ring_dans_hand": 69,
+            "hand_dans_ring": 0
+          },
+          {
+            "entre": "thumb/ring",
+            "sommets": 58,
+            "thumb_dans_ring": 0,
+            "ring_dans_thumb": 58
+          },
+          {
+            "entre": "thumb/hand",
+            "sommets": 54,
+            "thumb_dans_hand": 50,
+            "hand_dans_thumb": 4
+          },
+          {
+            "entre": "middle/hand",
+            "sommets": 39,
+            "middle_dans_hand": 39,
+            "hand_dans_middle": 0
+          },
+          {
+            "entre": "pinky/hand",
+            "sommets": 38,
+            "pinky_dans_hand": 38,
+            "hand_dans_pinky": 0
+          },
+          {
+            "entre": "index/hand",
+            "sommets": 17,
+            "index_dans_hand": 13,
+            "hand_dans_index": 4
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+            "sommets": 232
+          },
+          {
+            "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+            "sommets": 177
+          },
+          {
+            "couple": "DEF_middle_01.L → DEF_index_meta.L",
+            "sommets": 163
+          }
+        ]
+      },
+      "Hand_Pinch": {
+        "total": 53,
+        "couples": [
+          {
+            "entre": "thumb/hand",
+            "sommets": 53,
+            "thumb_dans_hand": 53,
+            "hand_dans_thumb": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+            "sommets": 53
+          }
+        ]
+      },
+      "Hand_OK": {
+        "total": 53,
+        "couples": [
+          {
+            "entre": "thumb/hand",
+            "sommets": 53,
+            "thumb_dans_hand": 53,
+            "hand_dans_thumb": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+            "sommets": 53
+          }
+        ]
+      },
+      "Hand_Cupped": {
+        "total": 80,
+        "couples": [
+          {
+            "entre": "middle/ring",
+            "sommets": 80,
+            "middle_dans_ring": 36,
+            "ring_dans_middle": 44
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_ring_01.L → DEF_middle_01.L",
+            "sommets": 44
+          },
+          {
+            "couple": "DEF_middle_01.L → DEF_ring_01.L",
+            "sommets": 36
+          }
+        ]
+      },
+      "Hand_Pinky_Thumb": {
+        "total": 1384,
+        "couples": [
+          {
+            "entre": "thumb/pinky",
+            "sommets": 556,
+            "thumb_dans_pinky": 386,
+            "pinky_dans_thumb": 170
+          },
+          {
+            "entre": "ring/pinky",
+            "sommets": 403,
+            "ring_dans_pinky": 0,
+            "pinky_dans_ring": 403
+          },
+          {
+            "entre": "index/middle",
+            "sommets": 146,
+            "index_dans_middle": 0,
+            "middle_dans_index": 146
+          },
+          {
+            "entre": "thumb/index",
+            "sommets": 136,
+            "thumb_dans_index": 26,
+            "index_dans_thumb": 110
+          },
+          {
+            "entre": "pinky/hand",
+            "sommets": 61,
+            "pinky_dans_hand": 61,
+            "hand_dans_pinky": 0
+          },
+          {
+            "entre": "middle/hand",
+            "sommets": 34,
+            "middle_dans_hand": 34,
+            "hand_dans_middle": 0
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets": 25,
+            "thumb_dans_middle": 14,
+            "middle_dans_thumb": 11
+          },
+          {
+            "entre": "thumb/hand",
+            "sommets": 23,
+            "thumb_dans_hand": 23,
+            "hand_dans_thumb": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+            "sommets": 403
+          },
+          {
+            "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+            "sommets": 291
+          },
+          {
+            "couple": "DEF_middle_03.L → DEF_index_meta.L",
+            "sommets": 146
+          }
+        ]
+      }
+    },
+    "transitions": {
+      "Hand_Neutral→Hand_Fist": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.8": {
+            "total": 137,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 137,
+                "thumb_dans_index": 33,
+                "index_dans_thumb": 104
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_02.L",
+                "sommets": 104
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_index_03.L",
+                "sommets": 33
+              }
+            ]
+          },
+          "0.9": {
+            "total": 355,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 355,
+                "thumb_dans_index": 70,
+                "index_dans_thumb": 285
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_02.L",
+                "sommets": 285
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_index_03.L",
+                "sommets": 70
+              }
+            ]
+          },
+          "1.0": {
+            "total": 3,
+            "couples": [
+              {
+                "entre": "middle/hand",
+                "sommets": 2,
+                "middle_dans_hand": 2,
+                "hand_dans_middle": 0
+              },
+              {
+                "entre": "ring/hand",
+                "sommets": 1,
+                "ring_dans_hand": 1,
+                "hand_dans_ring": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → ZONES_ARTICULAIRES",
+                "sommets": 2
+              },
+              {
+                "couple": "DEF_ring_02.L → ZONES_ARTICULAIRES",
+                "sommets": 1
+              }
+            ]
+          }
+        },
+        "pic": "0.9",
+        "pic_sommets": 355,
+        "premiere_etape_fautive": "0.8",
+        "etapes_fautives": [
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Point": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 1,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 1,
+                "index_dans_middle": 1,
+                "middle_dans_index": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 1
+              }
+            ]
+          },
+          "0.4": {
+            "total": 19,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 19,
+                "index_dans_middle": 19,
+                "middle_dans_index": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 19
+              }
+            ]
+          },
+          "0.5": {
+            "total": 128,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 128,
+                "index_dans_middle": 31,
+                "middle_dans_index": 97
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_index_01.L",
+                "sommets": 97
+              },
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 31
+              }
+            ]
+          },
+          "0.6": {
+            "total": 187,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 187,
+                "index_dans_middle": 29,
+                "middle_dans_index": 158
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_index_01.L",
+                "sommets": 135
+              },
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 28
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_index_meta.L",
+                "sommets": 23
+              }
+            ]
+          },
+          "0.7": {
+            "total": 199,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 199,
+                "index_dans_middle": 31,
+                "middle_dans_index": 168
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_index_01.L",
+                "sommets": 107
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_index_meta.L",
+                "sommets": 61
+              },
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 20
+              }
+            ]
+          },
+          "0.8": {
+            "total": 1730,
+            "couples": [
+              {
+                "entre": "thumb/middle",
+                "sommets": 876,
+                "thumb_dans_middle": 78,
+                "middle_dans_thumb": 798
+              },
+              {
+                "entre": "index/middle",
+                "sommets": 644,
+                "index_dans_middle": 29,
+                "middle_dans_index": 615
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 169,
+                "ring_dans_pinky": 169,
+                "pinky_dans_ring": 0
+              },
+              {
+                "entre": "middle/ring",
+                "sommets": 33,
+                "middle_dans_ring": 5,
+                "ring_dans_middle": 28
+              },
+              {
+                "entre": "thumb/ring",
+                "sommets": 4,
+                "thumb_dans_ring": 0,
+                "ring_dans_thumb": 4
+              },
+              {
+                "entre": "ring/hand",
+                "sommets": 4,
+                "ring_dans_hand": 4,
+                "hand_dans_ring": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 798
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 443
+              },
+              {
+                "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+                "sommets": 169
+              }
+            ]
+          },
+          "0.9": {
+            "total": 2016,
+            "couples": [
+              {
+                "entre": "thumb/middle",
+                "sommets": 707,
+                "thumb_dans_middle": 113,
+                "middle_dans_thumb": 594
+              },
+              {
+                "entre": "index/middle",
+                "sommets": 515,
+                "index_dans_middle": 34,
+                "middle_dans_index": 481
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 326,
+                "ring_dans_pinky": 320,
+                "pinky_dans_ring": 6
+              },
+              {
+                "entre": "middle/ring",
+                "sommets": 287,
+                "middle_dans_ring": 9,
+                "ring_dans_middle": 278
+              },
+              {
+                "entre": "thumb/ring",
+                "sommets": 107,
+                "thumb_dans_ring": 0,
+                "ring_dans_thumb": 107
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 60,
+                "thumb_dans_hand": 60,
+                "hand_dans_thumb": 0
+              },
+              {
+                "entre": "ring/hand",
+                "sommets": 14,
+                "ring_dans_hand": 14,
+                "hand_dans_ring": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 591
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 305
+              },
+              {
+                "couple": "DEF_ring_03.L → DEF_middle_meta.L",
+                "sommets": 275
+              }
+            ]
+          },
+          "1.0": {
+            "total": 1745,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 478,
+                "index_dans_middle": 25,
+                "middle_dans_index": 453
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 442,
+                "thumb_dans_middle": 122,
+                "middle_dans_thumb": 320
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 336,
+                "ring_dans_pinky": 317,
+                "pinky_dans_ring": 19
+              },
+              {
+                "entre": "middle/ring",
+                "sommets": 214,
+                "middle_dans_ring": 75,
+                "ring_dans_middle": 139
+              },
+              {
+                "entre": "ring/hand",
+                "sommets": 69,
+                "ring_dans_hand": 69,
+                "hand_dans_ring": 0
+              },
+              {
+                "entre": "thumb/ring",
+                "sommets": 58,
+                "thumb_dans_ring": 0,
+                "ring_dans_thumb": 58
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 54,
+                "thumb_dans_hand": 50,
+                "hand_dans_thumb": 4
+              },
+              {
+                "entre": "middle/hand",
+                "sommets": 39,
+                "middle_dans_hand": 39,
+                "hand_dans_middle": 0
+              },
+              {
+                "entre": "pinky/hand",
+                "sommets": 38,
+                "pinky_dans_hand": 38,
+                "hand_dans_pinky": 0
+              },
+              {
+                "entre": "index/hand",
+                "sommets": 17,
+                "index_dans_hand": 13,
+                "hand_dans_index": 4
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+                "sommets": 232
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 177
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_index_meta.L",
+                "sommets": 163
+              }
+            ]
+          }
+        },
+        "pic": "0.9",
+        "pic_sommets": 2016,
+        "premiere_etape_fautive": "0.3",
+        "etapes_fautives": [
+          "0.3",
+          "0.4",
+          "0.5",
+          "0.6",
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Pinch": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.8": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.9": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "1.0": {
+            "total": 53,
+            "couples": [
+              {
+                "entre": "thumb/hand",
+                "sommets": 53,
+                "thumb_dans_hand": 53,
+                "hand_dans_thumb": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+                "sommets": 53
+              }
+            ]
+          }
+        },
+        "pic": "1.0",
+        "pic_sommets": 53,
+        "premiere_etape_fautive": "1.0",
+        "etapes_fautives": [
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_OK": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.8": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.9": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "1.0": {
+            "total": 53,
+            "couples": [
+              {
+                "entre": "thumb/hand",
+                "sommets": 53,
+                "thumb_dans_hand": 53,
+                "hand_dans_thumb": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+                "sommets": 53
+              }
+            ]
+          }
+        },
+        "pic": "1.0",
+        "pic_sommets": 53,
+        "premiere_etape_fautive": "1.0",
+        "etapes_fautives": [
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Cupped": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 6,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 6,
+                "middle_dans_ring": 3,
+                "ring_dans_middle": 3
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 3
+              },
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 3
+              }
+            ]
+          },
+          "0.8": {
+            "total": 34,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 34,
+                "middle_dans_ring": 19,
+                "ring_dans_middle": 15
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 19
+              },
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 15
+              }
+            ]
+          },
+          "0.9": {
+            "total": 61,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 61,
+                "middle_dans_ring": 28,
+                "ring_dans_middle": 33
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 33
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 28
+              }
+            ]
+          },
+          "1.0": {
+            "total": 80,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 80,
+                "middle_dans_ring": 36,
+                "ring_dans_middle": 44
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 44
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 36
+              }
+            ]
+          }
+        },
+        "pic": "1.0",
+        "pic_sommets": 80,
+        "premiere_etape_fautive": "0.7",
+        "etapes_fautives": [
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Pinky_Thumb": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 22,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 22,
+                "thumb_dans_index": 0,
+                "index_dans_thumb": 22
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 22
+              }
+            ]
+          },
+          "0.5": {
+            "total": 68,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 68,
+                "thumb_dans_index": 0,
+                "index_dans_thumb": 68
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 68
+              }
+            ]
+          },
+          "0.6": {
+            "total": 102,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 102,
+                "thumb_dans_index": 0,
+                "index_dans_thumb": 102
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 102
+              }
+            ]
+          },
+          "0.7": {
+            "total": 1003,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 1003,
+                "thumb_dans_index": 92,
+                "index_dans_thumb": 911
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_01.L",
+                "sommets": 426
+              },
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+                "sommets": 359
+              },
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 126
+              }
+            ]
+          },
+          "0.8": {
+            "total": 2347,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 897,
+                "thumb_dans_index": 86,
+                "index_dans_thumb": 811
+              },
+              {
+                "entre": "thumb/pinky",
+                "sommets": 871,
+                "thumb_dans_pinky": 600,
+                "pinky_dans_thumb": 271
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 314,
+                "thumb_dans_hand": 310,
+                "hand_dans_thumb": 4
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 243,
+                "thumb_dans_middle": 42,
+                "middle_dans_thumb": 201
+              },
+              {
+                "entre": "middle/hand",
+                "sommets": 22,
+                "middle_dans_hand": 22,
+                "hand_dans_middle": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+                "sommets": 669
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+                "sommets": 522
+              },
+              {
+                "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+                "sommets": 300
+              }
+            ]
+          },
+          "0.9": {
+            "total": 2564,
+            "couples": [
+              {
+                "entre": "thumb/pinky",
+                "sommets": 907,
+                "thumb_dans_pinky": 534,
+                "pinky_dans_thumb": 373
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 740,
+                "thumb_dans_middle": 65,
+                "middle_dans_thumb": 675
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 432,
+                "ring_dans_pinky": 0,
+                "pinky_dans_ring": 432
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 262,
+                "thumb_dans_hand": 262,
+                "hand_dans_thumb": 0
+              },
+              {
+                "entre": "thumb/index",
+                "sommets": 160,
+                "thumb_dans_index": 25,
+                "index_dans_thumb": 135
+              },
+              {
+                "entre": "middle/hand",
+                "sommets": 41,
+                "middle_dans_hand": 41,
+                "hand_dans_middle": 0
+              },
+              {
+                "entre": "pinky/hand",
+                "sommets": 22,
+                "pinky_dans_hand": 22,
+                "hand_dans_pinky": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 520
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+                "sommets": 469
+              },
+              {
+                "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+                "sommets": 432
+              }
+            ]
+          },
+          "1.0": {
+            "total": 1384,
+            "couples": [
+              {
+                "entre": "thumb/pinky",
+                "sommets": 556,
+                "thumb_dans_pinky": 386,
+                "pinky_dans_thumb": 170
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 403,
+                "ring_dans_pinky": 0,
+                "pinky_dans_ring": 403
+              },
+              {
+                "entre": "index/middle",
+                "sommets": 146,
+                "index_dans_middle": 0,
+                "middle_dans_index": 146
+              },
+              {
+                "entre": "thumb/index",
+                "sommets": 136,
+                "thumb_dans_index": 26,
+                "index_dans_thumb": 110
+              },
+              {
+                "entre": "pinky/hand",
+                "sommets": 61,
+                "pinky_dans_hand": 61,
+                "hand_dans_pinky": 0
+              },
+              {
+                "entre": "middle/hand",
+                "sommets": 34,
+                "middle_dans_hand": 34,
+                "hand_dans_middle": 0
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 25,
+                "thumb_dans_middle": 14,
+                "middle_dans_thumb": 11
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 23,
+                "thumb_dans_hand": 23,
+                "hand_dans_thumb": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+                "sommets": 403
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+                "sommets": 291
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 146
+              }
+            ]
+          }
+        },
+        "pic": "0.9",
+        "pic_sommets": 2564,
+        "premiere_etape_fautive": "0.4",
+        "etapes_fautives": [
+          "0.4",
+          "0.5",
+          "0.6",
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      }
+    },
+    "familles": {
+      "hand": 10262,
+      "index": 9693,
+      "middle": 7870,
+      "pinky": 10583,
+      "ring": 7637,
+      "thumb": 7974
+    }
+  },
+  "classement_strict": {
+    "poses": {
+      "Hand_Neutral": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Relaxed": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Open": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Spread_Min": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Fist_25": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Fist_50": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Fist_75": {
+        "total": 118,
+        "couples": [
+          {
+            "entre": "index/middle",
+            "sommets": 72,
+            "index_dans_middle": 43,
+            "middle_dans_index": 29
+          },
+          {
+            "entre": "thumb/index",
+            "sommets": 42,
+            "thumb_dans_index": 6,
+            "index_dans_thumb": 36
+          },
+          {
+            "entre": "middle/ring",
+            "sommets": 4,
+            "middle_dans_ring": 4,
+            "ring_dans_middle": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_index_01.L → DEF_middle_01.L",
+            "sommets": 43
+          },
+          {
+            "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+            "sommets": 36
+          },
+          {
+            "couple": "DEF_middle_01.L → DEF_index_01.L",
+            "sommets": 29
+          }
+        ]
+      },
+      "Hand_Fist": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Point": {
+        "total": 1540,
+        "couples": [
+          {
+            "entre": "index/middle",
+            "sommets": 482,
+            "index_dans_middle": 25,
+            "middle_dans_index": 457
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets": 450,
+            "thumb_dans_middle": 126,
+            "middle_dans_thumb": 324
+          },
+          {
+            "entre": "ring/pinky",
+            "sommets": 336,
+            "ring_dans_pinky": 317,
+            "pinky_dans_ring": 19
+          },
+          {
+            "entre": "middle/ring",
+            "sommets": 214,
+            "middle_dans_ring": 75,
+            "ring_dans_middle": 139
+          },
+          {
+            "entre": "thumb/ring",
+            "sommets": 58,
+            "thumb_dans_ring": 0,
+            "ring_dans_thumb": 58
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+            "sommets": 232
+          },
+          {
+            "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+            "sommets": 178
+          },
+          {
+            "couple": "DEF_middle_03.L → DEF_index_meta.L",
+            "sommets": 163
+          }
+        ]
+      },
+      "Hand_Pinch": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_OK": {
+        "total": 0,
+        "couples": [],
+        "pires_groupes": []
+      },
+      "Hand_Cupped": {
+        "total": 80,
+        "couples": [
+          {
+            "entre": "middle/ring",
+            "sommets": 80,
+            "middle_dans_ring": 36,
+            "ring_dans_middle": 44
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_ring_01.L → DEF_middle_01.L",
+            "sommets": 44
+          },
+          {
+            "couple": "DEF_middle_01.L → DEF_ring_01.L",
+            "sommets": 36
+          }
+        ]
+      },
+      "Hand_Pinky_Thumb": {
+        "total": 1271,
+        "couples": [
+          {
+            "entre": "thumb/pinky",
+            "sommets": 556,
+            "thumb_dans_pinky": 386,
+            "pinky_dans_thumb": 170
+          },
+          {
+            "entre": "ring/pinky",
+            "sommets": 403,
+            "ring_dans_pinky": 0,
+            "pinky_dans_ring": 403
+          },
+          {
+            "entre": "index/middle",
+            "sommets": 146,
+            "index_dans_middle": 0,
+            "middle_dans_index": 146
+          },
+          {
+            "entre": "thumb/index",
+            "sommets": 136,
+            "thumb_dans_index": 26,
+            "index_dans_thumb": 110
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets": 25,
+            "thumb_dans_middle": 14,
+            "middle_dans_thumb": 11
+          },
+          {
+            "entre": "thumb/hand",
+            "sommets": 5,
+            "thumb_dans_hand": 5,
+            "hand_dans_thumb": 0
+          }
+        ],
+        "pires_groupes": [
+          {
+            "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+            "sommets": 403
+          },
+          {
+            "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+            "sommets": 291
+          },
+          {
+            "couple": "DEF_middle_03.L → DEF_index_meta.L",
+            "sommets": 146
+          }
+        ]
+      }
+    },
+    "transitions": {
+      "Hand_Neutral→Hand_Fist": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.8": {
+            "total": 137,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 137,
+                "thumb_dans_index": 33,
+                "index_dans_thumb": 104
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_02.L",
+                "sommets": 104
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_index_03.L",
+                "sommets": 33
+              }
+            ]
+          },
+          "0.9": {
+            "total": 355,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 355,
+                "thumb_dans_index": 70,
+                "index_dans_thumb": 285
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_02.L",
+                "sommets": 285
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_index_03.L",
+                "sommets": 70
+              }
+            ]
+          },
+          "1.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          }
+        },
+        "pic": "0.9",
+        "pic_sommets": 355,
+        "premiere_etape_fautive": "0.8",
+        "etapes_fautives": [
+          "0.8",
+          "0.9"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Point": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 1,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 1,
+                "index_dans_middle": 1,
+                "middle_dans_index": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 1
+              }
+            ]
+          },
+          "0.4": {
+            "total": 19,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 19,
+                "index_dans_middle": 19,
+                "middle_dans_index": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 19
+              }
+            ]
+          },
+          "0.5": {
+            "total": 128,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 128,
+                "index_dans_middle": 31,
+                "middle_dans_index": 97
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_index_01.L",
+                "sommets": 97
+              },
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 31
+              }
+            ]
+          },
+          "0.6": {
+            "total": 187,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 187,
+                "index_dans_middle": 29,
+                "middle_dans_index": 158
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_index_01.L",
+                "sommets": 135
+              },
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 28
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_index_meta.L",
+                "sommets": 23
+              }
+            ]
+          },
+          "0.7": {
+            "total": 199,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 199,
+                "index_dans_middle": 31,
+                "middle_dans_index": 168
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_index_01.L",
+                "sommets": 107
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_index_meta.L",
+                "sommets": 61
+              },
+              {
+                "couple": "DEF_index_01.L → DEF_middle_01.L",
+                "sommets": 20
+              }
+            ]
+          },
+          "0.8": {
+            "total": 1726,
+            "couples": [
+              {
+                "entre": "thumb/middle",
+                "sommets": 876,
+                "thumb_dans_middle": 78,
+                "middle_dans_thumb": 798
+              },
+              {
+                "entre": "index/middle",
+                "sommets": 644,
+                "index_dans_middle": 29,
+                "middle_dans_index": 615
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 169,
+                "ring_dans_pinky": 169,
+                "pinky_dans_ring": 0
+              },
+              {
+                "entre": "middle/ring",
+                "sommets": 33,
+                "middle_dans_ring": 5,
+                "ring_dans_middle": 28
+              },
+              {
+                "entre": "thumb/ring",
+                "sommets": 4,
+                "thumb_dans_ring": 0,
+                "ring_dans_thumb": 4
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 798
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 443
+              },
+              {
+                "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+                "sommets": 169
+              }
+            ]
+          },
+          "0.9": {
+            "total": 1942,
+            "couples": [
+              {
+                "entre": "thumb/middle",
+                "sommets": 707,
+                "thumb_dans_middle": 113,
+                "middle_dans_thumb": 594
+              },
+              {
+                "entre": "index/middle",
+                "sommets": 515,
+                "index_dans_middle": 34,
+                "middle_dans_index": 481
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 326,
+                "ring_dans_pinky": 320,
+                "pinky_dans_ring": 6
+              },
+              {
+                "entre": "middle/ring",
+                "sommets": 287,
+                "middle_dans_ring": 9,
+                "ring_dans_middle": 278
+              },
+              {
+                "entre": "thumb/ring",
+                "sommets": 107,
+                "thumb_dans_ring": 0,
+                "ring_dans_thumb": 107
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 591
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 305
+              },
+              {
+                "couple": "DEF_ring_03.L → DEF_middle_meta.L",
+                "sommets": 275
+              }
+            ]
+          },
+          "1.0": {
+            "total": 1540,
+            "couples": [
+              {
+                "entre": "index/middle",
+                "sommets": 482,
+                "index_dans_middle": 25,
+                "middle_dans_index": 457
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 450,
+                "thumb_dans_middle": 126,
+                "middle_dans_thumb": 324
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 336,
+                "ring_dans_pinky": 317,
+                "pinky_dans_ring": 19
+              },
+              {
+                "entre": "middle/ring",
+                "sommets": 214,
+                "middle_dans_ring": 75,
+                "ring_dans_middle": 139
+              },
+              {
+                "entre": "thumb/ring",
+                "sommets": 58,
+                "thumb_dans_ring": 0,
+                "ring_dans_thumb": 58
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+                "sommets": 232
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 178
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 163
+              }
+            ]
+          }
+        },
+        "pic": "0.9",
+        "pic_sommets": 1942,
+        "premiere_etape_fautive": "0.3",
+        "etapes_fautives": [
+          "0.3",
+          "0.4",
+          "0.5",
+          "0.6",
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Pinch": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.8": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.9": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "1.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          }
+        },
+        "pic": "0.0",
+        "pic_sommets": 0,
+        "premiere_etape_fautive": null,
+        "etapes_fautives": [],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_OK": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.8": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.9": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "1.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          }
+        },
+        "pic": "0.0",
+        "pic_sommets": 0,
+        "premiere_etape_fautive": null,
+        "etapes_fautives": [],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Cupped": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.5": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.6": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.7": {
+            "total": 6,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 6,
+                "middle_dans_ring": 3,
+                "ring_dans_middle": 3
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 3
+              },
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 3
+              }
+            ]
+          },
+          "0.8": {
+            "total": 34,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 34,
+                "middle_dans_ring": 19,
+                "ring_dans_middle": 15
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 19
+              },
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 15
+              }
+            ]
+          },
+          "0.9": {
+            "total": 61,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 61,
+                "middle_dans_ring": 28,
+                "ring_dans_middle": 33
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 33
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 28
+              }
+            ]
+          },
+          "1.0": {
+            "total": 80,
+            "couples": [
+              {
+                "entre": "middle/ring",
+                "sommets": 80,
+                "middle_dans_ring": 36,
+                "ring_dans_middle": 44
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_ring_01.L → DEF_middle_01.L",
+                "sommets": 44
+              },
+              {
+                "couple": "DEF_middle_01.L → DEF_ring_01.L",
+                "sommets": 36
+              }
+            ]
+          }
+        },
+        "pic": "1.0",
+        "pic_sommets": 80,
+        "premiere_etape_fautive": "0.7",
+        "etapes_fautives": [
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      },
+      "Hand_Neutral→Hand_Pinky_Thumb": {
+        "etapes": {
+          "0.0": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.1": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.2": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.3": {
+            "total": 0,
+            "couples": [],
+            "pires_groupes": []
+          },
+          "0.4": {
+            "total": 22,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 22,
+                "thumb_dans_index": 0,
+                "index_dans_thumb": 22
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 22
+              }
+            ]
+          },
+          "0.5": {
+            "total": 68,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 68,
+                "thumb_dans_index": 0,
+                "index_dans_thumb": 68
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 68
+              }
+            ]
+          },
+          "0.6": {
+            "total": 102,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 102,
+                "thumb_dans_index": 0,
+                "index_dans_thumb": 102
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 102
+              }
+            ]
+          },
+          "0.7": {
+            "total": 1003,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 1003,
+                "thumb_dans_index": 92,
+                "index_dans_thumb": 911
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_01.L",
+                "sommets": 426
+              },
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+                "sommets": 359
+              },
+              {
+                "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+                "sommets": 126
+              }
+            ]
+          },
+          "0.8": {
+            "total": 1984,
+            "couples": [
+              {
+                "entre": "thumb/index",
+                "sommets": 897,
+                "thumb_dans_index": 86,
+                "index_dans_thumb": 811
+              },
+              {
+                "entre": "thumb/pinky",
+                "sommets": 844,
+                "thumb_dans_pinky": 569,
+                "pinky_dans_thumb": 275
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 243,
+                "thumb_dans_middle": 42,
+                "middle_dans_thumb": 201
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+                "sommets": 669
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+                "sommets": 502
+              },
+              {
+                "couple": "DEF_pinky_02.L → DEF_thumb_02.L",
+                "sommets": 264
+              }
+            ]
+          },
+          "0.9": {
+            "total": 2238,
+            "couples": [
+              {
+                "entre": "thumb/pinky",
+                "sommets": 904,
+                "thumb_dans_pinky": 531,
+                "pinky_dans_thumb": 373
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 740,
+                "thumb_dans_middle": 65,
+                "middle_dans_thumb": 675
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 432,
+                "ring_dans_pinky": 0,
+                "pinky_dans_ring": 432
+              },
+              {
+                "entre": "thumb/index",
+                "sommets": 160,
+                "thumb_dans_index": 25,
+                "index_dans_thumb": 135
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 2,
+                "thumb_dans_hand": 2,
+                "hand_dans_thumb": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+                "sommets": 520
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+                "sommets": 466
+              },
+              {
+                "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+                "sommets": 432
+              }
+            ]
+          },
+          "1.0": {
+            "total": 1271,
+            "couples": [
+              {
+                "entre": "thumb/pinky",
+                "sommets": 556,
+                "thumb_dans_pinky": 386,
+                "pinky_dans_thumb": 170
+              },
+              {
+                "entre": "ring/pinky",
+                "sommets": 403,
+                "ring_dans_pinky": 0,
+                "pinky_dans_ring": 403
+              },
+              {
+                "entre": "index/middle",
+                "sommets": 146,
+                "index_dans_middle": 0,
+                "middle_dans_index": 146
+              },
+              {
+                "entre": "thumb/index",
+                "sommets": 136,
+                "thumb_dans_index": 26,
+                "index_dans_thumb": 110
+              },
+              {
+                "entre": "thumb/middle",
+                "sommets": 25,
+                "thumb_dans_middle": 14,
+                "middle_dans_thumb": 11
+              },
+              {
+                "entre": "thumb/hand",
+                "sommets": 5,
+                "thumb_dans_hand": 5,
+                "hand_dans_thumb": 0
+              }
+            ],
+            "pires_groupes": [
+              {
+                "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+                "sommets": 403
+              },
+              {
+                "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+                "sommets": 291
+              },
+              {
+                "couple": "DEF_middle_03.L → DEF_index_meta.L",
+                "sommets": 146
+              }
+            ]
+          }
+        },
+        "pic": "0.9",
+        "pic_sommets": 2238,
+        "premiere_etape_fautive": "0.4",
+        "etapes_fautives": [
+          "0.4",
+          "0.5",
+          "0.6",
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "contre_epreuve_etape_1_moins_action": 0
+      }
+    },
+    "familles": {
+      "hand": 10059,
+      "index": 9743,
+      "middle": 7916,
+      "pinky": 10632,
+      "ring": 7695,
+      "thumb": 7974
+    }
+  },
+  "poses": {
+    "Hand_Neutral": {
+      "total": 0,
+      "couples": [],
+      "pires_groupes": []
+    },
+    "Hand_Relaxed": {
+      "total": 0,
+      "couples": [],
+      "pires_groupes": []
+    },
+    "Hand_Open": {
+      "total": 0,
+      "couples": [],
+      "pires_groupes": []
+    },
+    "Hand_Spread_Min": {
+      "total": 0,
+      "couples": [],
+      "pires_groupes": []
+    },
+    "Hand_Fist_25": {
+      "total": 0,
+      "couples": [],
+      "pires_groupes": []
+    },
+    "Hand_Fist_50": {
+      "total": 0,
+      "couples": [],
+      "pires_groupes": []
+    },
+    "Hand_Fist_75": {
+      "total": 118,
+      "couples": [
+        {
+          "entre": "index/middle",
+          "sommets": 72,
+          "index_dans_middle": 43,
+          "middle_dans_index": 29
+        },
+        {
+          "entre": "thumb/index",
+          "sommets": 42,
+          "thumb_dans_index": 6,
+          "index_dans_thumb": 36
+        },
+        {
+          "entre": "middle/ring",
+          "sommets": 4,
+          "middle_dans_ring": 4,
+          "ring_dans_middle": 0
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_index_01.L → DEF_middle_01.L",
+          "sommets": 43
+        },
+        {
+          "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+          "sommets": 36
+        },
+        {
+          "couple": "DEF_middle_01.L → DEF_index_01.L",
+          "sommets": 29
+        }
+      ]
+    },
+    "Hand_Fist": {
+      "total": 3,
+      "couples": [
+        {
+          "entre": "middle/hand",
+          "sommets": 2,
+          "middle_dans_hand": 2,
+          "hand_dans_middle": 0
+        },
+        {
+          "entre": "ring/hand",
+          "sommets": 1,
+          "ring_dans_hand": 1,
+          "hand_dans_ring": 0
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_middle_01.L → ZONES_ARTICULAIRES",
+          "sommets": 2
+        },
+        {
+          "couple": "DEF_ring_02.L → ZONES_ARTICULAIRES",
+          "sommets": 1
+        }
+      ]
+    },
+    "Hand_Point": {
+      "total": 1745,
+      "couples": [
+        {
+          "entre": "index/middle",
+          "sommets": 478,
+          "index_dans_middle": 25,
+          "middle_dans_index": 453
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets": 442,
+          "thumb_dans_middle": 122,
+          "middle_dans_thumb": 320
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets": 336,
+          "ring_dans_pinky": 317,
+          "pinky_dans_ring": 19
+        },
+        {
+          "entre": "middle/ring",
+          "sommets": 214,
+          "middle_dans_ring": 75,
+          "ring_dans_middle": 139
+        },
+        {
+          "entre": "ring/hand",
+          "sommets": 69,
+          "ring_dans_hand": 69,
+          "hand_dans_ring": 0
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets": 58,
+          "thumb_dans_ring": 0,
+          "ring_dans_thumb": 58
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets": 54,
+          "thumb_dans_hand": 50,
+          "hand_dans_thumb": 4
+        },
+        {
+          "entre": "middle/hand",
+          "sommets": 39,
+          "middle_dans_hand": 39,
+          "hand_dans_middle": 0
+        },
+        {
+          "entre": "pinky/hand",
+          "sommets": 38,
+          "pinky_dans_hand": 38,
+          "hand_dans_pinky": 0
+        },
+        {
+          "entre": "index/hand",
+          "sommets": 17,
+          "index_dans_hand": 13,
+          "hand_dans_index": 4
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+          "sommets": 232
+        },
+        {
+          "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+          "sommets": 177
+        },
+        {
+          "couple": "DEF_middle_01.L → DEF_index_meta.L",
+          "sommets": 163
+        }
+      ]
+    },
+    "Hand_Pinch": {
+      "total": 53,
+      "couples": [
+        {
+          "entre": "thumb/hand",
+          "sommets": 53,
+          "thumb_dans_hand": 53,
+          "hand_dans_thumb": 0
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+          "sommets": 53
+        }
+      ]
+    },
+    "Hand_OK": {
+      "total": 53,
+      "couples": [
+        {
+          "entre": "thumb/hand",
+          "sommets": 53,
+          "thumb_dans_hand": 53,
+          "hand_dans_thumb": 0
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+          "sommets": 53
+        }
+      ]
+    },
+    "Hand_Cupped": {
+      "total": 80,
+      "couples": [
+        {
+          "entre": "middle/ring",
+          "sommets": 80,
+          "middle_dans_ring": 36,
+          "ring_dans_middle": 44
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_ring_01.L → DEF_middle_01.L",
+          "sommets": 44
+        },
+        {
+          "couple": "DEF_middle_01.L → DEF_ring_01.L",
+          "sommets": 36
+        }
+      ]
+    },
+    "Hand_Pinky_Thumb": {
+      "total": 1384,
+      "couples": [
+        {
+          "entre": "thumb/pinky",
+          "sommets": 556,
+          "thumb_dans_pinky": 386,
+          "pinky_dans_thumb": 170
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets": 403,
+          "ring_dans_pinky": 0,
+          "pinky_dans_ring": 403
+        },
+        {
+          "entre": "index/middle",
+          "sommets": 146,
+          "index_dans_middle": 0,
+          "middle_dans_index": 146
+        },
+        {
+          "entre": "thumb/index",
+          "sommets": 136,
+          "thumb_dans_index": 26,
+          "index_dans_thumb": 110
+        },
+        {
+          "entre": "pinky/hand",
+          "sommets": 61,
+          "pinky_dans_hand": 61,
+          "hand_dans_pinky": 0
+        },
+        {
+          "entre": "middle/hand",
+          "sommets": 34,
+          "middle_dans_hand": 34,
+          "hand_dans_middle": 0
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets": 25,
+          "thumb_dans_middle": 14,
+          "middle_dans_thumb": 11
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets": 23,
+          "thumb_dans_hand": 23,
+          "hand_dans_thumb": 0
+        }
+      ],
+      "pires_groupes": [
+        {
+          "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+          "sommets": 403
+        },
+        {
+          "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+          "sommets": 291
+        },
+        {
+          "couple": "DEF_middle_03.L → DEF_index_meta.L",
+          "sommets": 146
+        }
+      ]
+    }
+  },
+  "transitions": {
+    "Hand_Neutral→Hand_Fist": {
+      "etapes": {
+        "0.0": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.1": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.2": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.3": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.4": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.5": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.6": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.7": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.8": {
+          "total": 137,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 137,
+              "thumb_dans_index": 33,
+              "index_dans_thumb": 104
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_03.L → DEF_thumb_02.L",
+              "sommets": 104
+            },
+            {
+              "couple": "DEF_thumb_02.L → DEF_index_03.L",
+              "sommets": 33
+            }
+          ]
+        },
+        "0.9": {
+          "total": 355,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 355,
+              "thumb_dans_index": 70,
+              "index_dans_thumb": 285
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_03.L → DEF_thumb_02.L",
+              "sommets": 285
+            },
+            {
+              "couple": "DEF_thumb_02.L → DEF_index_03.L",
+              "sommets": 70
+            }
+          ]
+        },
+        "1.0": {
+          "total": 3,
+          "couples": [
+            {
+              "entre": "middle/hand",
+              "sommets": 2,
+              "middle_dans_hand": 2,
+              "hand_dans_middle": 0
+            },
+            {
+              "entre": "ring/hand",
+              "sommets": 1,
+              "ring_dans_hand": 1,
+              "hand_dans_ring": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_01.L → ZONES_ARTICULAIRES",
+              "sommets": 2
+            },
+            {
+              "couple": "DEF_ring_02.L → ZONES_ARTICULAIRES",
+              "sommets": 1
+            }
+          ]
+        }
+      },
+      "pic": "0.9",
+      "pic_sommets": 355,
+      "premiere_etape_fautive": "0.8",
+      "etapes_fautives": [
+        "0.8",
+        "0.9",
+        "1.0"
+      ],
+      "contre_epreuve_etape_1_moins_action": 0
+    },
+    "Hand_Neutral→Hand_Point": {
+      "etapes": {
+        "0.0": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.1": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.2": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.3": {
+          "total": 1,
+          "couples": [
+            {
+              "entre": "index/middle",
+              "sommets": 1,
+              "index_dans_middle": 1,
+              "middle_dans_index": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_01.L → DEF_middle_01.L",
+              "sommets": 1
+            }
+          ]
+        },
+        "0.4": {
+          "total": 19,
+          "couples": [
+            {
+              "entre": "index/middle",
+              "sommets": 19,
+              "index_dans_middle": 19,
+              "middle_dans_index": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_01.L → DEF_middle_01.L",
+              "sommets": 19
+            }
+          ]
+        },
+        "0.5": {
+          "total": 128,
+          "couples": [
+            {
+              "entre": "index/middle",
+              "sommets": 128,
+              "index_dans_middle": 31,
+              "middle_dans_index": 97
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_01.L → DEF_index_01.L",
+              "sommets": 97
+            },
+            {
+              "couple": "DEF_index_01.L → DEF_middle_01.L",
+              "sommets": 31
+            }
+          ]
+        },
+        "0.6": {
+          "total": 187,
+          "couples": [
+            {
+              "entre": "index/middle",
+              "sommets": 187,
+              "index_dans_middle": 29,
+              "middle_dans_index": 158
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_01.L → DEF_index_01.L",
+              "sommets": 135
+            },
+            {
+              "couple": "DEF_index_01.L → DEF_middle_01.L",
+              "sommets": 28
+            },
+            {
+              "couple": "DEF_middle_01.L → DEF_index_meta.L",
+              "sommets": 23
+            }
+          ]
+        },
+        "0.7": {
+          "total": 199,
+          "couples": [
+            {
+              "entre": "index/middle",
+              "sommets": 199,
+              "index_dans_middle": 31,
+              "middle_dans_index": 168
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_01.L → DEF_index_01.L",
+              "sommets": 107
+            },
+            {
+              "couple": "DEF_middle_01.L → DEF_index_meta.L",
+              "sommets": 61
+            },
+            {
+              "couple": "DEF_index_01.L → DEF_middle_01.L",
+              "sommets": 20
+            }
+          ]
+        },
+        "0.8": {
+          "total": 1730,
+          "couples": [
+            {
+              "entre": "thumb/middle",
+              "sommets": 876,
+              "thumb_dans_middle": 78,
+              "middle_dans_thumb": 798
+            },
+            {
+              "entre": "index/middle",
+              "sommets": 644,
+              "index_dans_middle": 29,
+              "middle_dans_index": 615
+            },
+            {
+              "entre": "ring/pinky",
+              "sommets": 169,
+              "ring_dans_pinky": 169,
+              "pinky_dans_ring": 0
+            },
+            {
+              "entre": "middle/ring",
+              "sommets": 33,
+              "middle_dans_ring": 5,
+              "ring_dans_middle": 28
+            },
+            {
+              "entre": "thumb/ring",
+              "sommets": 4,
+              "thumb_dans_ring": 0,
+              "ring_dans_thumb": 4
+            },
+            {
+              "entre": "ring/hand",
+              "sommets": 4,
+              "ring_dans_hand": 4,
+              "hand_dans_ring": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+              "sommets": 798
+            },
+            {
+              "couple": "DEF_middle_03.L → DEF_index_meta.L",
+              "sommets": 443
+            },
+            {
+              "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+              "sommets": 169
+            }
+          ]
+        },
+        "0.9": {
+          "total": 2016,
+          "couples": [
+            {
+              "entre": "thumb/middle",
+              "sommets": 707,
+              "thumb_dans_middle": 113,
+              "middle_dans_thumb": 594
+            },
+            {
+              "entre": "index/middle",
+              "sommets": 515,
+              "index_dans_middle": 34,
+              "middle_dans_index": 481
+            },
+            {
+              "entre": "ring/pinky",
+              "sommets": 326,
+              "ring_dans_pinky": 320,
+              "pinky_dans_ring": 6
+            },
+            {
+              "entre": "middle/ring",
+              "sommets": 287,
+              "middle_dans_ring": 9,
+              "ring_dans_middle": 278
+            },
+            {
+              "entre": "thumb/ring",
+              "sommets": 107,
+              "thumb_dans_ring": 0,
+              "ring_dans_thumb": 107
+            },
+            {
+              "entre": "thumb/hand",
+              "sommets": 60,
+              "thumb_dans_hand": 60,
+              "hand_dans_thumb": 0
+            },
+            {
+              "entre": "ring/hand",
+              "sommets": 14,
+              "ring_dans_hand": 14,
+              "hand_dans_ring": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+              "sommets": 591
+            },
+            {
+              "couple": "DEF_middle_03.L → DEF_index_meta.L",
+              "sommets": 305
+            },
+            {
+              "couple": "DEF_ring_03.L → DEF_middle_meta.L",
+              "sommets": 275
+            }
+          ]
+        },
+        "1.0": {
+          "total": 1745,
+          "couples": [
+            {
+              "entre": "index/middle",
+              "sommets": 478,
+              "index_dans_middle": 25,
+              "middle_dans_index": 453
+            },
+            {
+              "entre": "thumb/middle",
+              "sommets": 442,
+              "thumb_dans_middle": 122,
+              "middle_dans_thumb": 320
+            },
+            {
+              "entre": "ring/pinky",
+              "sommets": 336,
+              "ring_dans_pinky": 317,
+              "pinky_dans_ring": 19
+            },
+            {
+              "entre": "middle/ring",
+              "sommets": 214,
+              "middle_dans_ring": 75,
+              "ring_dans_middle": 139
+            },
+            {
+              "entre": "ring/hand",
+              "sommets": 69,
+              "ring_dans_hand": 69,
+              "hand_dans_ring": 0
+            },
+            {
+              "entre": "thumb/ring",
+              "sommets": 58,
+              "thumb_dans_ring": 0,
+              "ring_dans_thumb": 58
+            },
+            {
+              "entre": "thumb/hand",
+              "sommets": 54,
+              "thumb_dans_hand": 50,
+              "hand_dans_thumb": 4
+            },
+            {
+              "entre": "middle/hand",
+              "sommets": 39,
+              "middle_dans_hand": 39,
+              "hand_dans_middle": 0
+            },
+            {
+              "entre": "pinky/hand",
+              "sommets": 38,
+              "pinky_dans_hand": 38,
+              "hand_dans_pinky": 0
+            },
+            {
+              "entre": "index/hand",
+              "sommets": 17,
+              "index_dans_hand": 13,
+              "hand_dans_index": 4
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_ring_03.L → DEF_pinky_meta.L",
+              "sommets": 232
+            },
+            {
+              "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+              "sommets": 177
+            },
+            {
+              "couple": "DEF_middle_01.L → DEF_index_meta.L",
+              "sommets": 163
+            }
+          ]
+        }
+      },
+      "pic": "0.9",
+      "pic_sommets": 2016,
+      "premiere_etape_fautive": "0.3",
+      "etapes_fautives": [
+        "0.3",
+        "0.4",
+        "0.5",
+        "0.6",
+        "0.7",
+        "0.8",
+        "0.9",
+        "1.0"
+      ],
+      "contre_epreuve_etape_1_moins_action": 0
+    },
+    "Hand_Neutral→Hand_Pinch": {
+      "etapes": {
+        "0.0": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.1": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.2": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.3": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.4": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.5": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.6": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.7": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.8": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.9": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "1.0": {
+          "total": 53,
+          "couples": [
+            {
+              "entre": "thumb/hand",
+              "sommets": 53,
+              "thumb_dans_hand": 53,
+              "hand_dans_thumb": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+              "sommets": 53
+            }
+          ]
+        }
+      },
+      "pic": "1.0",
+      "pic_sommets": 53,
+      "premiere_etape_fautive": "1.0",
+      "etapes_fautives": [
+        "1.0"
+      ],
+      "contre_epreuve_etape_1_moins_action": 0
+    },
+    "Hand_Neutral→Hand_OK": {
+      "etapes": {
+        "0.0": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.1": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.2": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.3": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.4": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.5": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.6": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.7": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.8": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.9": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "1.0": {
+          "total": 53,
+          "couples": [
+            {
+              "entre": "thumb/hand",
+              "sommets": 53,
+              "thumb_dans_hand": 53,
+              "hand_dans_thumb": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+              "sommets": 53
+            }
+          ]
+        }
+      },
+      "pic": "1.0",
+      "pic_sommets": 53,
+      "premiere_etape_fautive": "1.0",
+      "etapes_fautives": [
+        "1.0"
+      ],
+      "contre_epreuve_etape_1_moins_action": 0
+    },
+    "Hand_Neutral→Hand_Cupped": {
+      "etapes": {
+        "0.0": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.1": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.2": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.3": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.4": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.5": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.6": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.7": {
+          "total": 6,
+          "couples": [
+            {
+              "entre": "middle/ring",
+              "sommets": 6,
+              "middle_dans_ring": 3,
+              "ring_dans_middle": 3
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_01.L → DEF_ring_01.L",
+              "sommets": 3
+            },
+            {
+              "couple": "DEF_ring_01.L → DEF_middle_01.L",
+              "sommets": 3
+            }
+          ]
+        },
+        "0.8": {
+          "total": 34,
+          "couples": [
+            {
+              "entre": "middle/ring",
+              "sommets": 34,
+              "middle_dans_ring": 19,
+              "ring_dans_middle": 15
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_01.L → DEF_ring_01.L",
+              "sommets": 19
+            },
+            {
+              "couple": "DEF_ring_01.L → DEF_middle_01.L",
+              "sommets": 15
+            }
+          ]
+        },
+        "0.9": {
+          "total": 61,
+          "couples": [
+            {
+              "entre": "middle/ring",
+              "sommets": 61,
+              "middle_dans_ring": 28,
+              "ring_dans_middle": 33
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_ring_01.L → DEF_middle_01.L",
+              "sommets": 33
+            },
+            {
+              "couple": "DEF_middle_01.L → DEF_ring_01.L",
+              "sommets": 28
+            }
+          ]
+        },
+        "1.0": {
+          "total": 80,
+          "couples": [
+            {
+              "entre": "middle/ring",
+              "sommets": 80,
+              "middle_dans_ring": 36,
+              "ring_dans_middle": 44
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_ring_01.L → DEF_middle_01.L",
+              "sommets": 44
+            },
+            {
+              "couple": "DEF_middle_01.L → DEF_ring_01.L",
+              "sommets": 36
+            }
+          ]
+        }
+      },
+      "pic": "1.0",
+      "pic_sommets": 80,
+      "premiere_etape_fautive": "0.7",
+      "etapes_fautives": [
+        "0.7",
+        "0.8",
+        "0.9",
+        "1.0"
+      ],
+      "contre_epreuve_etape_1_moins_action": 0
+    },
+    "Hand_Neutral→Hand_Pinky_Thumb": {
+      "etapes": {
+        "0.0": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.1": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.2": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.3": {
+          "total": 0,
+          "couples": [],
+          "pires_groupes": []
+        },
+        "0.4": {
+          "total": 22,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 22,
+              "thumb_dans_index": 0,
+              "index_dans_thumb": 22
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+              "sommets": 22
+            }
+          ]
+        },
+        "0.5": {
+          "total": 68,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 68,
+              "thumb_dans_index": 0,
+              "index_dans_thumb": 68
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+              "sommets": 68
+            }
+          ]
+        },
+        "0.6": {
+          "total": 102,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 102,
+              "thumb_dans_index": 0,
+              "index_dans_thumb": 102
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+              "sommets": 102
+            }
+          ]
+        },
+        "0.7": {
+          "total": 1003,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 1003,
+              "thumb_dans_index": 92,
+              "index_dans_thumb": 911
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_03.L → DEF_thumb_01.L",
+              "sommets": 426
+            },
+            {
+              "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+              "sommets": 359
+            },
+            {
+              "couple": "DEF_index_meta.L → DEF_thumb_meta.L",
+              "sommets": 126
+            }
+          ]
+        },
+        "0.8": {
+          "total": 2347,
+          "couples": [
+            {
+              "entre": "thumb/index",
+              "sommets": 897,
+              "thumb_dans_index": 86,
+              "index_dans_thumb": 811
+            },
+            {
+              "entre": "thumb/pinky",
+              "sommets": 871,
+              "thumb_dans_pinky": 600,
+              "pinky_dans_thumb": 271
+            },
+            {
+              "entre": "thumb/hand",
+              "sommets": 314,
+              "thumb_dans_hand": 310,
+              "hand_dans_thumb": 4
+            },
+            {
+              "entre": "thumb/middle",
+              "sommets": 243,
+              "thumb_dans_middle": 42,
+              "middle_dans_thumb": 201
+            },
+            {
+              "entre": "middle/hand",
+              "sommets": 22,
+              "middle_dans_hand": 22,
+              "hand_dans_middle": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_index_03.L → DEF_thumb_meta.L",
+              "sommets": 669
+            },
+            {
+              "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+              "sommets": 522
+            },
+            {
+              "couple": "DEF_thumb_02.L → ZONES_ARTICULAIRES",
+              "sommets": 300
+            }
+          ]
+        },
+        "0.9": {
+          "total": 2564,
+          "couples": [
+            {
+              "entre": "thumb/pinky",
+              "sommets": 907,
+              "thumb_dans_pinky": 534,
+              "pinky_dans_thumb": 373
+            },
+            {
+              "entre": "thumb/middle",
+              "sommets": 740,
+              "thumb_dans_middle": 65,
+              "middle_dans_thumb": 675
+            },
+            {
+              "entre": "ring/pinky",
+              "sommets": 432,
+              "ring_dans_pinky": 0,
+              "pinky_dans_ring": 432
+            },
+            {
+              "entre": "thumb/hand",
+              "sommets": 262,
+              "thumb_dans_hand": 262,
+              "hand_dans_thumb": 0
+            },
+            {
+              "entre": "thumb/index",
+              "sommets": 160,
+              "thumb_dans_index": 25,
+              "index_dans_thumb": 135
+            },
+            {
+              "entre": "middle/hand",
+              "sommets": 41,
+              "middle_dans_hand": 41,
+              "hand_dans_middle": 0
+            },
+            {
+              "entre": "pinky/hand",
+              "sommets": 22,
+              "pinky_dans_hand": 22,
+              "hand_dans_pinky": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_middle_03.L → DEF_thumb_meta.L",
+              "sommets": 520
+            },
+            {
+              "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+              "sommets": 469
+            },
+            {
+              "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+              "sommets": 432
+            }
+          ]
+        },
+        "1.0": {
+          "total": 1384,
+          "couples": [
+            {
+              "entre": "thumb/pinky",
+              "sommets": 556,
+              "thumb_dans_pinky": 386,
+              "pinky_dans_thumb": 170
+            },
+            {
+              "entre": "ring/pinky",
+              "sommets": 403,
+              "ring_dans_pinky": 0,
+              "pinky_dans_ring": 403
+            },
+            {
+              "entre": "index/middle",
+              "sommets": 146,
+              "index_dans_middle": 0,
+              "middle_dans_index": 146
+            },
+            {
+              "entre": "thumb/index",
+              "sommets": 136,
+              "thumb_dans_index": 26,
+              "index_dans_thumb": 110
+            },
+            {
+              "entre": "pinky/hand",
+              "sommets": 61,
+              "pinky_dans_hand": 61,
+              "hand_dans_pinky": 0
+            },
+            {
+              "entre": "middle/hand",
+              "sommets": 34,
+              "middle_dans_hand": 34,
+              "hand_dans_middle": 0
+            },
+            {
+              "entre": "thumb/middle",
+              "sommets": 25,
+              "thumb_dans_middle": 14,
+              "middle_dans_thumb": 11
+            },
+            {
+              "entre": "thumb/hand",
+              "sommets": 23,
+              "thumb_dans_hand": 23,
+              "hand_dans_thumb": 0
+            }
+          ],
+          "pires_groupes": [
+            {
+              "couple": "DEF_pinky_03.L → DEF_ring_meta.L",
+              "sommets": 403
+            },
+            {
+              "couple": "DEF_thumb_02.L → DEF_pinky_02.L",
+              "sommets": 291
+            },
+            {
+              "couple": "DEF_middle_03.L → DEF_index_meta.L",
+              "sommets": 146
+            }
+          ]
+        }
+      },
+      "pic": "0.9",
+      "pic_sommets": 2564,
+      "premiere_etape_fautive": "0.4",
+      "etapes_fautives": [
+        "0.4",
+        "0.5",
+        "0.6",
+        "0.7",
+        "0.8",
+        "0.9",
+        "1.0"
+      ],
+      "contre_epreuve_etape_1_moins_action": 0
+    }
+  },
+  "duree_s": 124.3
+}

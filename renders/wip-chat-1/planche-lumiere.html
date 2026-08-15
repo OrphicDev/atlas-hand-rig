@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Hand Rig — planche-contact rasante</title>
+<style>
+:root { --bg:#141517; --carte:#1d1f22; --tuile:#3c3e42; --txt:#e8e6e3; --gris:#9a9895;
+        --ok:#5fbf7a; --ko:#e0654f; --trait:#2c2f33; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--txt);
+  font:14px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif; }
+.wrap { max-width:1500px; margin:0 auto; padding:32px 24px 80px; }
+h1 { font-size:26px; margin:0 0 4px; letter-spacing:-.01em; }
+h2 { font-size:19px; margin:0 0 2px; }
+h3 { font-size:15px; margin:34px 0 10px; color:var(--gris); text-transform:uppercase; letter-spacing:.08em; }
+.sous { color:var(--gris); margin:0 0 26px; }
+.panneau { background:var(--carte); border:1px solid var(--trait); border-radius:10px; padding:18px 20px; margin:0 0 30px; }
+.reglages { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:10px 26px; margin:0; }
+.reglages div { display:flex; justify-content:space-between; gap:12px; border-bottom:1px dotted var(--trait); padding:3px 0; }
+.reglages span:first-child { color:var(--gris); }
+.reglages b { font-variant-numeric:tabular-nums; font-weight:600; }
+.pose { margin:0 0 40px; }
+.meta { color:var(--gris); margin:0 0 14px; font-size:13px; }
+.grille { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px; }
+.grille.zoom { grid-template-columns:repeat(auto-fill,minmax(420px,1fr)); }
+.cell { margin:0; background:var(--carte); border:1px solid var(--trait); border-radius:9px; overflow:hidden; }
+.shot { background:var(--tuile); line-height:0; }
+.shot img { width:100%; height:auto; display:block; }
+figcaption { padding:9px 11px 11px; }
+.nom { font-weight:600; font-size:13px; margin-bottom:5px; }
+.stats { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px; }
+.badge { font-size:11px; padding:2px 7px; border-radius:20px; font-variant-numeric:tabular-nums;
+  background:#2a2d31; color:var(--gris); border:1px solid var(--trait); }
+.badge.ok { color:var(--ok); border-color:#2f4a37; }
+.badge.ko { color:var(--ko); border-color:#54302a; }
+.petit { font-size:11.5px; color:var(--gris); font-variant-numeric:tabular-nums; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th,td { text-align:left; padding:7px 10px; border-bottom:1px solid var(--trait); vertical-align:top; }
+th { color:var(--gris); font-weight:600; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+code { background:#26292d; padding:1px 5px; border-radius:4px; font-size:12px; }
+.ok { color:var(--ok); } .ko { color:var(--ko); }
+.verdict { display:flex; gap:26px; flex-wrap:wrap; }
+.verdict div { font-variant-numeric:tabular-nums; }
+.verdict b { display:block; font-size:22px; }
+</style></head><body><div class="wrap">
+
+<h1>Atlas Hand Rig — planche-contact, eclairage lateral rasant</h1>
+<p class="sous">18 rendus · 3 poses × 4 angles, avec les <b>deux rasances opposees</b> sur la paume et le dos.
+Exposition et gestion des couleurs identiques sur toute la serie. Fond transparent : l'histogramme ne mesure que le sujet,
+et la mesure est bornee a la boite de la main (avant-bras exclu).</p>
+
+<div class="panneau">
+  <h3 style="margin-top:0">Reglages verrouilles</h3>
+  <div class="reglages">
+    <div><span>Moteur</span><b>CYCLES · 96 ech. · debruitage on</b></div>
+    <div><span>Resolution</span><b>900 × 900</b></div>
+    <div><span>Transformation de vue</span><b>AgX / look None</b></div>
+    <div><span>Exposition</span><b>+0.0 EV · gamma 1.0</b></div>
+    <div><span>Affichage</span><b>sRGB</b></div>
+    <div><span>Objectif</span><b>85 mm / capteur 36 mm</b></div>
+    <div><span>Champ (commun)</span><b>23.9 cm</b></div>
+    <div><span>Clay</span><b>gris 0.50 · rug. 1.00 · spec 0.00</b></div>
+    <div><span>Key : angle / normale</span><b>75.0° (rasance 15.0°)</b></div>
+    <div><span>Key : angle / camera</span><b>75.0°</b></div>
+    <div><span>Key : puissance</span><b>9.25 W a 59.7 cm</b></div>
+    <div><span>Fill frontal</span><b>15 % de la key (1.39 W)</b></div>
+    <div><span>Rim arriere</span><b>25 % de la key, 110° derriere</b></div>
+    <div><span>Ambiance monde</span><b>gris 0.02</b></div>
+  </div>
+</div>
+
+<div class="panneau verdict">
+  <div><span class="petit">Ecretage max (limite 2 %)</span><b class="ok">0.000 %</b></div>
+  <div><span class="petit">Ombres bouchees max</span><b class="ok">0.000 %</b></div>
+  <div><span class="petit">Images hors limite</span><b class="ok">0</b></div>
+  <div><span class="petit">Cadrages coupes</span><b class="ok">0</b></div>
+</div>
+
+
+  <section class="pose">
+    <h2>Hand_Neutral</h2>
+    <p class="meta">proprietes actives : <code>aucune (repos)</code>
+       &nbsp;·&nbsp; volume maillage <b>0.00040765 m³</b>
+       (<b class="ok">+0.00 %</b> vs Neutral)
+       &nbsp;·&nbsp; auto-intersections <b class="ok">0</b> paires de faces</p>
+    <div class="grille">
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Neutral-paume-A.png" alt="Hand_Neutral-paume-A"></div>
+      <figcaption>
+        <div class="nom">Paume — rasance A (+1)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.647 · max 0.839 · marge cadre 8.9 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Neutral-paume-B.png" alt="Hand_Neutral-paume-B"></div>
+      <figcaption>
+        <div class="nom">Paume — rasance B (−1, opposee)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.542 · max 0.846 · marge cadre 8.9 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Neutral-dos-A.png" alt="Hand_Neutral-dos-A"></div>
+      <figcaption>
+        <div class="nom">Dos — rasance A (+1)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.613 · max 0.835 · marge cadre 7.7 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Neutral-dos-B.png" alt="Hand_Neutral-dos-B"></div>
+      <figcaption>
+        <div class="nom">Dos — rasance B (−1, opposee)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.579 · max 0.843 · marge cadre 7.7 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Neutral-pouce.png" alt="Hand_Neutral-pouce"></div>
+      <figcaption>
+        <div class="nom">Cote pouce</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.589 · max 0.835 · marge cadre 7.7 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Neutral-auriculaire.png" alt="Hand_Neutral-auriculaire"></div>
+      <figcaption>
+        <div class="nom">Cote auriculaire</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.638 · max 0.832 · marge cadre 9.3 %</div>
+      </figcaption>
+    </figure></div>
+  </section>
+  <section class="pose">
+    <h2>Hand_Fist</h2>
+    <p class="meta">proprietes actives : <code>{&#x27;Fist&#x27;: 0.55, &#x27;Thumb_Curl&#x27;: 0.2187, &#x27;Thumb_Opposition&#x27;: 0.1635}</code>
+       &nbsp;·&nbsp; volume maillage <b>0.00041591 m³</b>
+       (<b class="ko">+2.03 %</b> vs Neutral)
+       &nbsp;·&nbsp; auto-intersections <b class="ko">141</b> paires de faces</p>
+    <div class="grille">
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Fist-paume-A.png" alt="Hand_Fist-paume-A"></div>
+      <figcaption>
+        <div class="nom">Paume — rasance A (+1)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.624 · max 0.831 · marge cadre 19.3 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Fist-paume-B.png" alt="Hand_Fist-paume-B"></div>
+      <figcaption>
+        <div class="nom">Paume — rasance B (−1, opposee)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.554 · max 0.835 · marge cadre 19.3 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Fist-dos-A.png" alt="Hand_Fist-dos-A"></div>
+      <figcaption>
+        <div class="nom">Dos — rasance A (+1)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.602 · max 0.837 · marge cadre 17.9 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Fist-dos-B.png" alt="Hand_Fist-dos-B"></div>
+      <figcaption>
+        <div class="nom">Dos — rasance B (−1, opposee)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.586 · max 0.834 · marge cadre 17.9 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Fist-pouce.png" alt="Hand_Fist-pouce"></div>
+      <figcaption>
+        <div class="nom">Cote pouce</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.617 · max 0.835 · marge cadre 18.1 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Fist-auriculaire.png" alt="Hand_Fist-auriculaire"></div>
+      <figcaption>
+        <div class="nom">Cote auriculaire</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.564 · max 0.839 · marge cadre 19.7 %</div>
+      </figcaption>
+    </figure></div>
+  </section>
+  <section class="pose">
+    <h2>Hand_Cupped</h2>
+    <p class="meta">proprietes actives : <code>{&#x27;Cup&#x27;: 1.0}</code>
+       &nbsp;·&nbsp; volume maillage <b>0.00041043 m³</b>
+       (<b class="ok">+0.68 %</b> vs Neutral)
+       &nbsp;·&nbsp; auto-intersections <b class="ko">29</b> paires de faces</p>
+    <div class="grille">
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Cupped-paume-A.png" alt="Hand_Cupped-paume-A"></div>
+      <figcaption>
+        <div class="nom">Paume — rasance A (+1)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.553 · max 0.846 · marge cadre 8.6 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Cupped-paume-B.png" alt="Hand_Cupped-paume-B"></div>
+      <figcaption>
+        <div class="nom">Paume — rasance B (−1, opposee)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.597 · max 0.846 · marge cadre 8.6 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Cupped-dos-A.png" alt="Hand_Cupped-dos-A"></div>
+      <figcaption>
+        <div class="nom">Dos — rasance A (+1)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.591 · max 0.843 · marge cadre 7.8 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Cupped-dos-B.png" alt="Hand_Cupped-dos-B"></div>
+      <figcaption>
+        <div class="nom">Dos — rasance B (−1, opposee)</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.615 · max 0.839 · marge cadre 7.8 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Cupped-pouce.png" alt="Hand_Cupped-pouce"></div>
+      <figcaption>
+        <div class="nom">Cote pouce</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.609 · max 0.831 · marge cadre 7.6 %</div>
+      </figcaption>
+    </figure>
+    <figure class="cell">
+      <div class="shot"><img loading="lazy" src="preuves/Hand_Cupped-auriculaire.png" alt="Hand_Cupped-auriculaire"></div>
+      <figcaption>
+        <div class="nom">Cote auriculaire</div>
+        <div class="stats">
+          <span class="badge ok">ecretage 0.000 %</span>
+          <span class="badge n">ombres 0.000 %</span>
+        </div>
+        <div class="petit">lum. moy 0.682 · max 0.830 · marge cadre 10.1 %</div>
+      </figcaption>
+    </figure></div>
+  </section>
+
+<h3>Zones suspectes — agrandissements</h3>
+<div class="grille zoom">
+    <figure class="cell large">
+      <div class="shot"><img loading="lazy" src="zooms/z1_fist_paume_doigts.png" alt="Hand_Fist / paume B — slivers d&#x27;auto-intersection a la base index-majeur et majeur-annulaire"></div>
+      <figcaption><div class="petit">Hand_Fist / paume B — slivers d&#x27;auto-intersection a la base index-majeur et majeur-annulaire</div></figcaption>
+    </figure>
+    <figure class="cell large">
+      <div class="shot"><img loading="lazy" src="zooms/z2_fist_dos_doigts.png" alt="Hand_Fist / dos A — encoches dans la silhouette aux plis interdigitaux"></div>
+      <figcaption><div class="petit">Hand_Fist / dos A — encoches dans la silhouette aux plis interdigitaux</div></figcaption>
+    </figure>
+    <figure class="cell large">
+      <div class="shot"><img loading="lazy" src="zooms/z5_fist_dos_articulations.png" alt="Hand_Fist / dos B — memes encoches sous la rasance opposee ; aucune dome metacarpo-phalangienne"></div>
+      <figcaption><div class="petit">Hand_Fist / dos B — memes encoches sous la rasance opposee ; aucune dome metacarpo-phalangienne</div></figcaption>
+    </figure>
+    <figure class="cell large">
+      <div class="shot"><img loading="lazy" src="zooms/z3_neutral_paume_centre.png" alt="Hand_Neutral / paume A — bruit de surface sur la paume au repos (defaut de maillage, pas de deformation)"></div>
+      <figcaption><div class="petit">Hand_Neutral / paume A — bruit de surface sur la paume au repos (defaut de maillage, pas de deformation)</div></figcaption>
+    </figure>
+    <figure class="cell large">
+      <div class="shot"><img loading="lazy" src="zooms/z4_fist_pouce.png" alt="Hand_Fist / cote pouce — repli des phalanges distales dans les moyennes"></div>
+      <figcaption><div class="petit">Hand_Fist / cote pouce — repli des phalanges distales dans les moyennes</div></figcaption>
+    </figure>
+    <figure class="cell large">
+      <div class="shot"><img loading="lazy" src="zooms/z6_cupped_index_majeur.png" alt="Hand_Cupped / paume B — croisement index x majeur (29 paires mesurees)"></div>
+      <figcaption><div class="petit">Hand_Cupped / paume B — croisement index x majeur (29 paires mesurees)</div></figcaption>
+    </figure></div>
+
+<h3>Mesure geometrique par pose</h3>
+<div class="panneau">
+<table><thead><tr><th>Pose</th><th class="num">Volume du maillage</th><th class="num">Ecart vs Neutral</th><th class="num">Auto-intersections</th></tr></thead>
+<tbody><tr><td>Hand_Neutral</td><td class='num'>0.00040765</td><td class='num '>+0.000 %</td><td class='num ok'>0</td></tr><tr><td>Hand_Fist</td><td class='num'>0.00041591</td><td class='num ko'>+2.027 %</td><td class='num ko'>141</td></tr><tr><td>Hand_Cupped</td><td class='num'>0.00041043</td><td class='num '>+0.682 %</td><td class='num ko'>29</td></tr><tr><td>Hand_Fist_25</td><td class='num'>0.00041099</td><td class='num '>+0.819 %</td><td class='num ok'>0</td></tr><tr><td>Hand_Fist_50</td><td class='num'>0.00041627</td><td class='num ko'>+2.114 %</td><td class='num ko'>32</td></tr><tr><td>Hand_Fist_75</td><td class='num'>0.00042327</td><td class='num ko'>+3.833 %</td><td class='num ko'>856</td></tr><tr><td>Hand_Open</td><td class='num'>0.00040898</td><td class='num '>+0.326 %</td><td class='num ko'>80</td></tr></tbody></table>
+<p class="petit" style="margin:12px 0 0">Le volume est calcule par le theoreme de la divergence sur le maillage evalue. Des que des faces se traversent,
+ce volume compte deux fois les zones superposees : au-dela de zero auto-intersection, l'ecart est un <b>indicateur d'anomalie</b>,
+pas une mesure de gonflement pure. Hand_Fist_25 est le seul cas curl-non-nul sans auto-intersection : son +0,82 % est, lui, un vrai gain de volume.</p>
+</div>
+
+<h3>Ou se traversent les faces</h3>
+<div class="panneau">
+<table><thead><tr><th>Pose</th><th class="num">Paires</th><th>Couples de groupes dominants (5 premiers)</th></tr></thead>
+<tbody><tr><td>Hand_Fist</td><td class='num'>141</td><td><code>DEF_middle_01.L x DEF_ring_01.L</code> &times; 54<br><code>DEF_middle_01.L/DEF_ring_01.L x DEF_ring_01.L</code> &times; 47<br><code>DEF_middle_01.L x DEF_middle_meta.L</code> &times; 16<br><code>DEF_middle_01.L x DEF_middle_01.L/DEF_middle_meta.L</code> &times; 12<br><code>DEF_middle_01.L x DEF_middle_01.L</code> &times; 12</td></tr><tr><td>Hand_Fist_75</td><td class='num'>856</td><td><code>DEF_index_03.L x DEF_thumb_meta.L</code> &times; 112<br><code>DEF_index_01.L x DEF_index_meta.L</code> &times; 70<br><code>DEF_middle_01.L x DEF_middle_meta.L</code> &times; 67<br><code>DEF_ring_01.L x DEF_ring_01.L/DEF_ring_meta.L</code> &times; 65<br><code>DEF_index_01.L/DEF_middle_01.L x DEF_middle_01.L</code> &times; 51</td></tr><tr><td>Hand_Cupped</td><td class='num'>29</td><td><code>DEF_index_01.L x DEF_index_01.L/DEF_middle_01.L</code> &times; 16<br><code>DEF_index_01.L/DEF_middle_01.L x DEF_middle_01.L</code> &times; 7<br><code>DEF_index_01.L x DEF_middle_01.L</code> &times; 6</td></tr><tr><td>Hand_Open</td><td class='num'>80</td><td><code>DEF_middle_01.L/DEF_ring_01.L x DEF_ring_01.L</code> &times; 43<br><code>DEF_middle_01.L x DEF_ring_01.L</code> &times; 37</td></tr></tbody></table>
+</div>
+
+</div></body></html>

@@ -30,6 +30,17 @@ import os
 import sys
 
 import bmesh
+# ═══ NE PAS TAMPONNER LA SORTIE ═══
+# Mesuré : deux lancements de 11 et 16 minutes n'avaient écrit ZÉRO octet, et
+# une exception laissait un journal vide. On ne peut alors distinguer un calcul
+# long d'un blocage, ni lire l'erreur qui a tout arrêté. Blender tamponne en
+# amont de Python ; il faut le lui dire ligne par ligne.
+try:
+    sys.stdout.reconfigure(line_buffering=True)
+    sys.stderr.reconfigure(line_buffering=True)
+except Exception:
+    pass
+
 import bpy
 import mathutils
 
@@ -80,6 +91,10 @@ rapport = {"cote": "gauche" if COTE == "g" else "droite", "side": SIDE}
 # quoi que ce soit tant que celle-ci n'est pas faite, parce que sans elle tout
 # résultat peut mentir de la même façon.
 ECHECS_ACCEPTATION = []
+# Le côté palmaire, relevé par le mouvement plus bas. Déclaré ici parce qu'il
+# est affecté avant d'être lu : une déclaration placée après son affectation ne
+# sert à rien.
+PALMAIRE_REF = [mathutils.Vector((0, 0, 1))]
 
 
 def exiger(nom, ok, mesure, seuil):
@@ -740,13 +755,37 @@ CURL = {"index": "Index_Curl", "middle": "Middle_Curl",
 AVANCE = {"index": 1.00, "middle": 1.06, "ring": 1.02, "pinky": 0.96}
 RELAX = {"index": 0.18, "middle": 0.24, "ring": 0.30, "pinky": 0.36}
 
+# ═══ LA FERMETURE EST UNE CASCADE, PAS TROIS ARCS SIMULTANÉS ═══
+#
+# Les trois articulations d'un doigt suivaient `Fist` au même rythme : d'où
+# quatre arcs identiques, une boucle trop ronde, et des phalanges qui ne
+# s'empilent pas contre la paume. Un vrai doigt se ferme par étapes — la
+# métacarpo-phalangienne engage, la proximale suit, la distale finit.
+#
+# L'évaluateur de drivers de Blender n'accepte que des expressions linéaires
+# (mesuré : `min`/`max` et le produit de deux variables échouent en silence).
+# Mais les butées de la phase E ÉCRÊTENT. En surpilotant une articulation avec
+# un décalage négatif, elle reste donc plaquée sur son extension tant que
+# `Fist` n'a pas rattrapé ce décalage : le retard d'entrée en action est obtenu
+# sans la moindre condition.
+#
+#   pente > amplitude  → l'articulation SATURE avant la fin de la course
+#   décalage négatif   → elle DÉMARRE plus tard
+CASCADE = {"01": (1.12, 0.00),      # engage tout de suite
+           "02": (1.55, -0.18),     # suit, et sature avant la fin
+           "03": (1.45, -0.34)}     # finit en dernier
+# Et les quatre doigts ne sont pas interchangeables : le majeur part devant,
+# l'auriculaire ferme plus tôt et plus court, l'annulaire suit le majeur.
+DEPART = {"index": 0.00, "middle": -0.03, "ring": -0.01, "pinky": 0.04}
 for nom in NOMS4:
     for suf, mx in MAXI.items():
         mnom = f"MCH_{nom}_{suf}_result{SIDE}"
-        k = SIGNE * math.radians(mx) * AVANCE[nom]
+        pente, retard = CASCADE[suf]
+        k = SIGNE * math.radians(mx) * AVANCE[nom] * pente
+        c0 = SIGNE * math.radians(mx) * AVANCE[nom] * (retard + DEPART[nom])
         kr = SIGNE * math.radians(mx) * RELAX[nom] * (0.7 if suf == "03" else 1.0)
         driver(mnom, AXE_FLEXION,
-               f"(fist + curl) * {k:.6f} + relax * {kr:.6f}",
+               f"(fist + curl) * {k:.6f} + relax * {kr:.6f} + {c0:.6f}",
                {"fist": "Fist", "curl": CURL[nom], "relax": "Relax"})
 # L'écartement agit sur la première phalange, autour de la normale de la paume.
 ECART = {"index": 10.0, "middle": 1.0, "ring": -6.0, "pinky": -12.0}
@@ -840,6 +879,9 @@ def borne(deg_ext, deg_flex):
     return (min(a, b), max(a, b))
 
 
+# Ces butées ne sont plus seulement des garde-fous : ce sont elles qui
+# fabriquent la cascade, en écrêtant les droites surpilotées ci-dessus. Les
+# valeurs restent celles du cahier des charges.
 LIM = {"01": borne(20.0, 90.0), "02": borne(0.0, 110.0), "03": borne(10.0, 80.0)}
 LIM_POUCE = {"01": borne(0.0, 60.0), "02": borne(0.0, 80.0)}
 ECART_MAX = math.radians(15.0)
@@ -942,10 +984,15 @@ _gnom = {g.index: g.name for g in geo.vertex_groups}
 
 
 def famille(n):
+    # ═══ SEULS LES GROUPES D'OS SONT DES FAMILLES ═══
+    # `ZONES_ARTICULAIRES`, créé pour le lissage correctif, n'est l'os de
+    # personne — et il domine 203 sommets. Rangé dans « hand », il fabriquait
+    # des intersections fantômes sur Pinch et OK et en cachait de vraies sur
+    # Point. Un groupe qui n'est pas un os n'appartient à aucune famille.
     for f in NOMS4 + ["thumb"]:
         if n.startswith(f"DEF_{f}_"):
             return f
-    return "hand"
+    return "hand" if n.startswith("DEF_") else None
 
 
 _contamine, _somme_fausse, _melange_paume = 0, 0, 0
@@ -1201,7 +1248,9 @@ def intersections(pose_nom):
     _p, _n = sommets_evalues()
     par_groupe = {}
     for i, nm in _dom.items():
-        par_groupe.setdefault(famille(nm), []).append(i)
+        _f = famille(nm)
+        if _f is not None:
+            par_groupe.setdefault(_f, []).append(i)
     arbres = {}
     for f, idx in par_groupe.items():
         t = mathutils.kdtree.KDTree(len(idx))
@@ -1209,23 +1258,38 @@ def intersections(pose_nom):
             t.insert(_p[i], k)
         t.balance()
         arbres[f] = (t, idx)
+    # ═══ TOUS LES COUPLES, ET DANS LES DEUX SENS ═══
+    #
+    # Ma liste n'en tenait que 9 sur 15, et ne comptait chaque couple que dans
+    # UN sens. Mesuré par l'agent qui a audité ce code : `ring/pinky` rend 0
+    # dans le sens que je testais et **403** dans l'autre, et `thumb/pinky` —
+    # jamais examiné — vaut 556 dans la pose qui met justement le pouce contre
+    # l'auriculaire. Au total ma sonde voyait 672 traversées sur 3 009, soit
+    # 22 %. Elle écrivait « aucune auto-intersection » sur des centaines de
+    # sommets traversants.
+    #
+    # « A dans B » et « B dans A » ne sont pas la même question : la surface
+    # qui pénètre n'est pas forcément celle dont on part.
     trouve = []
-    couples = [("thumb", "index"), ("thumb", "middle"), ("index", "middle"),
-               ("middle", "ring"), ("ring", "pinky"), ("thumb", "hand"),
-               ("index", "hand"), ("pinky", "hand"), ("middle", "hand")]
-    for fa, fb in couples:
-        if fa not in arbres or fb not in arbres:
-            continue
-        tb_, ib = arbres[fb]
-        n_ded = 0
-        for i in par_groupe[fa]:
-            co, k, d = tb_.find(_p[i])
-            j = ib[k]
-            if (d < 0.008 and (_p[j] - _p[i]).dot(_n[j]) > PROFONDEUR_MINIMALE
-                    and (_p_rep[i] - _p_rep[j]).length > ECART_REPOS_MINIMAL):
-                n_ded += 1
-        if n_ded:
-            trouve.append({"entre": f"{fa}/{fb}", "sommets_dedans": n_ded})
+    fams = [f for f in ("thumb", "index", "middle", "ring", "pinky", "hand")
+            if f in arbres]
+    for _x in range(len(fams)):
+        for _y in range(_x + 1, len(fams)):
+            fa, fb = fams[_x], fams[_y]
+            n_ded = 0
+            for _sens in ((fa, fb), (fb, fa)):
+                _src, _dst = _sens
+                tb_, ib = arbres[_dst]
+                for i in par_groupe[_src]:
+                    co, k, d = tb_.find(_p[i])
+                    j = ib[k]
+                    if (d < 0.008
+                            and (_p[j] - _p[i]).dot(_n[j]) > PROFONDEUR_MINIMALE
+                            and (_p_rep[i] - _p_rep[j]).length
+                            > ECART_REPOS_MINIMAL):
+                        n_ded += 1
+            if n_ded:
+                trouve.append({"entre": f"{fa}/{fb}", "sommets_dedans": n_ded})
     return trouve
 
 
@@ -1303,6 +1367,18 @@ dire("retour_au_repos", {
 if _ecart_retour >= 0.01:
     raise RuntimeError(f"Fist=0 ne redonne pas la pose de repos : "
                        f"{_ecart_retour:.4f} mm d'écart")
+
+# Le côté palmaire, mesuré par le mouvement : en fléchissant, les bouts des
+# doigts partent du côté de la paume. Le signe d'une normale construite ne se
+# suppose pas.
+regler()
+_pa_r, _ = sommets_evalues()
+regler(Fist=0.5)
+_pb_r, _ = sommets_evalues()
+regler()
+_bts_r = [i for i, n in _dom.items() if n.endswith(f"_03{SIDE}")]
+_dep_r = sum(((_pb_r[i] - _pa_r[i]) for i in _bts_r), mathutils.Vector((0, 0, 0)))
+PALMAIRE_REF[0] = (_dep_r - AXE * _dep_r.dot(AXE)).normalized()
 
 # ── H.2 · LES EMPREINTES, ET LA POSE QUE SACHA DEMANDE ──
 PALMAIRE = None
@@ -1453,6 +1529,7 @@ def penetration_familles(fa, fb):
 # haute. C'est la seule façon d'atteindre un optimum que la contrainte isole.
 BARRIERE = [1e6]
 CIBLE_DISTANCE = [0.0]      # 0 = la distance compte toujours
+ANNEAU_EXIGE = [0.0]        # ouverture minimale du trou, en mm (0 = sans objet)
 
 
 def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
@@ -1481,6 +1558,10 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
         # entre pouce et index tout en faisant traverser deux autres doigts.
         inter = sum(x["sommets_dedans"] for x in intersections("recherche"))
         m["intersection_des_doigts"] = inter
+        # Pour le « OK », le trou de l'anneau fait partie de l'objectif : sans
+        # lui, l'optimiseur retombe sur un pincement, ce qu'il a fait.
+        if ANNEAU_EXIGE[0]:
+            m["ouverture_anneau_mm"] = ouverture_anneau()
         # ═══ CE QUI EST OBLIGATOIRE NE SE NÉGOCIE PAS ═══
         # Avec un poids fini, l'optimiseur ÉCHANGEAIT : à 400 points par
         # sommet traversé, un sommet valait 1,3 mm de contact, et il préférait
@@ -1500,7 +1581,9 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
               + _d_eff * 300.0
               + max(0.0, m["distance_mm"] - 1.0) * 9000.0
               + (m["face_local"] + 1.0) * 2500.0
-              - min(m["sommets_a_moins_de_1_5_mm"], 120) * 2.0)
+              - min(m["sommets_a_moins_de_1_5_mm"], 120) * 2.0
+              + (max(0.0, ANNEAU_EXIGE[0] - m.get("ouverture_anneau_mm", 0.0))
+                 * 400.0 if ANNEAU_EXIGE[0] else 0.0))
         return sc, m, (props, os_)
 
     # ═══ PLUSIEURS GRAINES, PAS UNE ═══
@@ -1667,6 +1750,61 @@ for _ax, _deg in enumerate(OPPO_MESUREE):
            {"opp": "Thumb_Opposition"})
 bpy.context.view_layer.update()
 
+# ═══ LE CREUX DE LA PAUME SE MESURE ═══
+# `Hand_Cupped` était jugée à l'œil, et le client la trouve trop plate. Le creux
+# est la flèche de la paume : de combien sa surface palmaire s'enfonce sous le
+# plan qui passe par le poignet et les quatre jointures. Une paume plate rend
+# une flèche presque nulle.
+def creux_palmaire():
+    _p, _ = sommets_evalues()
+    _paume = [i for i, n in _dom.items() if n.endswith(f"_meta{SIDE}")]
+    if not _paume:
+        return 0.0
+    _plan = [ANATOMIE[n]["jointure"] for n in NOMS4] + [poignet]
+    _c = sum(_plan, mathutils.Vector((0, 0, 0))) / len(_plan)
+    _nrm = ((ANATOMIE["index"]["jointure"] - poignet)
+            .cross(ANATOMIE["pinky"]["jointure"] - poignet)).normalized()
+    if _nrm.dot(PALMAIRE_REF[0]) < 0:
+        _nrm = -_nrm
+    return max(0.0, max((_c - _p[i]).dot(_nrm) for i in _paume)) * 1000.0
+
+
+# ═══ UN NETTOYEUR DE POSE, GÉNÉRIQUE ═══
+# Le client relève des pénétrations dans Hand_Fist_75, Hand_Point et
+# Hand_Cupped — des poses que je posais à la main sans jamais les contrôler.
+# Elles gardent leur INTENTION (les propriétés voulues) et reçoivent les plus
+# PETITES corrections FK qui suppriment les traversées : un nettoyage, pas une
+# réécriture.
+def nettoyer_pose(nom_pose, props, axes, tours=9, bonus=None):
+    def evaluer(vec):
+        os_ = {cle: v for (_g, cle, _lo, _hi), v in zip(axes, vec)}
+        poser_etat(props, os_)
+        inter = sum(x["sommets_dedans"] for x in intersections(nom_pose))
+        ecart = sum(abs(v) for v in vec) / max(1, len(vec))
+        sc = inter * 1e5 + ecart * 12.0
+        if bonus is not None:
+            sc += bonus()
+        return sc, inter, os_
+
+    milieu = [0.0] * len(axes)
+    best = evaluer(milieu) + (list(milieu),)
+    pas = [(hi - lo) / 4.0 for _g, _c, lo, hi in axes]
+    for _t in range(tours):
+        bouge = False
+        for i in range(len(axes)):
+            for signe in (-1.0, 1.0):
+                v = list(best[3])
+                v[i] = max(axes[i][2], min(axes[i][3], v[i] + signe * pas[i]))
+                r = evaluer(v)
+                if r[0] < best[0]:
+                    best = r + (v,)
+                    bouge = True
+        if not bouge:
+            pas = [x * 0.55 for x in pas]
+    print(f"ATLAS_NETTOYAGE {nom_pose} : {best[1]} sommets traversants")
+    return best[2], best[1]
+
+
 # ── LES TROIS CONTACTS, CHACUN CHERCHÉ POUR LUI-MÊME ──
 IDX = [("prop", "Index_Curl", 0.0, 1.0),
        ("prop", "Thumb_Curl", 0.0, 1.0),
@@ -1712,12 +1850,65 @@ PKY = [# Pour rejoindre l'auriculaire, le pouce traverse la paume : il passe don
        ("os", (f"CTRL_middle_01{SIDE}", AXE_ECART), -20.0, 20.0),
        ("os", (f"CTRL_pinky_01{SIDE}", AXE_ECART), -20.0, 20.0)]
 
+# ═══ PINCH ET OK NE SONT PAS LE MÊME GESTE ═══
+#
+# Ils partageaient les mêmes axes et le même fond : le rapport leur donnait la
+# même course et la même distance de contact, et les rendus étaient
+# superposables. Ce n'était pas une coïncidence, c'était la même optimisation
+# lancée deux fois.
+#
+#   PINCH : pulpe contre pulpe, index MODÉRÉMENT fléchi, les trois autres
+#           doigts relâchés. Le geste de saisir une petite chose.
+#   OK    : le pouce et l'index forment un ANNEAU lisible, donc l'index
+#           s'enroule DAVANTAGE, et les trois autres restent ouverts.
+#
+# Ce qui distingue l'anneau du pincement se mesure : c'est son trou. Dans un
+# « OK », les segments PROXIMAUX du pouce et de l'index restent écartés pendant
+# que leurs pulpes se touchent ; dans un pincement, ils se rapprochent tous.
+def ouverture_anneau():
+    _p, _ = sommets_evalues()
+    _a1 = [i for i, n in _dom.items() if n == f"DEF_thumb_01{SIDE}"]
+    _b1 = [i for i, n in _dom.items() if n in (f"DEF_index_01{SIDE}",
+                                               f"DEF_index_02{SIDE}")]
+    if not _a1 or not _b1:
+        return 0.0
+    t = mathutils.kdtree.KDTree(len(_b1))
+    for k, i in enumerate(_b1):
+        t.insert(_p[i], k)
+    t.balance()
+    return min(t.find(_p[i])[2] for i in _a1) * 1000.0
+
+
+PINCH = [("prop", "Index_Curl", 0.20, 0.55),
+         ("prop", "Thumb_Curl", 0.0, 0.7),
+         ("prop", "Thumb_Opposition", 0.3, 1.0),
+         ("prop", "Relax", 0.25, 0.55),
+         ("os", (f"CTRL_index_01{SIDE}", 0), -30.0, 30.0),
+         ("os", (f"CTRL_thumb_01{SIDE}", 0), -35.0, 35.0),
+         ("os", (f"CTRL_thumb_02{SIDE}", 0), -35.0, 35.0),
+         ("os", (f"CTRL_thumb_meta{SIDE}", 0), -30.0, 30.0),
+         ("os", (f"CTRL_thumb_meta{SIDE}", 1), -30.0, 30.0),
+         ("os", (f"CTRL_thumb_meta{SIDE}", 2), -30.0, 30.0)]
+ANNEAU = [("prop", "Index_Curl", 0.62, 1.0),
+          ("prop", "Thumb_Curl", 0.0, 0.55),
+          ("prop", "Thumb_Opposition", 0.4, 1.0),
+          ("prop", "Spread", 0.0, 0.8),
+          ("os", (f"CTRL_index_01{SIDE}", 0), -30.0, 20.0),
+          ("os", (f"CTRL_index_02{SIDE}", 0), -20.0, 30.0),
+          ("os", (f"CTRL_thumb_01{SIDE}", 0), -35.0, 35.0),
+          ("os", (f"CTRL_thumb_02{SIDE}", 0), -35.0, 35.0),
+          ("os", (f"CTRL_thumb_meta{SIDE}", 0), -35.0, 35.0),
+          ("os", (f"CTRL_thumb_meta{SIDE}", 1), -35.0, 35.0),
+          ("os", (f"CTRL_thumb_meta{SIDE}", 2), -35.0, 35.0)]
+
 CONTACTS = {}
 for _nom_c, _a, _b, _axes, _fond in (
-        ("Hand_Pinch", "index", "thumb", IDX, {}),
-        ("Hand_OK", "index", "thumb", IDX, {"Middle_Curl": 0.12,
-                                            "Ring_Curl": 0.10,
-                                            "Pinky_Curl": 0.08}),
+        # Pincement : les trois autres doigts relâchés, pas enroulés.
+        ("Hand_Pinch", "index", "thumb", PINCH, {}),
+        # Anneau : les trois autres restent ouverts, et l'index s'enroule plus.
+        ("Hand_OK", "index", "thumb", ANNEAU, {"Middle_Curl": 0.06,
+                                               "Ring_Curl": 0.05,
+                                               "Pinky_Curl": 0.04}),
         # Le pouce ne peut rejoindre l'auriculaire qu'en passant AU-DESSUS de
         # doigts repliés : tant que l'index et le majeur restent tendus, il se
         # faufile à travers eux et 39 sommets se traversent. On oriente donc la
@@ -1725,7 +1916,9 @@ for _nom_c, _a, _b, _axes, _fond in (
         # explorer celles où l'index barre le chemin.
         ("Hand_Pinky_Thumb", "pinky", "thumb", PKY,
          {"Index_Curl": 0.95, "Middle_Curl": 0.95})):
+    ANNEAU_EXIGE[0] = 16.0 if _nom_c == "Hand_OK" else 0.0
     _m, _etat, _v = chercher_contact(_a, _b, _axes, _fond)
+    ANNEAU_EXIGE[0] = 0.0
     CONTACTS[_nom_c] = {"mesure": _m, "props": _etat[0], "os": _etat[1]}
     dire(f"contact_{_nom_c}", {
         "entre": f"{_a} et {_b}",
@@ -1843,6 +2036,31 @@ POSES = [
     ("Hand_Pinky_Thumb", CONTACTS["Hand_Pinky_Thumb"]["props"],
      CONTACTS["Hand_Pinky_Thumb"]["os"]),
 ]
+# ═══ TOUTES LES POSES SONT NETTOYÉES, PAS SEULEMENT LES QUATRE CONTRÔLÉES ═══
+# Le client relève des pénétrations dans Hand_Fist_75, Hand_Point et
+# Hand_Cupped. Elles y étaient parce que le validateur ne regardait que quatre
+# poses : ce qu'on ne mesure pas, on ne le corrige pas.
+AXES_NETTOYAGE = []
+for _n4 in NOMS4:
+    AXES_NETTOYAGE += [("os", (f"CTRL_{_n4}_01{SIDE}", AXE_ECART), -16.0, 16.0),
+                       ("os", (f"CTRL_{_n4}_01{SIDE}", 0), -18.0, 18.0),
+                       ("os", (f"CTRL_{_n4}_02{SIDE}", 0), -20.0, 20.0)]
+DEJA_CHERCHEES = {"Hand_Pinch", "Hand_OK", "Hand_Pinky_Thumb", "Hand_Fist"}
+_poses_propres = []
+for nom_pose, reglages, os_pose in POSES:
+    poser_etat(reglages, os_pose)
+    _n_int = sum(x["sommets_dedans"] for x in intersections(nom_pose))
+    if _n_int and nom_pose not in DEJA_CHERCHEES:
+        # Le creux de la paume entre dans l'objectif de Hand_Cupped : la
+        # nettoyer sans lui la rendrait propre ET plate.
+        _bonus = ((lambda: -creux_palmaire() * 90.0)
+                  if nom_pose == "Hand_Cupped" else None)
+        _os2, _reste = nettoyer_pose(nom_pose, reglages, AXES_NETTOYAGE,
+                                     bonus=_bonus)
+        os_pose = {**os_pose, **_os2}
+    _poses_propres.append((nom_pose, reglages, os_pose))
+POSES = _poses_propres
+
 _controle = {}
 for nom_pose, reglages, os_pose in POSES:
     poser_etat(reglages, os_pose)
@@ -1878,11 +2096,71 @@ for nom_pose, reglages, os_pose in POSES:
                 _ou[f"{_dom[_i]} → {_dom[_j]}"] = _ou.get(
                     f"{_dom[_i]} → {_dom[_j]}", 0) + 1
         print("ATLAS_OU_CA_TRAVERSE " + json.dumps(_ou, ensure_ascii=False))
-    if nom_pose in ("Hand_Fist", "Hand_Pinch", "Hand_OK", "Hand_Pinky_Thumb"):
-        exiger(f"{nom_pose} · aucune auto-intersection",
-               not _inter, _inter or "aucune", "aucune")
+    # Toutes les poses, sans exception : le validateur n'en épargnait que
+    # quatre, et les neuf autres n'étaient donc jamais contrôlées.
+    exiger(f"{nom_pose} · aucune auto-intersection",
+           not _inter, _inter or "aucune", "aucune")
 regler()
 dire("poses_de_validation", _controle)
+
+# ═══ LES TRANSITIONS, PAS SEULEMENT LES POSES FINALES ═══
+# Une pose finale sans collision ne prouve rien si les doigts se traversent au
+# milieu du geste. On échantillonne le chemin depuis le repos.
+_POSES_D = {n: (pr, o) for n, pr, o in POSES}
+_transitions = {}
+for _cible in ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
+               "Hand_Cupped", "Hand_Pinky_Thumb"):
+    if _cible not in _POSES_D:
+        continue
+    _pr, _o = _POSES_D[_cible]
+    _fautes_t = {}
+    for _k in range(11):
+        _u = _k / 10.0
+        poser_etat({kk: vv * _u for kk, vv in _pr.items()},
+                   {kk: vv * _u for kk, vv in _o.items()})
+        _it = intersections(f"{_cible}@{_u}")
+        if _it:
+            _fautes_t[f"{_u:.1f}"] = _it
+    _transitions[f"Neutral→{_cible}"] = _fautes_t or "aucune collision"
+    exiger(f"transition Neutral→{_cible} · aucune auto-intersection",
+           not _fautes_t, _fautes_t or "aucune", "aucune à chaque étape")
+regler()
+dire("transitions", _transitions)
+
+# ═══ PINCH ET OK DOIVENT ÊTRE DEUX GESTES ═══
+# Ils rendaient exactement la même course et la même distance : c'était la même
+# optimisation lancée deux fois. On mesure leur écart au lieu de l'espérer.
+if "Hand_Pinch" in _POSES_D and "Hand_OK" in _POSES_D:
+    poser_etat(*_POSES_D["Hand_Pinch"])
+    _pp1, _ = sommets_evalues()
+    _anneau_pinch = ouverture_anneau()
+    poser_etat(*_POSES_D["Hand_OK"])
+    _pp2, _ = sommets_evalues()
+    _anneau_ok = ouverture_anneau()
+    _ecart_gestes = max((a - b).length for a, b in zip(_pp1, _pp2)) * 1000
+    regler()
+    dire("pinch_contre_ok", {
+        "ecart_maximal_entre_les_deux_poses_mm": round(_ecart_gestes, 1),
+        "ouverture_de_l_anneau_pinch_mm": round(_anneau_pinch, 1),
+        "ouverture_de_l_anneau_ok_mm": round(_anneau_ok, 1)})
+    exiger("Pinch et OK sont deux gestes distincts", _ecart_gestes > 15.0,
+           f"{_ecart_gestes:.1f} mm", "> 15 mm d'écart")
+    exiger("l'anneau du OK est lisible", _anneau_ok >= 14.0,
+           f"{_anneau_ok:.1f} mm", "≥ 14 mm d'ouverture")
+
+# ═══ LA PAUME DOIT VRAIMENT SE CREUSER ═══
+if "Hand_Cupped" in _POSES_D:
+    regler()
+    _creux_repos = creux_palmaire()
+    poser_etat(*_POSES_D["Hand_Cupped"])
+    _creux_cup = creux_palmaire()
+    regler()
+    dire("creux_de_la_paume", {"au_repos_mm": round(_creux_repos, 1),
+                               "en_paume_creuse_mm": round(_creux_cup, 1),
+                               "gain_mm": round(_creux_cup - _creux_repos, 1)})
+    exiger("la paume creuse se creuse vraiment",
+           _creux_cup - _creux_repos >= 6.0,
+           f"{_creux_cup - _creux_repos:.1f} mm", "≥ 6 mm de plus qu'au repos")
 
 with open(os.path.join(DOSSIER, f"rapport-rig{SIDE}.json"), "w",
           encoding="utf-8") as f:
