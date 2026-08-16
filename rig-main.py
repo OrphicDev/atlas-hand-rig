@@ -1786,6 +1786,32 @@ try:
         "regle": "les poids sont TRANSFÉRÉS depuis le parent, jamais ajoutés"})
     exiger("les os correctifs ne déplacent pas le repos", _bouge < 0.01,
            f"{_bouge:.5f} mm", "< 0,01 mm")
+
+    # ═══ LES DRIVERS DE TRANSLATION, ET LEUR AMPLITUDE CHERCHEE (§7.4) ═══
+    #
+    # Le thenar doit CEDER quand le pouce traverse la paume, et la base de
+    # l'index doit ceder legerement en retour. Ce sont deux glissements de
+    # chair, pas deux rotations : d'ou une translation pilotee, et non un os
+    # de plus dans la chaine.
+    #
+    # L'amplitude ne se pose pas. Elle se cherche sur les trois axes locaux, et
+    # le classement est celui du cahier : d'abord les traversees, puis la
+    # profondeur, puis la distance de contact, puis l'orientation, et seulement
+    # ensuite la norme du deplacement — la plus petite correction qui fait le
+    # travail, jamais la plus forte qui l'ecrase.
+    for _nom_corr, _prop_corr, _borne in (
+            (f"DEF_thumb_thenar_corr{SIDE}", "Thumb_Opposition", 0.003),
+            (f"DEF_index_root_corr{SIDE}", "PSD_PinkyThumb", 0.002)):
+        for _ax in (0, 1, 2):
+            correctifs.driver_translation_lineaire(
+                rig, _nom_corr, _ax, SIDE, _prop_corr, 0.0)
+    forcer_evaluation()
+    dire("drivers_correctifs", {
+        "os": [f"DEF_thumb_thenar_corr{SIDE}", f"DEF_index_root_corr{SIDE}"],
+        "amplitudes": "posees a zero — cherchees en phase H, quand les poses "
+                      "de contact existent et qu'on peut mesurer ce qu'elles "
+                      "gagnent",
+        "regle": "la plus PETITE correction qui fait le travail"})
     CORRECTIFS_PRETS = True
 except Exception as _e:                                       # noqa: BLE001
     # On n'avale pas l'échec : on le publie et on continue sans correctifs, de
@@ -3219,6 +3245,85 @@ for _nom_c, _a, _b, _axes, _fond in (
            {"dans_les_pulpes": _m["penetration"],
             "dans_la_main_entiere": _m.get("intersection_des_doigts")},
            "0 sommet, pulpes ET main entière")
+
+# ═══════════════════════════════════════════════════════════════════
+#   L'AMPLITUDE DES CORRECTIFS DE VOLUME (§7.4)
+# ═══════════════════════════════════════════════════════════════════
+# Les deux os existent et leurs drivers sont poses a zero. On cherche
+# maintenant de combien ils doivent deplacer leur masse, et sur quel axe, EN
+# MESURANT ce que chaque essai gagne sur le contact qui resiste.
+#
+# Hand_Pinky_Thumb plafonne depuis trois chats : la recherche atteint 0,10 mm,
+# donc la pose EXISTE, et le nettoyage ne la tient pas. Le diagnostic du chat 1
+# le disait deja : ce n'est pas un doigt qui en traverse un autre, c'est
+# l'eminence thenar contre la base de l'index. Deux masses de chair doivent
+# ceder l'une devant l'autre, et aucune rotation d'os ne sait faire ca.
+if CORRECTIFS_PRETS and "Hand_Pinky_Thumb" in CONTACTS:
+    _drv_corr = {}
+    for _fc in (rig.animation_data.drivers if rig.animation_data else []):
+        for _nc in (f"DEF_thumb_thenar_corr{SIDE}", f"DEF_index_root_corr{SIDE}"):
+            if _fc.data_path == f'pose.bones["{_nc}"].location':
+                _drv_corr[(_nc, _fc.array_index)] = _fc
+
+    def _poser_amplitudes(vals):
+        for _cle, _fc in _drv_corr.items():
+            _fc.driver.expression = f"p * {vals.get(_cle, 0.0):.8f}"
+        forcer_evaluation()
+
+    _props_pt = {**CONTACTS["Hand_Pinky_Thumb"]["props"],
+                 "PSD_PinkyThumb": 1.0}
+    _os_pt = CONTACTS["Hand_Pinky_Thumb"]["os"]
+
+    def _essai(vals):
+        _poser_amplitudes(vals)
+        poser_etat(_props_pt, _os_pt)
+        _m = mesurer_contact("pinky", "thumb")
+        _i = sum(x["sommets_dedans"] for x in intersections("correctif"))
+        return {"traversees": _i,
+                "penetration": _m["penetration"],
+                "distance_mm": _m["distance_mm"],
+                "face": _m["face_local"],
+                "norme_mm": sum(abs(v) for v in vals.values()) * 1000.0}
+
+    def _rang_corr(r):
+        # L'ordre du cahier, et il ne se somme pas : une correction qui traverse
+        # ne peut pas battre une correction propre parce qu'elle serait plus
+        # petite.
+        return (r["traversees"] + r["penetration"],
+                max(0.0, r["distance_mm"] - SEUIL_CONTACT_MM),
+                max(0.0, r["face"] - SEUIL_FACE),
+                r["norme_mm"])
+
+    _base = {cle: 0.0 for cle in _drv_corr}
+    _meilleur = (_rang_corr(_essai(_base)), dict(_base))
+    _depart = _essai(_base)
+    print("ATLAS_CORRECTIF_DEPART " + json.dumps(
+        {k: (round(v, 3) if isinstance(v, float) else v)
+         for k, v in _depart.items()}, ensure_ascii=False))
+    for _cle in sorted(_drv_corr, key=lambda c: (c[0], c[1])):
+        _borne = 0.003 if "thenar" in _cle[0] else 0.002
+        for _v in (-_borne, -_borne / 2, _borne / 2, _borne):
+            _cand = dict(_meilleur[1])
+            _cand[_cle] = _v
+            _r = _rang_corr(_essai(_cand))
+            if _r < _meilleur[0]:
+                _meilleur = (_r, _cand)
+    _poser_amplitudes(_meilleur[1])
+    _final = _essai(_meilleur[1])
+    dire("amplitudes_correctives", {
+        "depart": {k: (round(v, 3) if isinstance(v, float) else v)
+                   for k, v in _depart.items()},
+        "retenu": {f"{k[0]}[{k[1]}]": round(v * 1000, 3)
+                   for k, v in _meilleur[1].items() if abs(v) > 1e-9} or "aucune",
+        "final": {k: (round(v, 3) if isinstance(v, float) else v)
+                  for k, v in _final.items()},
+        "regle": "traversees, puis distance, puis orientation, puis la plus "
+                 "PETITE norme — jamais une somme ponderee"})
+    _deplacement_max = max((abs(v) for v in _meilleur[1].values()), default=0.0)
+    exiger("les correctifs restent sous 3 mm de deplacement",
+           _deplacement_max <= 0.0031, f"{_deplacement_max * 1000:.2f} mm",
+           "≤ 3,00 mm")
+    regler()
 
 POSE_PINCE = CONTACTS["Hand_Pinky_Thumb"]["props"]
 dire("pince_auriculaire_pouce", {
