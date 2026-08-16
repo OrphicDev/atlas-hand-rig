@@ -93,6 +93,7 @@ e0d83cdb532b06f88c3146ea2135bf29e1fc701a1ffc6769ad168cfec73a533f  ./outils/matri
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
 99fe022f6bc8dca1dfeecd760984ae32218f752dc68009532f29b458086cf4a9  ./outils/rendus-poses.py
 dae825130d79e5867f25d5c126c37e8587d970f8511361ec534128df629d85f8  ./outils/revue-visuelle.py
+ada8da16f212510e8db8ececcaf2129b340179997e38c889ef359bf2b0d2f1ae  ./outils/sonde-cascade.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
 d9aa871f0061ccfea52421068ed49011c7d8d59e25a3004065dbdf4c14ea2c84  ./outils/sonde-opposition-pouce.py
@@ -404,7 +405,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-3ae86f3e02c478d2d836093668d8e27e84823c566b1736568a2b875a8f38f5ea  ./rig-main.py
+3b2bf65af351ae97447b6656711c154f6f5587f47906d87c9453e70c435998a2  ./rig-main.py
 0f70ee328b3a0fc2ee18ae2807b76a3e70feb51b479cbeadf076e8da6c6c4277  ./verifier-rig.py
 bef4201e1c1f473549049f34c71198d0678296aacb7fed36fcfbc1aa5ad02e18  ./work-pinky/WIP-focus-pinky-NON-VALIDE.blend
 ab8d9472d5009fafdfc3943eb61978693c23dc1406c165d75b628a8c6ed54336  ./work-pinky/rapport-focus-pinky.json

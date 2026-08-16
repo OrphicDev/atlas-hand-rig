@@ -2596,6 +2596,63 @@ SEUIL_FACE = -0.5
 SEUIL_ANNEAU_MM = 14.0
 
 
+# ═══ UN DOIGT PLIE EN ACCORDEON N'EST PAS UN DOIGT PLIE ═══
+#
+# TROUVE PAR L'OEIL DE SACHA sur un rendu du pincement : « la torsion bizarre ».
+# Mesure des trois flexions de l'index, en local :
+#
+#     Hand_Pinch         −23,1   −26,0   +12,9   ← la DIP repart en arriere
+#     Hand_OK            −28,5   +25,3   −23,5   ← les trois alternent
+#     Hand_Pinky_Thumb   −39,3   +29,8     0,0
+#     Hand_Fist (pouce)  −38,9   +27,6
+#     Hand_Relaxed        cascade intacte partout
+#
+# TOUTES les poses produites par une recherche de contact ont au moins un doigt
+# plie en Z. La seule propre est celle qui a ete posee A LA MAIN.
+#
+# La cause est dans l'objectif, pas dans les butees : la recherche optimise la
+# distance des pulpes, leur orientation et les traversees. UN DOIGT PLIE EN Z
+# SATISFAIT LES TROIS PARFAITEMENT — il rapproche meme les pulpes plus vite
+# qu'un doigt qui plie normalement, puisqu'il peut ramener sa derniere phalange
+# n'importe ou. Rien ne lui disait qu'une main plie ses trois articulations
+# DANS LE MEME SENS.
+#
+# Ce depot CONNAIT la regle : « la fermeture est une cascade, pas trois arcs
+# simultanes » est ecrit en toutes lettres pour le poing. Elle n'avait jamais
+# ete imposee aux recherches de contact. C'est le meme defaut que le sens de
+# l'ecartement : une verite du cahier, cablee a un seul endroit.
+CASCADE_TOLERANCE_DEG = 2.0     # sous 2 degres, une articulation est droite
+
+
+def ruptures_de_cascade():
+    """Combien d'articulations plient A CONTRESENS de leur doigt, en tout.
+
+    Rend un compte, pas un booleen : une pose avec une seule rupture est
+    moins fausse qu'une pose qui en a trois, et le classement doit pouvoir
+    les departager une fois le critere obligatoire franchi.
+    """
+    total, detail = 0, {}
+    for _d in NOMS4 + ["thumb"]:
+        _fx = []
+        for _sf in ("01", "02", "03"):
+            _n = f"CTRL_{_d}_{_sf}{SIDE}"
+            if _n not in rig.pose.bones:
+                continue
+            _fx.append(math.degrees(
+                rig.pose.bones[_n].matrix_basis.to_euler("XYZ").x))
+        _sg = {(1 if f > CASCADE_TOLERANCE_DEG else
+                -1 if f < -CASCADE_TOLERANCE_DEG else 0) for f in _fx} - {0}
+        if len(_sg) > 1:
+            # le sens minoritaire est celui qui rompt la cascade
+            _pos = sum(1 for f in _fx if f > CASCADE_TOLERANCE_DEG)
+            _neg = sum(1 for f in _fx if f < -CASCADE_TOLERANCE_DEG)
+            _n_rompues = min(_pos, _neg)
+            total += _n_rompues
+            detail[_d] = {"flexions_deg": [round(f, 1) for f in _fx],
+                          "articulations_a_contresens": _n_rompues}
+    return total, detail
+
+
 def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
     """axes : liste de (« prop », nom, lo, hi) ou (« os », (nom, axe), lo, hi)."""
     def evaluer(vec):
@@ -2662,14 +2719,21 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
         # pose qui les respecte tous, quel que soit son avantage ailleurs : les
         # termes continus ne servent plus qu'à guider vers eux et à départager
         # entre poses également acceptables.
+        # La cascade est OBLIGATOIRE au meme titre que le reste : une main dont
+        # un doigt plie en Z n'est pas une main, quelle que soit la qualite du
+        # contact qu'elle obtient.
+        _rompues, _detail_casc = ruptures_de_cascade()
+        m["ruptures_de_cascade"] = _rompues
         _violes = ((1 if inter + m["penetration"] > 0 else 0)
                    + (1 if m["distance_mm"] > SEUIL_CONTACT_MM else 0)
                    + (1 if m["face_local"] > SEUIL_FACE else 0)
+                   + (1 if _rompues else 0)
                    + (1 if (ANNEAU_EXIGE[0]
                             and m.get("ouverture_anneau_mm", 0.0)
                             < ANNEAU_EXIGE[0]) else 0))
         sc = (_violes * BARRIERE[0]
               + (inter + m["penetration"]) * BARRIERE[0]
+              + _rompues * BARRIERE[0]
               + _d_eff * 300.0
               + max(0.0, m["distance_mm"] - SEUIL_CONTACT_MM) * 9000.0
               + (m["face_local"] + 1.0) * 2500.0
@@ -3388,6 +3452,13 @@ for _nom_c, _a, _b, _axes, _fond in (
            {"dans_les_pulpes": _m["penetration"],
             "dans_la_main_entiere": _m.get("intersection_des_doigts")},
            "0 sommet, pulpes ET main entière")
+    # ═══ ET LA FORME, PAS SEULEMENT LES DISTANCES ═══
+    # Trois criteres verts sur une main dont un doigt plie en accordeon, c'est
+    # trois criteres qui ne regardent pas la main. Celui-ci regarde la forme.
+    _rc, _dc = ruptures_de_cascade()
+    exiger(f"{_nom_c} · les doigts plient en cascade",
+           _rc == 0, _dc or 0,
+           "aucune articulation a contresens de son doigt")
 
 # `focus=ok` et `focus=pinky` s'arrêtent ici — après avoir cherché LEUR
 # contact, et pas celui du voisin.
