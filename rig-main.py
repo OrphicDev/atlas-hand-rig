@@ -72,6 +72,7 @@ import mesures_paume                # noqa: E402
 import correctifs                   # noqa: E402
 sys.path.insert(0, os.path.join(RACINE, "outils"))
 import anneau                       # noqa: E402
+import transitions                  # noqa: E402
 import eclairage                    # noqa: E402
 
 portillon.exiger("humain-rig-main")
@@ -3935,6 +3936,79 @@ for nom_pose, reglages, os_pose in POSES:
     rig.animation_data.action = _anc
     _bibliotheque.append(nom_pose)
 regler()
+
+# ═══════════════════════════════════════════════════════════════════
+#   LES VRAIES ACTIONS DE TRANSITION (§11)
+# ═══════════════════════════════════════════════════════════════════
+# ═══ UNE DROITE ENTRE DEUX ÉTATS PROPRES PASSE À TRAVERS LA CHAIR ═══
+#
+# Le vérificateur et le playblast RECALCULENT la transition — la pose cible
+# multipliée par la fraction. Ils mesurent donc un mouvement que personne
+# n'anime, et un contournement leur est invisible par construction.
+#
+# Mesuré, et c'est la démonstration : `Neutral→Hand_Fist` a ses DEUX extrémités
+# propres et traverse l'index à t = 0,8. Le pouce d'un poing passe PAR
+# L'EXTÉRIEUR ; l'interpolation linéaire, elle, coupe le coin et le fait passer
+# à travers. Aucun nettoyage de pose ne peut corriger ça, parce que le défaut
+# n'est ni au départ ni à l'arrivée.
+#
+# L'ordre des événements du cahier est : dégager, creuser, contourner,
+# contacter, comprimer.
+# Les repères que le module EXIGE : il ne suppose ni axe ni signe, il les
+# reçoit MESURÉS. C'est la même discipline que partout ailleurs ici — sur la
+# main droite ces quatre valeurs changent, et un module qui les devinerait
+# produirait une transition inversée sans le moindre message.
+_REPERES = transitions.Reperes(
+    side=SIDE, axe_flexion=AXE_FLEXION, axe_ecart=AXE_ECART,
+    signe_flexion=SIGNE, signe_ecart=SIGNE_ECART,
+    canaux=[p[0] for p in PROPS])
+_POSES_ACT = {n: (pr, o) for n, pr, o in POSES}
+_actions_transition, _omissions_totales = [], {}
+for _cible in _TRANSITIONS:
+    if _cible not in _POSES_ACT:
+        continue
+    _pr_c, _os_c = _POSES_ACT[_cible]
+    try:
+        _etapes, _omis = transitions.scenario(_cible, _REPERES, _pr_c, _os_c)
+        _act_t = transitions.construire_action(rig, SIDE, _cible, _etapes,
+                                               remplacer=True)
+        _act_t.use_fake_user = True
+        _actions_transition.append(_act_t.name)
+        if _omis:
+            _omissions_totales[_cible] = _omis
+    except Exception as _e:                                   # noqa: BLE001
+        # On publie l'échec au lieu de l'avaler : une transition manquante doit
+        # se lire dans le rapport, pas se deviner à l'absence d'un nom.
+        print(f"ATLAS_TRANSITION_ACTION_ECHEC {_cible} : {_e}")
+        _omissions_totales[_cible] = f"ÉCHEC : {_e}"
+regler()
+dire("actions_de_transition", {
+    "creees": _actions_transition,
+    "attendues": list(_TRANSITIONS),
+    "omissions": _omissions_totales or "aucune",
+    "regle": "de vraies clés intermédiaires, pas une interpolation recalculée"})
+exiger("les six actions de transition existent",
+       len(_actions_transition) == len(_TRANSITIONS),
+       f"{len(_actions_transition)} sur {len(_TRANSITIONS)}",
+       "six actions Neutral_to_*")
+
+# ═══ ET ON LES MESURE SUR LEURS PROPRES IMAGES ═══
+# Construire une courbe qui contourne ne sert à rien si on continue de juger
+# une droite recalculée. On rejoue chaque image de chaque action.
+_fautes_reelles = {}
+for _nom_a in _actions_transition:
+    _act = bpy.data.actions[_nom_a]
+    _f = {}
+    for _img in range(1, transitions.IMAGES_TUTO + 1):
+        transitions.rejouer(rig, SIDE, _act, _img)
+        _it = intersections(f"{_nom_a}@{_img}")
+        if _it:
+            _f[str(_img)] = _it
+    _fautes_reelles[_nom_a] = _f or "aucune"
+    exiger(f"{_nom_a} · aucune auto-intersection sur ses 25 images",
+           not _f, _f or "aucune", "aucune à chaque image")
+regler()
+dire("transitions_reelles", _fautes_reelles)
 
 # Livraison : seuls les contrôleurs sont visibles ; rien n'est supprimé.
 try:
