@@ -1,5 +1,68 @@
 # CHANGELOG
 
+## chat 3 — les instruments d'abord, et ce qu'ils ont revele
+
+**Toujours NON-VALIDE.** Des criteres obligatoires restent faux, nommes dans
+[`STATUS.md`](STATUS.md).
+
+### Le fait central
+
+Le verificateur de ce depot jugeait `RIG_Hand.L-NON-VALIDE.blend` « 22 reussis,
+9 echoues ». Le verificateur ETENDU rend cinq echecs de plus sur le MEME
+fichier : la paume s'aplatit de 10,83 mm au lieu de se creuser, elle s'elargit
+de 14,04, le poing ne ferme qu'a 0,55.
+
+**Le rig n'etait pas moins casse avant. L'instrument ne regardait pas.**
+
+### Ce qui est repare, et mesure
+
+| | avant | apres |
+| --- | --- | --- |
+| `Cup` voute la paume | arc −10,89 mm | **+6,71 mm** |
+| `Cup` resserre la paume | largeur +14,04 mm | **−10,79 mm** |
+| le cerclage rouge de Sacha | −0,88 mm | **−4,94 mm** |
+| poids sans proprietaire | 12 329 ambigus | **0 entre rayons non voisins** |
+| os correctifs | inexistants | crees, repos deplace de **0,00013 mm** |
+| rendus de preuve | relief local 0,009–0,015 | **0,041–0,049**, 0 image fautive sur 78 |
+| la generation | plantait en code 1 | **va au bout** |
+
+`Cup` passe ses **sept criteres**, dont deux qui n'existaient pas : le
+resserrement ne repart jamais en arriere, et la voute ne s'effondre jamais en
+chemin. Ce sont eux qui auraient attrape le pouce-auriculaire qui se rapprochait
+jusqu'a `Cup = 0,5` puis reculait.
+
+### Les deux axes du creusement, elus par la mesure
+
+    voute        axe 0, signe −1     ← CUP employait le sens OPPOSE
+    convergence  axe 2, signe −1     ← n'etait pilote par RIEN
+
+Puis l'amplitude cherchee sous contrainte de proprete, et la descente est
+monotone : 16 119 → 14 006 → 9 258 → 3 016 → 319 → 4 → **0** traversees.
+
+### Les instruments ajoutes
+
+Onze outils et modules, **51 refus** exerces par les autotests hors Blender.
+Trois modules ont ete ecrits par agents PUIS REFUTES par un second agent : onze
+defauts reels trouves, dont une garde placee APRES une normalisation donc
+aveugle par construction, et une contre-epreuve qui testait IEEE 754 au lieu du
+module.
+
+### Ce qui resiste, sans arrondi
+
+- `Hand_Pinky_Thumb` : la pose EXISTE (0,10 mm a l'approche), le nettoyage ne la
+  tient pas ;
+- `Hand_OK` : l'anneau et le contact sont ANTAGONISTES. L'etape A rend 0,81 mm
+  et −0,699 — un excellent contact — avec **aucun anneau** ;
+- le poing : les quatre doigts SEULS se traversent 820 fois a `Fist = 0,7` ;
+- la main droite n'existe pas : le cahier exige une gauche validee.
+
+### Douze pieges payes
+
+Ils sont en tete du [`README`](README.md). Aucun n'aurait plante bruyamment, et
+c'est pour cela qu'ils ont coute des heures.
+
+---
+
 ## hands/chat-2-photoreal-v2 — sept causes, et le plantage qui cachait tout
 
 Base : `e2d4b1c9e05949531d9348d68367c225b2169872`
