@@ -1,0 +1,593 @@
+{
+  "cote": "gauche",
+  "side": ".L",
+  "audit_maillage": {
+    "objet": "GEO_Hand.L",
+    "sauvegarde": "GEO_Hand_BACKUP.L",
+    "echelle": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "rotation_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sommets_avant": 54019,
+    "sommets_apres": 54019,
+    "doublons_soudes": 0,
+    "aretes_non_manifold": 170,
+    "note_non_manifold": "le bord de coupe du moignon en fait partie"
+  },
+  "audit_articulations": {
+    "boucles_par_articulation": {
+      "index_MCP": 15,
+      "index_PIP": 15,
+      "index_DIP": 15,
+      "middle_MCP": 15,
+      "middle_PIP": 15,
+      "middle_DIP": 15,
+      "ring_MCP": 15,
+      "ring_PIP": 15,
+      "ring_DIP": 15,
+      "pinky_MCP": 15,
+      "pinky_PIP": 15,
+      "pinky_DIP": 14,
+      "thumb_MCP": 15,
+      "thumb_IP": 15
+    },
+    "sous_le_minimum_de_3": {}
+  },
+  "squelette_deformation": {
+    "os_de_la_main": "DEF_hand.L",
+    "longueur_paume_mm": 56.0,
+    "chaines": {
+      "index": [
+        "DEF_index_meta.L",
+        "DEF_index_01.L",
+        "DEF_index_02.L",
+        "DEF_index_03.L"
+      ],
+      "middle": [
+        "DEF_middle_meta.L",
+        "DEF_middle_01.L",
+        "DEF_middle_02.L",
+        "DEF_middle_03.L"
+      ],
+      "ring": [
+        "DEF_ring_meta.L",
+        "DEF_ring_01.L",
+        "DEF_ring_02.L",
+        "DEF_ring_03.L"
+      ],
+      "pinky": [
+        "DEF_pinky_meta.L",
+        "DEF_pinky_01.L",
+        "DEF_pinky_02.L",
+        "DEF_pinky_03.L"
+      ],
+      "thumb": [
+        "DEF_thumb_meta.L",
+        "DEF_thumb_01.L",
+        "DEF_thumb_02.L"
+      ]
+    },
+    "nombre_os_def": 20
+  },
+  "sens_de_flexion": {
+    "distance_moyenne_bout_paume_a_+30_mm": 100.3,
+    "distance_moyenne_bout_paume_a_-30_mm": 125.6,
+    "sens_retenu": 30.0,
+    "regle": "fléchir vers la paume rapproche le bout du centre de la paume"
+  },
+  "test_bone_roll": {
+    "par_doigt": {
+      "index": {
+        "rapprochement_mm": 27.0,
+        "axe_de_flexion_contre_travers": -0.997,
+        "course_mm": 63.6
+      },
+      "middle": {
+        "rapprochement_mm": 31.9,
+        "axe_de_flexion_contre_travers": -1.0,
+        "course_mm": 71.8
+      },
+      "ring": {
+        "rapprochement_mm": 34.6,
+        "axe_de_flexion_contre_travers": -0.986,
+        "course_mm": 65.9
+      },
+      "pinky": {
+        "rapprochement_mm": 23.7,
+        "axe_de_flexion_contre_travers": -0.888,
+        "course_mm": 52.2
+      },
+      "thumb": {
+        "rapprochement_mm": 19.5,
+        "axe_de_flexion_contre_travers": 0.742,
+        "course_mm": 34.1
+      }
+    },
+    "sens_des_quatre_doigts": [
+      [
+        "index",
+        -1
+      ],
+      [
+        "middle",
+        -1
+      ],
+      [
+        "ring",
+        -1
+      ],
+      [
+        "pinky",
+        -1
+      ]
+    ],
+    "fautes": []
+  },
+  "sens_de_l_ecartement": {
+    "eventail_au_repos_mm": {
+      "index/middle": 16.59,
+      "middle/ring": 15.75,
+      "ring/pinky": 30.68
+    },
+    "eventail_a_plus_ECART_mm": {
+      "index/middle": 5.76,
+      "middle/ring": 7.53,
+      "ring/pinky": 24.69
+    },
+    "eventail_a_moins_ECART_mm": {
+      "index/middle": 27.45,
+      "middle/ring": 23.73,
+      "ring/pinky": 36.27
+    },
+    "signe_retenu": -1.0,
+    "gain_du_sens_retenu_mm": {
+      "index/middle": 10.85,
+      "middle/ring": 7.98,
+      "ring/pinky": 5.59
+    },
+    "regle": "écarter doit AUGMENTER l'écart entre bouts de doigts voisins"
+  },
+  "sens_de_la_divergence": {
+    "eventail_a_plus_DIVERGENCE_mm": {
+      "index/middle": 8.52,
+      "middle/ring": 7.63,
+      "ring/pinky": 24.02
+    },
+    "eventail_a_moins_DIVERGENCE_mm": {
+      "index/middle": 24.51,
+      "middle/ring": 23.87,
+      "ring/pinky": 37.07
+    },
+    "signe_retenu": -1.0,
+    "gain_du_sens_retenu_mm": {
+      "index/middle": 7.91,
+      "middle/ring": 8.11,
+      "ring/pinky": 6.39
+    },
+    "regle": "diverger en fermant doit ÉCARTER les bouts de doigts voisins"
+  },
+  "cup_axes_elus": {
+    "reference": {
+      "arc_mm": 29.98,
+      "largeur_mm": 71.99,
+      "pouce_auriculaire_mm": 102.27
+    },
+    "voute": {
+      "axe": 0,
+      "signe": -1.0,
+      "amplitude_deg": 24.0,
+      "gain_arc_mm": 21.01
+    },
+    "convergence": {
+      "axe": 2,
+      "signe": -1.0,
+      "amplitude_deg": 24.0,
+      "gain_largeur_mm": -39.5,
+      "gain_pouce_auriculaire_mm": -31.54
+    },
+    "regle": "voûter = augmenter la flèche ; resserrer = diminuer la largeur"
+  },
+  "phase_d": {
+    "os_ctrl": 21,
+    "os_mch": 19,
+    "os_def": 20,
+    "proprietes": [
+      "Fist",
+      "Index_Curl",
+      "Middle_Curl",
+      "Ring_Curl",
+      "Pinky_Curl",
+      "Thumb_Curl",
+      "Thumb_Opposition",
+      "Spread",
+      "Cup",
+      "Relax",
+      "PSD_PinkyThumb",
+      "PSD_OK"
+    ],
+    "melange_des_rotations": "ADD",
+    "signe_de_flexion": 1.0,
+    "axe_flexion_euler": 0,
+    "axe_ecartement_euler": 2
+  },
+  "phase_e": {
+    "contraintes_de_butee": 38,
+    "mcp_deg": [
+      -20.0,
+      90.0
+    ],
+    "pip_deg": [
+      -0.0,
+      110.0
+    ],
+    "dip_deg": [
+      -10.0,
+      80.0
+    ],
+    "pouce_mcp_deg": [
+      -0.0,
+      60.0
+    ],
+    "pouce_ip_deg": [
+      -0.0,
+      80.0
+    ],
+    "ecartement_max_deg": 15.0
+  },
+  "phase_f": {
+    "sommets_contamines_entre_phalanges": 3620,
+    "sommets_melangeant_deux_metacarpiens": 22085,
+    "note_paume": "le mélange entre métacarpiens voisins est demandé par la règle 7 du tutoriel : la paume est une chair continue",
+    "sommets_dont_la_somme_des_poids_n_est_pas_1": 0,
+    "morceaux_par_doigt": {
+      "index": {
+        "morceaux": 1,
+        "plus_gros": 9743
+      },
+      "middle": {
+        "morceaux": 1,
+        "plus_gros": 7916
+      },
+      "ring": {
+        "morceaux": 1,
+        "plus_gros": 7695
+      },
+      "pinky": {
+        "morceaux": 1,
+        "plus_gros": 10632
+      },
+      "thumb": {
+        "morceaux": 1,
+        "plus_gros": 7974
+      }
+    },
+    "groupes": 20
+  },
+  "repeinture_palmaire": {
+    "ambigus_avant": 12329,
+    "repeints": 10254,
+    "elagues_rayons_eloignes": 4095,
+    "ambigus_apres": 873,
+    "dont_entre_rayons_VOISINS": 873,
+    "dont_entre_rayons_NON_VOISINS": 0,
+    "exemples_non_voisins": [],
+    "noyaux": {
+      "DEF_index_meta.L": 5175,
+      "DEF_middle_meta.L": 1712,
+      "DEF_ring_meta.L": 1294,
+      "DEF_pinky_meta.L": 6278,
+      "DEF_thumb_meta.L": 3875
+    },
+    "regle": "chaque masse palmaire appartient au métacarpien dont elle est la plus proche EN SUIVANT LA SURFACE ; le mélange entre rayons VOISINS est légitime, entre rayons éloignés jamais"
+  },
+  "phase_f_correction": {
+    "sommets_corriges": 2879,
+    "contamination_restante": 741,
+    "chair_encore_d_un_seul_tenant": {
+      "index": 1,
+      "middle": 1,
+      "ring": 1,
+      "pinky": 1,
+      "thumb": 1
+    }
+  },
+  "os_correctifs": {
+    "thenar": {
+      "sommets": 3253,
+      "centre_mm": [
+        -387.1,
+        -113.6,
+        882.4
+      ]
+    },
+    "index_root": {
+      "sommets": 3230,
+      "centre_mm": [
+        -412.1,
+        -112.4,
+        901.5
+      ]
+    },
+    "deplacement_du_repos_mm": 0.00014,
+    "regle": "les poids sont TRANSFÉRÉS depuis le parent, jamais ajoutés"
+  },
+  "preserve_volume": {
+    "sans": {
+      "intersections": 14798,
+      "compression_min": 0.0976,
+      "compression_p1": 0.2652,
+      "aretes_mesurees": 348384
+    },
+    "avec": {
+      "intersections": 14703,
+      "compression_min": 0.0147,
+      "compression_p1": 0.1389,
+      "aretes_mesurees": 348384
+    },
+    "retenu": false,
+    "grandeurs_qui_regressent_avec": [
+      "compression_min",
+      "compression_p1"
+    ],
+    "regle": "on garde la conservation de volume SAUF si une grandeur stricte régresse ; sur ce maillage les quaternions duaux pincent plus qu'ils ne préservent",
+    "gele": "ne plus toucher après création des shape keys"
+  },
+  "cup_amplitude_cherchee": {
+    "recherche": {
+      "1.0": {
+        "intersections": 18327,
+        "gain_arc_mm": 43.88,
+        "gain_largeur_mm": -20.61
+      },
+      "0.85": {
+        "intersections": 15089,
+        "gain_arc_mm": 29.29,
+        "gain_largeur_mm": -21.07
+      },
+      "0.7": {
+        "intersections": 10099,
+        "gain_arc_mm": 19.52,
+        "gain_largeur_mm": -20.0
+      },
+      "0.55": {
+        "intersections": 3345,
+        "gain_arc_mm": 13.69,
+        "gain_largeur_mm": -17.5
+      },
+      "0.45": {
+        "intersections": 387,
+        "gain_arc_mm": 10.61,
+        "gain_largeur_mm": -15.15
+      },
+      "0.35": {
+        "intersections": 3,
+        "gain_arc_mm": 7.9,
+        "gain_largeur_mm": -12.34
+      },
+      "0.3": {
+        "intersections": 0,
+        "gain_arc_mm": 6.71,
+        "gain_largeur_mm": -10.79
+      }
+    },
+    "echelle_retenue": 0.3,
+    "voute_deg_effectif": 7.2,
+    "convergence_deg_effectif": 7.2,
+    "regle": "la plus GRANDE amplitude qui ne fait se traverser la paume à aucun des 21 pas"
+  },
+  "balayage_cup": {
+    "pas": [
+      {
+        "cup": 0.0,
+        "arc_mm": 29.98,
+        "largeur_mm": 71.99,
+        "pouce_auriculaire_mm": 102.27,
+        "intersections": 0
+      },
+      {
+        "cup": 0.05,
+        "arc_mm": 30.3,
+        "largeur_mm": 71.41,
+        "pouce_auriculaire_mm": 102.0,
+        "intersections": 0
+      },
+      {
+        "cup": 0.1,
+        "arc_mm": 30.63,
+        "largeur_mm": 70.83,
+        "pouce_auriculaire_mm": 101.73,
+        "intersections": 0
+      },
+      {
+        "cup": 0.15,
+        "arc_mm": 30.95,
+        "largeur_mm": 70.25,
+        "pouce_auriculaire_mm": 101.46,
+        "intersections": 0
+      },
+      {
+        "cup": 0.2,
+        "arc_mm": 31.28,
+        "largeur_mm": 69.68,
+        "pouce_auriculaire_mm": 101.19,
+        "intersections": 0
+      },
+      {
+        "cup": 0.25,
+        "arc_mm": 31.6,
+        "largeur_mm": 69.11,
+        "pouce_auriculaire_mm": 100.93,
+        "intersections": 0
+      },
+      {
+        "cup": 0.3,
+        "arc_mm": 31.93,
+        "largeur_mm": 68.54,
+        "pouce_auriculaire_mm": 100.67,
+        "intersections": 0
+      },
+      {
+        "cup": 0.35,
+        "arc_mm": 32.26,
+        "largeur_mm": 67.98,
+        "pouce_auriculaire_mm": 100.41,
+        "intersections": 0
+      },
+      {
+        "cup": 0.4,
+        "arc_mm": 32.59,
+        "largeur_mm": 67.43,
+        "pouce_auriculaire_mm": 100.16,
+        "intersections": 0
+      },
+      {
+        "cup": 0.45,
+        "arc_mm": 32.92,
+        "largeur_mm": 66.88,
+        "pouce_auriculaire_mm": 99.91,
+        "intersections": 0
+      },
+      {
+        "cup": 0.5,
+        "arc_mm": 33.25,
+        "largeur_mm": 66.33,
+        "pouce_auriculaire_mm": 99.66,
+        "intersections": 0
+      },
+      {
+        "cup": 0.55,
+        "arc_mm": 33.59,
+        "largeur_mm": 65.79,
+        "pouce_auriculaire_mm": 99.41,
+        "intersections": 0
+      },
+      {
+        "cup": 0.6,
+        "arc_mm": 33.92,
+        "largeur_mm": 65.25,
+        "pouce_auriculaire_mm": 99.17,
+        "intersections": 0
+      },
+      {
+        "cup": 0.65,
+        "arc_mm": 34.26,
+        "largeur_mm": 64.72,
+        "pouce_auriculaire_mm": 98.93,
+        "intersections": 0
+      },
+      {
+        "cup": 0.7,
+        "arc_mm": 34.6,
+        "largeur_mm": 64.2,
+        "pouce_auriculaire_mm": 98.69,
+        "intersections": 0
+      },
+      {
+        "cup": 0.75,
+        "arc_mm": 34.95,
+        "largeur_mm": 63.68,
+        "pouce_auriculaire_mm": 98.45,
+        "intersections": 0
+      },
+      {
+        "cup": 0.8,
+        "arc_mm": 35.29,
+        "largeur_mm": 63.17,
+        "pouce_auriculaire_mm": 98.22,
+        "intersections": 0
+      },
+      {
+        "cup": 0.85,
+        "arc_mm": 35.64,
+        "largeur_mm": 62.67,
+        "pouce_auriculaire_mm": 98.0,
+        "intersections": 0
+      },
+      {
+        "cup": 0.9,
+        "arc_mm": 35.99,
+        "largeur_mm": 62.17,
+        "pouce_auriculaire_mm": 97.77,
+        "intersections": 0
+      },
+      {
+        "cup": 0.95,
+        "arc_mm": 36.34,
+        "largeur_mm": 61.68,
+        "pouce_auriculaire_mm": 97.55,
+        "intersections": 0
+      },
+      {
+        "cup": 1.0,
+        "arc_mm": 36.69,
+        "largeur_mm": 61.2,
+        "pouce_auriculaire_mm": 97.33,
+        "intersections": 0
+      }
+    ],
+    "gain_arc_mm": 6.71,
+    "gain_largeur_mm": -10.79,
+    "gain_pouce_auriculaire_mm": -4.94,
+    "pire_recul_de_largeur_mm": -0.48,
+    "pire_recul_de_fleche_mm": -0.32,
+    "intersections_totales": 0,
+    "retour_au_repos_mm": 0.0
+  },
+  "retour_au_repos": {
+    "ecart_max_mm": 0.0,
+    "course_du_poing_mm": 121.5,
+    "verdict": "exact"
+  },
+  "empreintes": {
+    "thumb": {
+      "sommets": 760,
+      "part_de_la_phalange": 0.33
+    },
+    "index": {
+      "sommets": 743,
+      "part_de_la_phalange": 0.31
+    },
+    "pinky": {
+      "sommets": 637,
+      "part_de_la_phalange": 0.29
+    }
+  },
+  "opposition_mesuree": {
+    "angles_du_metacarpien_deg": [
+      50.0,
+      48.1,
+      0.0
+    ],
+    "ecart_des_empreintes_mm": 0.99,
+    "se_font_face": -0.98,
+    "creusement": 0.6,
+    "repli_auriculaire": 0.4,
+    "ce_que_j_avais_suppose_deg": [
+      40.0,
+      -55.0,
+      22.0
+    ]
+  },
+  "vrille_mcp_lue": {
+    "course_max_mm_a_10_deg": {
+      "CTRL_pinky_01.L": 1.876,
+      "CTRL_thumb_01.L": 2.427,
+      "CTRL_index_01.L": 2.724
+    },
+    "borne_deg": 10.0
+  },
+  "contact_Hand_Pinky_Thumb": {
+    "entre": "pinky et thumb",
+    "distance_mm": 0.94,
+    "orientation_locale": -0.732,
+    "sommets_du_patch": 106,
+    "sommets_a_moins_de_1_5_mm": 3,
+    "penetration": 0
+  }
+}

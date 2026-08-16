@@ -52,3 +52,39 @@ ATLAS_BATTEMENT pinky/thumb tour 2/10 score=161782.9 distance=1.13mm traversées
 ATLAS_BATTEMENT pinky/thumb tour 3/10 score=145066.5 distance=1.28mm traversées=2360
 ATLAS_BATTEMENT pinky/thumb tour 4/10 score=145066.5 distance=1.28mm traversées=2360 (pas resserré)
 ATLAS_BATTEMENT pinky/thumb tour 5/10 score=138586.3 distance=0.94mm traversées=2293
+ATLAS_BATTEMENT pinky/thumb tour 6/10 score=109966.2 distance=0.94mm traversées=1816
+ATLAS_BATTEMENT pinky/thumb tour 7/10 score=106786.1 distance=0.94mm traversées=1763
+ATLAS_BATTEMENT pinky/thumb tour 8/10 score=96466.1 distance=0.94mm traversées=1591
+ATLAS_BATTEMENT pinky/thumb tour 9/10 score=82966.1 distance=0.94mm traversées=1366
+ATLAS_BATTEMENT pinky/thumb tour 10/10 score=80566.1 distance=0.94mm traversées=1326
+ATLAS_OU_CA_TRAVERSE_APPROCHE pinky/thumb {"DEF_middle_03.L → DEF_thumb_meta.L": 400, "DEF_pinky_meta.L → DEF_thumb_meta.L": 110, "DEF_thumb_meta.L → DEF_pinky_meta.L": 90, "DEF_thumb_02.L → DEF_pinky_02.L": 88, "DEF_pinky_02.L → DEF_thumb_02.L": 83, "DEF_middle_03.L → DEF_index_meta.L": 80, "DEF_thumb_02.L → DEF_pinky_meta.L": 73, "DEF_middle_meta.L → DEF_thumb_meta.L": 63, "DEF_pinky_03.L → DEF_ring_meta.L": 51, "DEF_thumb_meta.L → DEF_index_meta.L": 41, "DEF_index_meta.L → DEF_thumb_meta.L": 41, "DEF_thumb_meta.L → DEF_hand.L": 36, "DEF_index_meta.L → DEF_middle_meta.L": 33, "DEF_index_01.L → DEF_middle_meta.L": 27, "DEF_index_02.L → DEF_thumb_meta.L": 23, "DEF_middle_meta.L → DEF_index_meta.L": 18, "DEF_pinky_meta.L → DEF_thumb_02.L": 17, "DEF_thumb_02.L → DEF_pinky_03.L": 14, "DEF_thumb_meta.L → DEF_middle_meta.L": 13, "DEF_pinky_03.L → DEF_thumb_02.L": 9, "DEF_index_meta.L → DEF_hand.L": 8, "DEF_index_03.L → DEF_thumb_meta.L": 3, "DEF_ring_01.L → DEF_pinky_meta.L": 3, "DEF_middle_01.L → DEF_index_01.L": 2}
+ATLAS_BATTEMENT pinky/thumb tour 1/18 score=15158748.4 distance=15.73mm traversées=748
+ATLAS_BATTEMENT pinky/thumb tour 2/18 score=11498120.4 distance=13.32mm traversées=566
+ATLAS_BATTEMENT pinky/thumb tour 3/18 score=11290580.3 distance=12.55mm traversées=556
+ATLAS_BATTEMENT pinky/thumb tour 4/18 score=11230580.3 distance=12.55mm traversées=553
+ATLAS_BATTEMENT pinky/thumb tour 5/18 score=11230580.3 distance=12.55mm traversées=553 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 6/18 score=11109179.6 distance=12.39mm traversées=547
+ATLAS_BATTEMENT pinky/thumb tour 7/18 score=10490009.2 distance=12.44mm traversées=516
+ATLAS_BATTEMENT pinky/thumb tour 8/18 score=10319702.0 distance=11.33mm traversées=508
+ATLAS_BATTEMENT pinky/thumb tour 9/18 score=10319701.3 distance=11.33mm traversées=508
+ATLAS_BATTEMENT pinky/thumb tour 10/18 score=10319701.3 distance=11.33mm traversées=508 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 11/18 score=10015781.8 distance=10.91mm traversées=493
+ATLAS_BATTEMENT pinky/thumb tour 12/18 score=9975781.7 distance=10.91mm traversées=491
+ATLAS_BATTEMENT pinky/thumb tour 13/18 score=9975781.7 distance=10.91mm traversées=491 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 14/18 score=9875781.7 distance=10.91mm traversées=486
+ATLAS_BATTEMENT pinky/thumb tour 15/18 score=9875781.7 distance=10.91mm traversées=486 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 16/18 score=9874940.0 distance=10.81mm traversées=486
+ATLAS_BATTEMENT pinky/thumb tour 17/18 score=9874940.0 distance=10.81mm traversées=486 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 18/18 score=9854541.1 distance=10.77mm traversées=485
+ATLAS_DEUX_TEMPS {"contact": "pinky/thumb", "apres_approche_mm": 0.94, "traversees_apres_approche": 1326, "apres_nettoyage_mm": 10.77, "traversees_apres_nettoyage": 485, "axes_de_degagement": 1}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE pinky/thumb {"DEF_index_meta.L → DEF_thumb_meta.L": 87, "DEF_thumb_meta.L → DEF_pinky_meta.L": 60, "DEF_thumb_meta.L → DEF_hand.L": 56, "DEF_pinky_meta.L → DEF_thumb_meta.L": 50, "DEF_middle_03.L → DEF_index_meta.L": 50, "DEF_thumb_meta.L → DEF_index_meta.L": 42, "DEF_index_02.L → DEF_thumb_meta.L": 39, "DEF_index_meta.L → DEF_hand.L": 28, "DEF_index_01.L → DEF_middle_meta.L": 22, "DEF_index_meta.L → DEF_middle_meta.L": 19, "DEF_thumb_meta.L → DEF_index_02.L": 13, "DEF_middle_meta.L → DEF_index_meta.L": 8, "DEF_middle_03.L → DEF_thumb_meta.L": 5, "DEF_middle_01.L → DEF_index_01.L": 3, "DEF_hand.L → DEF_index_meta.L": 3}
+ATLAS_APPROCHE_MEILLEURE {"contact": "pinky/thumb", "approche_mm": 0.94, "nettoyage_mm": 10.77, "retenu": "approche"}
+ATLAS_CONTACT_HAND_PINKY_THUMB {"entre": "pinky et thumb", "distance_mm": 0.94, "orientation_locale": -0.732, "sommets_du_patch": 106, "sommets_a_moins_de_1_5_mm": 3, "penetration": 0}
+ATLAS_CRITERE OK  · Hand_Pinky_Thumb · les pulpes se touchent · mesuré 0.94 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_Pinky_Thumb · les pulpes se font face · mesuré -0.732 · exigé ≤ -0,50
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 1326} · exigé 0 sommet, pulpes ET main entière
+Info: Saved as "WIP-focus-pinky-NON-VALIDE.blend"
+ATLAS_FOCUS_TERMINE pinky → work-pinky/WIP-focus-pinky-NON-VALIDE.blend
+
+1 critère(s) obligatoire(s) en échec.
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:30:33)

@@ -231,7 +231,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 913200f72157af9ac8b94dcb772fb02eae1e69fbe7029077cb8fa1c836e06f6f  ./reports/chat-3/journal-generation-a859527-partiel.txt
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
 913200f72157af9ac8b94dcb772fb02eae1e69fbe7029077cb8fa1c836e06f6f  ./reports/chat-3/journal-generation.txt
-4b81b18fca74ebf54c2698a4275ea17eaf6aec55d24ae800fe1a40c83b6d30d8  ./reports/chat-3/journal-pinky.txt
+fc65cbba656be4020951f96781d7308a3e327d2cf7b29c7efe58bb19a48bcce5  ./reports/chat-3/journal-pinky.txt
 2a8364ed7efd63b58223e081a5409ee921fd3875d82d86a13edeab0187610026  ./reports/chat-3/journal-poing.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
@@ -404,6 +404,8 @@ f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
 3ae86f3e02c478d2d836093668d8e27e84823c566b1736568a2b875a8f38f5ea  ./rig-main.py
 0f70ee328b3a0fc2ee18ae2807b76a3e70feb51b479cbeadf076e8da6c6c4277  ./verifier-rig.py
+bef4201e1c1f473549049f34c71198d0678296aacb7fed36fcfbc1aa5ad02e18  ./work-pinky/WIP-focus-pinky-NON-VALIDE.blend
+ab8d9472d5009fafdfc3943eb61978693c23dc1406c165d75b628a8c6ed54336  ./work-pinky/rapport-focus-pinky.json
 78822c2937e30a8d5d9adcba5c9e01060b6dc0b0920a07df143e68582cfa76f5  ./work-poing/WIP-focus-fist-NON-VALIDE.blend
 bb68dfeed9a5c53bd13a4dfb8ae352ba20e523e27dd201db07a43c512012e50c  ./work-poing/rapport-focus-fist.json
 8b25c1f0e4c6b480d87bd1a13dcafbd19434aaf08fedc737e4732f3c83cc51ce  ./work/chat-3/corr/WIP-focus-cup-NON-VALIDE.blend
