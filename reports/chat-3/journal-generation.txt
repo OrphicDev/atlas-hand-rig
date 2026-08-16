@@ -1139,3 +1139,6 @@ ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 4/9 reste=1678
 ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 5/9 reste=1670
 ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 6/9 reste=1628
 ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 7/9 reste=1628 (pas resserré)
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 8/9 reste=1628 (pas resserré)
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 9/9 reste=1627
+ATLAS_NETTOYAGE Hand_Fist_75 : 1627 sommets traversants

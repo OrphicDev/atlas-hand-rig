@@ -226,12 +226,12 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-0eab091cc07d13fa1ab323c2970865115cd98e37f2aacd7f0d371aebfb15d249  ./reports/chat-3/journal-generation.txt
+280ff4a13b106f2c70e31062f214efd5ed6f22f56acb2b147e49e6e27a98dc1d  ./reports/chat-3/journal-generation.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
 b48430ef17f5e82e95ef299cf973eff87d26f0493b4c7013c09104d66579fe3c  ./reports/chat-3/regression-chat2-vs-chat3.txt
-e80c3d6591dedf36bd9595c1a2067b86dc0cab9e3c04f9d749dd1c43b5ae24ab  ./reports/chat-3/revue-visuelle.md
+a0b95e4b85c63c8eac326c21fd2fa9e5ac4787b659e9c5a55c93315179ff5562  ./reports/chat-3/revue-visuelle.md
 9c7b7ebb2cd6920ac16158b1faf932556f4de7ba6b87d8f1ab2e8baf0496edde  ./reports/chat-3/tableau-regression.txt
 220da7173c581c5b572871c5eb2d370500c7f5176037b70e625b5bac95e69a88  ./reports/chat-3/transitions/LISEZ-MOI.md
 e8e9d4475ddbb8b474da106df4e89da89d432c17006b306d8fde4f63e7d91373  ./reports/chat-3/transitions/Neutral-vers-Hand_Cupped/0001.png

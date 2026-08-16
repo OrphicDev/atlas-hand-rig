@@ -79,3 +79,74 @@ Noter les images de `b17e548` en les présentant comme le travail du chat 3.
 Elles datent d'avant les correctifs, elles montrent un rig dont je sais qu'il
 est faux, et les publier comme preuves reviendrait à ce que ce dépôt a fait au
 chat 1 : appeler « validé » ce que l'instrument ne regardait pas.
+
+---
+
+## Le rig du chat 3 — **5/10**, et voici pourquoi
+
+J'ai maintenant vu les 78 images. Je note.
+
+### La chaine de rendu : sans reproche
+
+| grandeur | resultat |
+| --- | --- |
+| images | 78 — treize poses, six vues |
+| ecretees | **aucune** |
+| ecretage | **0,000 %** sur les 78 |
+| rasance de la key | **75,0 degres** exactement |
+| relief local | **0,041 a 0,049** pour 0,020 exige |
+| images fautives | **0 sur 78** |
+
+Le relief local est **trois fois meilleur** que sur la serie du chat 1
+(0,009-0,015). Les deux directions rasantes ne sont pas un luxe : sur les
+planches, `paume-A` et `paume-B` ne montrent pas les memes plis, parce qu'une
+rasante ne revele que ceux qui lui sont perpendiculaires.
+
+### Le rig : ce que les planches montrent
+
+**`Fist` n'est pas un poing.** C'est le defaut le plus visible et le plus grave.
+Les doigts sont a peine replies. La mesure disait « fermeture retenue 0,6 » ;
+la planche montre une main qui se contente de se courber. Un tableau ne se
+corrige pas, une main qui ne ferme pas, si.
+
+**`OK` n'a pas d'anneau.** Le pouce et l'index se rejoignent sans menager de
+trou. `outils/anneau.py` refusait de rendre un nombre — « le contour projete
+n'enferme aucun vide » — et la planche donne raison a son refus.
+
+**`Open` et `Spread_Min` sont enfin dans le bon sens.** `Open` a les doigts
+ecartes, `Spread_Min` les a serres. Avant le correctif de signe, les deux poses
+portaient le nom de leur contraire. C'est le gain le plus net, et il se lit sans
+mesurer.
+
+**`Point` est juste.** Index tendu, les trois autres replies, le pouce range.
+
+**`Cupped` et `Pinky_Thumb`** restent ambigus a l'oeil sur ces vues : il y
+manque les gros plans et les overlays, qui sont ecrits mais pas encore rendus
+sur ce fichier.
+
+### La note, et sa justification
+
+**5 sur 10.**
+
+- **+3** pour la chaine de rendu : elle est irreprochable et prouvee sur 78
+  images. C'est un acquis qui ne se reperdra pas ;
+- **+1** pour l'ecartement, visible et corrige ;
+- **+1** pour `Point`, `Neutral`, `Relaxed` et les trois `Fist_25/50/75`, qui
+  tiennent ;
+- **−3** parce que le poing, qui est la pose la plus attendue d'une main, n'en
+  est pas un ;
+- **−2** parce que le `OK` n'a pas d'anneau, et qu'un signe OK sans trou n'est
+  pas un signe OK.
+
+Un 5 et pas moins parce que la moitie de ce qui manquait au chat 1 est
+desormais mesurable ET mesuree. Un 5 et pas plus parce que **deux des treize
+poses ne font pas ce que leur nom annonce**, et que c'est exactement le
+reproche que ce depot s'etait deja fait au chat 2 avec `Hand_Open`.
+
+### Ce qu'il faut pour depasser 8
+
+1. un poing qui ferme a `Fist = 1` ;
+2. un `OK` dont le trou se mesure ;
+3. les gros plans a lumiere dure et les overlays rouges avant/apres ;
+4. les six sequences jouant les VRAIES actions, pas la droite de repli ;
+5. la main droite, et la symetrie mesuree.
