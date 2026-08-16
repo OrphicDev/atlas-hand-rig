@@ -293,6 +293,100 @@ for _cible in ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
     exiger(f"transition Neutral→{_cible} · aucune auto-intersection",
            not _fautes, _fautes or "aucune", "aucune à chaque étape")
 
+# ═══════════════════════════════════════════════════════════════════
+#   CE QUE LE VÉRIFICATEUR NE CONTRÔLAIT PAS (§12.1)
+# ═══════════════════════════════════════════════════════════════════
+# Il jugeait les poses et les transitions, et rien d'autre. Or trois des quatre
+# blocages du chat 2 vivaient hors de son regard : le creusement de la paume,
+# la fermeture réelle du poing, et la somme des poids. Un vérificateur qui ne
+# regarde pas là où les défauts sont ne peut que les déclarer absents.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "atelier"))
+try:
+    import mesures_paume
+except Exception as _e:                                   # noqa: BLE001
+    mesures_paume = None
+    print(f"ATLAS_VERIF_SANS_MESURES_PAUME {_e}")
+
+if mesures_paume is not None:
+    # ── Cup : voûte, resserrement, convergence, et la MONOTONIE du trajet ──
+    _dom_v = {i: n for i, n in DOM.items()}
+    _palm = mesures_paume.direction_palmaire(rig, geo, SIDE, _dom_v)
+    _pau = mesures_paume.paume_sans_le_pouce(_dom_v, SIDE)
+
+    def _mesure_cup():
+        _t = mesures_paume.tetes_metacarpiennes(rig, SIDE)
+        _p, _ = evalue()
+        return (mesures_paume.arc_transverse(_p, _t, _palm, _pau),
+                mesures_paume.largeur_paume(_t),
+                mesures_paume.pouce_auriculaire(_t))
+
+    neutre()
+    _cup_pas = []
+    for _k in range(21):
+        _c = _k / 20.0
+        neutre()
+        pbh["Cup"] = _c
+        rig.update_tag()
+        bpy.context.scene.frame_set(bpy.context.scene.frame_current)
+        bpy.context.view_layer.update()
+        _a, _l, _pa = _mesure_cup()
+        _cup_pas.append({"cup": round(_c, 2), "arc_mm": round(_a, 2),
+                         "largeur_mm": round(_l, 2),
+                         "pouce_auriculaire_mm": round(_pa, 2),
+                         "traversees": sum(x["sommets"] for x in traversees())})
+    neutre()
+    _d_arc = _cup_pas[-1]["arc_mm"] - _cup_pas[0]["arc_mm"]
+    _d_lar = _cup_pas[-1]["largeur_mm"] - _cup_pas[0]["largeur_mm"]
+    _d_pa = (_cup_pas[-1]["pouce_auriculaire_mm"]
+             - _cup_pas[0]["pouce_auriculaire_mm"])
+    _recul_l = max(_cup_pas[i + 1]["largeur_mm"] - _cup_pas[i]["largeur_mm"]
+                   for i in range(20))
+    _recul_a = max(_cup_pas[i]["arc_mm"] - _cup_pas[i + 1]["arc_mm"]
+                   for i in range(20))
+    resultat["cup"] = {"pas": _cup_pas, "gain_arc_mm": round(_d_arc, 2),
+                       "gain_largeur_mm": round(_d_lar, 2),
+                       "gain_pouce_auriculaire_mm": round(_d_pa, 2)}
+    exiger("Cup · la paume se voûte", _d_arc >= 6.0,
+           f"{_d_arc:+.2f} mm", "≥ +6 mm")
+    exiger("Cup · la paume se resserre", _d_lar <= -6.0,
+           f"{_d_lar:+.2f} mm", "≤ −6 mm")
+    exiger("Cup · l'auriculaire rejoint le pouce", _d_pa <= -4.0,
+           f"{_d_pa:+.2f} mm", "≤ −4 mm")
+    exiger("Cup · le trajet ne repart jamais en arrière",
+           _recul_l <= 0.5 and _recul_a <= 0.5,
+           f"largeur {_recul_l:+.2f} / flèche {_recul_a:+.2f}", "≤ 0,50 mm")
+    exiger("Cup · aucune auto-intersection sur les 21 pas",
+           sum(p["traversees"] for p in _cup_pas) == 0,
+           sum(p["traversees"] for p in _cup_pas), "0 sommet")
+
+# ── Le poing se ferme-t-il vraiment ? (§12.1) ──
+# `Hand_Fist` peut exister, être propre, et ne fermer qu'à 60 %. Une pose
+# nommée « poing » qui n'en est pas un passait sans un mot.
+if "Hand_Fist" in ACTIONS:
+    appliquer(ACTIONS["Hand_Fist"])
+    _fist = float(pbh["Fist"]) if "Fist" in pbh.keys() else None
+    neutre()
+    resultat["fermeture_du_poing"] = _fist
+    exiger("le poing se ferme complètement", _fist is not None and _fist >= 0.999,
+           _fist if _fist is not None else "propriété absente", "Fist = 1,0")
+
+# ── La somme des poids déformants (§12.1) ──
+_os_def = {pb.name for pb in rig.pose.bones if pb.bone.use_deform}
+_hors, _trop = 0, 0
+for _v in geo.data.vertices:
+    _wd = [g.weight for g in _v.groups
+           if g.group in _ng and _ng[g.group] in _os_def and g.weight > 0.005]
+    if not _wd:
+        continue
+    if abs(sum(_wd) - 1.0) > 0.02:
+        _hors += 1
+    if len(_wd) > 4:
+        _trop += 1
+resultat["poids"] = {"somme_hors_tolerance": _hors, "plus_de_4_influences": _trop}
+exiger("somme des poids déformants à 1,00 ± 0,02", _hors == 0, _hors, "0 sommet")
+exiger("au plus 4 influences de déformation", _trop == 0, _trop, "0 sommet")
+
 # ── les drivers ──
 drv = [d.data_path for d in (rig.animation_data.drivers
                              if rig.animation_data else []) if not d.driver.is_valid]

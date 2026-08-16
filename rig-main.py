@@ -1495,23 +1495,48 @@ else:
     bpy.ops.object.vertex_group_normalize_all(lock_active=False)
     forcer_evaluation(geo)
 
-    # Remesure : le nombre d'ambigus doit CHUTER, sinon la repeinture n'a
-    # rien tranché et prétendrait le contraire.
-    _reste = 0
+    # ═══ JE COMPTAIS LA MAUVAISE CHOSE ═══
+    #
+    # Premier critère : « moins de 35 % d'ambigus restants ». Mesuré,
+    # 12 329 → 5 612, soit 45 % — et il échouait. Sauf que le cahier du chat 1
+    # dit lui-même que « le mélange entre métacarpiens VOISINS est demandé par
+    # la règle 7 : la paume est une chair continue ». Un sommet partagé entre
+    # l'index et le majeur est anatomiquement JUSTE, et mon seuil punissait la
+    # continuité de la chair au lieu de punir le défaut.
+    #
+    # Ce qui est absurde, c'est le sommet partagé entre deux rayons NON
+    # VOISINS — pouce et auriculaire, index et annulaire. Ceux-là ne se
+    # touchent nulle part sur une main, et aucune règle ne les autorise.
+    # C'est cela qu'on compte, et il doit tomber à zéro.
+    _ORDRE = ["thumb", "index", "middle", "ring", "pinky"]
+    _rang = {f"DEF_{n}_meta{SIDE}": i for i, n in enumerate(_ORDRE)}
+    _voisins, _lointains, _reste = 0, [], 0
     _gnom_p = {g.index: g.name for g in geo.vertex_groups}
     for _v in geo.data.vertices:
         _wm = {k: x for k, x in _poids_de(_v).items() if k in _META_PAUME}
-        _tri = sorted(_wm.values(), reverse=True)
-        if len(_tri) >= 2 and _tri[0] - _tri[1] < 0.15:
-            _reste += 1
+        _tri = sorted(_wm.items(), key=lambda kv: -kv[1])
+        if len(_tri) < 2 or _tri[0][1] - _tri[1][1] >= 0.15:
+            continue
+        _reste += 1
+        _ecart_rang = abs(_rang[_tri[0][0]] - _rang[_tri[1][0]])
+        if _ecart_rang <= 1:
+            _voisins += 1
+        else:
+            _lointains.append({"sommet": _v.index,
+                               "entre": f"{_tri[0][0]} / {_tri[1][0]}",
+                               "rangs_ecartes_de": _ecart_rang})
     dire("repeinture_palmaire", {
         "ambigus_avant": len(_ambigus), "repeints": _repeints,
         "ambigus_apres": _reste,
+        "dont_entre_rayons_VOISINS": _voisins,
+        "dont_entre_rayons_NON_VOISINS": len(_lointains),
+        "exemples_non_voisins": _lointains[:8],
         "noyaux": {b: len(v) for b, v in _noyaux.items()},
         "regle": "chaque masse palmaire appartient au métacarpien dont elle est "
-                 "la plus proche EN SUIVANT LA SURFACE, jamais à vol d'oiseau"})
-    exiger("la repeinture tranche vraiment", _reste < len(_ambigus) * 0.35,
-           f"{len(_ambigus)} → {_reste}", "moins de 35 % restants")
+                 "la plus proche EN SUIVANT LA SURFACE ; le mélange entre "
+                 "rayons VOISINS est légitime, entre rayons éloignés jamais"})
+    exiger("aucun sommet partagé entre deux rayons non voisins",
+           not _lointains, len(_lointains), "0 sommet")
 
 
 # ── F.2 · LA CONTAMINATION SE CORRIGE PAR UNE RÈGLE ──
