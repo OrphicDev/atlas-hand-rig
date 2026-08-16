@@ -69,6 +69,9 @@ import articulations as A           # noqa: E402
 import mains                        # noqa: E402
 import portillon                    # noqa: E402
 import mesures_paume                # noqa: E402
+import correctifs                   # noqa: E402
+sys.path.insert(0, os.path.join(RACINE, "outils"))
+import anneau                       # noqa: E402
 import eclairage                    # noqa: E402
 
 portillon.exiger("humain-rig-main")
@@ -1396,6 +1399,121 @@ if _defauts_f:
 print("ATLAS_PHASE_F terminée")
 
 
+# ═══════════════════════════════════════════════════════════════════
+#   F.1bis — REPEINDRE LA PAUME PAR LA GÉODÉSIQUE (§6.3 à 6.6)
+# ═══════════════════════════════════════════════════════════════════
+# ═══ 2 375 SOMMETS SANS PROPRIÉTAIRE, ET LE CRITÈRE NE LES VOYAIT PAS ═══
+#
+# Mesuré par `outils/sonde-poids-main.py` sur le rig livré : 2 375 sommets ont
+# moins de 0,15 d'écart entre leurs DEUX familles dominantes. Le contrôle du
+# dépôt classe par groupe dominant, donc il les range sans hésiter et les
+# déclare sains — c'est le cas « 51 % index / 49 % pouce » que le cahier décrit
+# en préambule de son §6.
+#
+#     46229 · DEF_middle_meta 0,396 vs DEF_index_meta 0,396 · écart 0,000
+#     51465 · DEF_thumb_meta  0,301 vs DEF_pinky_meta  0,301 · écart 0,001
+#     35497 · DEF_hand        0,322 vs DEF_thumb_meta  0,322 · commissure à 92 mm
+#
+# Un sommet partagé à parts égales entre le métacarpien du POUCE et celui de
+# l'AURICULAIRE — les deux bords opposés de la paume — et des dizaines à plus
+# de 90 mm de toute commissure, donc sans la moindre justification anatomique.
+#
+# Tant que la paume ne bougeait presque pas, ça ne se voyait pas. Avec un
+# creusement qui la voûte de 7,3 mm et la resserre de 10,8, la même bouillie
+# écrase la chair à 0,0986 de sa longueur de repos. Le cahier l'ordonne :
+# poids d'abord, correctifs ensuite, jamais l'inverse.
+#
+# On ne repeint pas à l'œil — il n'y a pas d'interface ici. On repeint par la
+# GÉODÉSIQUE, qui est la façon dont la chair est réellement reliée : chaque
+# masse palmaire appartient au métacarpien dont elle est la plus proche EN
+# SUIVANT LA SURFACE. Une distance euclidienne rapprocherait deux peaux qui se
+# font face sans être voisines.
+_META_PAUME = [f"DEF_{_n}_meta{SIDE}" for _n in NOMS4 + ["thumb"]]
+_gr_pau = {g.name: g for g in geo.vertex_groups}
+_gnom_p = {g.index: g.name for g in geo.vertex_groups}
+
+
+def _poids_de(v):
+    return {_gnom_p[g.group]: g.weight for g in v.groups
+            if g.group in _gnom_p and g.weight > 0.005}
+
+
+# Le NOYAU d'un métacarpien : les sommets qu'il tient sans ambiguïté. Ce sont
+# eux les graines, et c'est pour ça qu'on exige un écart FRANC — semer sur un
+# sommet douteux propagerait le doute au lieu de le lever.
+_noyaux, _ambigus = {n: [] for n in _META_PAUME}, []
+for _v in geo.data.vertices:
+    _w = _poids_de(_v)
+    _wm = {k: x for k, x in _w.items() if k in _META_PAUME}
+    if not _wm:
+        continue
+    _tri = sorted(_wm.items(), key=lambda kv: -kv[1])
+    if len(_tri) == 1 or _tri[0][1] - _tri[1][1] >= 0.30:
+        _noyaux[_tri[0][0]].append(_v.index)
+    else:
+        _ambigus.append(_v.index)
+
+_adj = correctifs._adjacence_du_maillage(geo)
+_dist = {}
+for _b, _graines in _noyaux.items():
+    if _graines:
+        _dist[_b] = correctifs._dijkstra_sur_aretes(_adj, _graines, 0.090)
+
+# ═══ UNE SONDE QUI NE PEUT PAS ÉCHOUER NE PROUVE RIEN ═══
+if not _ambigus:
+    print("ATLAS_REPEINTURE aucun sommet ambigu : rien à repeindre")
+elif len(_dist) < 2:
+    raise RuntimeError("moins de deux métacarpiens ont un noyau : la "
+                       "repeinture n'aurait aucun repère pour trancher")
+else:
+    _repeints = 0
+    for _i in _ambigus:
+        _v = geo.data.vertices[_i]
+        _w = _poids_de(_v)
+        _wm = {k: x for k, x in _w.items() if k in _META_PAUME}
+        _somme_meta = sum(_wm.values())
+        # Distances géodésiques du sommet à chaque noyau. Un métacarpien que la
+        # propagation n'atteint pas ne peut pas revendiquer ce sommet.
+        _d = {b: _dd[_i] for b, _dd in _dist.items() if _i in _dd and b in _wm}
+        if len(_d) < 2:
+            continue
+        # Poids ∝ 1/(d + ε)³ : l'exposant TRANCHE au lieu de moyenner. C'est
+        # tout l'objet de l'opération — un sommet à 0,000 d'écart doit sortir
+        # avec un propriétaire, pas avec un demi-propriétaire de plus.
+        _inv = {b: 1.0 / (x + 0.002) ** 3 for b, x in _d.items()}
+        _tot = sum(_inv.values())
+        for _b, _x in _inv.items():
+            _gr_pau[_b].add([_i], _somme_meta * _x / _tot, "REPLACE")
+        # Les métacarpiens non atteints perdent leur revendication.
+        for _b in _wm:
+            if _b not in _inv:
+                _gr_pau[_b].add([_i], 0.0, "REPLACE")
+        _repeints += 1
+    bpy.context.view_layer.objects.active = geo
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.vertex_group_clean(group_select_mode="ALL", limit=0.005)
+    bpy.ops.object.vertex_group_normalize_all(lock_active=False)
+    forcer_evaluation(geo)
+
+    # Remesure : le nombre d'ambigus doit CHUTER, sinon la repeinture n'a
+    # rien tranché et prétendrait le contraire.
+    _reste = 0
+    _gnom_p = {g.index: g.name for g in geo.vertex_groups}
+    for _v in geo.data.vertices:
+        _wm = {k: x for k, x in _poids_de(_v).items() if k in _META_PAUME}
+        _tri = sorted(_wm.values(), reverse=True)
+        if len(_tri) >= 2 and _tri[0] - _tri[1] < 0.15:
+            _reste += 1
+    dire("repeinture_palmaire", {
+        "ambigus_avant": len(_ambigus), "repeints": _repeints,
+        "ambigus_apres": _reste,
+        "noyaux": {b: len(v) for b, v in _noyaux.items()},
+        "regle": "chaque masse palmaire appartient au métacarpien dont elle est "
+                 "la plus proche EN SUIVANT LA SURFACE, jamais à vol d'oiseau"})
+    exiger("la repeinture tranche vraiment", _reste < len(_ambigus) * 0.35,
+           f"{len(_ambigus)} → {_reste}", "moins de 35 % restants")
+
+
 # ── F.2 · LA CONTAMINATION SE CORRIGE PAR UNE RÈGLE ──
 # 3 642 sommets étaient tirés par les phalanges d'un autre doigt. Le tutoriel
 # l'interdit (règle 6) et prévient que les poids automatiques ne sont qu'un
@@ -2208,7 +2326,7 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
         # Pour le « OK », le trou de l'anneau fait partie de l'objectif : sans
         # lui, l'optimiseur retombe sur un pincement, ce qu'il a fait.
         if ANNEAU_EXIGE[0]:
-            m["ouverture_anneau_mm"] = ouverture_anneau()
+            m["ouverture_anneau_mm"] = diametre_anneau()
         # ═══ CE QUI EST OBLIGATOIRE NE SE NÉGOCIE PAS ═══
         # Avec un poids fini, l'optimiseur ÉCHANGEAIT : à 400 points par
         # sommet traversé, un sommet valait 1,3 mm de contact, et il préférait
@@ -2697,6 +2815,21 @@ PKY = [# Pour rejoindre l'auriculaire, le pouce traverse la paume : il passe don
 # Ce qui distingue l'anneau du pincement se mesure : c'est son trou. Dans un
 # « OK », les segments PROXIMAUX du pouce et de l'index restent écartés pendant
 # que leurs pulpes se touchent ; dans un pincement, ils se rapprochent tous.
+# ═══ ON NE MESURE PAS UN TROU PAR LA DISTANCE MINIMALE DE SON CONTOUR ═══
+#
+# `ouverture_anneau()` rend le MINIMUM global entre les chairs proximales du
+# pouce et de l'index. Un seul point proche fait donc chuter la valeur alors
+# que le trou central reste grand — et inversement, un contour qui se pince
+# quelque part peut afficher une belle ouverture. C'est l'endroit où le contour
+# se SERRE, pas la taille du vide.
+#
+# `outils/anneau.py` mesure le diamètre du plus grand disque inscrit dans le
+# vide, dans le plan de l'anneau, sur la pose courante. C'est ce que le cahier
+# appelle le diamètre utile, et c'est lui qui décide si un « OK » se lit.
+def diametre_anneau():
+    return anneau.diametre_utile_anneau(rig, geo, SIDE, _dom, PALMAIRE_CUP)
+
+
 def ouverture_anneau():
     _p, _ = sommets_evalues()
     _a1 = [i for i, n in _dom.items() if n == f"DEF_thumb_01{SIDE}"]
@@ -3200,16 +3333,25 @@ regler()
 if "Hand_Pinch" in _POSES_D and "Hand_OK" in _POSES_D:
     poser_etat(*_POSES_D["Hand_Pinch"])
     _pp1, _ = sommets_evalues()
-    _anneau_pinch = ouverture_anneau()
+    _anneau_pinch = diametre_anneau()
     poser_etat(*_POSES_D["Hand_OK"])
     _pp2, _ = sommets_evalues()
-    _anneau_ok = ouverture_anneau()
+    _anneau_ok = diametre_anneau()
     _ecart_gestes = max((a - b).length for a, b in zip(_pp1, _pp2)) * 1000
     regler()
     dire("pinch_contre_ok", {
         "ecart_maximal_entre_les_deux_poses_mm": round(_ecart_gestes, 1),
-        "ouverture_de_l_anneau_pinch_mm": round(_anneau_pinch, 1),
-        "ouverture_de_l_anneau_ok_mm": round(_anneau_ok, 1)})
+        "diametre_utile_pinch_mm": round(_anneau_pinch, 1),
+        "diametre_utile_ok_mm": round(_anneau_ok, 1),
+        "note": "diamètre du plus grand disque inscrit dans le trou, pas le "
+                "minimum du contour"})
+    # Contre-épreuve du §10.1 : un pincement n'a pas d'anneau. Si les deux
+    # poses rendent le même diamètre, la mesure ne distingue pas un anneau d'un
+    # pincement et son verdict sur le OK ne vaut rien.
+    exiger("le diamètre utile distingue l'anneau du pincement",
+           _anneau_ok > _anneau_pinch + 3.0,
+           f"OK {_anneau_ok:.1f} mm contre Pinch {_anneau_pinch:.1f} mm",
+           "au moins 3 mm de plus pour le OK")
     exiger("Pinch et OK sont deux gestes distincts", _ecart_gestes > 15.0,
            f"{_ecart_gestes:.1f} mm", "> 15 mm d'écart")
     exiger("l'anneau du OK est lisible", _anneau_ok >= SEUIL_ANNEAU_MM,
