@@ -3464,6 +3464,12 @@ def nettoyer_transition(nom_pose, pr, o, axes, rondes=3, tours=6):
         milieu = [0.0] * len(axes)
         best = evaluer(milieu) + (list(milieu),)
         pas = [(hi - lo) / 4.0 for _g, _c, lo, hi in axes]
+        # ═══ TROISIÈME FOIS QUE J'OUBLIE UN BATTEMENT ═══
+        # Posés dans `optimiser_contact` et `nettoyer_pose`, pas ici. Sacha a
+        # vu sept minutes de silence et demandé si la reconstruction buguait —
+        # elle tournait à 100 % de CPU. Une boucle muette est indiscernable
+        # d'un blocage, et cette boucle-ci est la plus lente de toutes :
+        # chaque essai remesure TOUTES les étapes fautives du trajet.
         for _t in range(tours):
             bouge = False
             for i in range(len(axes)):
@@ -3474,6 +3480,10 @@ def nettoyer_transition(nom_pose, pr, o, axes, rondes=3, tours=6):
                     if r[0] < best[0]:
                         best = r + (v,)
                         bouge = True
+            print(f"ATLAS_BATTEMENT transition {nom_pose} ronde {_ronde + 1} "
+                  f"tour {_t + 1}/{tours} reste={best[1]} sur "
+                  f"{len(echantillon)} étapes"
+                  f"{'' if bouge else ' (pas resserré)'}")
             if not bouge:
                 pas = [x * 0.55 for x in pas]
         print(f"ATLAS_TRANSITION_NETTOYEE {nom_pose} ronde {_ronde + 1} : "
