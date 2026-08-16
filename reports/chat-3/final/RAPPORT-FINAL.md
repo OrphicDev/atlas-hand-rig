@@ -160,8 +160,17 @@ ne sont cherchés que pour `Hand_Pinky_Thumb`.
 
 ### 4.4 · `Hand_Pinky_Thumb` — deux causes trouvées
 
-La distance est **tenue à 0,9 mm**. Le seul critère qui échoue est
-l'**orientation** des pulpes : −0,287 pour −0,50 exigé.
+**Deux critères sur trois passent désormais**, et la vrille en est la cause
+prouvée :
+
+| critère | mesuré | exigé | |
+| --- | ---: | ---: | --- |
+| les pulpes se touchent | **0,94 mm** | ≤ 1,00 | réussi |
+| les pulpes se font face | **−0,732** | ≤ −0,50 | réussi |
+| aucune interpénétration | **1 326** | 0 | échec |
+
+L'orientation échouait de 0,213 ; elle passe de 0,232. Avant la vrille, elle
+valait **−0,287**.
 
 **Cause 1 — la vrille était verrouillée sur une articulation qui n'est pas une
 charnière.** La butée posait `min_y = max_y = 0` sur les trois articulations de
@@ -190,6 +199,20 @@ touché et vaut **0**.
 
 La correction était mesurée, retenue, câblée, vérifiée sous les 3 mm — et
 **jamais appliquée à la pose pour laquelle elle existe**.
+
+**Ce qui reste, et le diagnostic le sépare en trois causes au lieu d'un total :**
+
+| sommets | où | ce que c'est |
+| ---: | --- | --- |
+| **400** | `middle_03 → thumb_meta` | le majeur enroulé à 0,95 s'enfonce dans le thénar |
+| **200** | `pinky_meta ↔ thumb_meta` | les deux éminences de la paume l'une sur l'autre |
+| **171** | `thumb_02 ↔ pinky_02` | les deux segments en contact, **hors** des pulpes |
+
+**La première est le problème du poing.** Pour laisser passer le pouce vers
+l'auriculaire, l'index et le majeur doivent s'enrouler à 0,95 — très au-delà de
+la fermeture propre mesurée à 0,60. Les deux blocages du cahier n'en font
+qu'un : tant que les quatre doigts ne se ferment pas proprement, aucune pose
+qui les enroule ne peut être propre.
 
 ### 4.5 · Les transitions ne peuvent pas être plus propres que leur arrivée
 

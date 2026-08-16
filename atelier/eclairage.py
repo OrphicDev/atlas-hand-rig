@@ -107,6 +107,26 @@ REGLAGES = {
     "monde_gris": 0.02,
     "monde_intensite": 1.0,
 
+    # ═══ LE CYCLO, ET POURQUOI CE N'EST PAS UNE AMBIANCE A PLAT ═══
+    #
+    # Mesure qui a impose ce reglage : les 78 rendus du 16/08 ont un relief
+    # local de 0,041 pour 0,020 exige — trois fois le seuil — et le client les
+    # a juges MOINS BONS que ceux de la veille. La comparaison a eclairage
+    # IDENTIQUE montre que la geometrie n'avait pas bouge : c'etait la lumiere.
+    # J'avais optimise un chiffre et laisse tomber ce que le chiffre servait.
+    #
+    # Le cote ombre tombait a zero parce que le monde vaut 0,02 et que rien
+    # d'autre ne renvoie de lumiere. Monter `monde_gris` reglerait le symptome
+    # en ajoutant un voile uniforme qui ecrase justement le relief que la
+    # rasante venait chercher. Un studio reel ne fait pas ca : il pose un CYCLO
+    # — une carte grise derriere et sous le sujet — qui RENVOIE la lumiere deja
+    # presente, en respectant sa direction.
+    "fond_cyclo": True,
+    "fond_gris": 0.18,                 # gris moyen photographique
+    "fond_recul_x_largeur": 1.6,       # derriere le sujet, en largeurs
+    "fond_taille_x_largeur": 9.0,      # assez grand pour remplir le cadre
+    "fond_chute_x_largeur": 1.1,       # la partie qui descend sous le sujet
+
     # Materiau clay
     "clay_couleur": (0.50, 0.50, 0.50, 1.0),
     "clay_rugosite": 1.0,
@@ -122,7 +142,8 @@ REGLAGES = {
     "key_angle_rasance_deg": 15.0,     # => 75 deg par rapport a la normale
     "key_eclairement": 26.0,           # W/m^2-equivalent a la cible
     "key_angle_source_deg": 12.0,      # diametre apparent vu de la cible
-    "fill_ratio": 0.15,                # 15 % de la key (plafond exige : 20 %)
+    "fill_ratio": 0.20,                # le PLAFOND du cahier, pas son plancher :
+                                       # a 15 % le cote ombre se bouchait
     "fill_angle_source_deg": 60.0,     # tres douce, sans ombre propre
     "rim_ratio": 0.25,
     "rim_angle_rasance_deg": 20.0,     # 20 deg DERRIERE le plan de surface
@@ -388,6 +409,76 @@ def poser_studio(scene, materiau_clay=True, objets_clay=None, reglages=None):
     r["_lumieres_purgees"] = nb_purgees
     r["_materiau"] = mat.name if mat else None
     return r
+
+
+def poser_fond(scene, cible, direction_camera, largeur_sujet, reglages=None):
+    """Un cyclo derriere et sous le sujet, qui RENVOIE la lumiere de la key.
+
+    Deux plans a angle droit — le fond vertical et sa chute au sol — d'un gris
+    moyen photographique (0,18), lambertiens. Ils ne s'ajoutent pas a
+    l'eclairage : ils renvoient celui qui existe deja, donc ils remontent le
+    cote ombre SANS effacer la direction de la rasante. Une ambiance uniforme
+    ferait l'inverse.
+
+    `direction_camera` est le vecteur cible -> camera. Le fond se place a
+    l'oppose, assez loin pour ne recevoir aucune ombre portee dure et assez
+    grand pour remplir le cadre.
+    """
+    r = dict(REGLAGES)
+    if reglages:
+        r.update(reglages)
+    if not r.get("fond_cyclo", True):
+        return {"fond": None}
+    for nom in ("FOND_studio_mur", "FOND_studio_sol"):
+        ob = bpy.data.objects.get(nom)
+        if ob is not None:
+            bpy.data.objects.remove(ob, do_unlink=True)
+    cible = _V(cible)
+    vers_cam = _norm(_V(direction_camera))
+    largeur = max(float(largeur_sujet), 1e-4)
+    taille = largeur * float(r["fond_taille_x_largeur"])
+    recul = largeur * float(r["fond_recul_x_largeur"])
+    chute = largeur * float(r["fond_chute_x_largeur"])
+
+    mat = bpy.data.materials.get("MAT_fond_studio")
+    if mat is None:
+        mat = bpy.data.materials.new("MAT_fond_studio")
+        mat.use_nodes = True
+        bsdf = mat.node_tree.nodes.get("Principled BSDF")
+        if bsdf is not None:
+            g = float(r["fond_gris"])
+            bsdf.inputs["Base Color"].default_value = (g, g, g, 1.0)
+            bsdf.inputs["Roughness"].default_value = 1.0
+            if "Metallic" in bsdf.inputs:
+                bsdf.inputs["Metallic"].default_value = 0.0
+            for _cle in ("Specular IOR Level", "Specular"):
+                if _cle in bsdf.inputs:
+                    bsdf.inputs[_cle].default_value = 0.0
+                    break
+
+    # Le mur : perpendiculaire a l'axe camera, derriere le sujet.
+    bpy.ops.mesh.primitive_plane_add(size=taille,
+                                     location=tuple(cible - vers_cam * recul))
+    mur = bpy.context.active_object
+    mur.name = "FOND_studio_mur"
+    mur.rotation_mode = "QUATERNION"
+    mur.rotation_quaternion = vers_cam.to_track_quat("Z", "Y")
+    # La chute : sous le sujet, horizontale, raccordee au pied du mur.
+    bpy.ops.mesh.primitive_plane_add(
+        size=taille,
+        location=tuple(cible - vers_cam * recul
+                       - _V((0.0, 0.0, chute)) + vers_cam * (taille * 0.5)))
+    sol = bpy.context.active_object
+    sol.name = "FOND_studio_sol"
+    for ob in (mur, sol):
+        ob.data.materials.clear()
+        ob.data.materials.append(mat)
+        ob.visible_shadow = False       # il renvoie, il ne projette pas
+    return {"fond": [mur.name, sol.name],
+            "fond_gris": float(r["fond_gris"]),
+            "taille_m": round(taille, 4),
+            "recul_m": round(recul, 4),
+            "role": "renvoyer la lumiere existante, pas en ajouter"}
 
 
 def materiau_clay_objet():

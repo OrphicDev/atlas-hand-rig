@@ -125,6 +125,7 @@ print("ATLAS_RENDUS_COTE " + json.dumps(
 
 sc = bpy.context.scene
 _verrous = eclairage.poser_studio(sc, materiau_clay=True, objets_clay=[geo])
+# Le clay ne s applique qu a la main : le cyclo garde son propre gris.
 print("ATLAS_RENDUS_STUDIO " + json.dumps(_verrous, ensure_ascii=False,
                                           default=str))
 _main = [i for i in _dom if _dom[i] != f"DEF_hand{SIDE}"]
@@ -145,6 +146,13 @@ def rendre(nom, direction, cote, cadre=0.205, vise=None, source_deg=None):
     # source avec la distance, donc son angle apparent reste constant, et sur
     # un sujet quatre fois plus petit les plis sont a l'echelle du flou.
     _r = {"key_angle_source_deg": source_deg} if source_deg else None
+    # Le cyclo se repose a CHAQUE vue : il doit etre derriere le sujet vu de
+    # cette camera-ci, pas de la precedente. Un fond pose une fois pour toutes
+    # finit de profil et ne renvoie plus rien. Et il se pose APRES `_r`, sinon
+    # il lit une variable qui n'existe pas encore — ce que la premiere version
+    # de ce correctif faisait, et Blender l'a dit tout de suite.
+    _f = eclairage.poser_fond(sc, _c, sc.camera.matrix_world.translation - _c,
+                              cadre, reglages=_r)
     _e = eclairage.eclairer_rasant(_c, direction, direction, cote,
                                    largeur_sujet=cadre, scene=sc, reglages=_r)
     _h = eclairage.rendre(os.path.join(DOSSIER, nom + ".png"), sc)

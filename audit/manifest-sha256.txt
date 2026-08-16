@@ -6,7 +6,7 @@ b3b092a64bb1fbed2544b706409b35972441ee342867f9500c0a8bb7b9feb833  ./CHANGELOG.md
 c432d8253033ffc0eb7ef27fe413ad61619bc40389021dfb66af3fa1d6761cf8  ./STATUS.md
 9a64b81638bc93437f7554cf34105209bc02edf8b08e249d4c5a6d1101f647a3  ./atelier/articulations.py
 d8a20981c960507f157a6a6a1f72ca7c38b1b3efe1f0a2497a1d8501c17d2340  ./atelier/correctifs.py
-3dedc875895068d697d7a838a990cae29bb2d2d78c60b32ca8e0e8be16b3bf4c  ./atelier/eclairage.py
+66b88a4350f7f99f9b12395d420ee63234a987ec4f11228a98c0d2b97d48a93c  ./atelier/eclairage.py
 5056cc710aca9e136408b449f5aaed0edddba200d97f18e9e97560aba79a655e  ./atelier/humain.py
 d5d4686aab3e5ae08fa9f510aca0c9eed4425952be14fd5f1bc1e493f36e5dce  ./atelier/jacobienne.py
 3a3f6cfa6337dd9ce3fbf569a6fcb974471891136b6907a3faa7884b82a83a4d  ./atelier/mains.py
@@ -91,10 +91,11 @@ f161d9dfc22e05c921fced0f9d7477ec507b0ee2a69da1400e16bcea684c7328  ./outils/epreu
 2ab5ed431267bfad7743d53972796dbf5413031162cc21e1ea99c9783754dd06  ./outils/epreuve-focus.py
 e0d83cdb532b06f88c3146ea2135bf29e1fc701a1ffc6769ad168cfec73a533f  ./outils/matrice-acceptation.py
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
-53c562039a43e192109d24e7c73129fb90bc2dbf052783dec9cca6c92aac233d  ./outils/rendus-poses.py
+99fe022f6bc8dca1dfeecd760984ae32218f752dc68009532f29b458086cf4a9  ./outils/rendus-poses.py
 dae825130d79e5867f25d5c126c37e8587d970f8511361ec534128df629d85f8  ./outils/revue-visuelle.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
+d9aa871f0061ccfea52421068ed49011c7d8d59e25a3004065dbdf4c14ea2c84  ./outils/sonde-opposition-pouce.py
 c8ac50ed8d9f8cd4700712e14fd3a7a0d1d931273ac3834f629d29789a84fade  ./outils/sonde-poids-main.py
 580669195f94f895459702a82adb299fc548fd5fa85e633e5129f0b16179dac4  ./outils/telecharger-mannequin.sh
 b12c468705cd728105d6278305e013e98280e372b0e143b709f1777e243a2ece  ./renders/wip-chat-1/planche-lumiere.html
@@ -132,7 +133,7 @@ f8da7796ec3ee1ab3cbc31103d932f909da222f6da8928dd7f21168a06d74763  ./reports/chat
 188aa19ad00a5272ab2f178c82066c776ee1007bf28ca1030cbd0ada46fb34a9  ./reports/chat-2/verifier-e2d4b1c-ancien-blend.txt
 f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat-3/cup/01-balayage-cup.json
 f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
-bbc438c09f7c7aa448cfb56225032b10d35c81e96e8bf0e8ecd20df98a0ec06d  ./reports/chat-3/final/RAPPORT-FINAL.md
+59770c23900c8d75160885cd748bad309f6b339126943d233693352af089e2fc  ./reports/chat-3/final/RAPPORT-FINAL.md
 35469b7364db0e48a062fee4e5112878f9a4b8ee59bd1654aaa9fb3476415963  ./reports/chat-3/final/journal-rendus.txt
 8e97ee9f6c071aea2fce654aa406af52e5d54fb7cbc9f3420ad04ba75e9e3ab7  ./reports/chat-3/final/planches/planche-Hand_Cupped.png
 9f177d0a0fb07484784743b24415694f5cad6ff5ad2795561e65401c8bcee341  ./reports/chat-3/final/planches/planche-Hand_Fist.png
@@ -233,6 +234,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 913200f72157af9ac8b94dcb772fb02eae1e69fbe7029077cb8fa1c836e06f6f  ./reports/chat-3/journal-generation.txt
 fc65cbba656be4020951f96781d7308a3e327d2cf7b29c7efe58bb19a48bcce5  ./reports/chat-3/journal-pinky.txt
 2a8364ed7efd63b58223e081a5409ee921fd3875d82d86a13edeab0187610026  ./reports/chat-3/journal-poing.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./reports/chat-3/journal-poing2.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
