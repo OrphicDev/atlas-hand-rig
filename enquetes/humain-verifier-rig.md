@@ -29,6 +29,28 @@ même chose que la construction ne prouve rien.
   pleine sans écartement rend 780 sommets traversants. Il voit donc les vraies
   fautes.
 
+- **CE CONTROLE NE REGARDAIT PAS LA OU ETAIENT LES DEFAUTS.** Ma phrase du
+  debut — « un controle qui ne mesure pas la meme chose que la construction ne
+  prouve rien » — etait juste, et je ne l'avais pas appliquee a moi-meme.
+
+  Mesure : lance sur `RIG_Hand.L-NON-VALIDE.blend`, ce verificateur rendait
+  « 22 reussis, 9 echoues ». Etendu aux grandeurs que la construction mesure
+  deja, il rend sur LE MEME FICHIER cinq echecs de plus :
+
+      Cup · la paume se voute               −10,83 mm   l'arc S'APLATIT
+      Cup · la paume se resserre            +14,04 mm   elle S'ELARGIT
+      Cup · l'auriculaire rejoint le pouce   −0,88 mm
+      Cup · le trajet ne repart jamais       +1,25 mm   il repart
+      le poing se ferme completement           0,55
+
+  Ce sont AU CHIFFRE PRES les valeurs que les sondes avaient trouvees a la
+  main. Le rig n'etait pas moins casse : le verificateur ne regardait pas.
+
+- **`is_valid` ne dit rien de ce qu'un driver pilote.** Le depot a vecu
+  25 drivers verts dont la rotation restait a 0,00 degre parce qu'ils
+  n'etaient pas EVALUES. Une contre-epreuve fonctionnelle a ete ajoutee : on
+  applique 1 a chaque propriete et on mesure si le maillage BOUGE.
+
 ## 3. CE QUE LA GÉOMÉTRIE DIT
 
 Sur le rig courant, le contrôle doit retrouver : contact index-pouce à 0,75 mm,
@@ -50,6 +72,12 @@ doivent coller à celles du rapport de construction. Un écart franc signalerait
 que les deux scripts ne regardent pas la même zone de peau.
 
 ## 5. CE QUI RÉFUTERAIT
+- **Un verificateur qui ne mesure pas une grandeur ne peut pas la declarer
+  bonne.** Tout critere du cahier absent de ce script est un critere NON
+  MESURE, et la matrice d'acceptation le liste a part au lieu de le passer
+  sous silence. Un bloc absent n'est pas un bloc reussi — c'est la faute par
+  laquelle ce depot s'est declare valide au chat 1.
+
 
 - **Un contrôle qui passe sur un rig connu pour échouer.** Le fichier livré
   porte un défaut mesuré et documenté : 26 sommets traversants dans la pose

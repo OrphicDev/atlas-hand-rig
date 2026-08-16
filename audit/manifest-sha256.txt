@@ -19,7 +19,7 @@ ae8154420f6e4006058a319512a74f513a507d541313ed1218a62d2d437957f0  ./audit/AUDIT_
 f6d1abd70a4c5ecb2fa158447c87552024dfa74daa89cf70535d6611f843cf57  ./audit/wip-chat-1/audit-collisions.py
 19ce03c143fc33c253320f2959a75c7f5652087eb1d73fe3e657990d1fc07996  ./audit/wip-chat-1/collisions.json
 e913029dc9431c8ff804aa0245ede48eba39bb77930fa74e4aedaa9ac28a5016  ./enquetes/humain-rig-main.md
-070e777e0974625d9f5a581ba71b13c3c12cbb9ae46ec0e2e5b9974d8c7b5afa  ./enquetes/humain-verifier-rig.md
+7a8caa47ebd8a2949894e5050bf0589ab430f817d78af04e4adcb16fd0dc4c09  ./enquetes/humain-verifier-rig.md
 702b1dfa6d2c896638e213a07216752cd7cc9a0fa64a8b7657ec8d2c665b46a7  ./handoffs/HANDOFF_CHAT_2_HANDS.md
 1354ab0e6ea9f0d2a1a585d4235ca9fd837e38949ec1d591ed9de8ea5263beca  ./handoffs/HANDOFF_CHAT_2_NEXT.md
 aaa6c151561b63aa21d54a31ca72fe775ae012bfb7c13f3d7aabc33bed201d88  ./images/Hand_Cupped-auriculaire.png
@@ -212,7 +212,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-9786cbdbbf6ce8fb186540d629fab755ed33c3e952ed7c5947e533a5aa582d80  ./reports/chat-3/journal-generation.txt
+06479f60a78d60d39c9e3960d47c4b8dc4a51464ffce88578573036633aa2d40  ./reports/chat-3/journal-generation.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
