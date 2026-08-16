@@ -3061,7 +3061,20 @@ ANNEAU = [("prop", "Index_Curl", 0.62, 1.0),
           ("os", (f"CTRL_thumb_02{SIDE}", 0), -35.0, 35.0),
           ("os", (f"CTRL_thumb_meta{SIDE}", 0), -35.0, 35.0),
           ("os", (f"CTRL_thumb_meta{SIDE}", 1), -35.0, 35.0),
-          ("os", (f"CTRL_thumb_meta{SIDE}", 2), -35.0, 35.0)]
+          ("os", (f"CTRL_thumb_meta{SIDE}", 2), -35.0, 35.0),
+          # ═══ DEUX ABDUCTIONS, ET SEULEMENT DEUX (§10.2) ═══
+          # L'anneau se ferme ou s'ouvre autant par l'écartement des deux
+          # premiers segments que par leur flexion. Ces canaux-là existaient
+          # sans jamais être cherchés — l'index et le pouce ne pouvaient
+          # ouvrir le trou qu'en s'enroulant, ce qui rapproche aussi les
+          # segments proximaux et referme ce qu'on veut ouvrir.
+          #
+          # Aucune abduction sur index_02, index_03 ni thumb_02 : ce sont des
+          # CHARNIÈRES dans cette architecture, et la phase E y verrouille le
+          # Z. Les cherchers reviendrait à explorer une plage morte où deux
+          # valeurs différentes donnent la même pose.
+          ("os", (f"CTRL_index_01{SIDE}", AXE_ECART), -15.0, 15.0),
+          ("os", (f"CTRL_thumb_01{SIDE}", AXE_ECART), -10.0, 10.0)]
 
 CONTACTS = {}
 for _nom_c, _a, _b, _axes, _fond in (
@@ -3078,9 +3091,69 @@ for _nom_c, _a, _b, _axes, _fond in (
         # explorer celles où l'index barre le chemin.
         ("Hand_Pinky_Thumb", "pinky", "thumb", PKY,
          {"Index_Curl": 0.95, "Middle_Curl": 0.95})):
-    ANNEAU_EXIGE[0] = SEUIL_ANNEAU_MM if _nom_c == "Hand_OK" else 0.0
-    _m, _etat, _v = chercher_contact(_a, _b, _axes, _fond)
-    ANNEAU_EXIGE[0] = 0.0
+    if _nom_c == "Hand_OK":
+        # ═══ TROIS ÉTAPES, PARCE QUE LES DEUX EXIGENCES SE COMBATTENT ═══
+        #
+        # Mesuré deux fois : l'approche rendait 0,53 mm PROPRE puis le
+        # nettoyage 1,04 ; puis 0,87 propre et 2,43. L'anneau et le contact
+        # sont ANTAGONISTES — écarter le pouce de l'index ouvre le trou et
+        # éloigne les pulpes — et les chercher ensemble d'emblée fait qu'aucun
+        # des deux n'est jamais satisfait : les deux états violent un critère,
+        # la barrière ne départage plus rien, et les termes continus tranchent.
+        #
+        # ÉTAPE A : on IGNORE l'anneau et on cherche un contact franchement
+        # propre. Sans cette étape, on n'a même pas un point de départ valide.
+        ANNEAU_EXIGE[0] = 0.0
+        _mA, _etatA, _vA = chercher_contact(_a, _b, _axes, _fond)
+        print("ATLAS_OK_ETAPE_A " + json.dumps(
+            {"distance_mm": round(_mA["distance_mm"], 2),
+             "face": round(_mA["face_local"], 3),
+             "traversees": _mA.get("intersection_des_doigts"),
+             "diametre_anneau_mm": round(diametre_anneau(), 1)}, ensure_ascii=False))
+        # ÉTAPE B : on repart de CE candidat et on ouvre le trou, l'anneau
+        # devenant obligatoire. Le classement lexicographique interdit alors
+        # d'acheter de l'anneau avec de la distance : une pose qui viole le
+        # contact ne peut plus battre une pose qui le respecte.
+        ANNEAU_EXIGE[0] = SEUIL_ANNEAU_MM
+        _axes_B = [(g, c, max(lo, v - (hi - lo) * 0.30),
+                    min(hi, v + (hi - lo) * 0.30))
+                   for (g, c, lo, hi), v in zip(_axes, _vA)]
+        _mB, _etatB, _vB = chercher_contact(_a, _b, _axes_B, _fond)
+        print("ATLAS_OK_ETAPE_B " + json.dumps(
+            {"distance_mm": round(_mB["distance_mm"], 2),
+             "face": round(_mB["face_local"], 3),
+             "traversees": _mB.get("intersection_des_doigts"),
+             "diametre_anneau_mm": round(diametre_anneau(), 1)}, ensure_ascii=False))
+
+        # ═══ B N'EST PAS MEILLEUR PARCE QU'IL EST PLUS TARDIF ═══
+        # C'est la faute exacte du chat 2, reprise ici : on gardait le second
+        # état sans le comparer. On les départage sur les critères
+        # OBLIGATOIRES, dans l'ordre du cahier.
+        def _rang_ok(m, anneau_mm):
+            return (1 if (m.get("intersection_des_doigts") or m["penetration"]) else 0,
+                    1 if m["distance_mm"] > SEUIL_CONTACT_MM else 0,
+                    1 if m["face_local"] > SEUIL_FACE else 0,
+                    1 if anneau_mm < SEUIL_ANNEAU_MM else 0,
+                    max(0.0, m["distance_mm"] - SEUIL_CONTACT_MM),
+                    max(0.0, m["face_local"] - SEUIL_FACE),
+                    max(0.0, SEUIL_ANNEAU_MM - anneau_mm))
+
+        poser_etat(*_etatA)
+        _rA = _rang_ok(_mA, diametre_anneau())
+        poser_etat(*_etatB)
+        _rB = _rang_ok(_mB, diametre_anneau())
+        if _rA < _rB:
+            print("ATLAS_OK_RETENU étape A — B ne l'améliore sur aucun "
+                  "critère obligatoire")
+            _m, _etat, _v = _mA, _etatA, _vA
+            poser_etat(*_etatA)
+        else:
+            print("ATLAS_OK_RETENU étape B")
+            _m, _etat, _v = _mB, _etatB, _vB
+        ANNEAU_EXIGE[0] = 0.0
+    else:
+        ANNEAU_EXIGE[0] = 0.0
+        _m, _etat, _v = chercher_contact(_a, _b, _axes, _fond)
     CONTACTS[_nom_c] = {"mesure": _m, "props": _etat[0], "os": _etat[1]}
     dire(f"contact_{_nom_c}", {
         "entre": f"{_a} et {_b}",
