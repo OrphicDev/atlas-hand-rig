@@ -3,7 +3,7 @@
 b3b092a64bb1fbed2544b706409b35972441ee342867f9500c0a8bb7b9feb833  ./CHANGELOG.md
 8c2383d4e2113d27d26866d7d0edd3d2fb3a36fd4bb5c1a464994140e16bd6b9  ./README.md
 484b3c32df0181e5bb10135d8e90f5b2aea8718b7506eb666987deebec4d0c5d  ./RIG_Hand.L-NON-VALIDE.blend
-100edc79d23cb48ecf3b9bf5a146d310dcde294597908ff08fc7beecca69a982  ./STATUS.md
+c432d8253033ffc0eb7ef27fe413ad61619bc40389021dfb66af3fa1d6761cf8  ./STATUS.md
 9a64b81638bc93437f7554cf34105209bc02edf8b08e249d4c5a6d1101f647a3  ./atelier/articulations.py
 d8a20981c960507f157a6a6a1f72ca7c38b1b3efe1f0a2497a1d8501c17d2340  ./atelier/correctifs.py
 3dedc875895068d697d7a838a990cae29bb2d2d78c60b32ca8e0e8be16b3bf4c  ./atelier/eclairage.py
@@ -229,7 +229,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
 87912ff8494151e409636e754dfc7b965165c9750bdf10a0be3a1f0e345a6d83  ./reports/chat-3/journal-generation.txt
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./reports/chat-3/journal-pinky.txt
+fa058f18f9a152fe68a73bf95af65d35dd2de1a8477ccfeed2ba27ee281e27f5  ./reports/chat-3/journal-pinky.txt
 2a8364ed7efd63b58223e081a5409ee921fd3875d82d86a13edeab0187610026  ./reports/chat-3/journal-poing.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json

@@ -12,14 +12,15 @@ lecteur ne puisse s'y tromper.
 | **statut global** | **NON-VALIDE** |
 | branche active | `hands/chat-2-photoreal-v2` |
 | commit de départ | `e2d4b1c9e05949531d9348d68367c225b2169872` |
-| dernière étape terminée | baseline produite ; sept causes corrigées ; le plantage qui empêchait toute génération complète est trouvé et corrigé |
-| étape suivante | **une reconstruction portant les correctifs** — aucune n'a encore abouti |
+| dernière étape terminée | `Cup` prouvé 7/7 · poids repeints · 78 rendus Cycles · 14 planches |
+| étape suivante | prouver le poing, l'anneau et la pince après quatre correctifs de cause |
 | **main gauche** | rig existant, **non validé** |
 | **main droite** | **inexistante** |
-| `.blend` reflétant les scripts | **aucun** |
-| rendus produits par ces scripts | **aucun** |
-| playblasts de transition | **les six existent**, mais rendus depuis l'ancien `.blend` |
-| processus encore actifs | **aucun** |
+| `.blend` reflétant les scripts | reconstruction **en cours**, 23 ✓ / 10 ✗ à mi-parcours |
+| rendus produits par ces scripts | **78 images**, 0 fautive, écrêtage 0,000 % |
+| planches de contact | **14**, dont une d'ensemble des treize poses |
+| playblasts de transition | 150 images, rendues depuis l'ancien `.blend` |
+| épreuves hors Blender | **51 refus** + 2 nouvelles épreuves |
 
 `main` et `wip/chat-1-honest-probe` n'ont pas bougé. Aucun force push, aucune
 réécriture d'historique, aucun merge, aucun tag.
@@ -43,13 +44,28 @@ criteres, puis les rendus Cycles, puis la main droite.
 
 ### Ce qui resiste encore
 
-- `Hand_Pinky_Thumb` — la pose existe geometriquement (0,10 mm a l'approche) et
-  le nettoyage ne la tient pas ;
-- `Hand_OK` — l'anneau et le contact sont antagonistes ; la recherche en trois
-  etapes est ecrite, pas encore prouvee ;
-- le poing ne se ferme pas au-dela de 0,6 — les quatre doigts seuls se
-  traversent 820 fois a 0,7 ;
-- **aucun rendu Cycles n'a encore ete produit par ces scripts.**
+- **le poing s'arrete a 0,60 pour UN sommet.** La courbe des quatre doigts
+  seuls vaut 0 partout jusqu'a 0,60 puis **1** a 0,62. La mesure s'arretait au
+  premier niveau non nul : personne n'avait jamais regarde 0,64. Le « 820
+  traversees a 0,7 » de ce meme fichier est vrai a 0,7 — c'est l'autre bout
+  d'une courbe dont le milieu n'avait pas ete vu ;
+- **`Hand_OK` A un anneau, et il est jete.** L'etape A rend 0,81 mm de contact
+  et **0,0 mm** d'anneau ; l'etape B rend **8,1 mm** d'anneau, une MEILLEURE
+  orientation (−0,764 contre −0,699) et MOINS de traversees (79 contre 90) —
+  et perd sur trois centiemes de millimetre de contact. Le classement a raison
+  de garder A ; la recherche a tort de ne pas chercher ailleurs. L'etape C part
+  de toute la course avec l'anneau obligatoire ;
+- **`Hand_Pinch` echoue de six centiemes a cause de DEUX sommets.**
+  L'approche tient 0,83 mm avec 2 traversees, toutes deux
+  `DEF_index_meta → DEF_thumb_meta` — l'eminence thenar contre la base de
+  l'index, dans la commissure, sans rapport avec le pincement. Le nettoyage
+  recule le pouce de 0,23 mm pour les effacer ;
+- **`Hand_Pinky_Thumb` n'echoue plus que sur l'orientation** des pulpes
+  (−0,287 pour −0,50). La distance est tenue a 0,9 mm. Deux causes trouvees :
+  la butee verrouillait la vrille a zero sur la metacarpo-phalangienne, qui est
+  condylienne et non charniere ; et le correctif de volume etait cable sur
+  `PSD_PinkyThumb`, laissee a **0** dans la pose livree ;
+- la main droite n'existe pas — le cahier exige une gauche validee.
 
 ### Ce que le chat 3 a ajoute aux instruments
 
@@ -65,8 +81,28 @@ criteres, puis les rendus Cycles, puis la main droite.
 | `atelier/transitions.py` | de vraies actions, pas une interpolation recalculee |
 | `atelier/jacobienne.py` | convertir un deplacement voulu en delta de cle |
 | `atelier/miroir.py` | la main droite se transfere, avec une table de signes mesuree |
+| `outils/epreuve-classement-ok.py` | le classement des trois candidats du OK, sur ses nombres reels |
+| `outils/epreuve-focus.py` | chaque mode cible s'arrete-t-il a SA section ? |
 
 Cinquante et un refus sont exerces par les autotests purs, hors Blender.
+
+### Quatre defauts de plus, tous de la meme famille
+
+Trouves apres les rendus, tous par lecture ou par mesure, aucun n'aurait plante :
+
+1. **la mesure du poing s'arretait au premier echec**, donc supposait la courbe
+   monotone sans l'avoir verifiee ;
+2. **quatre des six modes `focus=` repondaient a cote de la question.** La
+   sortie etait posee une seule fois, a la fin de `Cup`, et se declenchait pour
+   tout focus autre que `all`. `focus=fist` rendait un `.blend`, un rapport et
+   « 0 critere obligatoire en echec » sans avoir touche au poing ;
+3. **la vrille etait verrouillee a zero sur les trois articulations** d'un
+   doigt, alors que seules la PIP et la DIP sont des charnieres ;
+4. **un correctif cable sur une propriete que la pose laisse a zero.** Mesure,
+   retenu, cable, verifie sous les 3 mm — et jamais applique.
+
+Le quatrieme est le defaut de signature de ce depot : un champ rempli au
+contrat que rien ne lit a l'arrivee.
 
 ### La lecon de ce chat, et elle vaut au-dela du rig
 
