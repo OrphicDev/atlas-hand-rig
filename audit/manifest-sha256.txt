@@ -8,6 +8,7 @@ ca440d52a0427dda1b0d14bdccdaf8a0638a07cdfc4c6bd55839d4af9796aae6  ./CHANGELOG.md
 3dedc875895068d697d7a838a990cae29bb2d2d78c60b32ca8e0e8be16b3bf4c  ./atelier/eclairage.py
 5056cc710aca9e136408b449f5aaed0edddba200d97f18e9e97560aba79a655e  ./atelier/humain.py
 3a3f6cfa6337dd9ce3fbf569a6fcb974471891136b6907a3faa7884b82a83a4d  ./atelier/mains.py
+52c7bef2e84d847d70463aecf9ecc0a7dcb2f9a188792eedb8fe156658a54538  ./atelier/mesures_paume.py
 41e7fafd79cdbfcd00ec18aba8a912c16db85093659da6b2f699877bd9f2d275  ./atelier/portillon.py
 ce41564fdb22f2c8f52f7f51f47a849e295ad1fac8ee2c7948c801295c0fb6e4  ./audit/AUDIT_PACKET_HANDS.md
 ae8154420f6e4006058a319512a74f513a507d541313ed1218a62d2d437957f0  ./audit/AUDIT_PACKET_HANDS_WIP.md
@@ -80,10 +81,12 @@ e3e19b0333029c552e2721465c2cdbf43d2d1d7c311e9cf9a574719929dc593e  ./images/gros-
 45e08157d547c46b3b5ffa1f6944cf1981dd06c2fe005b9de6292a44935805d0  ./mesures/enquete.md
 d20c86907409a0d43207b27b0954d5c0e44ff0a8b05d378b45b841c1cda1e92e  ./mesures/rapport-echec.json
 d1361015e6be1bd5edb576592231abd81400319614e340cbe618e1f7166c892a  ./mesures/rapport-rig.L.json
+711a4b909b2ee6222061f6aae83e601863f655e3becf3c5821d4d0c9737be985  ./outils/anneau.py
 f8eb801b9cca4d5b404002edb27135ae3097aa08a7ae72dd7e2f87970e6c52e8  ./outils/comparer-rapports.py
 be5326530e52a92eabd9a3cb4640979052f508f02d0f98b44d9ed820501fb98d  ./outils/playblast-transitions.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
+c8ac50ed8d9f8cd4700712e14fd3a7a0d1d931273ac3834f629d29789a84fade  ./outils/sonde-poids-main.py
 580669195f94f895459702a82adb299fc548fd5fa85e633e5129f0b16179dac4  ./outils/telecharger-mannequin.sh
 b12c468705cd728105d6278305e013e98280e372b0e143b709f1777e243a2ece  ./renders/wip-chat-1/planche-lumiere.html
 c6b874db08f2d3b89324d2667a25ec9787674169494ee3dd9af5bce4a23136b6  ./renders/wip-chat-1/preuves-lumiere/Hand_Cupped-auriculaire.png
@@ -122,7 +125,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-12e741e59041e860544ca442ba5e4e8a433dd4e147d76243c7397b997f0a0b1c  ./rig-main.py
+6bd8d631967c0ce46d0a768a5b5c6fd1613f7921807b251c6e5aeb5101891964  ./rig-main.py
 e4d3df9d6c59a95c0c2fb6c2dac68cbc087267a5e542d35f137faa3ca996efff  ./verifier-rig.py
 3f2d92e4e91e1c3121616f3007a0a9bd3591b26a624b06bdbf86893034f7387d  ./videos/b17e548/LISEZ-MOI.md
 57433d06119ba8aaddf59f5054d13277a19333fcd5223da2d878d21d2f077de4  ./videos/b17e548/Neutral-vers-Hand_Cupped/0001.png

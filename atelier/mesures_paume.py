@@ -54,6 +54,15 @@ EN_MM = 1000.0
 # ceux déjà publiés, ce qui est exactement le défaut que ce module corrige.
 POIDS_MINIMAL = 0.01
 
+# Longueur en dessous de laquelle un vecteur ne porte plus de direction fiable.
+# ═══ LE 1e-9 ÉTAIT ÉCRIT QUATRE FOIS ═══
+# Relecture adverse : quatre littéraux `1e-9` séparés gardaient quatre vecteurs
+# différents (la corde, la perpendiculaire, l'axe de la main, la composante
+# palmaire). Quatre exemplaires d'un même seuil, c'est la faute que ce module a
+# été écrit pour supprimer — appliquée à lui-même. Un seul exemplaire, sinon
+# ils divergeront le jour où l'un des quatre sera « ajusté ».
+LONGUEUR_NULLE = 1e-9
+
 
 # ═══════════════════════════════════════════════════════════════════
 #   OUTILLAGE — aucune valeur par défaut, aucun zéro fabriqué
@@ -86,6 +95,17 @@ def _evalue(geo):
     Repris mot pour mot de `evalue()` de la sonde. Sans `evaluated_get`, on lit
     le maillage de base : une main qui ne bouge jamais, donc une main qui passe
     tous les contrôles.
+
+    ═══ LES INDICES DE `dominances()` VIENNENT DU MAILLAGE DE BASE ═══
+    Relecture adverse : toutes les grandeurs font `p[i]` avec un `i` issu de
+    `geo.data.vertices`, alors que `p` est le maillage ÉVALUÉ. Aujourd'hui la
+    pile de modificateurs est Armature + CORRECTIVE_SMOOTH, qui conservent le
+    nombre de sommets, et la correspondance tient. Le jour où quelqu'un ajoute
+    un Subdivision ou un Mirror, les indices ne désignent plus les mêmes points
+    et TOUTES les grandeurs continuent de sortir des millimètres plausibles —
+    sur les mauvais sommets, sans un mot. C'est la forme la plus dangereuse de
+    la faute du dépôt : pas un zéro, mais un nombre crédible et faux. Ce
+    contrôle ne coûte rien et il lève au lieu de mentir.
     """
     import bpy
     dg = bpy.context.evaluated_depsgraph_get()
@@ -94,6 +114,13 @@ def _evalue(geo):
     mw = geo.matrix_world
     p = [mw @ v.co.copy() for v in m.vertices]
     ev.to_mesh_clear()
+    if len(p) != len(geo.data.vertices):
+        raise RuntimeError(
+            f"le maillage évalué a {len(p)} sommets pour "
+            f"{len(geo.data.vertices)} au repos : un modificateur change la "
+            "topologie, donc les indices rendus par `dominances()` ne "
+            "désignent plus les mêmes points et aucune des trois grandeurs ne "
+            "mesure ce qu'elle annonce")
     return p
 
 
@@ -307,23 +334,38 @@ def arc_transverse(p, tetes, palmaire, sommets):
     # que la tête de l'index et celle de l'auriculaire sont au même point — ce
     # n'est pas une paume plate, c'est une lecture cassée. Le cas ne peut pas
     # se produire sur une main réelle ; s'il se produit, il doit s'entendre.
-    if u.length < 1e-9:
+    if u.length < LONGUEUR_NULLE:
         raise RuntimeError("corde index↔auriculaire de longueur nulle : les "
                            "deux têtes métacarpiennes sont lues au même point")
     u = u.normalized()
     # Composante palmaire perpendiculaire à la corde : la flèche se mesure
     # perpendiculairement à ce qu'elle sous-tend, sinon on mesure de la longueur.
     n = (palmaire - u * palmaire.dot(u))
-    if n.length < 1e-9:
+    if n.length < LONGUEUR_NULLE:
         raise RuntimeError("la direction palmaire est colinéaire à la corde "
                            "index↔auriculaire : la flèche n'a pas de direction")
     n = n.normalized()
-    # `max(0.0, …)` est repris tel quel : la flèche est une profondeur côté
-    # paume. ATTENTION à la lecture — un arc INVERSÉ (paume convexe) sort ici à
-    # 0,00 exactement. Un 0,00 n'est donc pas « plat » : c'est « plat ou
-    # retourné », et ça se vérifie autrement. Sur le balayage publié la grandeur
-    # reste entre 19 et 30 mm, l'écrêtage n'a jamais servi.
-    return max(0.0, max((p[i] - a).dot(n) for i in sommets)) * EN_MM
+    fleche = max((p[i] - a).dot(n) for i in sommets)
+    # ═══ LE DERNIER ZÉRO FABRIQUÉ DU FICHIER ═══
+    # Relecture adverse : la version précédente écrivait `max(0.0, fleche)`,
+    # « repris tel quel de la sonde », et son propre commentaire admettait que
+    # le 0,00 qui en sort veut dire « plat OU retourné » — c'est-à-dire une
+    # mesure qui ne dit pas ce qu'elle mesure. C'est mot pour mot la règle 1 du
+    # dépôt : un zéro se lit comme une mesure. Le fichier avait déjà rompu le
+    # verbatim douze lignes plus haut pour cette raison exacte (corde nulle) ;
+    # garder l'écrêtage ici était donc une incohérence, pas une fidélité.
+    #
+    # AUCUN CHIFFRE PUBLIÉ NE CHANGE : sur le balayage de `b17e548` la flèche
+    # reste entre 19,10 et 29,99 mm, l'écrêtage n'a jamais mordu. Ce qui change,
+    # c'est qu'un arc retourné s'entend au lieu de se déguiser en paume plate.
+    if fleche < 0.0:
+        raise RuntimeError(
+            f"flèche NÉGATIVE ({fleche * EN_MM:.2f} mm) : aucun sommet palmaire "
+            "n'est du côté paume de la tête métacarpienne de l'index. L'arc est "
+            "retourné, ou la direction palmaire pointe vers le dos de la main — "
+            "dans les deux cas ce n'est pas une paume plate, et l'écrire 0,00 "
+            "serait annoncer une mesure là où il n'y a qu'une lecture cassée")
+    return fleche * EN_MM
 
 
 def largeur_paume(tetes):
@@ -412,7 +454,7 @@ def direction_palmaire(rig, geo, SIDE, dom):
     neutre(rig, SIDE)
 
     dep = _somme(p1[i] - p0[i] for i in bouts)
-    if dep.length < 1e-9:
+    if dep.length < LONGUEUR_NULLE:
         raise RuntimeError("fléchir à Fist = 0,5 ne déplace AUCUN bout de "
                            "doigt : soit les drivers n'ont pas été évalués, "
                            "soit le rig ne fléchit pas — dans les deux cas la "
@@ -420,12 +462,31 @@ def direction_palmaire(rig, geo, SIDE, dom):
 
     poignet = os_monde(rig, f"DEF_hand{SIDE}")
     knuck = {n: os_monde(rig, f"DEF_{n}_01{SIDE}") for n in NOMS4}
-    axe = ((_somme(knuck.values()) / 4.0) - poignet).normalized()
-    if axe.length < 1e-9:
+    # ═══ UNE GARDE PLACÉE APRÈS `.normalized()` NE GARDE PLUS RIEN ═══
+    # Relecture adverse : la version précédente écrivait
+    #     axe = (centre - poignet).normalized()
+    #     if axe.length < 1e-9: ...
+    # `mathutils` ne lève pas sur un vecteur nul, il rend un vecteur nul — donc
+    # ce test n'attrapait QUE le zéro strict. Un axe long de 1e-12 (poignet et
+    # jointures quasi confondus, ou lecture partiellement cassée) passait la
+    # garde et sortait normalisé : une direction de bruit, unitaire, donc
+    # parfaitement crédible dans la suite du calcul, où elle sert à retirer la
+    # composante axiale du déplacement. La direction palmaire entière en
+    # dépendait. Les trois autres gardes du fichier éprouvent le vecteur BRUT
+    # avant de le normaliser ; celle-ci était la seule à faire l'inverse, et
+    # c'est la seule qui ne pouvait pas échouer comme elle le prétendait.
+    #
+    # Le diviseur vient de `len(knuck)` et non d'un `4.0` écrit à la main : le
+    # `4` en dur était un second exemplaire de `len(NOMS4)`, et deux exemplaires
+    # d'une même quantité finissent par diverger — ajouter un cinquième rayon
+    # aurait laissé le centre des jointures faux sans rien casser visiblement.
+    axe = (_somme(knuck.values()) / float(len(knuck))) - poignet
+    if axe.length < LONGUEUR_NULLE:
         raise RuntimeError("le poignet et le centre des jointures sont au même "
                            "point : l'axe de la main ne s'établit pas")
+    axe = axe.normalized()
     palmaire = (dep - axe * dep.dot(axe))
-    if palmaire.length < 1e-9:
+    if palmaire.length < LONGUEUR_NULLE:
         raise RuntimeError("le déplacement des bouts est entièrement le long de "
                            "la main : il ne reste rien pour désigner la paume")
     palmaire = palmaire.normalized()
