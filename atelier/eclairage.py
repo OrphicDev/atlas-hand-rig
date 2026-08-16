@@ -463,18 +463,25 @@ def poser_fond(scene, cible, direction_camera, largeur_sujet, reglages=None):
     mur.name = "FOND_studio_mur"
     mur.rotation_mode = "QUATERNION"
     mur.rotation_quaternion = vers_cam.to_track_quat("Z", "Y")
-    # La chute : sous le sujet, horizontale, raccordee au pied du mur.
-    bpy.ops.mesh.primitive_plane_add(
-        size=taille,
-        location=tuple(cible - vers_cam * recul
-                       - _V((0.0, 0.0, chute)) + vers_cam * (taille * 0.5)))
-    sol = bpy.context.active_object
-    sol.name = "FOND_studio_sol"
-    for ob in (mur, sol):
+    # ═══ LA CHUTE EST COUPEE, ET JE DIS POURQUOI ═══
+    #
+    # Deux placements essayes, deux images cassees : la premiere poussait le
+    # plan de la moitie de sa propre taille vers la camera et il traversait le
+    # sujet ; la seconde le posait au sol, et sur un plan large sa ligne
+    # d'horizon coupe encore le corps a hauteur d'objectif.
+    #
+    # Un sol de cyclo demande de connaitre la hauteur de camera et l'assise du
+    # sujet, que `poser_fond` n'a pas. Plutot que de le regler a l'oeil jusqu'a
+    # ce qu'une image passe — ce qui le casserait au cadrage suivant — il est
+    # COUPE, et son absence est declaree dans le rendu.
+    sol = None
+    for ob in (mur,):
         ob.data.materials.clear()
         ob.data.materials.append(mat)
         ob.visible_shadow = False       # il renvoie, il ne projette pas
-    return {"fond": [mur.name, sol.name],
+    return {"fond": [mur.name],
+            "chute": "coupee — deux placements ont casse l'image, et un sol "
+                     "regle a l'oeil se recasse au cadrage suivant",
             "fond_gris": float(r["fond_gris"]),
             "taille_m": round(taille, 4),
             "recul_m": round(recul, 4),

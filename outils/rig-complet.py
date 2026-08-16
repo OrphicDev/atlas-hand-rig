@@ -111,8 +111,26 @@ if len(_rachis) < 8:
 # ── L'ÉTAGEMENT : cinq lombaires, douze thoraciques. On ne modélise pas les
 #    dix-sept, on pose CINQ os sur la ligne mesurée, aux fractions que
 #    l'anatomie donne pour les niveaux L5, L1, T8, T4 et T1.
-FRACTIONS_RACHIS = [0.0, 0.22, 0.46, 0.70, 0.88, 1.0]
-NOMS_RACHIS = ["spine_01", "spine_02", "spine_03", "spine_04", "chest"]
+# ═══ DIX-SEPT VERTEBRES, PAS CINQ BLOCS ═══
+#
+# Cinq os de rachis suffisent a faire plier un personnage ; ils ne suffisent
+# pas a le faire plier COMME UN DOS. Une colonne presacree humaine compte cinq
+# lombaires et douze thoraciques, et leurs hauteurs ne sont pas egales : les
+# lombaires sont les plus hautes, les thoraciques hautes les plus courtes.
+#
+# On garde donc la LIGNE MESUREE et on y etage dix-sept corps vertebraux selon
+# les hauteurs relatives de l'anatomie. La ligne vient de ce corps ; le decoupage
+# vient du squelette humain.
+HAUTEURS_LOMBAIRES = [1.00, 0.98, 0.96, 0.94, 0.92]          # L5 → L1
+HAUTEURS_THORACIQUES = [0.86, 0.84, 0.82, 0.80, 0.78, 0.76,  # T12 → T7
+                        0.74, 0.72, 0.70, 0.68, 0.66, 0.64]  # T6  → T1
+_h = HAUTEURS_LOMBAIRES + HAUTEURS_THORACIQUES
+_tot = sum(_h)
+FRACTIONS_RACHIS = [0.0]
+for _x in _h:
+    FRACTIONS_RACHIS.append(FRACTIONS_RACHIS[-1] + _x / _tot)
+NOMS_RACHIS = ([f"L{5 - _i}" for _i in range(5)]
+               + [f"T{12 - _i}" for _i in range(12)])
 
 
 def sur_la_ligne(ligne, f):
@@ -194,6 +212,24 @@ poser("root", (0.0, 0.0, Z_SOL), (0.0, 0.20, Z_SOL),
       note="au sol, sous le bassin mesuré")
 poser("pelvis", BASSIN, sur_la_ligne(_rachis, FRACTIONS_RACHIS[0]), "root",
       note="milieu des deux centres de hanche relevés")
+_L5 = sur_la_ligne(_rachis, FRACTIONS_RACHIS[0])
+poser("sacrum", BASSIN, BASSIN.lerp(_L5, 0.55), "pelvis", origine="proportion",
+      note="entre le milieu des hanches et L5, tous deux mesurés")
+_p = "sacrum"
+for _i in range(4):
+    _a = BASSIN.lerp(V((0.0, BASSIN.y + 0.05, BASSIN.z - 0.05)), _i / 4.0)
+    _b = BASSIN.lerp(V((0.0, BASSIN.y + 0.05, BASSIN.z - 0.05)), (_i + 1) / 4.0)
+    poser(f"coccyx_{_i + 1:02d}", _a, _b, _p, connecte=(_i > 0),
+          origine="proportion", note="quatre pièces coccygiennes")
+    _p = f"coccyx_{_i + 1:02d}"
+for _c, _s in (("L", -1.0), ("R", +1.0)):
+    poser(f"hip_blade.{_c}", BASSIN,
+          V((_s * abs(_hg.x) * 1.05, BASSIN.y + 0.03, BASSIN.z + 0.06)),
+          "pelvis", origine="proportion",
+          note="aile iliaque, sur la demi-largeur de hanche mesurée")
+    poser(f"glute.{_c}", V((_s * abs(_hg.x) * 0.7, BASSIN.y + 0.04, BASSIN.z)),
+          V((_s * abs(_hg.x) * 0.7, BASSIN.y + 0.09, BASSIN.z - 0.04)),
+          "pelvis", origine="proportion", note="masse fessière")
 
 # ── 4.2 · le rachis ───────────────────────────────────────────────
 _parent = "pelvis"
@@ -205,59 +241,195 @@ for _i, _nom in enumerate(NOMS_RACHIS):
                "L5-L1-T8-T4-T1")
     _parent = _nom
 
-# ── 4.3 · cou, tête, visage ───────────────────────────────────────
-_haut_rachis = sur_la_ligne(_rachis, 1.0)
-poser("neck_01", _haut_rachis, COU, "chest", connecte=True,
-      note="du haut du rachis mesuré au centre de cou relevé")
-_sommet_crane = V((0.0, COU.y, Z_SOMMET))
-poser("neck_02", COU, COU.lerp(_sommet_crane, 0.42), "neck_01", connecte=True,
-      origine="proportion", note="deux étages de cou entre deux points mesurés")
-_base_crane = COU.lerp(_sommet_crane, 0.42)
-poser("head", _base_crane, _sommet_crane, "neck_02", connecte=True,
-      note="jusqu'au sommet du crâne mesuré")
-
-# la mâchoire : charnière relevée au condyle, pointe au menton relevé
-_charniere = V((0.0, _condyle_src.y, _condyle_src.z))
-poser("jaw", _charniere, MENTON, "head",
-      note="charnière au condyle relevé, pointe au menton relevé")
-
-# les yeux : hauteur et demi-écart MESURÉS ; la profondeur du globe est une
-# proportion appliquée à la profondeur de tête mesurée.
-_prof_globe = TETE["profondeur"] * 0.22
+# ═══ LA CAGE : UN STERNUM ET DOUZE PAIRES DE CÔTES ═══
+# Un thorax qui se déforme comme un bloc n'a jamais l'air de respirer. Chaque
+# côte part de SA vertèbre — mesurée sur la ligne du rachis — et rejoint le
+# plan sternal, dont la profondeur vient de la profondeur de tronc mesurée.
+_t12 = sur_la_ligne(_rachis, FRACTIONS_RACHIS[5])
+_t1 = sur_la_ligne(_rachis, FRACTIONS_RACHIS[17])
+_tronc = [p for p in co if _t12.z < p.z < _t1.z and abs(p.x) < 0.20]
+_prof_tronc = max(q.y for q in _tronc) - min(q.y for q in _tronc)
+_demi_thorax = max(abs(q.x) for q in _tronc)
+poser("sternum", V((0.0, _t1.y - _prof_tronc * 0.85, _t1.z)),
+      V((0.0, _t12.y - _prof_tronc * 0.80, _t12.z + (_t1.z - _t12.z) * 0.25)),
+      "T1", origine="proportion",
+      note="sur la profondeur de tronc MESURÉE, 85 % en avant du rachis")
+for _n in range(1, 13):
+    _v = sur_la_ligne(_rachis, FRACTIONS_RACHIS[5 + (12 - _n)])
+    _f = 1.0 - abs(_n - 7) / 9.0          # les côtes moyennes sont les longues
+    for _c, _s in (("L", -1.0), ("R", +1.0)):
+        poser(f"rib_{_n:02d}.{_c}", _v,
+              V((_s * _demi_thorax * 0.92 * _f,
+                 _v.y - _prof_tronc * 0.62 * _f,
+                 _v.z - (_t1.z - _t12.z) * 0.06)),
+              f"T{_n}" if f"T{_n}" in arm.edit_bones else "T1",
+              origine="proportion",
+              note="de SA vertèbre mesurée vers le plan sternal ; la longueur "
+                   "suit la courbe des côtes, maximale à la 7e")
+poser("belly", sur_la_ligne(_rachis, FRACTIONS_RACHIS[3]),
+      V((0.0, sur_la_ligne(_rachis, FRACTIONS_RACHIS[3]).y - _prof_tronc * 0.75,
+         sur_la_ligne(_rachis, FRACTIONS_RACHIS[3]).z)), "L2",
+      origine="proportion", note="masse abdominale")
 for _c, _s in (("L", -1.0), ("R", +1.0)):
-    _centre = V((_s * _x_oeil * 0.52, _y_avant_oeil + _prof_globe, z_oeil))
-    poser(f"eye.{_c}", _centre, V((_centre.x, _y_avant_oeil - 0.01, z_oeil)),
-          "head", origine="proportion",
-          note="hauteur et demi-écart mesurés ; profondeur du globe = 22 % de "
-               "la profondeur de tête mesurée")
-    # sourcil et pommette, accrochés à la tête ; joue accrochée à la mâchoire
-    _z_sourcil = z_oeil + (Z_SOMMET - z_oeil) * 0.26
-    poser(f"brow.{_c}", V((_s * _x_oeil * 0.55, _y_avant_oeil + 0.012,
-                           _z_sourcil)),
-          V((_s * _x_oeil * 0.55, _y_avant_oeil - 0.006, _z_sourcil + 0.012)),
-          "head", origine="proportion",
-          note="26 % de la hauteur front-œil mesurée")
-    _z_pomm = z_oeil - (z_oeil - MENTON.z) * 0.30
-    poser(f"cheek.{_c}", V((_s * _x_oeil * 0.72, _y_avant_oeil + 0.02, _z_pomm)),
-          V((_s * _x_oeil * 0.72, _y_avant_oeil - 0.004, _z_pomm)),
-          "head", origine="proportion",
-          note="30 % de la hauteur œil-menton mesurée")
-    _z_bouche = MENTON.z + (z_oeil - MENTON.z) * 0.30
-    poser(f"lip_corner.{_c}", V((_s * _x_oeil * 0.42, _y_avant_oeil + 0.015,
-                                 _z_bouche)),
-          V((_s * _x_oeil * 0.42, _y_avant_oeil - 0.004, _z_bouche)),
-          "jaw", origine="proportion",
-          note="30 % de la hauteur menton-œil mesurée")
-_z_bouche = MENTON.z + (z_oeil - MENTON.z) * 0.30
-poser("lip_upper", V((0.0, _y_avant_oeil + 0.012, _z_bouche + 0.012)),
-      V((0.0, _y_avant_oeil - 0.006, _z_bouche + 0.012)), "head",
-      origine="proportion", note="au-dessus de la ligne de bouche")
-poser("lip_lower", V((0.0, _y_avant_oeil + 0.012, _z_bouche - 0.010)),
-      V((0.0, _y_avant_oeil - 0.006, _z_bouche - 0.010)), "jaw",
-      origine="proportion", note="sous la ligne de bouche, suit la mâchoire")
-poser("tongue", V((0.0, _y_avant_oeil + 0.055, _z_bouche - 0.004)),
-      V((0.0, _y_avant_oeil + 0.020, _z_bouche - 0.004)), "jaw",
-      origine="proportion", note="dans la cavité, suit la mâchoire")
+    poser(f"pec.{_c}", V((0.0, _t1.y - _prof_tronc * 0.60,
+                          _t1.z - (_t1.z - _t12.z) * 0.22)),
+          V((_s * _demi_thorax * 0.72, _t1.y - _prof_tronc * 0.72,
+             _t1.z - (_t1.z - _t12.z) * 0.30)), "T3", origine="proportion",
+          note="pectoral, sur la demi-largeur de thorax mesurée")
+    poser(f"lat.{_c}", V((_s * _demi_thorax * 0.30, _t1.y, _t1.z)),
+          V((_s * _demi_thorax * 0.85, _t12.y, _t12.z
+             + (_t1.z - _t12.z) * 0.35)), "T6", origine="proportion",
+          note="grand dorsal")
+    poser(f"trap.{_c}", sur_la_ligne(_rachis, 0.97),
+          V((_s * _demi_thorax * 0.62, _t1.y + 0.01, _t1.z)), "T1",
+          origine="proportion", note="trapèze")
+
+# ── 4.3 · cou, tête, visage ───────────────────────────────────────
+# ═══ SEPT CERVICALES ═══
+# Un cou humain en a sept, et c'est leur nombre qui lui donne sa courbe. Deux
+# os font tourner une tête ; ils ne font pas un cou.
+_haut_rachis = sur_la_ligne(_rachis, 1.0)
+_sommet_crane = V((0.0, COU.y, Z_SOMMET))
+_base_crane = COU.lerp(_sommet_crane, 0.30)
+_parent = "T1"
+for _i in range(7):
+    _a = _haut_rachis.lerp(_base_crane, _i / 7.0)
+    _b = _haut_rachis.lerp(_base_crane, (_i + 1) / 7.0)
+    poser(f"C{7 - _i}", _a, _b, _parent, connecte=(_i > 0),
+          origine=("mesure" if _i == 0 else "proportion"),
+          note=("du haut du rachis mesuré vers la base du crâne"
+                if _i == 0 else "sept cervicales étagées entre deux points "
+                                "mesurés"))
+    _parent = f"C{7 - _i}"
+poser("head", _base_crane, _sommet_crane, "C1", connecte=True,
+      note="de la base du crâne au sommet mesuré")
+poser("skull", _base_crane, V((0.0, TETE["y_avant"], z_oeil)), "head",
+      note="vers le point le plus antérieur de la face, relevé")
+
+# ═══ UN VISAGE, PAS TROIS OS ═══
+#
+# Douze os font bouger une tête ; ils ne font pas jouer un visage. Ce qui suit
+# pose les groupes que l'anatomie de surface donne : la mâchoire et son menton,
+# les quatre paupières, les sourcils en trois points chacun, le nez et ses
+# ailes, seize os de lèvres, les joues, les oreilles, la langue en trois
+# segments, et deux cibles de regard.
+#
+# ═══ ET L'ÉCART DES YEUX SE CORRIGE ═══
+# Le premier jet prenait le point le plus LATÉRAL de la tranche à hauteur d'œil.
+# C'est la largeur du crâne AUX OREILLES, pas la position des yeux : il donnait
+# 100 mm entre les pupilles là où un adulte est à 63. Une sonde qui mesure ce
+# qu'elle trouve au lieu de ce qu'elle cherche. On applique donc à la LARGEUR DE
+# TÊTE MESURÉE le rapport anthropométrique de l'écart interpupillaire, 0,33.
+DEMI_ECART_PUPILLES = TETE["largeur"] * 0.33 * 0.5
+_charniere_x = _condyle_src.x * 0.62      # le condyle est en dedans du tragus
+_h_face = z_oeil - MENTON.z               # hauteur œil → menton, MESURÉE
+_h_front = Z_SOMMET - z_oeil              # hauteur œil → sommet, MESURÉE
+_z_bouche = MENTON.z + _h_face * 0.30
+_prof_globe = TETE["profondeur"] * 0.22
+_av = _y_avant_oeil                        # la face, en avant
+
+for _c, _s in (("L", -1.0), ("R", +1.0)):
+    poser(f"jaw_hinge.{_c}",
+          V((_s * abs(_charniere_x), _condyle_src.y, _condyle_src.z)),
+          V((_s * abs(_charniere_x) * 0.5, MENTON.y, MENTON.z)), "head",
+          origine="proportion",
+          note="condyle relevé, rentré de 38 % vers l'axe")
+poser("jaw", V((0.0, _condyle_src.y, _condyle_src.z)), MENTON, "head",
+      note="charnière au condyle relevé, pointe au menton relevé")
+poser("chin", MENTON, V((0.0, MENTON.y - 0.012, MENTON.z + 0.008)), "jaw",
+      note="depuis le menton relevé")
+
+for _c, _s in (("L", -1.0), ("R", +1.0)):
+    _ex = _s * DEMI_ECART_PUPILLES
+    _centre_oeil = V((_ex, _av + _prof_globe, z_oeil))
+    poser(f"eye.{_c}", _centre_oeil, V((_ex, _av - 0.010, z_oeil)), "head",
+          origine="proportion",
+          note="hauteur d'œil MESURÉE ; écart = 33 % de la largeur de tête "
+               "mesurée ; globe à 22 % de la profondeur de tête mesurée")
+    poser(f"eye_aim.{_c}", V((_ex, _av - 0.10, z_oeil)),
+          V((_ex, _av - 0.14, z_oeil)), "head", origine="proportion",
+          note="cible de regard, devant l'œil")
+    # les quatre paupières
+    for _n, _dz in (("lid_upper", +0.011), ("lid_lower", -0.010)):
+        poser(f"{_n}.{_c}", V((_ex, _av + 0.006, z_oeil + _dz)),
+              V((_ex, _av - 0.008, z_oeil + _dz * 1.4)), f"eye.{_c}",
+              origine="proportion", note="paupière, sur le globe mesuré")
+    for _n, _dx in (("lid_inner", -0.45), ("lid_outer", +0.85)):
+        poser(f"{_n}.{_c}", V((_ex + _s * DEMI_ECART_PUPILLES * _dx,
+                               _av + 0.004, z_oeil)),
+              V((_ex + _s * DEMI_ECART_PUPILLES * _dx, _av - 0.008, z_oeil)),
+              f"eye.{_c}", origine="proportion",
+              note="coin interne et coin externe de l'œil")
+    # le sourcil en trois points
+    _z_sc = z_oeil + _h_front * 0.20
+    for _n, _fx in (("brow_inner", 0.35), ("brow_mid", 0.95),
+                    ("brow_outer", 1.45)):
+        poser(f"{_n}.{_c}",
+              V((_s * DEMI_ECART_PUPILLES * _fx, _av + 0.014, _z_sc)),
+              V((_s * DEMI_ECART_PUPILLES * _fx, _av - 0.004, _z_sc + 0.010)),
+              "head", origine="proportion",
+              note="sourcil à 20 % de la hauteur œil-sommet mesurée")
+    # la joue, en deux étages
+    for _n, _fz, _fx in (("cheek_upper", 0.28, 1.25), ("cheek_lower", 0.55, 1.10)):
+        _z = z_oeil - _h_face * _fz
+        poser(f"{_n}.{_c}", V((_s * DEMI_ECART_PUPILLES * _fx, _av + 0.024, _z)),
+              V((_s * DEMI_ECART_PUPILLES * _fx, _av - 0.004, _z)), "head",
+              origine="proportion",
+              note="fraction de la hauteur œil-menton mesurée")
+    # l'aile du nez
+    _z_nez = z_oeil - _h_face * 0.42
+    poser(f"nostril.{_c}", V((_s * DEMI_ECART_PUPILLES * 0.42, _av + 0.014,
+                              _z_nez)),
+          V((_s * DEMI_ECART_PUPILLES * 0.62, _av - 0.006, _z_nez)), "head",
+          origine="proportion", note="aile du nez")
+    # l'oreille, sur le point le plus latéral relevé
+    poser(f"ear.{_c}", V((_s * abs(_condyle_src.x) * 0.94, _condyle_src.y + 0.02,
+                          _condyle_src.z + 0.012)),
+          V((_s * abs(_condyle_src.x) * 1.02, _condyle_src.y + 0.02,
+             _condyle_src.z - 0.030)), "head",
+          note="au point le plus latéral de la tête sous les yeux, relevé")
+    # huit os de lèvres par côté : deux étages, deux profondeurs
+    for _lvl, _dz, _par in (("upper", +0.010, "head"),
+                            ("lower", -0.010, "jaw")):
+        for _pos, _fx in (("in", 0.30), ("mid", 0.62), ("out", 0.92),
+                          ("corner", 1.10)):
+            poser(f"lip_{_lvl}_{_pos}.{_c}",
+                  V((_s * DEMI_ECART_PUPILLES * _fx, _av + 0.014,
+                     _z_bouche + _dz)),
+                  V((_s * DEMI_ECART_PUPILLES * _fx, _av - 0.004,
+                     _z_bouche + _dz)), _par, origine="proportion",
+                  note="ligne de bouche à 30 % de la hauteur menton-œil "
+                       "mesurée")
+
+# l'arête du nez, la pointe, et le philtrum, sur l'axe
+poser("nose_bridge", V((0.0, _av + 0.020, z_oeil)),
+      V((0.0, _av - 0.004, z_oeil - _h_face * 0.24)), "head",
+      origine="proportion", note="de la racine à mi-hauteur du nez")
+poser("nose_tip", V((0.0, _av - 0.004, z_oeil - _h_face * 0.24)),
+      V((0.0, _av - 0.018, z_oeil - _h_face * 0.42)), "nose_bridge",
+      connecte=True, origine="proportion", note="pointe du nez")
+poser("philtrum", V((0.0, _av + 0.010, z_oeil - _h_face * 0.52)),
+      V((0.0, _av - 0.004, _z_bouche + 0.014)), "head", origine="proportion",
+      note="entre le nez et la lèvre")
+for _lvl, _dz, _par in (("upper", +0.012, "head"), ("lower", -0.012, "jaw")):
+    poser(f"lip_{_lvl}_mid", V((0.0, _av + 0.014, _z_bouche + _dz)),
+          V((0.0, _av - 0.006, _z_bouche + _dz)), _par, origine="proportion",
+          note="milieu de la lèvre")
+# la langue, en trois segments
+_p = "jaw"
+for _i in range(3):
+    _y0 = _av + 0.070 - _i * 0.020
+    poser(f"tongue_{_i + 1:02d}", V((0.0, _y0, _z_bouche - 0.004)),
+          V((0.0, _y0 - 0.020, _z_bouche - 0.004)), _p, connecte=(_i > 0),
+          origine="proportion", note="langue en trois segments")
+    _p = f"tongue_{_i + 1:02d}"
+# les dents, accrochées au crâne et à la mâchoire
+poser("teeth_upper", V((0.0, _av + 0.030, _z_bouche + 0.014)),
+      V((0.0, _av + 0.004, _z_bouche + 0.014)), "head", origine="proportion",
+      note="arcade supérieure")
+poser("teeth_lower", V((0.0, _av + 0.030, _z_bouche - 0.014)),
+      V((0.0, _av + 0.004, _z_bouche - 0.014)), "jaw", origine="proportion",
+      note="arcade inférieure, suit la mâchoire")
 
 # ── 4.4 · bras et mains ───────────────────────────────────────────
 NOMS_DOIGTS = ["thumb", "index", "middle", "ring", "pinky"]
@@ -267,12 +439,29 @@ for _c, _sfx in (("g", ".L"), ("d", ".R")):
     _ep = _B["epaule"]["centre"]
     _co = _B["coude"]["centre"]
     _po = _B["poignet"]["centre"]
-    poser(f"clavicle{_sfx}", sur_la_ligne(_rachis, 0.93), _ep, "chest",
+    # ═══ L'OMOPLATE EXISTE, ET ELLE GLISSE ═══
+    # Une clavicule seule fait monter l'épaule ; elle ne la fait pas AVANCER ni
+    # tourner. L'omoplate est l'os qui porte la moitié du mouvement d'épaule.
+    poser(f"scapula{_sfx}", sur_la_ligne(_rachis, 0.86),
+          _ep + V((0.0, 0.02, 0.0)), "T1", origine="proportion",
+          note="du rachis mesuré vers l'arrière de l'épaule relevée")
+    poser(f"clavicle{_sfx}", sur_la_ligne(_rachis, 0.93), _ep, "T1",
           note="du rachis mesuré au centre d'épaule relevé")
     poser(f"upperarm{_sfx}", _ep, _co, f"clavicle{_sfx}", connecte=True,
           note="épaule et coude relevés par les creux de section")
+    # ═══ LES OS DE VRILLE ═══
+    # Sans eux, l'avant-bras se tord comme un torchon entre le coude et le
+    # poignet : toute la rotation est portée par UNE articulation. Un radius
+    # tourne sur l'ulna sur toute sa longueur, et c'est ce que ces os répartissent.
+    poser(f"upperarm_twist{_sfx}", _ep.lerp(_co, 0.55), _co,
+          f"upperarm{_sfx}", origine="proportion",
+          note="répartit la rotation d'épaule sur la moitié distale")
     poser(f"forearm{_sfx}", _co, _po, f"upperarm{_sfx}", connecte=True,
           note="coude et poignet relevés")
+    for _k, _f0, _f1 in ((1, 0.33, 0.66), (2, 0.66, 1.0)):
+        poser(f"forearm_twist_{_k:02d}{_sfx}", _co.lerp(_po, _f0),
+              _co.lerp(_po, _f1), f"forearm{_sfx}", origine="proportion",
+              note="deux vrilles réparties sur l'avant-bras mesuré")
 
     _M = MAIN[_c]
     _dg = _M["doigts"]
@@ -306,7 +495,29 @@ for _c, _sfx in (("g", ".L"), ("d", ".R")):
             _prec = f"{_nd}_{_k + 1:02d}{_sfx}"
             _dep = _p
 
-# ── 4.5 · jambes et pieds ─────────────────────────────────────────
+# ── 4.5 · jambes, pieds et orteils ────────────────────────────────
+# ═══ CINQ ORTEILS, PAS UN BLOC ═══
+# On tente d'abord de les DÉTACHER par la mesure, comme les doigts : une coupe
+# sphérique depuis la cheville, au rayon qui rend le plus de morceaux. Si le
+# maillage ne les sépare pas — les orteils se touchent souvent sur un corps de
+# base — on les répartit sur la largeur d'avant-pied MESURÉE, et on le DIT.
+NOMS_ORTEILS = ["big_toe", "toe_02", "toe_03", "toe_04", "toe_05"]
+
+
+def orteils_mesures(cheville, bout, indices):
+    pts = [(i, co[i]) for i in indices]
+    meilleur = (0, None, 0.0)
+    r = (bout - cheville).length * 0.45
+    while r < (bout - cheville).length * 0.95:
+        loin = [i for i, q in pts if (q - cheville).length > r]
+        if len(loin) > 40:
+            ms = A.morceaux(corps, loin, co)
+            if len(ms) > meilleur[0]:
+                meilleur = (len(ms), ms, r)
+        r += 0.004
+    return meilleur
+
+
 for _c, _sfx in (("g", ".L"), ("d", ".R")):
     _J = R["jambe_" + _c]
     _ha = _J["hanche"]["centre"]
@@ -315,38 +526,153 @@ for _c, _sfx in (("g", ".L"), ("d", ".R")):
     _bo = V(_J["bout_orteil"])
     poser(f"thigh{_sfx}", _ha, _ge, "pelvis",
           note="hanche et genou relevés par les creux de section")
+    for _k, _f0, _f1 in ((1, 0.0, 0.33), (2, 0.33, 0.66)):
+        poser(f"thigh_twist_{_k:02d}{_sfx}", _ha.lerp(_ge, _f0),
+              _ha.lerp(_ge, _f1), f"thigh{_sfx}", origine="proportion",
+              note="deux vrilles réparties sur la cuisse mesurée")
     poser(f"shin{_sfx}", _ge, _ch, f"thigh{_sfx}", connecte=True,
           note="genou et cheville relevés")
-    # la base des orteils : sur l'axe cheville→bout, à la proportion du pied
+    for _k, _f0, _f1 in ((1, 0.33, 0.66), (2, 0.66, 1.0)):
+        poser(f"shin_twist_{_k:02d}{_sfx}", _ge.lerp(_ch, _f0),
+              _ge.lerp(_ch, _f1), f"shin{_sfx}", origine="proportion",
+              note="deux vrilles réparties sur la jambe mesurée")
+    # le talon : le point le plus postérieur du pied, RELEVÉ
+    _pied = [p for p in co if p.z < _ch.z + 0.02
+             and (p.x < 0) == (_ch.x < 0) and abs(p.x - _ch.x) < 0.12]
+    if not _pied:
+        raise SystemExit(f"ATLAS_REFUS aucun sommet de pied {_sfx}")
+    _talon = max(_pied, key=lambda p: p.y)
+    poser(f"heel{_sfx}", _ch, _talon, f"shin{_sfx}",
+          note="cheville relevée jusqu'au point le plus postérieur du pied")
     _base_orteils = _ch.lerp(_bo, 0.68)
     poser(f"foot{_sfx}", _ch, _base_orteils, f"shin{_sfx}", connecte=True,
           origine="proportion",
           note="cheville et bout d'orteil relevés ; la base des orteils est à "
                "68 % de cette longueur mesurée")
-    poser(f"toe{_sfx}", _base_orteils, _bo, f"foot{_sfx}", connecte=True,
-          note="jusqu'au bout d'orteil relevé")
+    # ── les cinq orteils
+    _idx_pied = [i for i, p in enumerate(co) if p.z < _ch.z
+                 and (p.x < 0) == (_ch.x < 0) and abs(p.x - _ch.x) < 0.14]
+    _n, _ms, _r = orteils_mesures(_ch, _bo, _idx_pied)
+    _travers = V((1.0, 0.0, 0.0)) if abs(_ch.x) > 1e-6 else V((1.0, 0.0, 0.0))
+    _axe_pied = (_bo - _ch).normalized()
+    _largeur = (max(p.x for p in _pied) - min(p.x for p in _pied))
+    dire(f"orteils_{_c}", {
+        "morceaux_detaches": _n, "rayon_de_coupe_m": round(_r, 4),
+        "largeur_avant_pied_mm": round(_largeur * 1000, 1),
+        "origine": ("mesure" if _n >= 5 else
+                    "proportion — le maillage ne sépare pas les orteils, ils "
+                    "sont répartis sur la largeur d'avant-pied MESURÉE")})
+    if _n >= 5:
+        _bouts = []
+        for _m in _ms:
+            _q = [co[i] for i in _m]
+            _bouts.append(max(_q, key=lambda x: (x - _ch).dot(_axe_pied)))
+        _bouts.sort(key=lambda q: q.x * (1 if _ch.x < 0 else -1))
+        _origine_orteils = "mesure"
+    else:
+        _bouts = []
+        for _k in range(5):
+            _f = (_k + 0.5) / 5.0 - 0.5
+            _lg = 1.0 - abs(_k - 0.6) * 0.09
+            _bouts.append(V((_base_orteils.x + _f * _largeur * 0.82,
+                             _base_orteils.y
+                             + (_bo - _base_orteils).y * _lg,
+                             _bo.z)))
+        _origine_orteils = "proportion"
+    for _k, (_nom, _bt) in enumerate(zip(NOMS_ORTEILS, _bouts)):
+        _f = (_k + 0.5) / 5.0 - 0.5
+        _racine = V((_base_orteils.x + _f * _largeur * 0.72,
+                     _base_orteils.y, _base_orteils.z))
+        # le métatarsien, puis deux ou trois phalanges
+        poser(f"{_nom}_meta{_sfx}", _ch.lerp(_racine, 0.35), _racine,
+              f"foot{_sfx}", origine="proportion",
+              note="métatarsien, entre la cheville et la base d'orteil")
+        _n_ph = 2 if _nom == "big_toe" else 3
+        _prec = f"{_nom}_meta{_sfx}"
+        _dep = _racine
+        for _ph in range(_n_ph):
+            _pt = _racine.lerp(_bt, (_ph + 1) / _n_ph)
+            poser(f"{_nom}_{_ph + 1:02d}{_sfx}", _dep, _pt, _prec,
+                  connecte=True, origine=_origine_orteils,
+                  note=("bout d'orteil détaché par la mesure"
+                        if _origine_orteils == "mesure"
+                        else "réparti sur la largeur d'avant-pied mesurée"))
+            _prec = f"{_nom}_{_ph + 1:02d}{_sfx}"
+            _dep = _pt
+    # ── les os de déformation des articulations porteuses
+    for _nom, _a, _b in ((f"knee_deform{_sfx}", _ge, _ge.lerp(_ch, 0.18)),
+                         (f"hip_deform{_sfx}", _ha, _ha.lerp(_ge, 0.18)),
+                         (f"ankle_deform{_sfx}", _ch, _ch.lerp(_bo, 0.18)),
+                         (f"calf{_sfx}", _ge.lerp(_ch, 0.20),
+                          _ge.lerp(_ch, 0.55))):
+        poser(_nom, _a, _b, f"shin{_sfx}" if "knee" in _nom or "calf" in _nom
+              else (f"thigh{_sfx}" if "hip" in _nom else f"foot{_sfx}"),
+              origine="proportion",
+              note="os de déformation, sur une longueur mesurée")
+
+# ── 4.6 · les déformations des membres supérieurs ─────────────────
+for _c, _sfx in (("g", ".L"), ("d", ".R")):
+    _B = R["bras_" + _c]
+    _ep, _co2, _po = (_B["epaule"]["centre"], _B["coude"]["centre"],
+                      _B["poignet"]["centre"])
+    for _nom, _a, _b, _par in (
+            (f"shoulder_deform{_sfx}", _ep, _ep.lerp(_co2, 0.18),
+             f"upperarm{_sfx}"),
+            (f"elbow_deform{_sfx}", _co2, _co2.lerp(_po, 0.18),
+             f"forearm{_sfx}"),
+            (f"wrist_deform{_sfx}", _po, _po.lerp(_co2, 0.15),
+             f"hand{_sfx}"),
+            (f"biceps{_sfx}", _ep.lerp(_co2, 0.25), _ep.lerp(_co2, 0.70),
+             f"upperarm{_sfx}"),
+            (f"triceps{_sfx}", _ep.lerp(_co2, 0.20), _ep.lerp(_co2, 0.75),
+             f"upperarm{_sfx}"),
+            (f"deltoid{_sfx}", _ep, _ep.lerp(_co2, 0.35),
+             f"upperarm{_sfx}")):
+        poser(_nom, _a, _b, _par, origine="proportion",
+              note="os de déformation ou de muscle, sur une longueur mesurée")
 
 bpy.ops.object.mode_set(mode="OBJECT")
 
 _n_os = len(arm.bones)
+def _n(pred):
+    return sum(1 for b in arm.bones if pred(b.name))
+
+
+_g = {
+    "bassin_et_sacrum": _n(lambda n: n.split(".")[0] in
+                           ("root", "pelvis", "sacrum") or
+                           n.startswith(("coccyx", "hip_blade", "glute"))),
+    "rachis": _n(lambda n: (n[0] in "LT" and n[1:].isdigit())),
+    "cage_et_tronc": _n(lambda n: n.startswith(("rib_", "sternum", "belly",
+                                                "pec.", "lat.", "trap."))),
+    "cou": _n(lambda n: n[0] == "C" and n[1:].isdigit()),
+    "tete": _n(lambda n: n in ("head", "skull")),
+    "visage": _n(lambda n: n.split(".")[0] in
+                 ("jaw", "jaw_hinge", "chin", "eye", "eye_aim", "lid_upper",
+                  "lid_lower", "lid_inner", "lid_outer", "brow_inner",
+                  "brow_mid", "brow_outer", "cheek_upper", "cheek_lower",
+                  "nostril", "ear", "nose_bridge", "nose_tip", "philtrum",
+                  "teeth_upper", "teeth_lower", "lip_upper_mid",
+                  "lip_lower_mid") or n.startswith(("lip_upper_", "lip_lower_",
+                                                    "tongue_"))),
+    "epaules_et_bras": _n(lambda n: n.startswith(
+        ("scapula", "clavicle", "upperarm", "forearm", "hand"))),
+    "doigts": _n(lambda n: n.split("_")[0] in NOMS_DOIGTS),
+    "jambes_et_pieds": _n(lambda n: n.startswith(
+        ("thigh", "shin", "foot", "heel"))),
+    "orteils": _n(lambda n: n.split("_")[0] in ("big", "toe")),
+    "deformation_et_muscles": _n(lambda n: n.startswith(
+        ("knee_deform", "hip_deform", "ankle_deform", "calf",
+         "shoulder_deform", "elbow_deform", "wrist_deform", "biceps",
+         "triceps", "deltoid"))),
+}
 dire("recensement", {
-    "os_total": _n_os,
+    "os_total": len(arm.bones),
     "poses_par_mesure": len(CENSUS["mesure"]),
     "poses_par_proportion_sur_longueur_mesuree": len(CENSUS["proportion"]),
-    "groupes": {
-        "rachis_et_bassin": sum(1 for b in arm.bones if b.name.startswith(
-            ("root", "pelvis", "spine", "chest"))),
-        "cou_et_tete": sum(1 for b in arm.bones if b.name.startswith(
-            ("neck", "head"))),
-        "visage": sum(1 for b in arm.bones if b.name.split(".")[0] in
-                      ("jaw", "eye", "brow", "cheek", "lip_corner",
-                       "lip_upper", "lip_lower", "tongue")),
-        "bras": sum(1 for b in arm.bones if b.name.startswith(
-            ("clavicle", "upperarm", "forearm", "hand"))),
-        "doigts": sum(1 for b in arm.bones
-                      if b.name.split("_")[0] in NOMS_DOIGTS),
-        "jambes": sum(1 for b in arm.bones if b.name.startswith(
-            ("thigh", "shin", "foot", "toe")))}})
+    "groupes": _g,
+    "somme_des_groupes": sum(_g.values()),
+    "non_classes": len(arm.bones) - sum(_g.values())})
 dire("os_par_mesure", CENSUS["mesure"])
 dire("os_par_proportion", CENSUS["proportion"])
 

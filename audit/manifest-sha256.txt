@@ -6,7 +6,7 @@ b3b092a64bb1fbed2544b706409b35972441ee342867f9500c0a8bb7b9feb833  ./CHANGELOG.md
 c432d8253033ffc0eb7ef27fe413ad61619bc40389021dfb66af3fa1d6761cf8  ./STATUS.md
 9a64b81638bc93437f7554cf34105209bc02edf8b08e249d4c5a6d1101f647a3  ./atelier/articulations.py
 d8a20981c960507f157a6a6a1f72ca7c38b1b3efe1f0a2497a1d8501c17d2340  ./atelier/correctifs.py
-66b88a4350f7f99f9b12395d420ee63234a987ec4f11228a98c0d2b97d48a93c  ./atelier/eclairage.py
+fef62b95e517b48e6fe224aa7f8d9dd5c7e9adf44b417262d569d70de2a27c24  ./atelier/eclairage.py
 5056cc710aca9e136408b449f5aaed0edddba200d97f18e9e97560aba79a655e  ./atelier/humain.py
 d5d4686aab3e5ae08fa9f510aca0c9eed4425952be14fd5f1bc1e493f36e5dce  ./atelier/jacobienne.py
 3a3f6cfa6337dd9ce3fbf569a6fcb974471891136b6907a3faa7884b82a83a4d  ./atelier/mains.py
@@ -14,6 +14,7 @@ d5d4686aab3e5ae08fa9f510aca0c9eed4425952be14fd5f1bc1e493f36e5dce  ./atelier/jaco
 f91e7e8b0e4359e0a68aa40b39185d85e8394e29ba4d6951161aca3132aaea88  ./atelier/miroir.py
 41e7fafd79cdbfcd00ec18aba8a912c16db85093659da6b2f699877bd9f2d275  ./atelier/portillon.py
 672196e2740046d086f89f23c132794ecbf156e5e837afc357ff4ca421145f69  ./atelier/transitions.py
+fa886e7c50788189381760f20d2c4e9993cb9a898971dc6089d793f29741d531  ./atelier/visage.py
 09852770e54abd5e09dc8d2311276ca317fc9daa1a140a69129b57a9a64508b3  ./audit/AUDIT_PACKET_HANDS.md
 ae8154420f6e4006058a319512a74f513a507d541313ed1218a62d2d437957f0  ./audit/AUDIT_PACKET_HANDS_WIP.md
 f6d1abd70a4c5ecb2fa158447c87552024dfa74daa89cf70535d6611f843cf57  ./audit/wip-chat-1/audit-collisions.py
@@ -93,7 +94,8 @@ e0d83cdb532b06f88c3146ea2135bf29e1fc701a1ffc6769ad168cfec73a533f  ./outils/matri
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
 99fe022f6bc8dca1dfeecd760984ae32218f752dc68009532f29b458086cf4a9  ./outils/rendus-poses.py
 dae825130d79e5867f25d5c126c37e8587d970f8511361ec534128df629d85f8  ./outils/revue-visuelle.py
-01be046f1b6ef6ef9a898b751294cf33225a4124885578e7cf01ab64a2954a65  ./outils/rig-complet.py
+ed5b39122b53cc44ae119ea592c6f27600e2142b897c95baf013af94d4ad6071  ./outils/rig-complet.py
+914a45e09e77feae0fdaf73a95636521630ecd56c2a26194a905a122520828ee  ./outils/rig-humain.py
 ada8da16f212510e8db8ececcaf2129b340179997e38c889ef359bf2b0d2f1ae  ./outils/sonde-cascade.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
