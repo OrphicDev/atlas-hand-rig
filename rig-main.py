@@ -1710,13 +1710,32 @@ try:
     if len(_idx_thenar) < 20 or len(_idx_index) < 20:
         raise RuntimeError(f"masses palmaires trop petites pour un correctif : "
                            f"thénar {len(_idx_thenar)}, base index {len(_idx_index)}")
-    _ZONES = {
-        "thenar": correctifs.masque_geodesique(geo, _idx_thenar, 0.018, 0.032),
-        "index_root": correctifs.masque_geodesique(geo, _idx_index, 0.010, 0.022)}
-    _pts_now = [geo.matrix_world @ v.co for v in geo.data.vertices]
+    # ═══ UN MASQUE QUI PREND TOUTE LA PAUME NE CORRIGE PLUS UNE MASSE ═══
+    #
+    # Premier jet : rayons 18/32 mm autour de TOUS les sommets du métacarpien.
+    # Mesuré : 10 896 et 10 622 sommets, soit 20 % de la main chacun. La graine
+    # est déjà une grande région — un métacarpien tient une masse entière — et
+    # y ajouter 32 mm de propagation couvrait la paume d'un bord à l'autre. Un
+    # correctif qui pèse sur toute la paume ne corrige plus le thénar, il
+    # déplace la paume.
+    #
+    # On sème donc sur le CŒUR de la masse — les sommets les plus proches de
+    # son centre — et on propage court. Le correctif doit agir là où deux
+    # masses se rencontrent, pas partout où elles existent.
+    def _coeur(indices, part=0.35):
+        _c = sum((_pts_zone[i] for i in indices),
+                 mathutils.Vector((0, 0, 0))) / len(indices)
+        _tri = sorted(indices, key=lambda i: (_pts_zone[i] - _c).length)
+        return _tri[:max(8, int(len(_tri) * part))]
 
+    _pts_zone = [geo.matrix_world @ v.co for v in geo.data.vertices]
+    _ZONES = {
+        "thenar": correctifs.masque_geodesique(
+            geo, _coeur(_idx_thenar), 0.008, 0.016),
+        "index_root": correctifs.masque_geodesique(
+            geo, _coeur(_idx_index), 0.006, 0.012)}
     def _centre(masque):
-        _s = sum((_pts_now[i] for i in masque), mathutils.Vector((0, 0, 0)))
+        _s = sum((_pts_zone[i] for i in masque), mathutils.Vector((0, 0, 0)))
         return _s / max(1, len(masque))
 
     # ═══ ON NE SORT JAMAIS D'ICI EN MODE ÉDITION ═══

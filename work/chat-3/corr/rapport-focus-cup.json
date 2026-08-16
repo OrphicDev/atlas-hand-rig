@@ -299,29 +299,29 @@
   },
   "os_correctifs": {
     "thenar": {
-      "sommets": 10896,
+      "sommets": 3253,
       "centre_mm": [
-        -395.0,
-        -112.1,
-        885.8
+        -387.1,
+        -113.6,
+        882.4
       ]
     },
     "index_root": {
-      "sommets": 10622,
+      "sommets": 3230,
       "centre_mm": [
-        -410.9,
-        -109.4,
-        895.3
+        -412.1,
+        -112.4,
+        901.5
       ]
     },
-    "deplacement_du_repos_mm": 0.00015,
+    "deplacement_du_repos_mm": 0.00013,
     "regle": "les poids sont TRANSFÉRÉS depuis le parent, jamais ajoutés"
   },
   "preserve_volume": {
     "sans": {
       "intersections": 14798,
       "compression_min": 0.0976,
-      "compression_p1": 0.2651,
+      "compression_p1": 0.2652,
       "aretes_mesurees": 348384
     },
     "avec": {
