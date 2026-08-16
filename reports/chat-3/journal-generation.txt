@@ -62,3 +62,5 @@ ATLAS_BATTEMENT index/thumb tour 2/18 score=52552.6 distance=4.45mm traversées=
 ATLAS_BATTEMENT index/thumb tour 3/18 score=52552.6 distance=4.45mm traversées=0 (pas resserré)
 ATLAS_BATTEMENT index/thumb tour 4/18 score=37250.7 distance=2.79mm traversées=0
 ATLAS_BATTEMENT index/thumb tour 5/18 score=37250.7 distance=2.79mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/18 score=21955.7 distance=1.15mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 7/18 score=21955.7 distance=1.15mm traversées=0 (pas resserré)

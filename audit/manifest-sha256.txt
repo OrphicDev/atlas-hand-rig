@@ -89,7 +89,7 @@ cdb63f01abaff1d0f5e95f6161d143b89628d55adde7e02e2e835a9130366087  ./outils/annea
 f8eb801b9cca4d5b404002edb27135ae3097aa08a7ae72dd7e2f87970e6c52e8  ./outils/comparer-rapports.py
 e0d83cdb532b06f88c3146ea2135bf29e1fc701a1ffc6769ad168cfec73a533f  ./outils/matrice-acceptation.py
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
-b273ea9b868424fc88b8c0c0169e68087ce590d8b10b428bb8d51df99f0bb9ed  ./outils/rendus-poses.py
+53c562039a43e192109d24e7c73129fb90bc2dbf052783dec9cca6c92aac233d  ./outils/rendus-poses.py
 dae825130d79e5867f25d5c126c37e8587d970f8511361ec534128df629d85f8  ./outils/revue-visuelle.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
@@ -212,7 +212,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-5970946b455123ad4170721963334e28ce112e11369339b62f504f6cd28a9086  ./reports/chat-3/journal-generation.txt
+5c2d828de65366d5a4f9224e370bbb26378e07928d2994e95f1147cd4542c262  ./reports/chat-3/journal-generation.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json

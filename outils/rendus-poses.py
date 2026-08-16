@@ -170,6 +170,92 @@ for _nom_a in sorted(ACTIONS):
     print(f"ATLAS_RENDU {_nom_a} — {len(VUES)} vues")
 neutre()
 
+# ═══ LES GROS PLANS ET LES OVERLAYS (§13) ═══
+#
+# Un tableau dit COMBIEN de sommets se traversent, jamais OU. « 211 sommets »
+# ne se corrige pas : c'est pour ca que ce defaut a survecu a deux chats. Les
+# sommets fautifs sont peints en rouge, avec la MEME camera que la vue propre —
+# deux cadrages differents rendraient la comparaison impossible a faire a
+# l'oeil, ce qui est tout le travail de ces images.
+if GROS_PLANS:
+    _mat = bpy.data.materials.new("ATLAS_traversant")
+    _mat.use_nodes = True
+    _mat.node_tree.nodes["Principled BSDF"].inputs["Base Color"] \
+        .default_value = (0.85, 0.12, 0.10, 1.0)
+    geo.data.materials.append(_mat)
+    _irouge = len(geo.data.materials) - 1
+    _PROF, _ECART = 0.0005, 0.014
+    neutre()
+    _prepos = sommets()
+
+    def _fautifs():
+        _p = sommets()
+        dg = bpy.context.evaluated_depsgraph_get()
+        ev = geo.evaluated_get(dg)
+        m = ev.to_mesh()
+        m3 = geo.matrix_world.to_3x3()
+        _n = [(m3 @ v.normal).normalized() for v in m.vertices]
+        ev.to_mesh_clear()
+        _fam = {}
+        for i, nm in _dom.items():
+            for f in ("index", "middle", "ring", "pinky", "thumb"):
+                if nm.startswith(f"DEF_{f}_"):
+                    _fam.setdefault(f, []).append(i)
+                    break
+            else:
+                if nm.startswith("DEF_"):
+                    _fam.setdefault("hand", []).append(i)
+        _arb = {}
+        for f, ii in _fam.items():
+            t = mathutils.kdtree.KDTree(len(ii))
+            for k, i in enumerate(ii):
+                t.insert(_p[i], k)
+            t.balance()
+            _arb[f] = (t, ii)
+        out = set()
+        fs = sorted(_arb)
+        for x in range(len(fs)):
+            for y in range(x + 1, len(fs)):
+                for a, b in ((fs[x], fs[y]), (fs[y], fs[x])):
+                    tb, ib = _arb[b]
+                    for i in _fam[a]:
+                        co, k, d = tb.find(_p[i])
+                        j = ib[k]
+                        if (d < 0.008
+                                and (_p[j] - _p[i]).dot(_n[j]) > _PROF
+                                and (_prepos[i] - _prepos[j]).length > _ECART):
+                            out.add(i)
+        return out
+
+    _ov = {}
+    for _na in ("Hand_Pinch", "Hand_OK", "Hand_Pinky_Thumb", "Hand_Fist",
+                "Hand_Point", "Hand_Cupped"):
+        if _na not in ACTIONS:
+            continue
+        neutre()
+        rig.animation_data_create()
+        rig.animation_data.action = ACTIONS[_na]
+        bpy.context.scene.frame_set(1)
+        bpy.context.view_layer.update()
+        _f = _fautifs()
+        # Une face n'est peinte que si TOUS ses sommets sont fautifs : peindre
+        # des qu'un seul l'est etalerait le rouge sur des zones saines et
+        # rendrait l'image plus alarmante que la mesure.
+        _np = 0
+        for _poly in geo.data.polygons:
+            if _f and all(v in _f for v in _poly.vertices):
+                _poly.material_index = _irouge
+                _np += 1
+        rafraichir()
+        rendre(f"overlay-{_na}-paume", PALMAIRE, +1)
+        for _poly in geo.data.polygons:
+            _poly.material_index = 0
+        rafraichir()
+        _ov[_na] = {"sommets_traversants": len(_f), "faces_peintes": _np}
+        print(f"ATLAS_OVERLAY {_na} : {len(_f)} sommets, {_np} faces")
+    neutre()
+    print("ATLAS_OVERLAYS " + json.dumps(_ov, ensure_ascii=False))
+
 print("\nATLAS_RENDUS " + json.dumps(
     {"dossier": DOSSIER, "images": _rendues, "histogrammes": _histos},
     ensure_ascii=False))
