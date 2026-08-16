@@ -3927,6 +3927,95 @@ if not SANS_RENDU:
 poser_etat(*POSE_POING)
 compression_stats = {f: compression(DEF[f][-1]) for f in NOMS4 + ["thumb"]}
 dire("compression_au_poing", compression_stats)
+
+# ═══════════════════════════════════════════════════════════════════
+#   LES VOLUMES DU POING — MESURÉS AVANT D'ÊTRE CORRIGÉS (§9.6)
+# ═══════════════════════════════════════════════════════════════════
+# Le cahier demande des dômes MCP lisibles au dos, des vallées entre eux, des
+# coussinets comprimés au contact, et surtout PAS de doigts réduits à des
+# cylindres. Ce sont quatre grandeurs différentes, et aucune n'était mesurée :
+# le dépôt ne regardait que la compression des arêtes, qui dit si la chair
+# s'écrase mais jamais si la SILHOUETTE tient.
+#
+# On les mesure d'abord. Sculpter avant de mesurer, ce serait corriger vers une
+# forme qu'on n'a pas définie — et le cahier interdit qu'un correctif masque de
+# mauvais poids, ce qui suppose de savoir distinguer les deux.
+def _dome_et_vallee():
+    """La bosse des jointures au dos, et le creux entre elles, en mm.
+
+    Le dôme se mesure comme une FLÈCHE : la saillie de la chair au-dessus de la
+    corde qui joint deux jointures voisines. Une main dont le dos est lisse
+    rend une flèche nulle — c'est l'effet « boucle de cylindres » que le cahier
+    proscrit, et il se lit sur ce seul nombre.
+    """
+    _p, _ = sommets_evalues()
+    _tetes = {n: rig.matrix_world @ rig.pose.bones[f"DEF_{n}_01{SIDE}"].head
+              for n in NOMS4}
+    _dos = -PALMAIRE_CUP
+    _out = {}
+    for _a, _b in (("index", "middle"), ("middle", "ring"), ("ring", "pinky")):
+        _ca, _cb = _tetes[_a], _tetes[_b]
+        _mid = (_ca + _cb) / 2.0
+        # Les sommets dorsaux proches du milieu de la corde.
+        _zone = [i for i, n in _dom.items()
+                 if n in (f"DEF_{_a}_01{SIDE}", f"DEF_{_b}_01{SIDE}",
+                          f"DEF_{_a}_meta{SIDE}", f"DEF_{_b}_meta{SIDE}")
+                 and (_p[i] - _mid).length < 0.018
+                 and (_p[i] - _mid).dot(_dos) > 0]
+        if len(_zone) < 5:
+            _out[f"{_a}/{_b}"] = None
+            continue
+        _h_dome = max((_p[i] - _ca).dot(_dos) for i in _zone) * 1000.0
+        _h_vallee = min((_p[i] - _ca).dot(_dos) for i in _zone) * 1000.0
+        _out[f"{_a}/{_b}"] = {"dome_mm": round(_h_dome, 2),
+                              "vallee_mm": round(_h_vallee, 2),
+                              "relief_mm": round(_h_dome - _h_vallee, 2)}
+    return _out
+
+
+def _epaisseur_des_doigts():
+    """Le diamètre de chaque phalange distale, au poing et au repos.
+
+    Un doigt qui perd son épaisseur en se fermant est un cylindre qui rétrécit,
+    pas de la chair qui se comprime : le volume doit se REDISTRIBUER sur les
+    côtés, pas disparaître.
+    """
+    _p, _ = sommets_evalues()
+    _out = {}
+    for _n in NOMS4:
+        _ii = [i for i, nm in _dom.items() if nm == f"DEF_{_n}_03{SIDE}"]
+        if len(_ii) < 8:
+            _out[_n] = None
+            continue
+        _c = sum((_p[i] for i in _ii), mathutils.Vector((0, 0, 0))) / len(_ii)
+        _out[_n] = round(2.0 * sum((_p[i] - _c).length for i in _ii)
+                         / len(_ii) * 1000.0, 2)
+    return _out
+
+
+regler()
+_epaisseur_repos = _epaisseur_des_doigts()
+poser_etat(*POSE_POING)
+_volumes_poing = {"domes_et_vallees": _dome_et_vallee(),
+                  "epaisseur_des_doigts_mm": _epaisseur_des_doigts(),
+                  "epaisseur_au_repos_mm": _epaisseur_repos}
+_relief = [v["relief_mm"] for v in _volumes_poing["domes_et_vallees"].values()
+           if v is not None]
+_garde_epaisseur = {}
+for _n in NOMS4:
+    _a, _b = _epaisseur_repos.get(_n), _volumes_poing["epaisseur_des_doigts_mm"].get(_n)
+    if _a and _b:
+        _garde_epaisseur[_n] = round(_b / _a, 3)
+_volumes_poing["part_d_epaisseur_conservee"] = _garde_epaisseur
+dire("volumes_du_poing", _volumes_poing)
+exiger("les jointures gardent du relief au dos du poing",
+       bool(_relief) and min(_relief) >= 1.0,
+       f"{min(_relief):.2f} mm au minimum" if _relief else "non mesurable",
+       "≥ 1,0 mm de relief entre dôme et vallée")
+exiger("les doigts ne se réduisent pas à des cylindres",
+       bool(_garde_epaisseur) and min(_garde_epaisseur.values()) >= 0.80,
+       _garde_epaisseur or "non mesurable",
+       "≥ 80 % de l'épaisseur de repos conservée")
 _calibre = {f: compression_stats[f]["min"] for f in ("thumb", "pinky", "index")}
 poser_etat(CONTACTS["Hand_Pinky_Thumb"]["props"],
            CONTACTS["Hand_Pinky_Thumb"]["os"])
