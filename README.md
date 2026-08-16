@@ -6,23 +6,57 @@ maillage déformé.
 
 > ## ⚠️ Ce rig n'est PAS validé
 >
-> **1 critère obligatoire reste faux** et il est décrit en détail plus bas.
-> Le fichier livré s'appelle `RIG_Hand.L-NON-VALIDE.blend` pour que son état soit
-> lisible sans ouvrir quoi que ce soit. **De l'aide est recherchée sur ce point.**
+> Des critères obligatoires restent faux, et ils sont nommés sans arrondi dans
+> [`STATUS.md`](STATUS.md). Le fichier livré s'appelle
+> `RIG_Hand.L-NON-VALIDE.blend` pour que son état soit lisible sans ouvrir quoi
+> que ce soit.
+
+---
+
+## Ce que ce dépôt a appris, et qui vaut au-delà du rig
+
+Le vérificateur de ce dépôt jugeait un fichier « 22 critères réussis, 9
+échoués ». Le même fichier, jugé par le vérificateur **étendu**, rend cinq
+échecs de plus : la paume s'aplatit au lieu de se creuser, elle s'élargit de
+14 mm, le poing ne se ferme qu'à 60 %.
+
+**Le rig n'était pas moins cassé avant. L'instrument ne regardait pas.**
+
+Ce dépôt tient donc une règle, et tout son outillage en découle :
+
+> **Une sonde doit pouvoir échouer.** Un instrument qui rend zéro parce qu'il
+> ne mesure rien est indiscernable d'un instrument qui rend zéro parce que tout
+> va bien — sauf si on l'a construit pour pouvoir tomber.
+
+Chaque sonde ici se contre-éprouve avant de conclure et **refuse de rendre un
+verdict** si sa contre-épreuve échoue. Cinquante et un refus sont exercés par
+les autotests, hors Blender, à chaque exécution.
 
 ---
 
 ## Ce qu'il y a dans ce dépôt
 
-| fichier | contenu |
+| chemin | contenu |
 | --- | --- |
-| `RIG_Hand.L-NON-VALIDE.blend` | le rig, en pose neutre, seuls les contrôleurs visibles |
-| `rig-main.py` | construit tout : audit, squelette, drivers, poses, rendus |
-| `verifier-rig.py` | **vérifie un `.blend` sans reconstruire le maillage** |
-| `atelier/` | les quatre modules dont dépend la construction |
-| `images/` | 52 rendus — 13 poses × 4 plans |
-| `images/gros-plans/` | 8 gros plans des contacts critiques |
-| `mesures/` | rapport complet, rapport d'échec, carnets d'enquête |
+| `rig-main.py` | construit tout : audit, squelette, drivers, poids, poses, correctifs, rendus |
+| `verifier-rig.py` | **juge un `.blend` sans reconstruire** — poses, transitions, `Cup`, poing, poids, drivers |
+| `atelier/mesures_paume.py` | arc transverse, largeur, convergence — sur la pose **courante** |
+| `atelier/correctifs.py` | masques géodésiques, transfert de poids, shape keys clairsemées |
+| `atelier/transitions.py` | de vraies actions clés, pas une interpolation recalculée |
+| `atelier/jacobienne.py` | convertir un déplacement voulu **dans la pose** en delta de clé |
+| `atelier/miroir.py` | la main droite se **transfère**, avec une table de signes mesurée |
+| `atelier/eclairage.py` | studio rasant, exposition verrouillée, histogrammes |
+| `outils/sonde-ecartement.py` | l'écartement écarte-t-il ? |
+| `outils/sonde-creux.py` | la paume se creuse-t-elle, et quel axe la creuse ? |
+| `outils/sonde-poids-main.py` | quels sommets n'ont pas de propriétaire ? |
+| `outils/anneau.py` | le **diamètre utile** du trou, pas le minimum du contour |
+| `outils/rendus-poses.py` | les preuves visuelles, **depuis un `.blend`** |
+| `outils/playblast-transitions.py` | les six séquences de transition |
+| `outils/revue-visuelle.py` | ce qu'une image montre, avant qu'on la note |
+| `outils/comparer-rapports.py` | le tableau de régression |
+| `outils/matrice-acceptation.py` | la matrice du cahier, **produite** et jamais recopiée |
+| `reports/chat-3/final/poses/` | 78 rendus, six vues par pose |
+| `reports/chat-3/transitions/` | 150 images, six séquences |
 
 ---
 
@@ -30,151 +64,92 @@ maillage déformé.
 
 **Blender 5.1.2.** Aucun add-on.
 
-Vérifier le rig livré — ne demande **aucun** téléchargement :
+Juger le rig livré — ne demande **aucun** téléchargement :
 
 ```bash
-blender --background --factory-startup --python verifier-rig.py -- RIG_Hand.L-NON-VALIDE.blend
+blender --background --factory-startup --python-exit-code 1 \
+  --python verifier-rig.py -- RIG_Hand.L-NON-VALIDE.blend
 ```
 
-Exécuté dans un clone propre : **code de sortie 2**, 12 critères passent, 1
-échoue (celui décrit plus bas). Le script sort en erreur dès qu'un critère
-obligatoire est faux — c'est voulu.
-
-Reconstruire depuis zéro — demande le maillage de base :
+Reconstruire — demande le maillage de base :
 
 ```bash
 export ATLAS_BASE_MESH=/chemin/vers/human_base_meshes_bundle.blend
-blender --background --factory-startup --python rig-main.py -- ./sortie homme g 110
+blender --background --factory-startup --python-exit-code 1 \
+  --python rig-main.py -- sortie homme g 110 mesure
 ```
 
-### Résultat des deux commandes, exécutées dans un dossier temporaire propre
+**Compter quatre heures.** Les recherches de contact et le nettoyage des
+transitions dominent. Pour apprendre vite, le mode ciblé s'arrête dès que la
+question posée a sa réponse :
 
-| commande | code de sortie | résultat |
-| --- | --- | --- |
-| `verifier-rig.py` | **2** | 12 critères passent, 1 échoue — aucun téléchargement requis |
-| `rig-main.py` (reconstruction complète) | **2** | 25 critères passent, 1 échoue — résultat identique au dépôt de travail |
+```bash
+blender --background --factory-startup --python-exit-code 1 \
+  --python rig-main.py -- work homme g 110 mesure focus=cup
+```
 
-Le code 2 est le comportement voulu : un critère obligatoire faux fait échouer
-le pipeline. Il vaudra 0 quand le défaut décrit plus bas sera corrigé.
+`focus=cup|weights|pinky|fist|ok|all`. **Le fichier qu'un focus produit n'a
+jamais le droit de s'appeler valide** : il existe pour apprendre, et toute
+correction retenue doit être rejouée par `focus=all`.
+
+`--python-exit-code 1` n'est pas décoratif : sans lui, les scripts sortent en
+code 0 après un plantage, et un échec se lit comme un succès.
 
 Le maillage de base est le **Human Base Meshes bundle** de Blender Studio,
-publié en **CC0** ([source](https://studio.blender.org/tools/assets/human-base-meshes),
-version 1.4.1, 47 Mo). Il n'est pas versionné ici : trop lourd, et inutile pour
-vérifier le rig.
+publié en **CC0**
+([source](https://studio.blender.org/tools/assets/human-base-meshes)),
+version 1.4.1, 49 420 489 octets,
+SHA-256 `3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137`.
 
 ---
 
-## Journal avant / après
+## Les pièges déjà payés — ne pas les repayer
 
-L'état de départ est le commit `4bfab88`, audité et jugé incorrect.
+Chacun a coûté des heures, et aucun n'aurait planté bruyamment.
 
-| mesure | avant | après | exigé |
-| --- | --- | --- | --- |
-| compression min. du pouce au poing | 0,106 | 0.7494 | ≥ 0,25 |
-| pouce–index dans `Hand_Pinch` | 29,8 mm | 0.8 mm | ≤ 1,0 mm |
-| pouce–index dans `Hand_OK` | 32,8 mm | 0.8 mm | ≤ 1,0 mm |
-| pouce–auriculaire | 2,47 mm | 0.9 mm | ≤ 1,0 mm |
-| auto-intersections (poing) | non mesurées | aucune | aucune |
-| auto-intersections (pince auriculaire) | non mesurées | **26 sommets** | aucune |
-| contamination hors commissures | 2 sommets | 0 | 0 |
-| écart au retour au repos | 0,0 mm | 0,0000 mm | < 0,01 mm |
-| reproductible depuis un clone | non | oui | oui |
-
-
----
-
-## Le défaut qui reste
-
-**La pose `Hand_Pinky_Thumb` fait se traverser 26 sommets.**
-
-Les deux pulpes se touchent bien — 0,90 mm, orientées face à face à −0,73 — mais
-la chair se traverse ailleurs. J'ai cherché *où*, au lieu de retenter au hasard,
-et la réponse est nette :
-
-```
-DEF_thumb_meta.L → DEF_index_meta.L : 26 sommets
-```
-
-**Ce n'est pas un doigt qui en traverse un autre.** C'est l'**éminence thénar**
-contre la **base de l'index** — deux masses de la paume qui se replient l'une
-sur l'autre quand le pouce traverse pour rejoindre l'auriculaire.
-
-Ce que j'ai essayé, et pourquoi ça n'a pas suffi :
-
-1. **Élargir la recherche de pose** (index et majeur libres de se replier
-   complètement, amplitudes du métacarpien portées à ±45°). Le nettoyage passe
-   de 65 à 45 sommets puis plafonne : aucune pose accessible n'est propre.
-2. **Chercher en deux temps** — approcher sans contrainte, puis nettoyer. C'est
-   ce qui a débloqué les trois autres contacts. Ici, l'approche atteint 0,09 mm
-   et le nettoyage ne descend pas sous ~26.
-3. **Un lissage correctif** (phase G du cahier des charges). Mesuré, il
-   n'améliorait rien — gains négatifs sur les trois doigts testés — donc il a
-   été **retiré** plutôt que conservé pour masquer le défaut.
-
-**Ma lecture :** c'est un problème de **volume**, pas de pose ni d'architecture.
-La paume n'a pas de quoi absorber la traversée du pouce. La piste que je n'ai
-pas menée à bout est celle des **correctifs dépendants de la pose** sur le
-thénar et sur le creux entre pouce et index — précisément ce que la phase G
-prévoit pour ce cas. C'est là que de l'aide serait la plus utile.
-
----
-
-## Ce qui a été corrigé
-
-### Le pouce s'écrasait au poing
-
-Sa chair distale tombait à **0,106** de sa longueur de repos. La cause n'était
-pas les poids : `Fist` s'additionnait à `Thumb_Curl` sur les mêmes phalanges,
-*et* une part de `Fist` s'ajoutait encore à l'opposition. Les trois
-articulations finissaient plaquées contre leurs butées. `Fist` ne pilote plus
-que les quatre doigts ; le pouce a ses commandes propres.
-
-Compression au poing après correction — minimum, puis percentile 1 % :
-
-| doigt | minimum | p1 | médiane |
-| --- | --- | --- | --- |
-| index | 0.6457 | 0.8576 | 1.0 |
-| middle | 0.5908 | 0.8385 | 1.0 |
-| ring | 0.5295 | 0.7996 | 1.0 |
-| pinky | 0.5516 | 0.7725 | 1.0 |
-| thumb | 0.7494 | 0.8368 | 1.0 |
-
-
-### Les quatre métacarpiens partaient du même point
-
-Ils pivotaient autour d'un centre unique : une paume ne peut alors pas se
-creuser, elle ne peut que s'ouvrir en corolle. Leurs bases forment maintenant un
-**arc carpo-métacarpien** mesuré sur la largeur réelle de la paume à hauteur du
-carpe.
-
-### Les doigts se traversaient en se fermant
-
-Mesuré **sans le pouce** : 8 sommets dès une fermeture de 0,7, 444 à 0,8. Ce
-n'était donc ni le pouce ni la pose — c'était la fermeture. Les doigts divergent
-maintenant en se refermant, et l'amplitude de cette divergence est cherchée par
-la mesure.
-
-### Le pipeline concluait malgré ses propres échecs
-
-L'ancienne version écrivait `"reussi": false` puis sauvegardait et affichait
-« terminé ». Un seul critère faux interdit désormais d'écraser un `.blend`
-validé, écrit `mesures/rapport-echec.json`, et sort en **code non nul**.
+1. **Les drivers ne s'évaluent pas en mode fond** sans changement d'image. Sans
+   `frame_set`, on mesure une main **immobile** — et une main immobile revient
+   toujours exactement à sa pose de repos, donc elle passe tous les contrôles.
+2. **L'évaluateur d'expressions n'accepte que des droites.** `min`, `max` et le
+   produit de deux variables échouent **en silence** (`is_valid = false`).
+3. **Une pose finale propre ne prouve rien.** `Neutral→Hand_Fist` a ses deux
+   extrémités propres et traverse l'index à t = 0,8.
+4. **Jamais de valeur par défaut sur une lecture de mesure.** Un zéro se lit
+   comme une mesure.
+5. **Le seuil d'acceptation ne doit pas servir de zone franche** à un
+   optimiseur : il dépense la marge jusqu'au dernier centième et la franchit.
+6. **Un driver réécrit sa voie.** Sonder un canal piloté sans le taire rend
+   `+0,00` partout — un tableau parfaitement cohérent et parfaitement faux.
+7. **Un `except` qui ne rend pas l'état ne rattrape rien**, il déplace la
+   panne. Une exception a laissé l'armature en mode édition ; tout ce qui
+   suivait a mesuré une main figée.
+8. **Une origine relevée avant que l'origine soit décidée n'est pas une
+   origine.**
+9. **Compter la mauvaise chose.** Un critère peut punir exactement ce que
+   l'anatomie exige.
+10. **Une tranche à un seul bord fabrique un contour**, donc un anneau — 19 mm
+    de diamètre utile attribués à un pincement.
+11. **Un masque géodésique trop large déplace la paume** au lieu de corriger le
+    thénar.
+12. **Un driver de constante nulle ne pilote rien** : c'est un champ rempli au
+    contrat que rien ne lit à l'arrivée.
 
 ---
 
 ## Method note (English)
 
-This hand rig is built entirely from script: joint centres, the palm plane, each
-finger's flexion axis and the thumb's opposition angles are **measured on the
-mesh**, never typed in by eye. Every mandatory check can fail the build.
+This hand rig is built entirely from script: joint centres, the palm plane,
+each finger's flexion axis and the thumb's opposition angles are **measured on
+the mesh**, never typed in by eye. Every mandatory check can fail the build.
 
-**One criterion still fails.** In the `Hand_Pinky_Thumb` pose the pads meet
-correctly (0.90 mm apart, normals opposed at −0.73), but 26 vertices
-interpenetrate — all of them between `DEF_thumb_meta` and `DEF_index_meta`, that
-is, **thenar eminence against the base of the index**. It is palm flesh folding
-into itself, not one finger passing through another. Pose search and a two-stage
-approach-then-clean strategy both plateau around 26 vertices; a corrective smooth
-was measured, found not to help, and removed rather than kept as a cover-up. The
-untried lead is pose-space corrective shapes on the thenar. Help welcome.
+The single most useful finding is not about the rig but about its instruments.
+The repository's own verifier rated a file "22 passed, 9 failed". The **extended**
+verifier rates the same file with five more failures — the palm flattens
+instead of cupping, it widens by 14 mm, the fist only closes to 60 %.
+
+The rig was not less broken before. The instrument was not looking.
+
+Every probe here counter-proves itself before concluding and **refuses to
+return a verdict** if that counter-proof fails.
 
 Base mesh: Blender Studio Human Base Meshes bundle (CC0). Blender 5.1.2.

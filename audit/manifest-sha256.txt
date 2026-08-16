@@ -1,7 +1,7 @@
 7f598fe7e753b1dc0d39398b99ac099238762115d91e98e4b24f2b34cccf0d73  ./.gitattributes
 632ffb15c383403d2b5b48106c2d16ca1d45c302261b5d2dfe2d3c5824d79d0a  ./.gitignore
 ca440d52a0427dda1b0d14bdccdaf8a0638a07cdfc4c6bd55839d4af9796aae6  ./CHANGELOG.md
-4b53037af4f5a080f34bec604117d2a848d0aae8fb2688e1e6d0460d4d488563  ./README.md
+2eacb0c4926167ab8f87052eb9375a321435992f4f5da08eb9ae9a92dc3e6fd2  ./README.md
 484b3c32df0181e5bb10135d8e90f5b2aea8718b7506eb666987deebec4d0c5d  ./RIG_Hand.L-NON-VALIDE.blend
 100edc79d23cb48ecf3b9bf5a146d310dcde294597908ff08fc7beecca69a982  ./STATUS.md
 9a64b81638bc93437f7554cf34105209bc02edf8b08e249d4c5a6d1101f647a3  ./atelier/articulations.py
@@ -212,7 +212,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-8fb236db3aa7b5cb12cc7342bf16721d59464407308be631c3752f97b248b740  ./reports/chat-3/journal-generation.txt
+e3e257bcd532c8fef54d2cb2883a712a3ba39f555d1845b940ea4b38ddcf4848  ./reports/chat-3/journal-generation.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
