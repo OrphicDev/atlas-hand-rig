@@ -2265,6 +2265,12 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
         if best is None or r[0] < best[0]:
             best = r + (list(g),)
     pas = [(hi - lo) / 3.0 for _g, _c, lo, hi in axes]
+    # ═══ UNE RECHERCHE MUETTE EST INDISCERNABLE D'UN BLOCAGE ═══
+    # Le chat 1 a déstampé les sorties du pipeline, mais PAS l'intérieur des
+    # boucles : une recherche de contact peut rester trois minutes sans écrire
+    # un octet. Sacha a cru à un plantage et arrêté une reconstruction qui
+    # travaillait. Un battement par tour suffit à lever le doute, et il coûte
+    # une ligne pour une minute de calcul.
     for _t in range(tours):
         bouge = False
         for i in range(len(axes)):
@@ -2275,6 +2281,10 @@ def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
                 if r[0] < best[0]:
                     best = r + (v,)
                     bouge = True
+        print(f"ATLAS_BATTEMENT {doigt_a}/{doigt_b} tour {_t + 1}/{tours} "
+              f"score={best[0]:.1f} distance={best[1]['distance_mm']:.2f}mm "
+              f"traversées={best[1].get('intersection_des_doigts', '?')}"
+              f"{'' if bouge else ' (pas resserré)'}")
         if not bouge:
             pas = [x * 0.5 for x in pas]
     # ═══ ON REPOSE LA POSE RETENUE ET ON LA REMESURE ═══
@@ -2607,6 +2617,8 @@ def nettoyer_pose(nom_pose, props, axes, tours=9, bonus=None):
                 if r[0] < best[0]:
                     best = r + (v,)
                     bouge = True
+        print(f"ATLAS_BATTEMENT nettoyage {nom_pose} tour {_t + 1}/{tours} "
+              f"reste={best[1]}{'' if bouge else ' (pas resserré)'}")
         if not bouge:
             pas = [x * 0.55 for x in pas]
     print(f"ATLAS_NETTOYAGE {nom_pose} : {best[1]} sommets traversants")
