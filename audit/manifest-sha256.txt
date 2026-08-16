@@ -125,7 +125,10 @@ f8da7796ec3ee1ab3cbc31103d932f909da222f6da8928dd7f21168a06d74763  ./reports/chat
 188aa19ad00a5272ab2f178c82066c776ee1007bf28ca1030cbd0ada46fb34a9  ./reports/chat-2/verifier-e2d4b1c-ancien-blend.txt
 f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat-3/cup/01-balayage-cup.json
 f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
-da77e89e7f619a9cbd881317c9f5f0ae01ad3a7b326123067e7b2d3baf0ac783  ./reports/chat-3/journal-generation.txt
+8e8cf13fc8c80587b7a9a001e0378cc793dd4eb18a9fa69e9212672b686be2c7  ./reports/chat-3/journal-generation.txt
+333abec11a84735dffb055165e0a67b54c426302c17aab8406c67b3fa33a786d  ./reports/chat-3/rapport-echec.json
+156651ae085eca4d8b4d9874ae725861f3006939811d0a9e95a73179419ece4a  ./reports/chat-3/rapport-rig.L.json
+9c7b7ebb2cd6920ac16158b1faf932556f4de7ba6b87d8f1ab2e8baf0496edde  ./reports/chat-3/tableau-regression.txt
 cc3fab7a162e79a20ed2262003be77197b9c0f009e25cbc3c638b940867b2b4e  ./reports/chat-3/weights/audit-complet.json
 5dbc45b36e8c430053514695722e3200cecac63b4a5bd227c7b2ee7d6cff138b  ./reports/chat-3/weights/journal-audit.txt
 aa69aea8cacef72452a29e6e975c199ce0802f34ce71747d319e0a15a1f38543  ./reports/wip-chat-1/agent-livraison.md
@@ -135,7 +138,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-3a5103b928256543e8238115c2a48a7050ab648ce8d6dc18a084762a27aa43a6  ./rig-main.py
+2ac605ee326cfb8d4f8b660c03d0e4dfc050e41b59c57039901d53261075153f  ./rig-main.py
 e4d3df9d6c59a95c0c2fb6c2dac68cbc087267a5e542d35f137faa3ca996efff  ./verifier-rig.py
 3f2d92e4e91e1c3121616f3007a0a9bd3591b26a624b06bdbf86893034f7387d  ./videos/b17e548/LISEZ-MOI.md
 57433d06119ba8aaddf59f5054d13277a19333fcd5223da2d878d21d2f077de4  ./videos/b17e548/Neutral-vers-Hand_Cupped/0001.png

@@ -1788,6 +1788,18 @@ dire("preserve_volume", {
              "qu'ils ne préservent",
     "gele": "ne plus toucher après création des shape keys"})
 
+# ═══ LE REPOS SE RELÈVE APRÈS QUE LA DÉFORMATION EST CHOISIE ═══
+#
+# `_p_repos_global` avait été capturé plus haut, sous `Preserve Volume = True`
+# — la valeur que je posais à la création du modificateur. Le test A/B le fait
+# ensuite basculer à False, et la pose de repos change alors de méthode de
+# déformation. Mesuré : le critère « Cup · retour exact au repos » rendait
+# 0,0000 mm en `focus=cup` et 0,0401 mm dans la reconstruction complète, pour
+# ce seul motif. Une origine relevée avant que l'origine soit décidée n'est pas
+# une origine.
+regler()
+_p_repos_global, _ = sommets_evalues()
+
 # ═══ L'AMPLITUDE SE CHERCHE SOUS CONTRAINTE DE PROPRETÉ ═══
 #
 # L'élection des axes (phase D) ne pouvait pas compter les traversées :
