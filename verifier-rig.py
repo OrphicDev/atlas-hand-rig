@@ -393,6 +393,43 @@ drv = [d.data_path for d in (rig.animation_data.drivers
 exiger("tous les drivers sont valides", not drv, drv or "aucun invalide",
        "aucun invalide")
 
+# ═══ VALIDE NE VEUT PAS DIRE FONCTIONNEL (§12.2) ═══
+#
+# `is_valid` dit que Blender sait évaluer l'expression. Il ne dit RIEN sur ce
+# qu'elle pilote. Un driver peut être vert et viser le mauvais os, le mauvais
+# axe, ou une propriété que plus personne ne règle — le dépôt en a fait
+# l'expérience : 25 drivers valides dont la rotation restait à 0,00°, parce
+# qu'ils n'étaient pas ÉVALUÉS.
+#
+# On applique donc 0, puis 1, à chaque propriété publique, et on regarde si le
+# maillage BOUGE. Une propriété qui ne déplace aucun sommet ne pilote rien,
+# qu'elle soit déclarée valide ou non.
+neutre()
+_p_ref, _ = evalue()
+_inertes, _bougent = [], {}
+for _prop in sorted(k for k in pbh.keys() if isinstance(pbh[k], float)):
+    neutre()
+    pbh[_prop] = 1.0
+    rig.update_tag()
+    bpy.context.scene.frame_set(bpy.context.scene.frame_current)
+    bpy.context.view_layer.update()
+    _pp, _ = evalue()
+    _d = max((a - b).length for a, b in zip(_p_ref, _pp)) * 1000
+    _bougent[_prop] = round(_d, 3)
+    if _d < 0.05:
+        _inertes.append(_prop)
+neutre()
+resultat["proprietes_deplacement_mm"] = _bougent
+# Les propriétés correctives PSD_* n'ont d'effet que si leur shape key existe :
+# leur inertie est un fait à publier, pas un échec du rig tant que les
+# correctifs ne sont pas construits.
+_inertes_durs = [p for p in _inertes if not p.startswith("PSD_")]
+exiger("chaque propriété pilote vraiment quelque chose", not _inertes_durs,
+       _inertes_durs or "aucune inerte", "déplacement > 0,05 mm à la valeur 1")
+if [p for p in _inertes if p.startswith("PSD_")]:
+    print("ATLAS_PSD_INERTES " + json.dumps(
+        [p for p in _inertes if p.startswith("PSD_")], ensure_ascii=False))
+
 neutre()
 resultat["echecs"] = echecs
 print("\nATLAS_VERIFICATION " + json.dumps(resultat, ensure_ascii=False))

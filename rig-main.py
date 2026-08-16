@@ -3438,6 +3438,7 @@ def nettoyer_transition(nom_pose, pr, o, axes, rondes=3, tours=6):
     que les étapes réellement fautives, plus l'arrivée, et on relit le trajet
     entier entre deux rondes — corriger une étape peut en salir une autre.
     """
+    _reste_precedent, _elargi = None, False
     for _ronde in range(rondes):
         fautives = etapes_fautives(pr, o)
         if not fautives:
@@ -3490,6 +3491,30 @@ def nettoyer_transition(nom_pose, pr, o, axes, rondes=3, tours=6):
               f"{best[1]} sommets traversants sur {len(echantillon)} étapes")
         if best[1] == 0:
             return best[2], {"rondes": _ronde + 1}
+        # ═══ UNE RONDE QUI NE GAGNE RIEN NE GAGNERA RIEN EN LA REFAISANT ═══
+        #
+        # Mesuré sur `Neutral→Hand_OK` : ronde 2 rend 3 780 sommets, ronde 3
+        # rend 3 780. Identique au sommet près. Ce n'est pas une convergence
+        # lente, c'est un PLAFOND — et on relançait quand même une ronde
+        # entière à l'identique, la plus lente boucle du pipeline, pour
+        # réobtenir le même nombre.
+        #
+        # On élargit alors les axes UNE fois : si le chemin est infaisable dans
+        # l'espace actuel, il faut plus d'espace, pas plus de tours. Et si le
+        # plafond tient malgré l'élargissement, on s'arrête et on le DIT — un
+        # chemin infaisable est un fait à publier, pas une boucle à répéter.
+        if _reste_precedent is not None and best[1] >= _reste_precedent:
+            if _elargi:
+                print(f"ATLAS_TRANSITION_PLAFOND {nom_pose} : {best[1]} sommets, "
+                      f"inchangé malgré l'élargissement des axes — le chemin "
+                      f"est infaisable dans cet espace")
+                return best[2], {"rondes": _ronde + 1, "plafond": best[1],
+                                 "verdict": "infaisable dans cet espace d'axes"}
+            axes = [(g, c, lo * 1.6, hi * 1.6) for g, c, lo, hi in axes]
+            _elargi = True
+            print(f"ATLAS_TRANSITION_ELARGIE {nom_pose} : plafond à {best[1]} "
+                  f"sommets, axes élargis de 60 %")
+        _reste_precedent = best[1]
         o = best[2]
     return o, {"rondes": rondes, "reste": etapes_fautives(pr, o)}
 
