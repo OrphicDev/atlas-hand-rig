@@ -1677,6 +1677,93 @@ dire("phase_f_correction", {
 
 
 # ═══════════════════════════════════════════════════════════════════
+#   PHASE F.3 — LES DEUX OS CORRECTIFS DE PAUME (§7.2 à 7.4)
+# ═══════════════════════════════════════════════════════════════════
+# ═══ UNE POSE DÉPLACE DES OS ; UN CORRECTIF DÉPLACE DE LA CHAIR ═══
+#
+# `Hand_Pinky_Thumb` plafonne depuis deux chats : la recherche atteint 0,10 mm
+# — donc la pose EXISTE — mais le nettoyage ne descend pas sous ~211 sommets
+# traversants. Le diagnostic du chat 1 le dit déjà : ce n'est pas un doigt qui
+# en traverse un autre, c'est **l'éminence thénar contre la base de l'index**,
+# deux masses de la paume qui se replient l'une sur l'autre.
+#
+# Aucune pose ne peut résoudre ça. Deux masses de chair doivent CÉDER l'une
+# devant l'autre, et un rig d'os ne sait pas faire céder de la chair. D'où ces
+# deux petits os déformants, sans contrôleur : ils déplacent une masse sans
+# toucher à l'intention de la pose.
+#
+# Ils sont créés APRÈS la repeinture — leurs poids sont TRANSFÉRÉS depuis le
+# parent, jamais ajoutés, donc la somme de chaque sommet ne bouge pas et le
+# repos reste exact. C'est arithmétique, pas un réglage heureux.
+_ZONES = {}
+try:
+    # Le repos AVANT toute création : `_p_repos_global` n'existe pas encore à
+    # cet endroit du pipeline (il est relevé en phase H, après le choix de la
+    # déformation). S'y référer ici aurait levé un NameError à la première
+    # exécution — une comparaison ne vaut que contre une origine qui existe.
+    au_repos()
+    _p_avant_corr, _ = sommets_evalues()
+    _sha_maillage = correctifs.empreinte_maillage_basis(geo)
+    _idx_thenar = [i for i, n in _dom.items() if n == f"DEF_thumb_meta{SIDE}"]
+    _idx_index = [i for i, n in _dom.items() if n == f"DEF_index_meta{SIDE}"]
+    if len(_idx_thenar) < 20 or len(_idx_index) < 20:
+        raise RuntimeError(f"masses palmaires trop petites pour un correctif : "
+                           f"thénar {len(_idx_thenar)}, base index {len(_idx_index)}")
+    _ZONES = {
+        "thenar": correctifs.masque_geodesique(geo, _idx_thenar, 0.018, 0.032),
+        "index_root": correctifs.masque_geodesique(geo, _idx_index, 0.010, 0.022)}
+    _pts_now = [geo.matrix_world @ v.co for v in geo.data.vertices]
+
+    def _centre(masque):
+        _s = sum((_pts_now[i] for i in masque), mathutils.Vector((0, 0, 0)))
+        return _s / max(1, len(masque))
+
+    bpy.context.view_layer.objects.active = rig
+    bpy.ops.object.mode_set(mode="EDIT")
+    _EB = arm.edit_bones
+    correctifs.ajouter_bone_correctif(
+        _EB, f"DEF_thumb_thenar_corr{SIDE}", _EB[f"DEF_thumb_meta{SIDE}"],
+        _centre(_ZONES["thenar"]), PALMAIRE_CUP, T)
+    correctifs.ajouter_bone_correctif(
+        _EB, f"DEF_index_root_corr{SIDE}", _EB[f"DEF_index_meta{SIDE}"],
+        _centre(_ZONES["index_root"]), PALMAIRE_CUP, T)
+    bpy.ops.object.mode_set(mode="OBJECT")
+
+    correctifs.transferer_vers_correctif(
+        geo, _ZONES["thenar"], f"DEF_thumb_meta{SIDE}",
+        f"DEF_thumb_thenar_corr{SIDE}", maximum=0.35)
+    correctifs.transferer_vers_correctif(
+        geo, _ZONES["index_root"], f"DEF_index_meta{SIDE}",
+        f"DEF_index_root_corr{SIDE}", maximum=0.35)
+    forcer_evaluation(geo)
+
+    # ═══ LE REPOS DOIT ÊTRE INTACT, ET ON LE MESURE ═══
+    # Transférer conserve la somme, donc le repos ne peut pas bouger — mais
+    # « ne peut pas » n'est pas « n'a pas ». On vérifie.
+    au_repos()
+    _p_apres_corr, _ = sommets_evalues()
+    _bouge = max((a - b).length for a, b in zip(_p_avant_corr,
+                                                _p_apres_corr)) * 1000
+    dire("os_correctifs", {
+        "thenar": {"sommets": len(_ZONES["thenar"]),
+                   "centre_mm": [round(x * 1000, 1) for x in _centre(_ZONES["thenar"])]},
+        "index_root": {"sommets": len(_ZONES["index_root"]),
+                       "centre_mm": [round(x * 1000, 1)
+                                     for x in _centre(_ZONES["index_root"])]},
+        "deplacement_du_repos_mm": round(_bouge, 5),
+        "regle": "les poids sont TRANSFÉRÉS depuis le parent, jamais ajoutés"})
+    exiger("les os correctifs ne déplacent pas le repos", _bouge < 0.01,
+           f"{_bouge:.5f} mm", "< 0,01 mm")
+    CORRECTIFS_PRETS = True
+except Exception as _e:                                       # noqa: BLE001
+    # On n'avale pas l'échec : on le publie et on continue sans correctifs, de
+    # sorte que le rapport dise pourquoi ils manquent au lieu de les taire.
+    print("ATLAS_OS_CORRECTIFS_ECHEC " + json.dumps(str(_e), ensure_ascii=False))
+    dire("os_correctifs", {"echec": str(_e)})
+    CORRECTIFS_PRETS = False
+
+
+# ═══════════════════════════════════════════════════════════════════
 #   PHASE H — POSES DE VALIDATION
 # ═══════════════════════════════════════════════════════════════════
 def regler(**kw):
@@ -2914,8 +3001,29 @@ PKY = [# Pour rejoindre l'auriculaire, le pouce traverse la paume : il passe don
 # `outils/anneau.py` mesure le diamètre du plus grand disque inscrit dans le
 # vide, dans le plan de l'anneau, sur la pose courante. C'est ce que le cahier
 # appelle le diamètre utile, et c'est lui qui décide si un « OK » se lit.
+ANNEAU_INTROUVABLE = [0]
+
+
 def diametre_anneau():
-    return anneau.diametre_utile_anneau(rig, geo, SIDE, _dom, PALMAIRE_CUP)
+    """Le diamètre utile, ou 0 quand la pose n'a PAS d'anneau.
+
+    ═══ UN ANNEAU ABSENT N'EST PAS UNE MESURE MANQUANTE ═══
+    Le module lève quand la tranche du plan ne contient pas assez de sommets
+    pour dessiner un contour — mesuré pendant la recherche du OK : « 591
+    sommets d'index et 0 de pouce ». C'est juste, et ça tuait la construction.
+    Or pendant une recherche, la plupart des poses candidates n'ont
+    légitimement aucun anneau : le pouce n'est pas encore en face.
+    On rend donc 0, ce qui est VRAI — le trou est de taille nulle — et le
+    critère ≥ 14 mm l'écarte comme il doit. Mais on COMPTE ces cas et on les
+    publie : sans ça, un zéro « pas d'anneau ici » deviendrait indiscernable
+    d'un zéro « je n'ai pas su mesurer », et c'est la faute que ce dépôt
+    combat depuis le début.
+    """
+    try:
+        return anneau.diametre_utile_anneau(rig, geo, SIDE, _dom, PALMAIRE_CUP)
+    except RuntimeError:
+        ANNEAU_INTROUVABLE[0] += 1
+        return 0.0
 
 
 def ouverture_anneau():
@@ -3432,7 +3540,9 @@ if "Hand_Pinch" in _POSES_D and "Hand_OK" in _POSES_D:
         "diametre_utile_pinch_mm": round(_anneau_pinch, 1),
         "diametre_utile_ok_mm": round(_anneau_ok, 1),
         "note": "diamètre du plus grand disque inscrit dans le trou, pas le "
-                "minimum du contour"})
+                "minimum du contour",
+        "poses_sans_anneau_mesurable_pendant_la_recherche":
+            ANNEAU_INTROUVABLE[0]})
     # Contre-épreuve du §10.1 : un pincement n'a pas d'anneau. Si les deux
     # poses rendent le même diamètre, la mesure ne distingue pas un anneau d'un
     # pincement et son verdict sur le OK ne vaut rien.

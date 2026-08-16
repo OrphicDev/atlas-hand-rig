@@ -10,334 +10,229 @@ ATLAS_PHASE_C réussie
 ATLAS_SENS_DE_L_ECARTEMENT {"eventail_au_repos_mm": {"index/middle": 16.59, "middle/ring": 15.75, "ring/pinky": 30.68}, "eventail_a_plus_ECART_mm": {"index/middle": 5.76, "middle/ring": 7.53, "ring/pinky": 24.69}, "eventail_a_moins_ECART_mm": {"index/middle": 27.45, "middle/ring": 23.73, "ring/pinky": 36.27}, "signe_retenu": -1.0, "gain_du_sens_retenu_mm": {"index/middle": 10.85, "middle/ring": 7.98, "ring/pinky": 5.59}, "regle": "écarter doit AUGMENTER l'écart entre bouts de doigts voisins"}
 ATLAS_SENS_DE_LA_DIVERGENCE {"eventail_a_plus_DIVERGENCE_mm": {"index/middle": 8.52, "middle/ring": 7.63, "ring/pinky": 24.02}, "eventail_a_moins_DIVERGENCE_mm": {"index/middle": 24.51, "middle/ring": 23.87, "ring/pinky": 37.07}, "signe_retenu": -1.0, "gain_du_sens_retenu_mm": {"index/middle": 7.91, "middle/ring": 8.11, "ring/pinky": 6.39}, "regle": "diverger en fermant doit ÉCARTER les bouts de doigts voisins"}
 ATLAS_CUP_AXES_ELUS {"reference": {"arc_mm": 29.98, "largeur_mm": 71.99, "pouce_auriculaire_mm": 102.27}, "voute": {"axe": 0, "signe": -1.0, "amplitude_deg": 24.0, "gain_arc_mm": 21.01}, "convergence": {"axe": 2, "signe": -1.0, "amplitude_deg": 24.0, "gain_largeur_mm": -39.5, "gain_pouce_auriculaire_mm": -31.54}, "regle": "voûter = augmenter la flèche ; resserrer = diminuer la largeur"}
-ATLAS_PHASE_D {"os_ctrl": 21, "os_mch": 19, "os_def": 20, "proprietes": ["Fist", "Index_Curl", "Middle_Curl", "Ring_Curl", "Pinky_Curl", "Thumb_Curl", "Thumb_Opposition", "Spread", "Cup", "Relax"], "melange_des_rotations": "ADD", "signe_de_flexion": 1.0, "axe_flexion_euler": 0, "axe_ecartement_euler": 2}
+ATLAS_PHASE_D {"os_ctrl": 21, "os_mch": 19, "os_def": 20, "proprietes": ["Fist", "Index_Curl", "Middle_Curl", "Ring_Curl", "Pinky_Curl", "Thumb_Curl", "Thumb_Opposition", "Spread", "Cup", "Relax", "PSD_PinkyThumb", "PSD_OK"], "melange_des_rotations": "ADD", "signe_de_flexion": 1.0, "axe_flexion_euler": 0, "axe_ecartement_euler": 2}
 ATLAS_PHASE_D terminée
 ATLAS_PHASE_E {"contraintes_de_butee": 38, "mcp_deg": [-20.0, 90.0], "pip_deg": [-0.0, 110.0], "dip_deg": [-10.0, 80.0], "pouce_mcp_deg": [-0.0, 60.0], "pouce_ip_deg": [-0.0, 80.0], "ecartement_max_deg": 15.0}
 Info: 5877 vertex weights limited
 ATLAS_PHASE_F {"sommets_contamines_entre_phalanges": 3620, "sommets_melangeant_deux_metacarpiens": 22085, "note_paume": "le mélange entre métacarpiens voisins est demandé par la règle 7 du tutoriel : la paume est une chair continue", "sommets_dont_la_somme_des_poids_n_est_pas_1": 0, "morceaux_par_doigt": {"index": {"morceaux": 1, "plus_gros": 9743}, "middle": {"morceaux": 1, "plus_gros": 7916}, "ring": {"morceaux": 1, "plus_gros": 7695}, "pinky": {"morceaux": 1, "plus_gros": 10632}, "thumb": {"morceaux": 1, "plus_gros": 7974}}, "groupes": 20}
 ATLAS_PHASE_F_DEFAUTS ["3620 sommets d'un doigt sont tirés par les phalanges d'un autre"]
 ATLAS_PHASE_F terminée
-ATLAS_PHASE_F_CORRECTION {"sommets_corriges": 2949, "contamination_restante": 671, "chair_encore_d_un_seul_tenant": {"index": 1, "middle": 1, "ring": 1, "pinky": 1, "thumb": 1}}
+ATLAS_REPEINTURE_PALMAIRE {"ambigus_avant": 12329, "repeints": 10254, "elagues_rayons_eloignes": 4095, "ambigus_apres": 873, "dont_entre_rayons_VOISINS": 873, "dont_entre_rayons_NON_VOISINS": 0, "exemples_non_voisins": [], "noyaux": {"DEF_index_meta.L": 5175, "DEF_middle_meta.L": 1712, "DEF_ring_meta.L": 1294, "DEF_pinky_meta.L": 6278, "DEF_thumb_meta.L": 3875}, "regle": "chaque masse palmaire appartient au métacarpien dont elle est la plus proche EN SUIVANT LA SURFACE ; le mélange entre rayons VOISINS est légitime, entre rayons éloignés jamais"}
+ATLAS_CRITERE OK  · aucun sommet partagé entre deux rayons non voisins · mesuré 0 · exigé 0 sommet
+ATLAS_PHASE_F_CORRECTION {"sommets_corriges": 2879, "contamination_restante": 741, "chair_encore_d_un_seul_tenant": {"index": 1, "middle": 1, "ring": 1, "pinky": 1, "thumb": 1}}
 ATLAS_SONDE_INTERSECTION {"au_repos": "aucune", "verdict": "utilisable"}
-ATLAS_PRESERVE_VOLUME {"sans": {"intersections": 11903, "compression_min": 0.0626, "compression_p1": 0.2759, "aretes_mesurees": 344724}, "avec": {"intersections": 11750, "compression_min": 0.0147, "compression_p1": 0.1388, "aretes_mesurees": 344724}, "retenu": false, "grandeurs_qui_regressent_avec": ["compression_min", "compression_p1"], "regle": "on garde la conservation de volume SAUF si une grandeur stricte régresse ; sur ce maillage les quaternions duaux pincent plus qu'ils ne préservent", "gele": "ne plus toucher après création des shape keys"}
-ATLAS_CUP_AMPLITUDE échelle=1.00 traversées= 16031 arc=+43.88 largeur=-20.61
-ATLAS_CUP_AMPLITUDE échelle=0.85 traversées= 13943 arc=+29.29 largeur=-21.07
-ATLAS_CUP_AMPLITUDE échelle=0.70 traversées=  9232 arc=+19.92 largeur=-20.00
-ATLAS_CUP_AMPLITUDE échelle=0.55 traversées=  3004 arc=+14.31 largeur=-17.50
-ATLAS_CUP_AMPLITUDE échelle=0.45 traversées=   319 arc=+11.35 largeur=-15.15
-ATLAS_CUP_AMPLITUDE échelle=0.35 traversées=     4 arc= +8.60 largeur=-12.34
-ATLAS_CUP_AMPLITUDE échelle=0.30 traversées=     0 arc= +7.29 largeur=-10.79
-ATLAS_CUP_AMPLITUDE_CHERCHEE {"recherche": {"1.0": {"intersections": 16031, "gain_arc_mm": 43.88, "gain_largeur_mm": -20.61}, "0.85": {"intersections": 13943, "gain_arc_mm": 29.29, "gain_largeur_mm": -21.07}, "0.7": {"intersections": 9232, "gain_arc_mm": 19.92, "gain_largeur_mm": -20.0}, "0.55": {"intersections": 3004, "gain_arc_mm": 14.31, "gain_largeur_mm": -17.5}, "0.45": {"intersections": 319, "gain_arc_mm": 11.35, "gain_largeur_mm": -15.15}, "0.35": {"intersections": 4, "gain_arc_mm": 8.6, "gain_largeur_mm": -12.34}, "0.3": {"intersections": 0, "gain_arc_mm": 7.29, "gain_largeur_mm": -10.79}}, "echelle_retenue": 0.3, "voute_deg_effectif": 7.2, "convergence_deg_effectif": 7.2, "regle": "la plus GRANDE amplitude qui ne fait se traverser la paume à aucun des 21 pas"}
-ATLAS_BALAYAGE_CUP {"pas": [{"cup": 0.0, "arc_mm": 29.98, "largeur_mm": 71.99, "pouce_auriculaire_mm": 102.27, "intersections": 0}, {"cup": 0.05, "arc_mm": 30.33, "largeur_mm": 71.41, "pouce_auriculaire_mm": 102.0, "intersections": 0}, {"cup": 0.1, "arc_mm": 30.68, "largeur_mm": 70.83, "pouce_auriculaire_mm": 101.73, "intersections": 0}, {"cup": 0.15, "arc_mm": 31.02, "largeur_mm": 70.25, "pouce_auriculaire_mm": 101.46, "intersections": 0}, {"cup": 0.2, "arc_mm": 31.38, "largeur_mm": 69.68, "pouce_auriculaire_mm": 101.19, "intersections": 0}, {"cup": 0.25, "arc_mm": 31.73, "largeur_mm": 69.11, "pouce_auriculaire_mm": 100.93, "intersections": 0}, {"cup": 0.3, "arc_mm": 32.08, "largeur_mm": 68.54, "pouce_auriculaire_mm": 100.67, "intersections": 0}, {"cup": 0.35, "arc_mm": 32.44, "largeur_mm": 67.98, "pouce_auriculaire_mm": 100.41, "intersections": 0}, {"cup": 0.4, "arc_mm": 32.8, "largeur_mm": 67.43, "pouce_auriculaire_mm": 100.16, "intersections": 0}, {"cup": 0.45, "arc_mm": 33.16, "largeur_mm": 66.88, "pouce_auriculaire_mm": 99.91, "intersections": 0}, {"cup": 0.5, "arc_mm": 33.52, "largeur_mm": 66.33, "pouce_auriculaire_mm": 99.66, "intersections": 0}, {"cup": 0.55, "arc_mm": 33.88, "largeur_mm": 65.79, "pouce_auriculaire_mm": 99.41, "intersections": 0}, {"cup": 0.6, "arc_mm": 34.25, "largeur_mm": 65.25, "pouce_auriculaire_mm": 99.17, "intersections": 0}, {"cup": 0.65, "arc_mm": 34.62, "largeur_mm": 64.72, "pouce_auriculaire_mm": 98.93, "intersections": 0}, {"cup": 0.7, "arc_mm": 34.99, "largeur_mm": 64.2, "pouce_auriculaire_mm": 98.69, "intersections": 0}, {"cup": 0.75, "arc_mm": 35.36, "largeur_mm": 63.68, "pouce_auriculaire_mm": 98.45, "intersections": 0}, {"cup": 0.8, "arc_mm": 35.74, "largeur_mm": 63.17, "pouce_auriculaire_mm": 98.22, "intersections": 0}, {"cup": 0.85, "arc_mm": 36.12, "largeur_mm": 62.67, "pouce_auriculaire_mm": 98.0, "intersections": 0}, {"cup": 0.9, "arc_mm": 36.5, "largeur_mm": 62.17, "pouce_auriculaire_mm": 97.77, "intersections": 0}, {"cup": 0.95, "arc_mm": 36.88, "largeur_mm": 61.68, "pouce_auriculaire_mm": 97.55, "intersections": 0}, {"cup": 1.0, "arc_mm": 37.27, "largeur_mm": 61.2, "pouce_auriculaire_mm": 97.33, "intersections": 0}], "gain_arc_mm": 7.29, "gain_largeur_mm": -10.79, "gain_pouce_auriculaire_mm": -4.94, "pire_recul_de_largeur_mm": -0.48, "pire_recul_de_fleche_mm": -0.34, "intersections_totales": 0, "retour_au_repos_mm": 0.0401}
-ATLAS_CRITERE OK  · Cup · la paume se voûte · mesuré +7.29 mm · exigé ≥ +6 mm de flèche
+ATLAS_PRESERVE_VOLUME {"sans": {"intersections": 14798, "compression_min": 0.0976, "compression_p1": 0.2652, "aretes_mesurees": 348384}, "avec": {"intersections": 14703, "compression_min": 0.0147, "compression_p1": 0.1389, "aretes_mesurees": 348384}, "retenu": false, "grandeurs_qui_regressent_avec": ["compression_min", "compression_p1"], "regle": "on garde la conservation de volume SAUF si une grandeur stricte régresse ; sur ce maillage les quaternions duaux pincent plus qu'ils ne préservent", "gele": "ne plus toucher après création des shape keys"}
+ATLAS_CUP_AMPLITUDE échelle=1.00 traversées= 18328 arc=+43.88 largeur=-20.61
+ATLAS_CUP_AMPLITUDE échelle=0.85 traversées= 15090 arc=+29.29 largeur=-21.07
+ATLAS_CUP_AMPLITUDE échelle=0.70 traversées= 10099 arc=+19.52 largeur=-20.00
+ATLAS_CUP_AMPLITUDE échelle=0.55 traversées=  3345 arc=+13.69 largeur=-17.50
+ATLAS_CUP_AMPLITUDE échelle=0.45 traversées=   387 arc=+10.61 largeur=-15.15
+ATLAS_CUP_AMPLITUDE échelle=0.35 traversées=     3 arc= +7.90 largeur=-12.34
+ATLAS_CUP_AMPLITUDE échelle=0.30 traversées=     0 arc= +6.71 largeur=-10.79
+ATLAS_CUP_AMPLITUDE_CHERCHEE {"recherche": {"1.0": {"intersections": 18328, "gain_arc_mm": 43.88, "gain_largeur_mm": -20.61}, "0.85": {"intersections": 15090, "gain_arc_mm": 29.29, "gain_largeur_mm": -21.07}, "0.7": {"intersections": 10099, "gain_arc_mm": 19.52, "gain_largeur_mm": -20.0}, "0.55": {"intersections": 3345, "gain_arc_mm": 13.69, "gain_largeur_mm": -17.5}, "0.45": {"intersections": 387, "gain_arc_mm": 10.61, "gain_largeur_mm": -15.15}, "0.35": {"intersections": 3, "gain_arc_mm": 7.9, "gain_largeur_mm": -12.34}, "0.3": {"intersections": 0, "gain_arc_mm": 6.71, "gain_largeur_mm": -10.79}}, "echelle_retenue": 0.3, "voute_deg_effectif": 7.2, "convergence_deg_effectif": 7.2, "regle": "la plus GRANDE amplitude qui ne fait se traverser la paume à aucun des 21 pas"}
+ATLAS_BALAYAGE_CUP {"pas": [{"cup": 0.0, "arc_mm": 29.98, "largeur_mm": 71.99, "pouce_auriculaire_mm": 102.27, "intersections": 0}, {"cup": 0.05, "arc_mm": 30.3, "largeur_mm": 71.41, "pouce_auriculaire_mm": 102.0, "intersections": 0}, {"cup": 0.1, "arc_mm": 30.63, "largeur_mm": 70.83, "pouce_auriculaire_mm": 101.73, "intersections": 0}, {"cup": 0.15, "arc_mm": 30.95, "largeur_mm": 70.25, "pouce_auriculaire_mm": 101.46, "intersections": 0}, {"cup": 0.2, "arc_mm": 31.28, "largeur_mm": 69.68, "pouce_auriculaire_mm": 101.19, "intersections": 0}, {"cup": 0.25, "arc_mm": 31.6, "largeur_mm": 69.11, "pouce_auriculaire_mm": 100.93, "intersections": 0}, {"cup": 0.3, "arc_mm": 31.93, "largeur_mm": 68.54, "pouce_auriculaire_mm": 100.67, "intersections": 0}, {"cup": 0.35, "arc_mm": 32.26, "largeur_mm": 67.98, "pouce_auriculaire_mm": 100.41, "intersections": 0}, {"cup": 0.4, "arc_mm": 32.59, "largeur_mm": 67.43, "pouce_auriculaire_mm": 100.16, "intersections": 0}, {"cup": 0.45, "arc_mm": 32.92, "largeur_mm": 66.88, "pouce_auriculaire_mm": 99.91, "intersections": 0}, {"cup": 0.5, "arc_mm": 33.25, "largeur_mm": 66.33, "pouce_auriculaire_mm": 99.66, "intersections": 0}, {"cup": 0.55, "arc_mm": 33.59, "largeur_mm": 65.79, "pouce_auriculaire_mm": 99.41, "intersections": 0}, {"cup": 0.6, "arc_mm": 33.92, "largeur_mm": 65.25, "pouce_auriculaire_mm": 99.17, "intersections": 0}, {"cup": 0.65, "arc_mm": 34.26, "largeur_mm": 64.72, "pouce_auriculaire_mm": 98.93, "intersections": 0}, {"cup": 0.7, "arc_mm": 34.6, "largeur_mm": 64.2, "pouce_auriculaire_mm": 98.69, "intersections": 0}, {"cup": 0.75, "arc_mm": 34.95, "largeur_mm": 63.68, "pouce_auriculaire_mm": 98.45, "intersections": 0}, {"cup": 0.8, "arc_mm": 35.29, "largeur_mm": 63.17, "pouce_auriculaire_mm": 98.22, "intersections": 0}, {"cup": 0.85, "arc_mm": 35.64, "largeur_mm": 62.67, "pouce_auriculaire_mm": 98.0, "intersections": 0}, {"cup": 0.9, "arc_mm": 35.99, "largeur_mm": 62.17, "pouce_auriculaire_mm": 97.77, "intersections": 0}, {"cup": 0.95, "arc_mm": 36.34, "largeur_mm": 61.68, "pouce_auriculaire_mm": 97.55, "intersections": 0}, {"cup": 1.0, "arc_mm": 36.69, "largeur_mm": 61.2, "pouce_auriculaire_mm": 97.33, "intersections": 0}], "gain_arc_mm": 6.71, "gain_largeur_mm": -10.79, "gain_pouce_auriculaire_mm": -4.94, "pire_recul_de_largeur_mm": -0.48, "pire_recul_de_fleche_mm": -0.32, "intersections_totales": 0, "retour_au_repos_mm": 0.0}
+ATLAS_CRITERE OK  · Cup · la paume se voûte · mesuré +6.71 mm · exigé ≥ +6 mm de flèche
 ATLAS_CRITERE OK  · Cup · la paume se resserre · mesuré -10.79 mm · exigé ≤ −6 mm de largeur
 ATLAS_CRITERE OK  · Cup · l'auriculaire rejoint le pouce · mesuré -4.94 mm · exigé ≤ −4 mm
 ATLAS_CRITERE OK  · Cup · le resserrement ne repart jamais en arrière · mesuré -0.48 mm · exigé ≤ 0,50 mm par pas
-ATLAS_CRITERE OK  · Cup · la voûte ne s'effondre jamais en chemin · mesuré -0.34 mm · exigé ≤ 0,50 mm par pas
+ATLAS_CRITERE OK  · Cup · la voûte ne s'effondre jamais en chemin · mesuré -0.32 mm · exigé ≤ 0,50 mm par pas
 ATLAS_CRITERE OK  · Cup · aucune auto-intersection sur les 21 pas · mesuré 0 · exigé 0 sommet
-ATLAS_CRITERE ÉCHEC · Cup · retour exact au repos · mesuré 0.0401 mm · exigé < 0,01 mm
-ATLAS_CONTRE_EPREUVE_DU_SEUIL {"fermeture_pleine_sans_ecartement": 2478, "verdict": "le seuil voit les vraies traversées"}
+ATLAS_CRITERE OK  · Cup · retour exact au repos · mesuré 0.0000 mm · exigé < 0,01 mm
+ATLAS_CONTRE_EPREUVE_DU_SEUIL {"fermeture_pleine_sans_ecartement": 2788, "verdict": "le seuil voit les vraies traversées"}
 ATLAS_SONDE_DRIVER {"propriete_Fist": 1.0, "mch_brut_deg": [95.2, 0.0, -8.0], "mch_evalue_deg": [95.2, 0.0, -8.0], "mch_matrice_evaluee": [1.662, -0.0, -0.14], "def_evalue_deg": [0.0, 0.0, 0.0], "def_matrice_evaluee": [0.0, -0.0, 0.0], "nb_drivers": 28, "expression": "(fist + curl) * 1.661553 + relax * 0.267035 + 0.000000", "driver_valide": true}
 ATLAS_RETOUR_AU_REPOS {"ecart_max_mm": 0.0, "course_du_poing_mm": 121.5, "verdict": "exact"}
 ATLAS_EMPREINTES {"thumb": {"sommets": 760, "part_de_la_phalange": 0.33}, "index": {"sommets": 743, "part_de_la_phalange": 0.31}, "pinky": {"sommets": 638, "part_de_la_phalange": 0.29}}
 ATLAS_PHASE_H_PRETE
 ATLAS_OPPOSITION_MESUREE {"angles_du_metacarpien_deg": [50.0, 48.1, 0.0], "ecart_des_empreintes_mm": 0.99, "se_font_face": -0.98, "creusement": 0.6, "repli_auriculaire": 0.4, "ce_que_j_avais_suppose_deg": [40.0, -55.0, 22.0]}
-ATLAS_BATTEMENT index/thumb tour 1/10 score=17663.1 distance=2.81mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 2/10 score=813.2 distance=0.95mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 3/10 score=813.2 distance=0.95mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 4/10 score=813.2 distance=0.95mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 5/10 score=813.2 distance=0.95mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 6/10 score=809.2 distance=0.90mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 7/10 score=282.5 distance=0.16mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 8/10 score=282.5 distance=0.16mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 9/10 score=282.5 distance=0.16mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 10/10 score=282.5 distance=0.16mm traversées=0 (pas resserré)
-ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb {}
-ATLAS_BATTEMENT index/thumb tour 1/18 score=244.8 distance=0.77mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 2/18 score=244.8 distance=0.77mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 3/18 score=244.8 distance=0.77mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 4/18 score=238.6 distance=0.58mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 5/18 score=238.6 distance=0.58mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 6/18 score=238.6 distance=0.58mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 7/18 score=238.6 distance=0.58mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 8/18 score=199.9 distance=0.51mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 9/18 score=178.3 distance=0.54mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 10/18 score=127.6 distance=0.31mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 11/18 score=127.6 distance=0.31mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 12/18 score=127.6 distance=0.31mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 13/18 score=127.6 distance=0.31mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 14/18 score=127.5 distance=0.33mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 15/18 score=127.5 distance=0.33mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 16/18 score=124.5 distance=0.13mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 17/18 score=124.2 distance=0.15mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 18/18 score=124.1 distance=0.16mm traversées=0
-ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 0.16, "traversees_apres_approche": 0, "apres_nettoyage_mm": 0.16, "traversees_apres_nettoyage": 0, "axes_de_degagement": 3}
-ATLAS_CONTACT_HAND_PINCH {"entre": "index et thumb", "distance_mm": 0.16, "orientation_locale": -0.918, "sommets_du_patch": 136, "sommets_a_moins_de_1_5_mm": 40, "penetration": 0}
-ATLAS_CRITERE OK  · Hand_Pinch · les pulpes se touchent · mesuré 0.16 mm · exigé ≤ 1.00 mm
-ATLAS_CRITERE OK  · Hand_Pinch · les pulpes se font face · mesuré -0.918 · exigé ≤ -0,50
+ATLAS_BATTEMENT index/thumb tour 1/10 score=17843.1 distance=2.81mm traversées=2
+ATLAS_BATTEMENT index/thumb tour 2/10 score=993.2 distance=0.95mm traversées=2
+ATLAS_BATTEMENT index/thumb tour 3/10 score=910.6 distance=0.72mm traversées=2
+ATLAS_BATTEMENT index/thumb tour 4/10 score=910.6 distance=0.72mm traversées=2
+ATLAS_BATTEMENT index/thumb tour 5/10 score=910.6 distance=0.72mm traversées=2 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/10 score=910.6 distance=0.72mm traversées=2
+ATLAS_BATTEMENT index/thumb tour 7/10 score=910.6 distance=0.72mm traversées=2 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 8/10 score=910.6 distance=0.72mm traversées=2 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 9/10 score=729.1 distance=0.83mm traversées=2
+ATLAS_BATTEMENT index/thumb tour 10/10 score=729.1 distance=0.83mm traversées=2
+ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb {"DEF_index_meta.L → DEF_thumb_meta.L": 2}
+ATLAS_BATTEMENT index/thumb tour 1/18 score=53485.0 distance=4.55mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 2/18 score=52552.6 distance=4.45mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 3/18 score=52552.6 distance=4.45mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 4/18 score=37250.7 distance=2.79mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 5/18 score=37250.7 distance=2.79mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/18 score=21955.7 distance=1.15mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 7/18 score=21955.7 distance=1.15mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 8/18 score=21955.4 distance=1.15mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 9/18 score=21955.4 distance=1.15mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 10/18 score=21213.1 distance=1.07mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 11/18 score=21212.8 distance=1.07mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 12/18 score=21212.8 distance=1.07mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 13/18 score=21212.8 distance=1.07mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 14/18 score=21212.8 distance=1.07mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 15/18 score=21212.8 distance=1.07mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 16/18 score=21105.2 distance=1.06mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 17/18 score=21105.2 distance=1.06mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 18/18 score=21104.8 distance=1.06mm traversées=0
+ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 0.83, "traversees_apres_approche": 2, "apres_nettoyage_mm": 1.06, "traversees_apres_nettoyage": 0, "axes_de_degagement": 3}
+ATLAS_CONTACT_HAND_PINCH {"entre": "index et thumb", "distance_mm": 1.06, "orientation_locale": -0.788, "sommets_du_patch": 119, "sommets_a_moins_de_1_5_mm": 3, "penetration": 0}
+ATLAS_CRITERE ÉCHEC · Hand_Pinch · les pulpes se touchent · mesuré 1.06 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_Pinch · les pulpes se font face · mesuré -0.788 · exigé ≤ -0,50
 ATLAS_CRITERE OK  · Hand_Pinch · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 0} · exigé 0 sommet, pulpes ET main entière
-ATLAS_BATTEMENT index/thumb tour 1/10 score=26389.3 distance=0.97mm traversées=339
-ATLAS_BATTEMENT index/thumb tour 2/10 score=25769.7 distance=0.61mm traversées=328
-ATLAS_BATTEMENT index/thumb tour 3/10 score=25769.7 distance=0.61mm traversées=328 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 4/10 score=25651.4 distance=0.54mm traversées=328
-ATLAS_BATTEMENT index/thumb tour 5/10 score=25651.4 distance=0.54mm traversées=328 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 6/10 score=17799.6 distance=2.22mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 7/10 score=8101.2 distance=0.77mm traversées=20
-ATLAS_BATTEMENT index/thumb tour 8/10 score=6411.1 distance=0.72mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 9/10 score=6409.7 distance=0.64mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 10/10 score=6397.7 distance=0.57mm traversées=0
-ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb {}
-ATLAS_BATTEMENT index/thumb tour 1/18 score=26621.8 distance=1.00mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 2/18 score=26589.4 distance=0.59mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 3/18 score=26541.0 distance=0.72mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 4/18 score=26527.5 distance=0.78mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 5/18 score=26425.8 distance=0.81mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 6/18 score=26389.6 distance=0.93mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 7/18 score=26389.6 distance=0.93mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 8/18 score=26389.6 distance=0.93mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 9/18 score=26389.6 distance=0.93mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 10/18 score=26358.5 distance=0.93mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 11/18 score=26358.5 distance=0.93mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 12/18 score=26358.5 distance=0.93mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 13/18 score=26358.4 distance=0.93mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 14/18 score=26358.4 distance=0.93mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 15/18 score=26358.4 distance=0.93mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 16/18 score=26358.4 distance=0.93mm traversées=0
-ATLAS_BATTEMENT index/thumb tour 17/18 score=26358.4 distance=0.93mm traversées=0 (pas resserré)
-ATLAS_BATTEMENT index/thumb tour 18/18 score=26342.6 distance=0.90mm traversées=0
-ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 0.57, "traversees_apres_approche": 0, "apres_nettoyage_mm": 0.9, "traversees_apres_nettoyage": 0, "axes_de_degagement": 3}
-ATLAS_CONTACT_HAND_OK {"entre": "index et thumb", "distance_mm": 0.9, "orientation_locale": -0.655, "sommets_du_patch": 77, "sommets_a_moins_de_1_5_mm": 5, "penetration": 0}
-ATLAS_CRITERE OK  · Hand_OK · les pulpes se touchent · mesuré 0.90 mm · exigé ≤ 1.00 mm
-ATLAS_CRITERE OK  · Hand_OK · les pulpes se font face · mesuré -0.655 · exigé ≤ -0,50
-ATLAS_CRITERE OK  · Hand_OK · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 0} · exigé 0 sommet, pulpes ET main entière
-ATLAS_BATTEMENT pinky/thumb tour 1/10 score=276886.7 distance=19.97mm traversées=1613
-ATLAS_BATTEMENT pinky/thumb tour 2/10 score=123494.3 distance=5.91mm traversées=1240
-ATLAS_BATTEMENT pinky/thumb tour 3/10 score=98010.9 distance=4.34mm traversées=1058
-ATLAS_BATTEMENT pinky/thumb tour 4/10 score=98010.9 distance=4.34mm traversées=1058 (pas resserré)
-ATLAS_BATTEMENT pinky/thumb tour 5/10 score=96220.9 distance=4.09mm traversées=1067
-ATLAS_BATTEMENT pinky/thumb tour 6/10 score=96220.9 distance=4.09mm traversées=1067
-ATLAS_BATTEMENT pinky/thumb tour 7/10 score=96220.9 distance=4.09mm traversées=1067 (pas resserré)
-ATLAS_BATTEMENT pinky/thumb tour 8/10 score=88052.0 distance=2.94mm traversées=1111
-ATLAS_BATTEMENT pinky/thumb tour 9/10 score=83075.3 distance=2.60mm traversées=1079
-ATLAS_BATTEMENT pinky/thumb tour 10/10 score=80979.8 distance=1.90mm traversées=1128
-ATLAS_OU_CA_TRAVERSE_APPROCHE pinky/thumb {"DEF_middle_03.L → DEF_ring_meta.L": 304, "DEF_middle_03.L → DEF_index_meta.L": 161, "DEF_index_meta.L → DEF_thumb_meta.L": 98, "DEF_middle_01.L → DEF_index_meta.L": 85, "DEF_middle_03.L → DEF_thumb_meta.L": 75, "DEF_index_03.L → DEF_thumb_meta.L": 70, "DEF_thumb_meta.L → DEF_index_meta.L": 62, "DEF_thumb_02.L → DEF_pinky_03.L": 41, "DEF_pinky_03.L → DEF_thumb_02.L": 35, "DEF_thumb_meta.L → DEF_hand.L": 35, "DEF_middle_01.L → DEF_ring_meta.L": 31, "DEF_middle_02.L → DEF_thumb_meta.L": 21, "DEF_index_meta.L → DEF_middle_01.L": 17, "DEF_middle_02.L → DEF_index_meta.L": 17, "DEF_index_01.L → DEF_middle_01.L": 16, "DEF_ring_meta.L → DEF_middle_03.L": 10, "DEF_index_meta.L → DEF_middle_02.L": 8, "DEF_middle_01.L → DEF_index_01.L": 8, "DEF_thumb_meta.L → DEF_index_03.L": 7, "DEF_index_02.L → DEF_thumb_meta.L": 7, "DEF_middle_01.L → DEF_ring_01.L": 6, "DEF_thumb_meta.L → DEF_index_02.L": 4, "DEF_thumb_meta.L → DEF_middle_02.L": 2, "DEF_middle_meta.L → DEF_index_01.L": 2, "DEF_ring_01.L → DEF_middle_01.L": 2, "DEF_thumb_meta.L → DEF_middle_03.L": 1, "DEF_index_meta.L → DEF_hand.L": 1, "DEF_hand.L → DEF_index_meta.L": 1, "DEF_ring_01.L → DEF_pinky_01.L": 1}
-ATLAS_BATTEMENT pinky/thumb tour 1/18 score=23139014.3 distance=17.82mm traversées=1146
-ATLAS_BATTEMENT pinky/thumb tour 2/18 score=20250534.9 distance=19.08mm traversées=1001
-ATLAS_BATTEMENT pinky/thumb tour 3/18 score=20006687.4 distance=3.50mm traversées=996
-ATLAS_BATTEMENT pinky/thumb tour 4/18 score=20005217.0 distance=3.36mm traversées=996
-ATLAS_BATTEMENT pinky/thumb tour 5/18 score=19904947.7 distance=3.30mm traversées=991
-ATLAS_BATTEMENT pinky/thumb tour 6/18 score=19904947.0 distance=3.30mm traversées=991
-ATLAS_BATTEMENT pinky/thumb tour 7/18 score=19904947.0 distance=3.30mm traversées=991 (pas resserré)
-ATLAS_BATTEMENT pinky/thumb tour 8/18 score=19844827.5 distance=3.29mm traversées=988
-ATLAS_BATTEMENT pinky/thumb tour 9/18 score=19807348.7 distance=3.57mm traversées=986
-ATLAS_BATTEMENT pinky/thumb tour 10/18 score=19806227.5 distance=3.45mm traversées=986
-ATLAS_BATTEMENT pinky/thumb tour 11/18 score=19806226.7 distance=3.45mm traversées=986
-ATLAS_BATTEMENT pinky/thumb tour 12/18 score=19806226.7 distance=3.45mm traversées=986 (pas resserré)
-ATLAS_BATTEMENT pinky/thumb tour 13/18 score=19698878.2 distance=2.62mm traversées=981
-ATLAS_BATTEMENT pinky/thumb tour 14/18 score=19638878.2 distance=2.62mm traversées=978
-ATLAS_BATTEMENT pinky/thumb tour 15/18 score=19638878.2 distance=2.62mm traversées=978 (pas resserré)
-ATLAS_BATTEMENT pinky/thumb tour 16/18 score=19578878.2 distance=2.62mm traversées=975
-ATLAS_BATTEMENT pinky/thumb tour 17/18 score=19578878.2 distance=2.62mm traversées=975 (pas resserré)
-ATLAS_BATTEMENT pinky/thumb tour 18/18 score=19559249.6 distance=2.66mm traversées=974
-ATLAS_DEUX_TEMPS {"contact": "pinky/thumb", "apres_approche_mm": 1.9, "traversees_apres_approche": 1128, "apres_nettoyage_mm": 2.66, "traversees_apres_nettoyage": 974, "axes_de_degagement": 1}
-ATLAS_OU_CA_TRAVERSE_NETTOYAGE pinky/thumb {"DEF_middle_03.L → DEF_ring_meta.L": 284, "DEF_middle_03.L → DEF_index_meta.L": 184, "DEF_index_meta.L → DEF_thumb_meta.L": 98, "DEF_middle_01.L → DEF_index_meta.L": 83, "DEF_middle_03.L → DEF_thumb_meta.L": 81, "DEF_middle_02.L → DEF_thumb_meta.L": 52, "DEF_thumb_meta.L → DEF_index_meta.L": 47, "DEF_middle_01.L → DEF_ring_meta.L": 27, "DEF_thumb_meta.L → DEF_hand.L": 22, "DEF_middle_02.L → DEF_index_meta.L": 19, "DEF_index_01.L → DEF_middle_01.L": 18, "DEF_index_meta.L → DEF_middle_01.L": 17, "DEF_index_meta.L → DEF_middle_02.L": 13, "DEF_middle_01.L → DEF_index_01.L": 7, "DEF_ring_meta.L → DEF_middle_03.L": 7, "DEF_index_03.L → DEF_thumb_meta.L": 6, "DEF_middle_meta.L → DEF_index_01.L": 2, "DEF_hand.L → DEF_index_meta.L": 2, "DEF_middle_01.L → DEF_ring_01.L": 2, "DEF_thumb_meta.L → DEF_middle_03.L": 1, "DEF_thumb_meta.L → DEF_middle_02.L": 1, "DEF_index_meta.L → DEF_hand.L": 1}
-ATLAS_APPROCHE_MEILLEURE {"contact": "pinky/thumb", "approche_mm": 1.9, "nettoyage_mm": 2.66, "retenu": "approche"}
-ATLAS_CONTACT_HAND_PINKY_THUMB {"entre": "pinky et thumb", "distance_mm": 1.9, "orientation_locale": 0.433, "sommets_du_patch": 156, "sommets_a_moins_de_1_5_mm": 0, "penetration": 15}
-ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · les pulpes se touchent · mesuré 1.90 mm · exigé ≤ 1.00 mm
-ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · les pulpes se font face · mesuré 0.433 · exigé ≤ -0,50
-ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune interpénétration · mesuré {'dans_les_pulpes': 15, 'dans_la_main_entiere': 1128} · exigé 0 sommet, pulpes ET main entière
-ATLAS_PINCE_AURICULAIRE_POUCE {"ecart_des_empreintes_mm": 1.9, "se_font_face": 0.433}
-ATLAS_DIVERGENCE k=0° → fermeture propre 0.55
-ATLAS_DIVERGENCE k=2° → fermeture propre 0.55
-ATLAS_DIVERGENCE k=4° → fermeture propre 0.55
-ATLAS_DIVERGENCE k=6° → fermeture propre 0.5
-ATLAS_DIVERGENCE k=8° → fermeture propre 0.5
+ATLAS_BATTEMENT index/thumb tour 1/10 score=49297.5 distance=0.16mm traversées=638
+ATLAS_BATTEMENT index/thumb tour 2/10 score=42861.7 distance=0.19mm traversées=684
+ATLAS_BATTEMENT index/thumb tour 3/10 score=42132.1 distance=0.14mm traversées=676
+ATLAS_BATTEMENT index/thumb tour 4/10 score=42132.1 distance=0.14mm traversées=676
+ATLAS_BATTEMENT index/thumb tour 5/10 score=42132.1 distance=0.14mm traversées=676 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/10 score=17882.8 distance=0.86mm traversées=258
+ATLAS_BATTEMENT index/thumb tour 7/10 score=17882.8 distance=0.86mm traversées=258 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 8/10 score=17882.8 distance=0.86mm traversées=258
+ATLAS_BATTEMENT index/thumb tour 9/10 score=17882.8 distance=0.86mm traversées=258 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 10/10 score=16159.2 distance=1.02mm traversées=225
+ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb {"DEF_thumb_02.L → DEF_index_02.L": 91, "DEF_index_meta.L → DEF_thumb_meta.L": 54, "DEF_index_02.L → DEF_thumb_02.L": 41, "DEF_pinky_meta.L → DEF_thumb_meta.L": 26, "DEF_thumb_meta.L → DEF_index_meta.L": 11, "DEF_thumb_02.L → DEF_index_03.L": 1, "DEF_index_meta.L → DEF_hand.L": 1}
+ATLAS_BATTEMENT index/thumb tour 1/18 score=4140711.3 distance=4.71mm traversées=202
+ATLAS_BATTEMENT index/thumb tour 2/18 score=4098278.5 distance=6.57mm traversées=199
+ATLAS_BATTEMENT index/thumb tour 3/18 score=4097336.2 distance=6.47mm traversées=199
+ATLAS_BATTEMENT index/thumb tour 4/18 score=4078036.2 distance=4.41mm traversées=199
+ATLAS_BATTEMENT index/thumb tour 5/18 score=4078035.9 distance=4.41mm traversées=199
+ATLAS_BATTEMENT index/thumb tour 6/18 score=4078035.9 distance=4.41mm traversées=199 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 7/18 score=3044140.1 distance=2.88mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 8/18 score=3044139.0 distance=2.88mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 9/18 score=3044138.6 distance=2.88mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 10/18 score=3044138.6 distance=2.88mm traversées=148 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 11/18 score=3044138.6 distance=2.88mm traversées=148 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 12/18 score=3037691.7 distance=2.20mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 13/18 score=3037669.9 distance=2.19mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 14/18 score=3037648.0 distance=2.19mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 15/18 score=3037626.9 distance=2.19mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 16/18 score=3037606.2 distance=2.19mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 17/18 score=3037586.5 distance=2.18mm traversées=148
+ATLAS_BATTEMENT index/thumb tour 18/18 score=3037575.6 distance=2.18mm traversées=148
+ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 1.02, "traversees_apres_approche": 225, "apres_nettoyage_mm": 2.18, "traversees_apres_nettoyage": 148, "axes_de_degagement": 3}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE index/thumb {"DEF_index_meta.L → DEF_thumb_meta.L": 88, "DEF_pinky_meta.L → DEF_thumb_meta.L": 39, "DEF_thumb_meta.L → DEF_pinky_meta.L": 11, "DEF_thumb_meta.L → DEF_index_meta.L": 7, "DEF_index_meta.L → DEF_hand.L": 3}
+ATLAS_CONTACT_HAND_OK {"entre": "index et thumb", "distance_mm": 2.18, "orientation_locale": -0.633, "sommets_du_patch": 75, "sommets_a_moins_de_1_5_mm": 0, "penetration": 0}
+ATLAS_CRITERE ÉCHEC · Hand_OK · les pulpes se touchent · mesuré 2.18 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_OK · les pulpes se font face · mesuré -0.633 · exigé ≤ -0,50
+ATLAS_CRITERE ÉCHEC · Hand_OK · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 148} · exigé 0 sommet, pulpes ET main entière
+ATLAS_BATTEMENT pinky/thumb tour 1/10 score=270102.2 distance=18.26mm traversées=1767
+ATLAS_BATTEMENT pinky/thumb tour 2/10 score=223186.1 distance=8.51mm traversées=2521
+ATLAS_BATTEMENT pinky/thumb tour 3/10 score=150883.2 distance=0.79mm traversées=2486
+ATLAS_BATTEMENT pinky/thumb tour 4/10 score=150823.2 distance=0.79mm traversées=2485
+ATLAS_BATTEMENT pinky/thumb tour 5/10 score=150823.2 distance=0.79mm traversées=2485 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 6/10 score=150163.2 distance=0.79mm traversées=2474
+ATLAS_BATTEMENT pinky/thumb tour 7/10 score=150163.2 distance=0.79mm traversées=2474 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 8/10 score=136683.4 distance=1.27mm traversées=2194
+ATLAS_BATTEMENT pinky/thumb tour 9/10 score=132768.7 distance=1.24mm traversées=2137
+ATLAS_BATTEMENT pinky/thumb tour 10/10 score=131889.0 distance=1.20mm traversées=2131
+ATLAS_OU_CA_TRAVERSE_APPROCHE pinky/thumb {"DEF_index_02.L → DEF_thumb_meta.L": 348, "DEF_middle_03.L → DEF_index_meta.L": 269, "DEF_middle_02.L → DEF_index_meta.L": 169, "DEF_index_meta.L → DEF_thumb_meta.L": 159, "DEF_index_03.L → DEF_thumb_meta.L": 147, "DEF_thumb_meta.L → DEF_index_02.L": 134, "DEF_middle_02.L → DEF_thumb_meta.L": 133, "DEF_middle_03.L → DEF_thumb_meta.L": 109, "DEF_middle_01.L → DEF_ring_meta.L": 90, "DEF_thumb_meta.L → DEF_middle_02.L": 80, "DEF_thumb_meta.L → DEF_index_meta.L": 76, "DEF_index_meta.L → DEF_hand.L": 57, "DEF_thumb_meta.L → DEF_hand.L": 51, "DEF_middle_01.L → DEF_index_01.L": 37, "DEF_thumb_meta.L → DEF_pinky_meta.L": 34, "DEF_index_meta.L → DEF_middle_02.L": 29, "DEF_index_01.L → DEF_middle_meta.L": 26, "DEF_thumb_meta.L → DEF_index_03.L": 23, "DEF_index_meta.L → DEF_middle_01.L": 23, "DEF_thumb_02.L → DEF_pinky_02.L": 22, "DEF_middle_03.L → DEF_ring_meta.L": 17, "DEF_index_01.L → DEF_middle_01.L": 16, "DEF_pinky_meta.L → DEF_thumb_meta.L": 13, "DEF_middle_meta.L → DEF_index_01.L": 12, "DEF_pinky_02.L → DEF_thumb_02.L": 11, "DEF_thumb_01.L → DEF_middle_02.L": 8, "DEF_thumb_01.L → DEF_index_meta.L": 7, "DEF_thumb_meta.L → DEF_middle_03.L": 7, "DEF_index_meta.L → DEF_middle_03.L": 7, "DEF_ring_meta.L → DEF_middle_01.L": 6, "DEF_middle_01.L → DEF_ring_01.L": 5, "DEF_middle_02.L → DEF_thumb_01.L": 4, "DEF_thumb_02.L → DEF_pinky_03.L": 2}
+ATLAS_BATTEMENT pinky/thumb tour 1/18 score=31891325.8 distance=17.15mm traversées=1585
+ATLAS_BATTEMENT pinky/thumb tour 2/18 score=31072769.7 distance=8.73mm traversées=1548
+ATLAS_BATTEMENT pinky/thumb tour 3/18 score=30685885.5 distance=8.00mm traversées=1529
+ATLAS_BATTEMENT pinky/thumb tour 4/18 score=30565885.5 distance=8.00mm traversées=1523
+ATLAS_BATTEMENT pinky/thumb tour 5/18 score=30565885.5 distance=8.00mm traversées=1523 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 6/18 score=30511760.4 distance=2.08mm traversées=1522
+ATLAS_BATTEMENT pinky/thumb tour 7/18 score=30511759.8 distance=2.08mm traversées=1522
+ATLAS_BATTEMENT pinky/thumb tour 8/18 score=30487939.6 distance=3.84mm traversées=1520
+ATLAS_BATTEMENT pinky/thumb tour 9/18 score=30351597.3 distance=8.62mm traversées=1512
+ATLAS_BATTEMENT pinky/thumb tour 10/18 score=30176832.7 distance=7.04mm traversées=1504
+ATLAS_BATTEMENT pinky/thumb tour 11/18 score=30176832.7 distance=7.04mm traversées=1504 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 12/18 score=30074221.7 distance=8.95mm traversées=1498
+ATLAS_BATTEMENT pinky/thumb tour 13/18 score=30074221.7 distance=8.95mm traversées=1498 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 14/18 score=30065201.6 distance=7.97mm traversées=1498
+ATLAS_BATTEMENT pinky/thumb tour 15/18 score=30065201.6 distance=7.97mm traversées=1498 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 16/18 score=30029560.0 distance=8.44mm traversées=1496
+ATLAS_BATTEMENT pinky/thumb tour 17/18 score=30029560.0 distance=8.44mm traversées=1496 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 18/18 score=30007373.7 distance=8.20mm traversées=1495
+ATLAS_DEUX_TEMPS {"contact": "pinky/thumb", "apres_approche_mm": 1.2, "traversees_apres_approche": 2131, "apres_nettoyage_mm": 8.2, "traversees_apres_nettoyage": 1495, "axes_de_degagement": 1}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE pinky/thumb {"DEF_middle_03.L → DEF_index_meta.L": 263, "DEF_index_02.L → DEF_thumb_meta.L": 252, "DEF_index_meta.L → DEF_thumb_meta.L": 153, "DEF_middle_02.L → DEF_index_meta.L": 97, "DEF_index_03.L → DEF_thumb_meta.L": 83, "DEF_thumb_meta.L → DEF_index_02.L": 77, "DEF_thumb_meta.L → DEF_hand.L": 76, "DEF_index_meta.L → DEF_hand.L": 76, "DEF_middle_01.L → DEF_ring_meta.L": 61, "DEF_thumb_meta.L → DEF_index_meta.L": 60, "DEF_middle_02.L → DEF_thumb_meta.L": 59, "DEF_middle_03.L → DEF_thumb_meta.L": 44, "DEF_middle_01.L → DEF_index_01.L": 40, "DEF_index_meta.L → DEF_middle_02.L": 27, "DEF_index_01.L → DEF_middle_meta.L": 26, "DEF_thumb_meta.L → DEF_index_03.L": 21, "DEF_thumb_meta.L → DEF_pinky_meta.L": 18, "DEF_index_meta.L → DEF_middle_01.L": 13, "DEF_middle_meta.L → DEF_index_01.L": 12, "DEF_thumb_meta.L → DEF_middle_02.L": 11, "DEF_index_meta.L → DEF_middle_03.L": 7, "DEF_index_01.L → DEF_middle_01.L": 6, "DEF_middle_01.L → DEF_ring_01.L": 6, "DEF_ring_meta.L → DEF_middle_01.L": 4, "DEF_thumb_meta.L → DEF_middle_03.L": 3}
+ATLAS_CONTACT_HAND_PINKY_THUMB {"entre": "pinky et thumb", "distance_mm": 8.2, "orientation_locale": -0.871, "sommets_du_patch": 48, "sommets_a_moins_de_1_5_mm": 0, "penetration": 0}
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · les pulpes se touchent · mesuré 8.20 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_Pinky_Thumb · les pulpes se font face · mesuré -0.871 · exigé ≤ -0,50
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 1495} · exigé 0 sommet, pulpes ET main entière
+ATLAS_PINCE_AURICULAIRE_POUCE {"ecart_des_empreintes_mm": 8.2, "se_font_face": -0.871}
+ATLAS_DIVERGENCE k=0° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=2° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=4° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=6° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=8° → fermeture propre 0.55
 ATLAS_DIVERGENCE k=10° → fermeture propre 0.5
 ATLAS_DIVERGENCE k=12° → fermeture propre 0.5
-ATLAS_DIVERGENCE_CHERCHEE {"balayage": {"0.0": 0.55, "2.0": 0.55, "4.0": 0.55, "6.0": 0.5, "8.0": 0.5, "10.0": 0.5, "12.0": 0.5}, "k_retenu_deg": 0.0, "fermeture_propre_atteinte": 0.55, "regle": "la plus PETITE amplitude qui atteint la fermeture la plus profonde"}
-ATLAS_CUP_POING cup=0.00 → fermeture propre 0.55
+ATLAS_DIVERGENCE_CHERCHEE {"balayage": {"0.0": 0.6, "2.0": 0.6, "4.0": 0.6, "6.0": 0.6, "8.0": 0.55, "10.0": 0.5, "12.0": 0.5}, "k_retenu_deg": 0.0, "fermeture_propre_atteinte": 0.6, "regle": "la plus PETITE amplitude qui atteint la fermeture la plus profonde"}
+ATLAS_CUP_POING cup=0.00 → fermeture propre 0.6
 ATLAS_CUP_POING cup=0.25 → fermeture propre 0.55
 ATLAS_CUP_POING cup=0.50 → fermeture propre 0.5
-ATLAS_CUP_POING cup=0.70 → fermeture propre 0.3
-ATLAS_CUP_POING cup=0.90 → fermeture propre 0.2
-ATLAS_CREUSEMENT_DU_POING {"balayage": {"0.0": 0.55, "0.25": 0.55, "0.5": 0.5, "0.7": 0.3, "0.9": 0.2}, "cup_retenu": 0.0, "fermeture_propre_atteinte": 0.55, "regle": "le plus PETIT creusement qui laisse aller le plus loin"}
-ATLAS_TRAVERSEES_DES_QUATRE_DOIGTS_SEULS {"0.0": {"total": 0}, "0.02": {"total": 0}, "0.04": {"total": 0}, "0.06": {"total": 0}, "0.08": {"total": 0}, "0.1": {"total": 0}, "0.12": {"total": 0}, "0.14": {"total": 0}, "0.16": {"total": 0}, "0.18": {"total": 0}, "0.2": {"total": 0}, "0.22": {"total": 0}, "0.24": {"total": 0}, "0.26": {"total": 0}, "0.28": {"total": 0}, "0.3": {"total": 0}, "0.32": {"total": 0}, "0.34": {"total": 0}, "0.36": {"total": 0}, "0.38": {"total": 0}, "0.4": {"total": 0}, "0.42": {"total": 0}, "0.44": {"total": 0}, "0.46": {"total": 0}, "0.48": {"total": 0}, "0.5": {"total": 0}, "0.52": {"total": 0}, "0.54": {"total": 0}, "0.56": {"total": 0}, "0.58": {"total": 0}, "0.6": {"total": 1}}
-ATLAS_FERMETURE_RETENUE {"valeur": 0.58, "profondeur_propre_mesuree": 0.58, "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"}
-ATLAS_CRITERE ÉCHEC · le poing se ferme complètement sans traversée · mesuré 0.58 · exigé Fist = 1.0
-ATLAS_BATTEMENT thumb/index tour 1/10 score=337810.9 distance=26.59mm traversées=1647
-ATLAS_BATTEMENT thumb/index tour 2/10 score=164480.3 distance=5.58mm traversées=2004
-ATLAS_BATTEMENT thumb/index tour 3/10 score=121311.3 distance=2.76mm traversées=1722
-ATLAS_BATTEMENT thumb/index tour 4/10 score=121311.3 distance=2.76mm traversées=1722 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 5/10 score=116646.4 distance=3.01mm traversées=1570
-ATLAS_BATTEMENT thumb/index tour 6/10 score=116529.5 distance=1.46mm traversées=1770
-ATLAS_BATTEMENT thumb/index tour 7/10 score=116529.5 distance=1.46mm traversées=1770 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 8/10 score=105547.3 distance=2.12mm traversées=1506
-ATLAS_BATTEMENT thumb/index tour 9/10 score=103459.9 distance=1.33mm traversées=1570
-ATLAS_BATTEMENT thumb/index tour 10/10 score=103459.9 distance=1.33mm traversées=1570 (pas resserré)
-ATLAS_OU_CA_TRAVERSE_APPROCHE thumb/index {"DEF_middle_03.L → DEF_index_meta.L": 251, "DEF_ring_03.L → DEF_pinky_meta.L": 195, "DEF_ring_03.L → DEF_middle_meta.L": 158, "DEF_index_03.L → DEF_thumb_meta.L": 146, "DEF_index_meta.L → DEF_thumb_meta.L": 114, "DEF_ring_02.L → DEF_pinky_meta.L": 100, "DEF_middle_03.L → DEF_thumb_meta.L": 99, "DEF_ring_01.L → DEF_pinky_meta.L": 97, "DEF_thumb_meta.L → DEF_index_meta.L": 86, "DEF_index_01.L → DEF_middle_01.L": 64, "DEF_index_03.L → DEF_thumb_02.L": 48, "DEF_thumb_02.L → DEF_index_03.L": 38, "DEF_middle_01.L → DEF_index_meta.L": 35, "DEF_index_meta.L → DEF_middle_01.L": 31, "DEF_middle_03.L → DEF_ring_meta.L": 16, "DEF_thumb_01.L → DEF_index_meta.L": 12, "DEF_middle_meta.L → DEF_ring_01.L": 11, "DEF_thumb_meta.L → DEF_hand.L": 10, "DEF_ring_02.L → DEF_middle_meta.L": 10, "DEF_pinky_meta.L → DEF_ring_01.L": 9, "DEF_middle_01.L → DEF_ring_meta.L": 7, "DEF_index_01.L → DEF_middle_meta.L": 6, "DEF_middle_01.L → DEF_ring_01.L": 4, "DEF_ring_01.L → DEF_middle_meta.L": 4, "DEF_thumb_meta.L → DEF_index_03.L": 3, "DEF_ring_02.L → DEF_thumb_meta.L": 3, "DEF_middle_meta.L → DEF_index_01.L": 3, "DEF_middle_01.L → DEF_index_01.L": 3, "DEF_index_meta.L → DEF_middle_03.L": 1, "DEF_middle_meta.L → DEF_ring_02.L": 1, "DEF_middle_meta.L → DEF_ring_03.L": 1, "DEF_ring_meta.L → DEF_middle_01.L": 1, "DEF_ring_01.L → DEF_middle_01.L": 1, "DEF_ring_01.L → DEF_pinky_01.L": 1, "DEF_pinky_meta.L → DEF_ring_02.L": 1}
-ATLAS_BATTEMENT thumb/index tour 1/18 score=29079052.6 distance=5.11mm traversées=1450
-ATLAS_BATTEMENT thumb/index tour 2/18 score=29060203.7 distance=3.06mm traversées=1450
-ATLAS_BATTEMENT thumb/index tour 3/18 score=29060203.1 distance=3.06mm traversées=1450
-ATLAS_BATTEMENT thumb/index tour 4/18 score=29060203.1 distance=3.06mm traversées=1450 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 5/18 score=28368907.1 distance=4.01mm traversées=1415
-ATLAS_BATTEMENT thumb/index tour 6/18 score=27788906.7 distance=4.01mm traversées=1386
-ATLAS_BATTEMENT thumb/index tour 7/18 score=27788906.7 distance=4.01mm traversées=1386 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 8/18 score=27303171.7 distance=3.39mm traversées=1362
-ATLAS_BATTEMENT thumb/index tour 9/18 score=27303171.1 distance=3.39mm traversées=1362
-ATLAS_BATTEMENT thumb/index tour 10/18 score=27303171.1 distance=3.39mm traversées=1362 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 11/18 score=27279298.7 distance=2.98mm traversées=1361
-ATLAS_BATTEMENT thumb/index tour 12/18 score=27279298.2 distance=2.98mm traversées=1361
-ATLAS_BATTEMENT thumb/index tour 13/18 score=27279298.2 distance=2.98mm traversées=1361 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 14/18 score=27279297.9 distance=2.98mm traversées=1361
-ATLAS_BATTEMENT thumb/index tour 15/18 score=27279297.9 distance=2.98mm traversées=1361 (pas resserré)
-ATLAS_BATTEMENT thumb/index tour 16/18 score=27177674.1 distance=2.81mm traversées=1356
-ATLAS_BATTEMENT thumb/index tour 17/18 score=27118497.7 distance=2.90mm traversées=1353
-ATLAS_BATTEMENT thumb/index tour 18/18 score=27118497.1 distance=2.90mm traversées=1353
-ATLAS_DEUX_TEMPS {"contact": "thumb/index", "apres_approche_mm": 1.33, "traversees_apres_approche": 1570, "apres_nettoyage_mm": 2.9, "traversees_apres_nettoyage": 1353, "axes_de_degagement": 0}
-ATLAS_OU_CA_TRAVERSE_NETTOYAGE thumb/index {"DEF_index_03.L → DEF_thumb_meta.L": 201, "DEF_middle_03.L → DEF_index_meta.L": 189, "DEF_ring_03.L → DEF_pinky_meta.L": 180, "DEF_ring_03.L → DEF_middle_meta.L": 159, "DEF_middle_03.L → DEF_thumb_meta.L": 138, "DEF_ring_01.L → DEF_pinky_meta.L": 99, "DEF_ring_02.L → DEF_pinky_meta.L": 96, "DEF_index_01.L → DEF_middle_01.L": 77, "DEF_middle_01.L → DEF_index_meta.L": 49, "DEF_index_meta.L → DEF_middle_01.L": 29, "DEF_thumb_meta.L → DEF_index_meta.L": 19, "DEF_index_meta.L → DEF_thumb_meta.L": 17, "DEF_thumb_meta.L → DEF_index_02.L": 11, "DEF_ring_02.L → DEF_thumb_meta.L": 10, "DEF_ring_02.L → DEF_middle_meta.L": 10, "DEF_pinky_meta.L → DEF_ring_01.L": 9, "DEF_middle_03.L → DEF_ring_meta.L": 8, "DEF_middle_01.L → DEF_ring_meta.L": 7, "DEF_middle_meta.L → DEF_ring_01.L": 7, "DEF_thumb_meta.L → DEF_index_03.L": 6, "DEF_ring_03.L → DEF_thumb_meta.L": 6, "DEF_thumb_meta.L → DEF_middle_03.L": 4, "DEF_middle_01.L → DEF_ring_01.L": 4, "DEF_ring_01.L → DEF_middle_meta.L": 4, "DEF_index_02.L → DEF_thumb_meta.L": 3, "DEF_index_01.L → DEF_middle_meta.L": 3, "DEF_middle_meta.L → DEF_index_01.L": 3, "DEF_middle_meta.L → DEF_ring_02.L": 3, "DEF_ring_meta.L → DEF_middle_01.L": 1, "DEF_pinky_meta.L → DEF_ring_02.L": 1}
-ATLAS_POUCE_DU_POING {"distance_a_l_index_mm": 2.9, "penetration": 0, "reglages": {"Fist": 1.0, "Thumb_Curl": 0.563, "Thumb_Opposition": 0.205}, "corrections_fk_deg": {"CTRL_index_01.L[2]": 0.8, "CTRL_middle_01.L[2]": 6.4, "CTRL_ring_01.L[2]": 8.0, "CTRL_pinky_01.L[2]": -14.0, "CTRL_thumb_meta.L[0]": -27.7, "CTRL_thumb_meta.L[1]": 43.3, "CTRL_thumb_meta.L[2]": 28.5, "CTRL_thumb_01.L[0]": 21.8, "CTRL_thumb_02.L[0]": 19.9}}
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 1/9 reste=1672
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 2/9 reste=1407
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 3/9 reste=1337
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 4/9 reste=1327
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 5/9 reste=1307
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 6/9 reste=1297
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 7/9 reste=1297 (pas resserré)
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 8/9 reste=1273
-ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 9/9 reste=1273 (pas resserré)
-ATLAS_NETTOYAGE Hand_Fist_75 : 1273 sommets traversants
-ATLAS_BATTEMENT nettoyage Hand_Point tour 1/9 reste=1442
-ATLAS_BATTEMENT nettoyage Hand_Point tour 2/9 reste=1371
-ATLAS_BATTEMENT nettoyage Hand_Point tour 3/9 reste=1324
-ATLAS_BATTEMENT nettoyage Hand_Point tour 4/9 reste=1315
-ATLAS_BATTEMENT nettoyage Hand_Point tour 5/9 reste=1307
-ATLAS_BATTEMENT nettoyage Hand_Point tour 6/9 reste=1307 (pas resserré)
-ATLAS_BATTEMENT nettoyage Hand_Point tour 7/9 reste=1287
-ATLAS_BATTEMENT nettoyage Hand_Point tour 8/9 reste=1287 (pas resserré)
-ATLAS_BATTEMENT nettoyage Hand_Point tour 9/9 reste=1202
-ATLAS_NETTOYAGE Hand_Point : 1202 sommets traversants
+ATLAS_CUP_POING cup=0.70 → fermeture propre 0.5
+ATLAS_CUP_POING cup=0.90 → fermeture propre 0.25
+ATLAS_CREUSEMENT_DU_POING {"balayage": {"0.0": 0.6, "0.25": 0.55, "0.5": 0.5, "0.7": 0.5, "0.9": 0.25}, "cup_retenu": 0.0, "fermeture_propre_atteinte": 0.6, "regle": "le plus PETIT creusement qui laisse aller le plus loin"}
+ATLAS_TRAVERSEES_DES_QUATRE_DOIGTS_SEULS {"0.0": {"total": 0}, "0.02": {"total": 0}, "0.04": {"total": 0}, "0.06": {"total": 0}, "0.08": {"total": 0}, "0.1": {"total": 0}, "0.12": {"total": 0}, "0.14": {"total": 0}, "0.16": {"total": 0}, "0.18": {"total": 0}, "0.2": {"total": 0}, "0.22": {"total": 0}, "0.24": {"total": 0}, "0.26": {"total": 0}, "0.28": {"total": 0}, "0.3": {"total": 0}, "0.32": {"total": 0}, "0.34": {"total": 0}, "0.36": {"total": 0}, "0.38": {"total": 0}, "0.4": {"total": 0}, "0.42": {"total": 0}, "0.44": {"total": 0}, "0.46": {"total": 0}, "0.48": {"total": 0}, "0.5": {"total": 0}, "0.52": {"total": 0}, "0.54": {"total": 0}, "0.56": {"total": 0}, "0.58": {"total": 0}, "0.6": {"total": 0}, "0.62": {"total": 1}}
+ATLAS_FERMETURE_RETENUE {"valeur": 0.6, "profondeur_propre_mesuree": 0.6, "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"}
+ATLAS_CRITERE ÉCHEC · le poing se ferme complètement sans traversée · mesuré 0.6 · exigé Fist = 1.0
+ATLAS_BATTEMENT thumb/index tour 1/10 score=351610.9 distance=26.59mm traversées=1877
+ATLAS_BATTEMENT thumb/index tour 2/10 score=158480.3 distance=5.58mm traversées=1904
+ATLAS_BATTEMENT thumb/index tour 3/10 score=127311.3 distance=2.76mm traversées=1822
+ATLAS_BATTEMENT thumb/index tour 4/10 score=127311.3 distance=2.76mm traversées=1822 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 5/10 score=122408.0 distance=1.17mm traversées=1954
+ATLAS_BATTEMENT thumb/index tour 6/10 score=122408.0 distance=1.17mm traversées=1954 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 7/10 score=114627.1 distance=2.06mm traversées=1680
+ATLAS_BATTEMENT thumb/index tour 8/10 score=114147.1 distance=2.06mm traversées=1672
+ATLAS_BATTEMENT thumb/index tour 9/10 score=114147.1 distance=2.06mm traversées=1672 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 10/10 score=108798.5 distance=1.29mm traversées=1681
+ATLAS_OU_CA_TRAVERSE_APPROCHE thumb/index {"DEF_ring_03.L → DEF_pinky_meta.L": 244, "DEF_thumb_meta.L → DEF_index_meta.L": 211, "DEF_ring_03.L → DEF_middle_meta.L": 177, "DEF_middle_03.L → DEF_index_meta.L": 151, "DEF_index_meta.L → DEF_thumb_meta.L": 143, "DEF_index_03.L → DEF_thumb_meta.L": 100, "DEF_ring_01.L → DEF_pinky_meta.L": 98, "DEF_thumb_02.L → DEF_index_meta.L": 95, "DEF_index_01.L → DEF_middle_01.L": 70, "DEF_ring_02.L → DEF_pinky_meta.L": 59, "DEF_index_meta.L → DEF_thumb_02.L": 52, "DEF_middle_01.L → DEF_index_meta.L": 43, "DEF_index_meta.L → DEF_middle_01.L": 33, "DEF_thumb_01.L → DEF_index_meta.L": 29, "DEF_pinky_meta.L → DEF_ring_02.L": 19, "DEF_index_03.L → DEF_thumb_02.L": 18, "DEF_pinky_meta.L → DEF_ring_01.L": 17, "DEF_thumb_02.L → DEF_index_03.L": 16, "DEF_middle_meta.L → DEF_ring_03.L": 16, "DEF_middle_01.L → DEF_index_01.L": 14, "DEF_middle_meta.L → DEF_ring_01.L": 12, "DEF_ring_01.L → DEF_middle_meta.L": 11, "DEF_ring_02.L → DEF_middle_meta.L": 9, "DEF_thumb_meta.L → DEF_middle_meta.L": 8, "DEF_thumb_meta.L → DEF_hand.L": 8, "DEF_index_01.L → DEF_middle_meta.L": 8, "DEF_middle_meta.L → DEF_index_01.L": 7, "DEF_middle_01.L → DEF_ring_meta.L": 3, "DEF_middle_01.L → DEF_ring_01.L": 3, "DEF_ring_01.L → DEF_middle_01.L": 3, "DEF_thumb_meta.L → DEF_index_03.L": 2, "DEF_ring_meta.L → DEF_middle_01.L": 1, "DEF_ring_01.L → DEF_pinky_01.L": 1}
+ATLAS_BATTEMENT thumb/index tour 1/18 score=29562375.4 distance=16.22mm traversées=1469
+ATLAS_BATTEMENT thumb/index tour 2/18 score=27949000.9 distance=12.60mm traversées=1390
+ATLAS_BATTEMENT thumb/index tour 3/18 score=27516598.9 distance=11.22mm traversées=1368
+ATLAS_BATTEMENT thumb/index tour 4/18 score=27489576.9 distance=10.50mm traversées=1368
+ATLAS_BATTEMENT thumb/index tour 5/18 score=27489576.9 distance=10.50mm traversées=1368 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 6/18 score=27469576.9 distance=10.50mm traversées=1367
+ATLAS_BATTEMENT thumb/index tour 7/18 score=27469576.9 distance=10.50mm traversées=1367 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 8/18 score=27009576.9 distance=10.50mm traversées=1344
+ATLAS_BATTEMENT thumb/index tour 9/18 score=26969576.9 distance=10.50mm traversées=1342
+ATLAS_BATTEMENT thumb/index tour 10/18 score=26889576.9 distance=10.50mm traversées=1338
+ATLAS_BATTEMENT thumb/index tour 11/18 score=26889576.9 distance=10.50mm traversées=1338 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 12/18 score=26729579.8 distance=10.50mm traversées=1330
+ATLAS_BATTEMENT thumb/index tour 13/18 score=26729579.8 distance=10.50mm traversées=1330 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 14/18 score=26729579.8 distance=10.50mm traversées=1330 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 15/18 score=26709579.8 distance=10.50mm traversées=1329
+ATLAS_BATTEMENT thumb/index tour 16/18 score=26709579.8 distance=10.50mm traversées=1329 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 17/18 score=26708845.1 distance=10.43mm traversées=1329
+ATLAS_BATTEMENT thumb/index tour 18/18 score=26668988.8 distance=10.44mm traversées=1327
+ATLAS_DEUX_TEMPS {"contact": "thumb/index", "apres_approche_mm": 1.29, "traversees_apres_approche": 1681, "apres_nettoyage_mm": 10.44, "traversees_apres_nettoyage": 1327, "axes_de_degagement": 0}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE thumb/index {"DEF_ring_03.L → DEF_pinky_meta.L": 255, "DEF_ring_03.L → DEF_middle_meta.L": 169, "DEF_middle_03.L → DEF_index_meta.L": 125, "DEF_ring_01.L → DEF_pinky_meta.L": 97, "DEF_index_meta.L → DEF_thumb_meta.L": 93, "DEF_thumb_meta.L → DEF_index_meta.L": 91, "DEF_index_01.L → DEF_middle_01.L": 89, "DEF_index_03.L → DEF_thumb_meta.L": 84, "DEF_middle_01.L → DEF_index_meta.L": 63, "DEF_ring_02.L → DEF_pinky_meta.L": 58, "DEF_index_meta.L → DEF_middle_01.L": 31, "DEF_thumb_meta.L → DEF_hand.L": 29, "DEF_ring_01.L → DEF_middle_meta.L": 17, "DEF_pinky_meta.L → DEF_ring_01.L": 17, "DEF_middle_meta.L → DEF_ring_01.L": 16, "DEF_pinky_meta.L → DEF_ring_02.L": 16, "DEF_middle_meta.L → DEF_ring_03.L": 15, "DEF_index_02.L → DEF_thumb_meta.L": 14, "DEF_thumb_meta.L → DEF_middle_meta.L": 9, "DEF_middle_01.L → DEF_index_01.L": 8, "DEF_ring_02.L → DEF_middle_meta.L": 7, "DEF_middle_meta.L → DEF_index_01.L": 6, "DEF_ring_01.L → DEF_middle_01.L": 6, "DEF_index_01.L → DEF_middle_meta.L": 5, "DEF_middle_01.L → DEF_ring_meta.L": 3, "DEF_middle_01.L → DEF_ring_01.L": 2, "DEF_middle_03.L → DEF_ring_03.L": 1, "DEF_ring_meta.L → DEF_middle_01.L": 1}
+ATLAS_POUCE_DU_POING {"distance_a_l_index_mm": 10.44, "penetration": 0, "reglages": {"Fist": 1.0, "Thumb_Curl": 0.357, "Thumb_Opposition": 0.423}, "corrections_fk_deg": {"CTRL_index_01.L[2]": -6.2, "CTRL_middle_01.L[2]": 4.1, "CTRL_ring_01.L[2]": 6.0, "CTRL_pinky_01.L[2]": -13.2, "CTRL_thumb_meta.L[0]": -20.0, "CTRL_thumb_meta.L[1]": 59.8, "CTRL_thumb_meta.L[2]": 36.8, "CTRL_thumb_01.L[0]": 29.9, "CTRL_thumb_02.L[0]": 34.3}}
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 1/9 reste=1957
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 2/9 reste=1700
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 3/9 reste=1689
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 4/9 reste=1678
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 5/9 reste=1670
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 6/9 reste=1628
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 7/9 reste=1628 (pas resserré)
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 8/9 reste=1628 (pas resserré)
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 9/9 reste=1627
+ATLAS_NETTOYAGE Hand_Fist_75 : 1627 sommets traversants
+ATLAS_BATTEMENT nettoyage Hand_Point tour 1/9 reste=1871
+ATLAS_BATTEMENT nettoyage Hand_Point tour 2/9 reste=1783
+ATLAS_BATTEMENT nettoyage Hand_Point tour 3/9 reste=1636
+ATLAS_BATTEMENT nettoyage Hand_Point tour 4/9 reste=1625
+ATLAS_BATTEMENT nettoyage Hand_Point tour 5/9 reste=1625 (pas resserré)
+ATLAS_BATTEMENT nettoyage Hand_Point tour 6/9 reste=1541
+ATLAS_BATTEMENT nettoyage Hand_Point tour 7/9 reste=1541 (pas resserré)
+ATLAS_BATTEMENT nettoyage Hand_Point tour 8/9 reste=1498
+ATLAS_BATTEMENT nettoyage Hand_Point tour 9/9 reste=1498
+ATLAS_NETTOYAGE Hand_Point : 1498 sommets traversants
 ATLAS_CRITERE OK  · Hand_Neutral · aucune auto-intersection · mesuré aucune · exigé aucune
 ATLAS_CRITERE OK  · Hand_Relaxed · aucune auto-intersection · mesuré aucune · exigé aucune
 ATLAS_CRITERE OK  · Hand_Open · aucune auto-intersection · mesuré aucune · exigé aucune
 ATLAS_CRITERE OK  · Hand_Spread_Min · aucune auto-intersection · mesuré aucune · exigé aucune
-ATLAS_CRITERE ÉCHEC · Hand_Fist · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 257}, {'entre': 'thumb/middle', 'sommets_dedans': 142}, {'entre': 'thumb/ring', 'sommets_dedans': 16}, {'entre': 'index/middle', 'sommets_dedans': 350}, {'entre': 'middle/ring', 'sommets_dedans': 203}, {'entre': 'ring/pinky', 'sommets_dedans': 385}] · exigé aucune
+ATLAS_CRITERE ÉCHEC · Hand_Fist · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 282}, {'entre': 'thumb/middle', 'sommets_dedans': 9}, {'entre': 'thumb/hand', 'sommets_dedans': 29}, {'entre': 'index/middle', 'sommets_dedans': 327}, {'entre': 'middle/ring', 'sommets_dedans': 237}, {'entre': 'ring/pinky', 'sommets_dedans': 443}] · exigé aucune
 ATLAS_CRITERE OK  · Hand_Fist_25 · aucune auto-intersection · mesuré aucune · exigé aucune
 ATLAS_CRITERE OK  · Hand_Fist_50 · aucune auto-intersection · mesuré aucune · exigé aucune
-ATLAS_CRITERE ÉCHEC · Hand_Fist_75 · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 779}, {'entre': 'index/middle', 'sommets_dedans': 24}, {'entre': 'middle/ring', 'sommets_dedans': 240}, {'entre': 'ring/pinky', 'sommets_dedans': 230}] · exigé aucune
-ATLAS_CRITERE ÉCHEC · Hand_Point · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 386}, {'entre': 'index/middle', 'sommets_dedans': 338}, {'entre': 'middle/ring', 'sommets_dedans': 194}, {'entre': 'ring/pinky', 'sommets_dedans': 282}] · exigé aucune
+ATLAS_CRITERE ÉCHEC · Hand_Fist_75 · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 769}, {'entre': 'thumb/ring', 'sommets_dedans': 69}, {'entre': 'index/middle', 'sommets_dedans': 93}, {'entre': 'middle/ring', 'sommets_dedans': 329}, {'entre': 'ring/pinky', 'sommets_dedans': 367}] · exigé aucune
+ATLAS_CRITERE ÉCHEC · Hand_Point · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 154}, {'entre': 'thumb/middle', 'sommets_dedans': 317}, {'entre': 'index/middle', 'sommets_dedans': 385}, {'entre': 'middle/ring', 'sommets_dedans': 291}, {'entre': 'ring/pinky', 'sommets_dedans': 351}] · exigé aucune
 ATLAS_CRITERE OK  · Hand_Pinch · aucune auto-intersection · mesuré aucune · exigé aucune
-ATLAS_CRITERE OK  · Hand_OK · aucune auto-intersection · mesuré aucune · exigé aucune
+ATLAS_CRITERE ÉCHEC · Hand_OK · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 95}, {'entre': 'thumb/pinky', 'sommets_dedans': 50}, {'entre': 'index/hand', 'sommets_dedans': 3}] · exigé aucune
 ATLAS_CRITERE OK  · Hand_Cupped · aucune auto-intersection · mesuré aucune · exigé aucune
-ATLAS_OU_CA_TRAVERSE {"DEF_thumb_meta.L → DEF_index_meta.L": 62, "DEF_thumb_meta.L → DEF_index_02.L": 4, "DEF_thumb_meta.L → DEF_index_03.L": 7}
-ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 248}, {'entre': 'thumb/middle', 'sommets_dedans': 99}, {'entre': 'thumb/pinky', 'sommets_dedans': 76}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 314}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 353}, {'entre': 'ring/pinky', 'sommets_dedans': 1}] · exigé aucune
-ATLAS_POSES_DE_VALIDATION {"Hand_Neutral": {"course_max_mm": 0.0, "auriculaire_au_pouce_mm": 125.4, "index_au_pouce_mm": 59.6, "auto_intersections": []}, "Hand_Relaxed": {"course_max_mm": 54.5, "auriculaire_au_pouce_mm": 107.1, "index_au_pouce_mm": 49.8, "auto_intersections": []}, "Hand_Open": {"course_max_mm": 15.1, "auriculaire_au_pouce_mm": 132.9, "index_au_pouce_mm": 53.2, "auto_intersections": []}, "Hand_Spread_Min": {"course_max_mm": 15.1, "auriculaire_au_pouce_mm": 117.0, "index_au_pouce_mm": 65.9, "auto_intersections": []}, "Hand_Fist": {"course_max_mm": 121.5, "auriculaire_au_pouce_mm": 64.9, "index_au_pouce_mm": 2.9, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 257}, {"entre": "thumb/middle", "sommets_dedans": 142}, {"entre": "thumb/ring", "sommets_dedans": 16}, {"entre": "index/middle", "sommets_dedans": 350}, {"entre": "middle/ring", "sommets_dedans": 203}, {"entre": "ring/pinky", "sommets_dedans": 385}]}, "Hand_Fist_25": {"course_max_mm": 63.9, "auriculaire_au_pouce_mm": 110.6, "index_au_pouce_mm": 38.5, "auto_intersections": []}, "Hand_Fist_50": {"course_max_mm": 128.0, "auriculaire_au_pouce_mm": 88.0, "index_au_pouce_mm": 20.2, "auto_intersections": []}, "Hand_Fist_75": {"course_max_mm": 123.9, "auriculaire_au_pouce_mm": 81.4, "index_au_pouce_mm": 26.4, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 779}, {"entre": "index/middle", "sommets_dedans": 24}, {"entre": "middle/ring", "sommets_dedans": 240}, {"entre": "ring/pinky", "sommets_dedans": 230}]}, "Hand_Point": {"course_max_mm": 121.4, "auriculaire_au_pouce_mm": 59.6, "index_au_pouce_mm": 47.6, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 2}, {"entre": "thumb/middle", "sommets_dedans": 386}, {"entre": "index/middle", "sommets_dedans": 338}, {"entre": "middle/ring", "sommets_dedans": 194}, {"entre": "ring/pinky", "sommets_dedans": 282}]}, "Hand_Pinch": {"course_max_mm": 68.9, "auriculaire_au_pouce_mm": 89.2, "index_au_pouce_mm": 0.2, "auto_intersections": []}, "Hand_OK": {"course_max_mm": 100.6, "auriculaire_au_pouce_mm": 83.5, "index_au_pouce_mm": 0.9, "auto_intersections": []}, "Hand_Cupped": {"course_max_mm": 29.2, "auriculaire_au_pouce_mm": 116.5, "index_au_pouce_mm": 60.1, "auto_intersections": []}, "Hand_Pinky_Thumb": {"course_max_mm": 128.2, "auriculaire_au_pouce_mm": 1.9, "index_au_pouce_mm": 38.9, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 248}, {"entre": "thumb/middle", "sommets_dedans": 99}, {"entre": "thumb/pinky", "sommets_dedans": 76}, {"entre": "thumb/hand", "sommets_dedans": 35}, {"entre": "index/middle", "sommets_dedans": 314}, {"entre": "index/hand", "sommets_dedans": 2}, {"entre": "middle/ring", "sommets_dedans": 353}, {"entre": "ring/pinky", "sommets_dedans": 1}]}}
-ATLAS_TRANSITION_A_NETTOYER Hand_Fist ronde 1 : {"0.6": 2, "0.7": 1811, "0.8": 1145, "0.9": 1299, "1.0": 1353}
-ATLAS_TRANSITION_NETTOYEE Hand_Fist ronde 1 : 3575 sommets traversants sur 5 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_Fist ronde 2 : {"0.6": 3, "0.7": 97, "0.8": 1113, "0.9": 1096, "1.0": 1266}
-ATLAS_TRANSITION_NETTOYEE Hand_Fist ronde 2 : 3208 sommets traversants sur 5 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_Fist ronde 3 : {"0.6": 2, "0.7": 116, "0.8": 847, "0.9": 754, "1.0": 1489}
-ATLAS_TRANSITION_NETTOYEE Hand_Fist ronde 3 : 3078 sommets traversants sur 5 étapes
-ATLAS_CRITERE ÉCHEC · transition Neutral→Hand_Fist · aucune auto-intersection · mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 2}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 6}, {'entre': 'thumb/hand', 'sommets_dedans': 5}, {'entre': 'middle/ring', 'sommets_dedans': 2}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 13}, {'entre': 'thumb/hand', 'sommets_dedans': 5}, {'entre': 'index/middle', 'sommets_dedans': 200}, {'entre': 'middle/ring', 'sommets_dedans': 292}, {'entre': 'ring/pinky', 'sommets_dedans': 300}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 17}, {'entre': 'thumb/hand', 'sommets_dedans': 6}, {'entre': 'index/middle', 'sommets_dedans': 278}, {'entre': 'middle/ring', 'sommets_dedans': 225}, {'entre': 'ring/pinky', 'sommets_dedans': 270}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 536}, {'entre': 'index/middle', 'sommets_dedans': 248}, {'entre': 'middle/ring', 'sommets_dedans': 371}, {'entre': 'ring/pinky', 'sommets_dedans': 302}]} · exigé aucune à chaque étape
-ATLAS_TRANSITION_A_NETTOYER Hand_Point ronde 1 : {"0.3": 14, "0.4": 132, "0.5": 175, "0.6": 180, "0.7": 540, "0.8": 1467, "0.9": 1315, "1.0": 1202}
-ATLAS_TRANSITION_NETTOYEE Hand_Point ronde 1 : 4613 sommets traversants sur 8 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_Point ronde 2 : {"0.3": 12, "0.4": 112, "0.5": 158, "0.6": 172, "0.7": 183, "0.8": 1392, "0.9": 1221, "1.0": 1363}
-ATLAS_TRANSITION_NETTOYEE Hand_Point ronde 2 : 4546 sommets traversants sur 8 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_Point ronde 3 : {"0.3": 9, "0.4": 90, "0.5": 151, "0.6": 167, "0.7": 178, "0.8": 1432, "0.9": 1167, "1.0": 1352}
-ATLAS_TRANSITION_NETTOYEE Hand_Point ronde 3 : 4524 sommets traversants sur 8 étapes
-ATLAS_CRITERE ÉCHEC · transition Neutral→Hand_Point · aucune auto-intersection · mesuré {'0.3': [{'entre': 'index/middle', 'sommets_dedans': 7}], '0.4': [{'entre': 'index/middle', 'sommets_dedans': 88}], '0.5': [{'entre': 'index/middle', 'sommets_dedans': 146}], '0.6': [{'entre': 'index/middle', 'sommets_dedans': 162}], '0.7': [{'entre': 'index/middle', 'sommets_dedans': 175}, {'entre': 'middle/ring', 'sommets_dedans': 1}], '0.8': [{'entre': 'thumb/middle', 'sommets_dedans': 442}, {'entre': 'index/middle', 'sommets_dedans': 480}, {'entre': 'middle/ring', 'sommets_dedans': 218}, {'entre': 'ring/pinky', 'sommets_dedans': 291}], '0.9': [{'entre': 'thumb/middle', 'sommets_dedans': 374}, {'entre': 'index/middle', 'sommets_dedans': 352}, {'entre': 'middle/ring', 'sommets_dedans': 185}, {'entre': 'ring/pinky', 'sommets_dedans': 248}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 383}, {'entre': 'thumb/ring', 'sommets_dedans': 19}, {'entre': 'index/middle', 'sommets_dedans': 342}, {'entre': 'middle/ring', 'sommets_dedans': 289}, {'entre': 'ring/pinky', 'sommets_dedans': 320}]} · exigé aucune à chaque étape
-ATLAS_CRITERE OK  · transition Neutral→Hand_Pinch · aucune auto-intersection · mesuré aucune · exigé aucune à chaque étape
-ATLAS_TRANSITION_A_NETTOYER Hand_OK ronde 1 : {"0.7": 1508, "0.8": 1636, "0.9": 486}
-ATLAS_TRANSITION_NETTOYEE Hand_OK ronde 1 : 2564 sommets traversants sur 4 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_OK ronde 2 : {"0.6": 712, "0.7": 1951, "0.8": 550, "0.9": 56, "1.0": 7}
-ATLAS_TRANSITION_NETTOYEE Hand_OK ronde 2 : 2052 sommets traversants sur 5 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_OK ronde 3 : {"0.6": 676, "0.7": 738, "0.8": 448, "0.9": 190}
-ATLAS_TRANSITION_NETTOYEE Hand_OK ronde 3 : 1346 sommets traversants sur 5 étapes
-ATLAS_CRITERE ÉCHEC · transition Neutral→Hand_OK · aucune auto-intersection · mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 163}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 184}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 521}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 403}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 75}]} · exigé aucune à chaque étape
-ATLAS_CRITERE OK  · transition Neutral→Hand_Cupped · aucune auto-intersection · mesuré aucune · exigé aucune à chaque étape
-ATLAS_TRANSITION_A_NETTOYER Hand_Pinky_Thumb ronde 1 : {"0.4": 100, "0.5": 596, "0.6": 1421, "0.7": 3159, "0.8": 4750, "0.9": 1894, "1.0": 1128}
-ATLAS_TRANSITION_NETTOYEE Hand_Pinky_Thumb ronde 1 : 8250 sommets traversants sur 7 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_Pinky_Thumb ronde 2 : {"0.4": 17, "0.5": 16, "0.6": 798, "0.7": 1669, "0.8": 3520, "0.9": 1055, "1.0": 1175}
-ATLAS_TRANSITION_NETTOYEE Hand_Pinky_Thumb ronde 2 : 6793 sommets traversants sur 7 étapes
-ATLAS_TRANSITION_A_NETTOYER Hand_Pinky_Thumb ronde 3 : {"0.4": 18, "0.5": 8, "0.6": 864, "0.7": 1099, "0.8": 2601, "0.9": 1106, "1.0": 1097}
-ATLAS_TRANSITION_NETTOYEE Hand_Pinky_Thumb ronde 3 : 4762 sommets traversants sur 7 étapes
-ATLAS_CRITERE ÉCHEC · transition Neutral→Hand_Pinky_Thumb · aucune auto-intersection · mesuré {'0.4': [{'entre': 'thumb/index', 'sommets_dedans': 18}], '0.5': [{'entre': 'thumb/index', 'sommets_dedans': 6}], '0.6': [{'entre': 'thumb/index', 'sommets_dedans': 13}, {'entre': 'thumb/middle', 'sommets_dedans': 174}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 22}, {'entre': 'thumb/middle', 'sommets_dedans': 1723}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 1116}, {'entre': 'thumb/middle', 'sommets_dedans': 131}, {'entre': 'thumb/hand', 'sommets_dedans': 4}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 113}, {'entre': 'thumb/pinky', 'sommets_dedans': 32}, {'entre': 'thumb/hand', 'sommets_dedans': 18}, {'entre': 'index/middle', 'sommets_dedans': 394}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 157}, {'entre': 'thumb/pinky', 'sommets_dedans': 36}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 706}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 62}]} · exigé aucune à chaque étape
-ATLAS_TRANSITIONS {"Neutral→Hand_Fist": {"0.6": [{"entre": "thumb/index", "sommets_dedans": 2}], "0.7": [{"entre": "thumb/index", "sommets_dedans": 6}, {"entre": "thumb/hand", "sommets_dedans": 5}, {"entre": "middle/ring", "sommets_dedans": 2}], "0.8": [{"entre": "thumb/index", "sommets_dedans": 13}, {"entre": "thumb/hand", "sommets_dedans": 5}, {"entre": "index/middle", "sommets_dedans": 200}, {"entre": "middle/ring", "sommets_dedans": 292}, {"entre": "ring/pinky", "sommets_dedans": 300}], "0.9": [{"entre": "thumb/index", "sommets_dedans": 17}, {"entre": "thumb/hand", "sommets_dedans": 6}, {"entre": "index/middle", "sommets_dedans": 278}, {"entre": "middle/ring", "sommets_dedans": 225}, {"entre": "ring/pinky", "sommets_dedans": 270}], "1.0": [{"entre": "thumb/index", "sommets_dedans": 536}, {"entre": "index/middle", "sommets_dedans": 248}, {"entre": "middle/ring", "sommets_dedans": 371}, {"entre": "ring/pinky", "sommets_dedans": 302}]}, "Neutral→Hand_Point": {"0.3": [{"entre": "index/middle", "sommets_dedans": 7}], "0.4": [{"entre": "index/middle", "sommets_dedans": 88}], "0.5": [{"entre": "index/middle", "sommets_dedans": 146}], "0.6": [{"entre": "index/middle", "sommets_dedans": 162}], "0.7": [{"entre": "index/middle", "sommets_dedans": 175}, {"entre": "middle/ring", "sommets_dedans": 1}], "0.8": [{"entre": "thumb/middle", "sommets_dedans": 442}, {"entre": "index/middle", "sommets_dedans": 480}, {"entre": "middle/ring", "sommets_dedans": 218}, {"entre": "ring/pinky", "sommets_dedans": 291}], "0.9": [{"entre": "thumb/middle", "sommets_dedans": 374}, {"entre": "index/middle", "sommets_dedans": 352}, {"entre": "middle/ring", "sommets_dedans": 185}, {"entre": "ring/pinky", "sommets_dedans": 248}], "1.0": [{"entre": "thumb/index", "sommets_dedans": 2}, {"entre": "thumb/middle", "sommets_dedans": 383}, {"entre": "thumb/ring", "sommets_dedans": 19}, {"entre": "index/middle", "sommets_dedans": 342}, {"entre": "middle/ring", "sommets_dedans": 289}, {"entre": "ring/pinky", "sommets_dedans": 320}]}, "Neutral→Hand_Pinch": "aucune collision", "Neutral→Hand_OK": {"0.6": [{"entre": "thumb/index", "sommets_dedans": 163}], "0.7": [{"entre": "thumb/index", "sommets_dedans": 184}], "0.8": [{"entre": "thumb/index", "sommets_dedans": 521}], "0.9": [{"entre": "thumb/index", "sommets_dedans": 403}], "1.0": [{"entre": "thumb/index", "sommets_dedans": 75}]}, "Neutral→Hand_Cupped": "aucune collision", "Neutral→Hand_Pinky_Thumb": {"0.4": [{"entre": "thumb/index", "sommets_dedans": 18}], "0.5": [{"entre": "thumb/index", "sommets_dedans": 6}], "0.6": [{"entre": "thumb/index", "sommets_dedans": 13}, {"entre": "thumb/middle", "sommets_dedans": 174}], "0.7": [{"entre": "thumb/index", "sommets_dedans": 22}, {"entre": "thumb/middle", "sommets_dedans": 1723}], "0.8": [{"entre": "thumb/index", "sommets_dedans": 1116}, {"entre": "thumb/middle", "sommets_dedans": 131}, {"entre": "thumb/hand", "sommets_dedans": 4}], "0.9": [{"entre": "thumb/index", "sommets_dedans": 113}, {"entre": "thumb/pinky", "sommets_dedans": 32}, {"entre": "thumb/hand", "sommets_dedans": 18}, {"entre": "index/middle", "sommets_dedans": 394}], "1.0": [{"entre": "thumb/index", "sommets_dedans": 157}, {"entre": "thumb/pinky", "sommets_dedans": 36}, {"entre": "thumb/hand", "sommets_dedans": 35}, {"entre": "index/middle", "sommets_dedans": 706}, {"entre": "index/hand", "sommets_dedans": 2}, {"entre": "middle/ring", "sommets_dedans": 62}]}}
-ATLAS_CRITERE ÉCHEC · Hand_Fist · aucune auto-intersection après nettoyage des transitions · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 536}, {'entre': 'index/middle', 'sommets_dedans': 248}, {'entre': 'middle/ring', 'sommets_dedans': 371}, {'entre': 'ring/pinky', 'sommets_dedans': 302}] · exigé aucune
-ATLAS_CRITERE ÉCHEC · Hand_Point · aucune auto-intersection après nettoyage des transitions · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 383}, {'entre': 'thumb/ring', 'sommets_dedans': 19}, {'entre': 'index/middle', 'sommets_dedans': 342}, {'entre': 'middle/ring', 'sommets_dedans': 289}, {'entre': 'ring/pinky', 'sommets_dedans': 320}] · exigé aucune
-ATLAS_CRITERE ÉCHEC · Hand_OK · aucune auto-intersection après nettoyage des transitions · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 75}] · exigé aucune
-ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune auto-intersection après nettoyage des transitions · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 157}, {'entre': 'thumb/pinky', 'sommets_dedans': 36}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 706}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 62}] · exigé aucune
-ATLAS_PINCH_CONTRE_OK {"ecart_maximal_entre_les_deux_poses_mm": 72.0, "ouverture_de_l_anneau_pinch_mm": 16.8, "ouverture_de_l_anneau_ok_mm": 0.2}
-ATLAS_CRITERE OK  · Pinch et OK sont deux gestes distincts · mesuré 72.0 mm · exigé > 15 mm d'écart
-ATLAS_CRITERE ÉCHEC · l'anneau du OK est lisible · mesuré 0.2 mm · exigé ≥ 14 mm d'ouverture
-ATLAS_CREUX_DE_LA_PAUME {"au_repos_mm": 21.0, "en_paume_creuse_mm": 20.3, "gain_mm": -0.8}
-ATLAS_CRITERE ÉCHEC · la paume creuse se creuse vraiment · mesuré -0.8 mm · exigé ≥ 6 mm de plus qu'au repos
-ATLAS_PHASE_H terminée
-ATLAS_COMPRESSION_AU_POING {"index": {"min": 0.3707, "p1": 0.7406, "p5": 0.9284, "mediane": 1.0, "aretes": 4687, "arete_la_plus_comprimee": 30086, "position_mm": [-401.5, -128.4, 876.6]}, "middle": {"min": 0.2696, "p1": 0.7482, "p5": 0.9356, "mediane": 1.0, "aretes": 4659, "arete_la_plus_comprimee": 25741, "position_mm": [-404.0, -110.9, 866.6]}, "ring": {"min": 0.2161, "p1": 0.6716, "p5": 0.9186, "mediane": 1.0, "aretes": 4608, "arete_la_plus_comprimee": 37502, "position_mm": [-411.8, -84.5, 859.7]}, "pinky": {"min": 0.2281, "p1": 0.57, "p5": 0.9141, "mediane": 1.0, "aretes": 4384, "arete_la_plus_comprimee": 44234, "position_mm": [-409.1, -62.3, 843.7]}, "thumb": {"min": 0.0986, "p1": 0.4305, "p5": 0.8379, "mediane": 1.0, "aretes": 4551, "arete_la_plus_comprimee": 49597, "position_mm": [-397.9, -138.1, 888.9]}}
-ATLAS_PHASE_G {"compression_de_reference_poing": {"thumb": 0.0986, "pinky": 0.2281, "index": 0.3707}, "compression_avant": {"thumb": 0.1413, "pinky": 0.6033, "index": 0.4906}, "compression_apres": {"thumb": 0.1362, "pinky": 0.5958, "index": 0.4257}, "gain": {"thumb": -0.0051, "pinky": -0.0075, "index": -0.0649}, "verdict": "retiré — il n'améliorait pas la compression, il n'aurait fait que flouter", "sommets_dans_les_zones": 12581}
-ATLAS_CREUX_ENTRE_LES_DOIGTS {"sommets_a_deux_doigts_dans_le_creux": 671, "sommets_a_deux_doigts_ailleurs": 0, "lecture": "la règle 7 demande ce mélange à la base des doigts ; seuls les sommets « ailleurs » seraient un défaut"}
-ATLAS_CRITERE OK  · retour exact au repos · mesuré 0.0000 mm · exigé < 0,01 mm
-ATLAS_CRITERE OK  · aucune contamination hors des commissures · mesuré 0 · exigé 0 sommet
-ATLAS_CRITERE OK  · compression de index au poing · minimum · mesuré 0.3707 · exigé ≥ 0,25
-ATLAS_CRITERE OK  · compression de index au poing · percentile 1 % · mesuré 0.7406 · exigé ≥ 0,50
-ATLAS_CRITERE OK  · compression de middle au poing · minimum · mesuré 0.2696 · exigé ≥ 0,25
-ATLAS_CRITERE OK  · compression de middle au poing · percentile 1 % · mesuré 0.7482 · exigé ≥ 0,50
-ATLAS_CRITERE ÉCHEC · compression de ring au poing · minimum · mesuré 0.2161 · exigé ≥ 0,25
-ATLAS_CRITERE OK  · compression de ring au poing · percentile 1 % · mesuré 0.6716 · exigé ≥ 0,50
-ATLAS_CRITERE ÉCHEC · compression de pinky au poing · minimum · mesuré 0.2281 · exigé ≥ 0,25
-ATLAS_CRITERE OK  · compression de pinky au poing · percentile 1 % · mesuré 0.57 · exigé ≥ 0,50
-ATLAS_CRITERE ÉCHEC · compression de thumb au poing · minimum · mesuré 0.0986 · exigé ≥ 0,25
-ATLAS_CRITERE ÉCHEC · compression de thumb au poing · percentile 1 % · mesuré 0.4305 · exigé ≥ 0,50
-ATLAS_CRITERE OK  · tous les drivers sont valides · mesuré aucun invalide · exigé aucun invalide
-
-ATLAS_NON_LIVRABLE — 23 critère(s) obligatoire(s) en échec :
-  · Cup · retour exact au repos — mesuré 0.0401 mm, exigé < 0,01 mm
-  · Hand_Pinky_Thumb · les pulpes se touchent — mesuré 1.90 mm, exigé ≤ 1.00 mm
-  · Hand_Pinky_Thumb · les pulpes se font face — mesuré 0.433, exigé ≤ -0,50
-  · Hand_Pinky_Thumb · aucune interpénétration — mesuré {'dans_les_pulpes': 15, 'dans_la_main_entiere': 1128}, exigé 0 sommet, pulpes ET main entière
-  · le poing se ferme complètement sans traversée — mesuré 0.58, exigé Fist = 1.0
-  · Hand_Fist · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 257}, {'entre': 'thumb/middle', 'sommets_dedans': 142}, {'entre': 'thumb/ring', 'sommets_dedans': 16}, {'entre': 'index/middle', 'sommets_dedans': 350}, {'entre': 'middle/ring', 'sommets_dedans': 203}, {'entre': 'ring/pinky', 'sommets_dedans': 385}], exigé aucune
-  · Hand_Fist_75 · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 779}, {'entre': 'index/middle', 'sommets_dedans': 24}, {'entre': 'middle/ring', 'sommets_dedans': 240}, {'entre': 'ring/pinky', 'sommets_dedans': 230}], exigé aucune
-  · Hand_Point · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 386}, {'entre': 'index/middle', 'sommets_dedans': 338}, {'entre': 'middle/ring', 'sommets_dedans': 194}, {'entre': 'ring/pinky', 'sommets_dedans': 282}], exigé aucune
-  · Hand_Pinky_Thumb · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 248}, {'entre': 'thumb/middle', 'sommets_dedans': 99}, {'entre': 'thumb/pinky', 'sommets_dedans': 76}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 314}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 353}, {'entre': 'ring/pinky', 'sommets_dedans': 1}], exigé aucune
-  · transition Neutral→Hand_Fist · aucune auto-intersection — mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 2}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 6}, {'entre': 'thumb/hand', 'sommets_dedans': 5}, {'entre': 'middle/ring', 'sommets_dedans': 2}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 13}, {'entre': 'thumb/hand', 'sommets_dedans': 5}, {'entre': 'index/middle', 'sommets_dedans': 200}, {'entre': 'middle/ring', 'sommets_dedans': 292}, {'entre': 'ring/pinky', 'sommets_dedans': 300}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 17}, {'entre': 'thumb/hand', 'sommets_dedans': 6}, {'entre': 'index/middle', 'sommets_dedans': 278}, {'entre': 'middle/ring', 'sommets_dedans': 225}, {'entre': 'ring/pinky', 'sommets_dedans': 270}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 536}, {'entre': 'index/middle', 'sommets_dedans': 248}, {'entre': 'middle/ring', 'sommets_dedans': 371}, {'entre': 'ring/pinky', 'sommets_dedans': 302}]}, exigé aucune à chaque étape
-  · transition Neutral→Hand_Point · aucune auto-intersection — mesuré {'0.3': [{'entre': 'index/middle', 'sommets_dedans': 7}], '0.4': [{'entre': 'index/middle', 'sommets_dedans': 88}], '0.5': [{'entre': 'index/middle', 'sommets_dedans': 146}], '0.6': [{'entre': 'index/middle', 'sommets_dedans': 162}], '0.7': [{'entre': 'index/middle', 'sommets_dedans': 175}, {'entre': 'middle/ring', 'sommets_dedans': 1}], '0.8': [{'entre': 'thumb/middle', 'sommets_dedans': 442}, {'entre': 'index/middle', 'sommets_dedans': 480}, {'entre': 'middle/ring', 'sommets_dedans': 218}, {'entre': 'ring/pinky', 'sommets_dedans': 291}], '0.9': [{'entre': 'thumb/middle', 'sommets_dedans': 374}, {'entre': 'index/middle', 'sommets_dedans': 352}, {'entre': 'middle/ring', 'sommets_dedans': 185}, {'entre': 'ring/pinky', 'sommets_dedans': 248}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 383}, {'entre': 'thumb/ring', 'sommets_dedans': 19}, {'entre': 'index/middle', 'sommets_dedans': 342}, {'entre': 'middle/ring', 'sommets_dedans': 289}, {'entre': 'ring/pinky', 'sommets_dedans': 320}]}, exigé aucune à chaque étape
-  · transition Neutral→Hand_OK · aucune auto-intersection — mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 163}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 184}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 521}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 403}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 75}]}, exigé aucune à chaque étape
-  · transition Neutral→Hand_Pinky_Thumb · aucune auto-intersection — mesuré {'0.4': [{'entre': 'thumb/index', 'sommets_dedans': 18}], '0.5': [{'entre': 'thumb/index', 'sommets_dedans': 6}], '0.6': [{'entre': 'thumb/index', 'sommets_dedans': 13}, {'entre': 'thumb/middle', 'sommets_dedans': 174}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 22}, {'entre': 'thumb/middle', 'sommets_dedans': 1723}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 1116}, {'entre': 'thumb/middle', 'sommets_dedans': 131}, {'entre': 'thumb/hand', 'sommets_dedans': 4}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 113}, {'entre': 'thumb/pinky', 'sommets_dedans': 32}, {'entre': 'thumb/hand', 'sommets_dedans': 18}, {'entre': 'index/middle', 'sommets_dedans': 394}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 157}, {'entre': 'thumb/pinky', 'sommets_dedans': 36}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 706}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 62}]}, exigé aucune à chaque étape
-  · Hand_Fist · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 536}, {'entre': 'index/middle', 'sommets_dedans': 248}, {'entre': 'middle/ring', 'sommets_dedans': 371}, {'entre': 'ring/pinky', 'sommets_dedans': 302}], exigé aucune
-  · Hand_Point · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 383}, {'entre': 'thumb/ring', 'sommets_dedans': 19}, {'entre': 'index/middle', 'sommets_dedans': 342}, {'entre': 'middle/ring', 'sommets_dedans': 289}, {'entre': 'ring/pinky', 'sommets_dedans': 320}], exigé aucune
-  · Hand_OK · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 75}], exigé aucune
-  · Hand_Pinky_Thumb · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 157}, {'entre': 'thumb/pinky', 'sommets_dedans': 36}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 706}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 62}], exigé aucune
-  · l'anneau du OK est lisible — mesuré 0.2 mm, exigé ≥ 14 mm d'ouverture
-  · la paume creuse se creuse vraiment — mesuré -0.8 mm, exigé ≥ 6 mm de plus qu'au repos
-  · compression de ring au poing · minimum — mesuré 0.2161, exigé ≥ 0,25
-  · compression de pinky au poing · minimum — mesuré 0.2281, exigé ≥ 0,25
-  · compression de thumb au poing · minimum — mesuré 0.0986, exigé ≥ 0,25
-  · compression de thumb au poing · percentile 1 % — mesuré 0.4305, exigé ≥ 0,50
-Le .blend validé n'est PAS remplacé ; le rig en cours est écrit sous un nom qui dit son état.
-Info: Saved as "RIG_Hand.L-NON-VALIDE.blend"
-
-ATLAS_NON_LIVRABLE — le rig n'est PAS validé. Les rendus et le rapport sont écrits pour que le défaut soit visible et repris par quelqu'un d'autre.
-  · Cup · retour exact au repos — mesuré 0.0401 mm, exigé < 0,01 mm
-  · Hand_Pinky_Thumb · les pulpes se touchent — mesuré 1.90 mm, exigé ≤ 1.00 mm
-  · Hand_Pinky_Thumb · les pulpes se font face — mesuré 0.433, exigé ≤ -0,50
-  · Hand_Pinky_Thumb · aucune interpénétration — mesuré {'dans_les_pulpes': 15, 'dans_la_main_entiere': 1128}, exigé 0 sommet, pulpes ET main entière
-  · le poing se ferme complètement sans traversée — mesuré 0.58, exigé Fist = 1.0
-  · Hand_Fist · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 257}, {'entre': 'thumb/middle', 'sommets_dedans': 142}, {'entre': 'thumb/ring', 'sommets_dedans': 16}, {'entre': 'index/middle', 'sommets_dedans': 350}, {'entre': 'middle/ring', 'sommets_dedans': 203}, {'entre': 'ring/pinky', 'sommets_dedans': 385}], exigé aucune
-  · Hand_Fist_75 · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 779}, {'entre': 'index/middle', 'sommets_dedans': 24}, {'entre': 'middle/ring', 'sommets_dedans': 240}, {'entre': 'ring/pinky', 'sommets_dedans': 230}], exigé aucune
-  · Hand_Point · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 386}, {'entre': 'index/middle', 'sommets_dedans': 338}, {'entre': 'middle/ring', 'sommets_dedans': 194}, {'entre': 'ring/pinky', 'sommets_dedans': 282}], exigé aucune
-  · Hand_Pinky_Thumb · aucune auto-intersection — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 248}, {'entre': 'thumb/middle', 'sommets_dedans': 99}, {'entre': 'thumb/pinky', 'sommets_dedans': 76}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 314}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 353}, {'entre': 'ring/pinky', 'sommets_dedans': 1}], exigé aucune
-  · transition Neutral→Hand_Fist · aucune auto-intersection — mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 2}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 6}, {'entre': 'thumb/hand', 'sommets_dedans': 5}, {'entre': 'middle/ring', 'sommets_dedans': 2}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 13}, {'entre': 'thumb/hand', 'sommets_dedans': 5}, {'entre': 'index/middle', 'sommets_dedans': 200}, {'entre': 'middle/ring', 'sommets_dedans': 292}, {'entre': 'ring/pinky', 'sommets_dedans': 300}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 17}, {'entre': 'thumb/hand', 'sommets_dedans': 6}, {'entre': 'index/middle', 'sommets_dedans': 278}, {'entre': 'middle/ring', 'sommets_dedans': 225}, {'entre': 'ring/pinky', 'sommets_dedans': 270}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 536}, {'entre': 'index/middle', 'sommets_dedans': 248}, {'entre': 'middle/ring', 'sommets_dedans': 371}, {'entre': 'ring/pinky', 'sommets_dedans': 302}]}, exigé aucune à chaque étape
-  · transition Neutral→Hand_Point · aucune auto-intersection — mesuré {'0.3': [{'entre': 'index/middle', 'sommets_dedans': 7}], '0.4': [{'entre': 'index/middle', 'sommets_dedans': 88}], '0.5': [{'entre': 'index/middle', 'sommets_dedans': 146}], '0.6': [{'entre': 'index/middle', 'sommets_dedans': 162}], '0.7': [{'entre': 'index/middle', 'sommets_dedans': 175}, {'entre': 'middle/ring', 'sommets_dedans': 1}], '0.8': [{'entre': 'thumb/middle', 'sommets_dedans': 442}, {'entre': 'index/middle', 'sommets_dedans': 480}, {'entre': 'middle/ring', 'sommets_dedans': 218}, {'entre': 'ring/pinky', 'sommets_dedans': 291}], '0.9': [{'entre': 'thumb/middle', 'sommets_dedans': 374}, {'entre': 'index/middle', 'sommets_dedans': 352}, {'entre': 'middle/ring', 'sommets_dedans': 185}, {'entre': 'ring/pinky', 'sommets_dedans': 248}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 383}, {'entre': 'thumb/ring', 'sommets_dedans': 19}, {'entre': 'index/middle', 'sommets_dedans': 342}, {'entre': 'middle/ring', 'sommets_dedans': 289}, {'entre': 'ring/pinky', 'sommets_dedans': 320}]}, exigé aucune à chaque étape
-  · transition Neutral→Hand_OK · aucune auto-intersection — mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 163}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 184}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 521}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 403}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 75}]}, exigé aucune à chaque étape
-  · transition Neutral→Hand_Pinky_Thumb · aucune auto-intersection — mesuré {'0.4': [{'entre': 'thumb/index', 'sommets_dedans': 18}], '0.5': [{'entre': 'thumb/index', 'sommets_dedans': 6}], '0.6': [{'entre': 'thumb/index', 'sommets_dedans': 13}, {'entre': 'thumb/middle', 'sommets_dedans': 174}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 22}, {'entre': 'thumb/middle', 'sommets_dedans': 1723}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 1116}, {'entre': 'thumb/middle', 'sommets_dedans': 131}, {'entre': 'thumb/hand', 'sommets_dedans': 4}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 113}, {'entre': 'thumb/pinky', 'sommets_dedans': 32}, {'entre': 'thumb/hand', 'sommets_dedans': 18}, {'entre': 'index/middle', 'sommets_dedans': 394}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 157}, {'entre': 'thumb/pinky', 'sommets_dedans': 36}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 706}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 62}]}, exigé aucune à chaque étape
-  · Hand_Fist · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 536}, {'entre': 'index/middle', 'sommets_dedans': 248}, {'entre': 'middle/ring', 'sommets_dedans': 371}, {'entre': 'ring/pinky', 'sommets_dedans': 302}], exigé aucune
-  · Hand_Point · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 2}, {'entre': 'thumb/middle', 'sommets_dedans': 383}, {'entre': 'thumb/ring', 'sommets_dedans': 19}, {'entre': 'index/middle', 'sommets_dedans': 342}, {'entre': 'middle/ring', 'sommets_dedans': 289}, {'entre': 'ring/pinky', 'sommets_dedans': 320}], exigé aucune
-  · Hand_OK · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 75}], exigé aucune
-  · Hand_Pinky_Thumb · aucune auto-intersection après nettoyage des transitions — mesuré [{'entre': 'thumb/index', 'sommets_dedans': 157}, {'entre': 'thumb/pinky', 'sommets_dedans': 36}, {'entre': 'thumb/hand', 'sommets_dedans': 35}, {'entre': 'index/middle', 'sommets_dedans': 706}, {'entre': 'index/hand', 'sommets_dedans': 2}, {'entre': 'middle/ring', 'sommets_dedans': 62}], exigé aucune
-  · l'anneau du OK est lisible — mesuré 0.2 mm, exigé ≥ 14 mm d'ouverture
-  · la paume creuse se creuse vraiment — mesuré -0.8 mm, exigé ≥ 6 mm de plus qu'au repos
-  · compression de ring au poing · minimum — mesuré 0.2161, exigé ≥ 0,25
-  · compression de pinky au poing · minimum — mesuré 0.2281, exigé ≥ 0,25
-  · compression de thumb au poing · minimum — mesuré 0.0986, exigé ≥ 0,25
-  · compression de thumb au poing · percentile 1 % — mesuré 0.4305, exigé ≥ 0,50
-Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:30:33)
+ATLAS_OU_CA_TRAVERSE {"DEF_thumb_meta.L → DEF_index_meta.L": 60, "DEF_thumb_meta.L → DEF_index_03.L": 21, "DEF_thumb_meta.L → DEF_index_02.L": 77}
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 646}, {'entre': 'thumb/middle', 'sommets_dedans': 117}, {'entre': 'thumb/pinky', 'sommets_dedans': 18}, {'entre': 'thumb/hand', 'sommets_dedans': 76}, {'entre': 'index/middle', 'sommets_dedans': 491}, {'entre': 'index/hand', 'sommets_dedans': 76}, {'entre': 'middle/ring', 'sommets_dedans': 71}] · exigé aucune
+ATLAS_POSES_DE_VALIDATION {"Hand_Neutral": {"course_max_mm": 0.0, "auriculaire_au_pouce_mm": 125.4, "index_au_pouce_mm": 59.6, "auto_intersections": []}, "Hand_Relaxed": {"course_max_mm": 54.5, "auriculaire_au_pouce_mm": 107.1, "index_au_pouce_mm": 49.8, "auto_intersections": []}, "Hand_Open": {"course_max_mm": 15.1, "auriculaire_au_pouce_mm": 132.9, "index_au_pouce_mm": 53.2, "auto_intersections": []}, "Hand_Spread_Min": {"course_max_mm": 15.1, "auriculaire_au_pouce_mm": 117.0, "index_au_pouce_mm": 65.9, "auto_intersections": []}, "Hand_Fist": {"course_max_mm": 121.6, "auriculaire_au_pouce_mm": 66.5, "index_au_pouce_mm": 10.4, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 282}, {"entre": "thumb/middle", "sommets_dedans": 9}, {"entre": "thumb/hand", "sommets_dedans": 29}, {"entre": "index/middle", "sommets_dedans": 327}, {"entre": "middle/ring", "sommets_dedans": 237}, {"entre": "ring/pinky", "sommets_dedans": 443}]}, "Hand_Fist_25": {"course_max_mm": 63.9, "auriculaire_au_pouce_mm": 110.6, "index_au_pouce_mm": 38.5, "auto_intersections": []}, "Hand_Fist_50": {"course_max_mm": 128.0, "auriculaire_au_pouce_mm": 88.0, "index_au_pouce_mm": 20.2, "auto_intersections": []}, "Hand_Fist_75": {"course_max_mm": 123.8, "auriculaire_au_pouce_mm": 82.2, "index_au_pouce_mm": 31.3, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 769}, {"entre": "thumb/ring", "sommets_dedans": 69}, {"entre": "index/middle", "sommets_dedans": 93}, {"entre": "middle/ring", "sommets_dedans": 329}, {"entre": "ring/pinky", "sommets_dedans": 367}]}, "Hand_Point": {"course_max_mm": 120.6, "auriculaire_au_pouce_mm": 52.5, "index_au_pouce_mm": 47.1, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 154}, {"entre": "thumb/middle", "sommets_dedans": 317}, {"entre": "index/middle", "sommets_dedans": 385}, {"entre": "middle/ring", "sommets_dedans": 291}, {"entre": "ring/pinky", "sommets_dedans": 351}]}, "Hand_Pinch": {"course_max_mm": 70.8, "auriculaire_au_pouce_mm": 91.8, "index_au_pouce_mm": 1.1, "auto_intersections": []}, "Hand_OK": {"course_max_mm": 100.9, "auriculaire_au_pouce_mm": 83.8, "index_au_pouce_mm": 2.2, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 95}, {"entre": "thumb/pinky", "sommets_dedans": 50}, {"entre": "index/hand", "sommets_dedans": 3}]}, "Hand_Cupped": {"course_max_mm": 29.2, "auriculaire_au_pouce_mm": 116.5, "index_au_pouce_mm": 60.1, "auto_intersections": []}, "Hand_Pinky_Thumb": {"course_max_mm": 121.2, "auriculaire_au_pouce_mm": 8.2, "index_au_pouce_mm": 43.9, "auto_intersections": [{"entre": "thumb/index", "sommets_dedans": 646}, {"entre": "thumb/middle", "sommets_dedans": 117}, {"entre": "thumb/pinky", "sommets_dedans": 18}, {"entre": "thumb/hand", "sommets_dedans": 76}, {"entre": "index/middle", "sommets_dedans": 491}, {"entre": "index/hand", "sommets_dedans": 76}, {"entre": "middle/ring", "sommets_dedans": 71}]}}
+ATLAS_TRANSITION_A_NETTOYER Hand_Fist ronde 1 : {"0.2": 3, "0.3": 20, "0.4": 84, "0.5": 120, "0.6": 205, "0.7": 2544, "0.8": 1285, "0.9": 1317, "1.0": 1327}
+ATLAS_TRANSITION_NETTOYEE Hand_Fist ronde 1 : 4740 sommets traversants sur 9 étapes
+ATLAS_TRANSITION_A_NETTOYER Hand_Fist ronde 2 : {"0.2": 3, "0.3": 20, "0.4": 84, "0.5": 120, "0.6": 205, "0.7": 220, "0.8": 1513, "0.9": 1285, "1.0": 1290}
