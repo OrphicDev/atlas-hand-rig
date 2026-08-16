@@ -3488,6 +3488,44 @@ if CORRECTIFS_PRETS and "Hand_Pinky_Thumb" in CONTACTS:
     exiger("les correctifs restent sous 3 mm de deplacement",
            _deplacement_max <= 0.0031, f"{_deplacement_max * 1000:.2f} mm",
            "≤ 3,00 mm")
+
+    # ═══ LA POSE LIVRÉE DOIT ALLUMER SON PROPRE CORRECTIF ═══
+    #
+    # Le defaut de signature de ce depot, dans sa forme la plus couteuse.
+    #
+    # L'amplitude est cherchee avec `PSD_PinkyThumb = 1` — dans `_props_pt`,
+    # une copie LOCALE. Le driver est ensuite cable sur cette meme propriete.
+    # Mais la pose livree est construite depuis `CONTACTS[...]["props"]`, qui
+    # vient de la recherche de contact, ou `PSD_PinkyThumb` n'a jamais ete
+    # touche et vaut donc 0.
+    #
+    # Consequence : la correction est mesuree, retenue, cablee, verifiee sous
+    # les 3 mm — et JAMAIS APPLIQUEE a la pose pour laquelle elle existe. Le
+    # rapport la montre. Le rig ne la porte pas. C'est un champ rempli au
+    # contrat que rien ne lit a l'arrivee.
+    for (_nc, _ax), _v in _meilleur[1].items():
+        if abs(_v) < 1e-9:
+            continue
+        _prop = ("Thumb_Opposition" if "thenar" in _nc else "PSD_PinkyThumb")
+        if _prop.startswith("PSD_"):
+            CONTACTS["Hand_Pinky_Thumb"]["props"][_prop] = 1.0
+    _psd_allumes = {p: v for p, v in CONTACTS["Hand_Pinky_Thumb"]["props"].items()
+                    if p.startswith("PSD_")}
+    dire("correctifs_allumes_dans_la_pose", {
+        "pose": "Hand_Pinky_Thumb",
+        "psd": _psd_allumes or "aucun — aucun correctif n'a ete retenu",
+        "regle": "un correctif cable sur une propriete que la pose laisse a "
+                 "zero est un correctif qui n'existe pas"})
+    # Et on le VERIFIE, on ne le suppose pas : chaque driver cree est relu, et
+    # sa propriete pilote doit etre non nulle dans la pose visee.
+    for _ligne in _crees:
+        _pilote = _ligne.split(" = ")[1].split(" x ")[0]
+        _valeur = (CONTACTS["Hand_Pinky_Thumb"]["props"].get(_pilote, 0.0)
+                   if _pilote.startswith("PSD_")
+                   else CONTACTS["Hand_Pinky_Thumb"]["props"].get(_pilote, 0.0))
+        exiger(f"le correctif {_ligne.split('[')[0]} est allume dans sa pose",
+               abs(float(_valeur)) > 1e-9,
+               f"{_pilote} = {_valeur}", "non nul dans Hand_Pinky_Thumb")
     regler()
 
 POSE_PINCE = CONTACTS["Hand_Pinky_Thumb"]["props"]

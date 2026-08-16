@@ -1172,3 +1172,4 @@ ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 1/6 reste=5612 sur 9 étapes
 ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 2/6 reste=5359 sur 9 étapes
 ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 3/6 reste=5216 sur 9 étapes
 ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 4/6 reste=5076 sur 9 étapes
+ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 5/6 reste=5076 sur 9 étapes (pas resserré)
