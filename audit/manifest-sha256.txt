@@ -8,6 +8,7 @@ ca440d52a0427dda1b0d14bdccdaf8a0638a07cdfc4c6bd55839d4af9796aae6  ./CHANGELOG.md
 d8a20981c960507f157a6a6a1f72ca7c38b1b3efe1f0a2497a1d8501c17d2340  ./atelier/correctifs.py
 3dedc875895068d697d7a838a990cae29bb2d2d78c60b32ca8e0e8be16b3bf4c  ./atelier/eclairage.py
 5056cc710aca9e136408b449f5aaed0edddba200d97f18e9e97560aba79a655e  ./atelier/humain.py
+d5d4686aab3e5ae08fa9f510aca0c9eed4425952be14fd5f1bc1e493f36e5dce  ./atelier/jacobienne.py
 3a3f6cfa6337dd9ce3fbf569a6fcb974471891136b6907a3faa7884b82a83a4d  ./atelier/mains.py
 52c7bef2e84d847d70463aecf9ecc0a7dcb2f9a188792eedb8fe156658a54538  ./atelier/mesures_paume.py
 f91e7e8b0e4359e0a68aa40b39185d85e8394e29ba4d6951161aca3132aaea88  ./atelier/miroir.py
@@ -126,7 +127,7 @@ f8da7796ec3ee1ab3cbc31103d932f909da222f6da8928dd7f21168a06d74763  ./reports/chat
 188aa19ad00a5272ab2f178c82066c776ee1007bf28ca1030cbd0ada46fb34a9  ./reports/chat-2/verifier-e2d4b1c-ancien-blend.txt
 f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat-3/cup/01-balayage-cup.json
 f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
-ea805f112ea7d9af95a60eac3c43ba938b127217f2f61c4af4b959ac86cc64ba  ./reports/chat-3/journal-generation.txt
+81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation.txt
 333abec11a84735dffb055165e0a67b54c426302c17aab8406c67b3fa33a786d  ./reports/chat-3/rapport-echec.json
 156651ae085eca4d8b4d9874ae725861f3006939811d0a9e95a73179419ece4a  ./reports/chat-3/rapport-rig.L.json
 9c7b7ebb2cd6920ac16158b1faf932556f4de7ba6b87d8f1ab2e8baf0496edde  ./reports/chat-3/tableau-regression.txt
