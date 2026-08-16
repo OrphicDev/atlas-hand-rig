@@ -724,3 +724,418 @@ ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
 ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
 ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1642, pouce 11)
 ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1632, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1652, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1657, pouce 12)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1627, pouce 9)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1643, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1625, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1658, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 10/18 score=1269858.0 distance=3.62mm traversées=59
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1654, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1642, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1632, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1652, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1657, pouce 12)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1627, pouce 9)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1643, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1625, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1658, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 11/18 score=1269858.0 distance=3.62mm traversées=59 (pas resserré)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1642, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1650, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1650, pouce 12)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1632, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1642, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1638, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1655, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 12/18 score=1269746.9 distance=3.60mm traversées=59
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1652, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1647, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1647, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1641, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1654, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1652, pouce 12)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1636, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1643, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1638, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1655, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 13/18 score=1269746.9 distance=3.60mm traversées=59 (pas resserré)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1651, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1647, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1653, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1639, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1643, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1641, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1653, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 14/18 score=1269746.9 distance=3.60mm traversées=59 (pas resserré)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1650, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1642, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1652, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 15/18 score=1269733.9 distance=3.60mm traversées=59
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1647, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1650, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1642, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1652, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 16/18 score=1269733.9 distance=3.60mm traversées=59 (pas resserré)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1650, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 17/18 score=1269732.8 distance=3.60mm traversées=59
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1648, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1646, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1650, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1644, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1649, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 1645, pouce 11)
+ATLAS_BATTEMENT index/thumb tour 18/18 score=1269732.8 distance=3.60mm traversées=59 (pas resserré)
+ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 1.03, "traversees_apres_approche": 79, "apres_nettoyage_mm": 3.6, "traversees_apres_nettoyage": 59, "axes_de_degagement": 3}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE index/thumb {"DEF_index_meta.L → DEF_thumb_meta.L": 28, "DEF_pinky_meta.L → DEF_thumb_meta.L": 18, "DEF_thumb_meta.L → DEF_pinky_meta.L": 11, "DEF_thumb_meta.L → DEF_index_meta.L": 2}
+ATLAS_APPROCHE_MEILLEURE {"contact": "index/thumb", "approche_mm": 1.03, "nettoyage_mm": 3.6, "retenu": "approche"}
+ATLAS_ANNEAU_TRANCHE_ELARGIE 6.0 mm (index 2523, pouce 98)
+ATLAS_OK_ETAPE_B {"distance_mm": 1.03, "face": -0.764, "traversees": 79, "diametre_anneau_mm": 8.1}
+ATLAS_ANNEAU_TRANCHE_ELARGIE 4.5 mm (index 2213, pouce 19)
+ATLAS_ANNEAU_TRANCHE_ELARGIE 6.0 mm (index 2523, pouce 98)
+ATLAS_OK_RETENU étape A — B ne l'améliore sur aucun critère obligatoire
+ATLAS_CONTACT_HAND_OK {"entre": "index et thumb", "distance_mm": 0.81, "orientation_locale": -0.699, "sommets_du_patch": 78, "sommets_a_moins_de_1_5_mm": 7, "penetration": 0}
+ATLAS_CRITERE OK  · Hand_OK · les pulpes se touchent · mesuré 0.81 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_OK · les pulpes se font face · mesuré -0.699 · exigé ≤ -0,50
+ATLAS_CRITERE ÉCHEC · Hand_OK · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 90} · exigé 0 sommet, pulpes ET main entière
+ATLAS_BATTEMENT pinky/thumb tour 1/10 score=270102.2 distance=18.26mm traversées=1767
+ATLAS_BATTEMENT pinky/thumb tour 2/10 score=223186.1 distance=8.51mm traversées=2521
+ATLAS_BATTEMENT pinky/thumb tour 3/10 score=150883.2 distance=0.79mm traversées=2486
+ATLAS_BATTEMENT pinky/thumb tour 4/10 score=150823.2 distance=0.79mm traversées=2485
+ATLAS_BATTEMENT pinky/thumb tour 5/10 score=150823.2 distance=0.79mm traversées=2485 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 6/10 score=150163.2 distance=0.79mm traversées=2474
+ATLAS_BATTEMENT pinky/thumb tour 7/10 score=150163.2 distance=0.79mm traversées=2474 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 8/10 score=136683.4 distance=1.27mm traversées=2194
+ATLAS_BATTEMENT pinky/thumb tour 9/10 score=132768.7 distance=1.24mm traversées=2137
+ATLAS_BATTEMENT pinky/thumb tour 10/10 score=131889.0 distance=1.20mm traversées=2131
+ATLAS_OU_CA_TRAVERSE_APPROCHE pinky/thumb {"DEF_index_02.L → DEF_thumb_meta.L": 348, "DEF_middle_03.L → DEF_index_meta.L": 269, "DEF_middle_02.L → DEF_index_meta.L": 169, "DEF_index_meta.L → DEF_thumb_meta.L": 159, "DEF_index_03.L → DEF_thumb_meta.L": 147, "DEF_thumb_meta.L → DEF_index_02.L": 134, "DEF_middle_02.L → DEF_thumb_meta.L": 133, "DEF_middle_03.L → DEF_thumb_meta.L": 109, "DEF_middle_01.L → DEF_ring_meta.L": 90, "DEF_thumb_meta.L → DEF_middle_02.L": 80, "DEF_thumb_meta.L → DEF_index_meta.L": 76, "DEF_index_meta.L → DEF_hand.L": 57, "DEF_thumb_meta.L → DEF_hand.L": 51, "DEF_middle_01.L → DEF_index_01.L": 37, "DEF_thumb_meta.L → DEF_pinky_meta.L": 34, "DEF_index_meta.L → DEF_middle_02.L": 29, "DEF_index_01.L → DEF_middle_meta.L": 26, "DEF_thumb_meta.L → DEF_index_03.L": 23, "DEF_index_meta.L → DEF_middle_01.L": 23, "DEF_thumb_02.L → DEF_pinky_02.L": 22, "DEF_middle_03.L → DEF_ring_meta.L": 17, "DEF_index_01.L → DEF_middle_01.L": 16, "DEF_pinky_meta.L → DEF_thumb_meta.L": 13, "DEF_middle_meta.L → DEF_index_01.L": 12, "DEF_pinky_02.L → DEF_thumb_02.L": 11, "DEF_thumb_01.L → DEF_middle_02.L": 8, "DEF_thumb_01.L → DEF_index_meta.L": 7, "DEF_thumb_meta.L → DEF_middle_03.L": 7, "DEF_index_meta.L → DEF_middle_03.L": 7, "DEF_ring_meta.L → DEF_middle_01.L": 6, "DEF_middle_01.L → DEF_ring_01.L": 5, "DEF_middle_02.L → DEF_thumb_01.L": 4, "DEF_thumb_02.L → DEF_pinky_03.L": 2}
+ATLAS_BATTEMENT pinky/thumb tour 1/18 score=31891325.8 distance=17.15mm traversées=1585
+ATLAS_BATTEMENT pinky/thumb tour 2/18 score=31072769.7 distance=8.73mm traversées=1548
+ATLAS_BATTEMENT pinky/thumb tour 3/18 score=30685885.0 distance=8.00mm traversées=1529
+ATLAS_BATTEMENT pinky/thumb tour 4/18 score=30565885.0 distance=8.00mm traversées=1523
+ATLAS_BATTEMENT pinky/thumb tour 5/18 score=30565885.0 distance=8.00mm traversées=1523 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 6/18 score=30511759.6 distance=2.08mm traversées=1522
+ATLAS_BATTEMENT pinky/thumb tour 7/18 score=30511759.6 distance=2.08mm traversées=1522 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 8/18 score=30447420.8 distance=1.60mm traversées=1519
+ATLAS_BATTEMENT pinky/thumb tour 9/18 score=30444576.6 distance=1.28mm traversées=1519
+ATLAS_BATTEMENT pinky/thumb tour 10/18 score=30444576.5 distance=1.28mm traversées=1519
+ATLAS_BATTEMENT pinky/thumb tour 11/18 score=30444576.5 distance=1.28mm traversées=1519 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 12/18 score=30042285.6 distance=0.26mm traversées=1500
+ATLAS_BATTEMENT pinky/thumb tour 13/18 score=30041875.2 distance=0.31mm traversées=1500
+ATLAS_BATTEMENT pinky/thumb tour 14/18 score=30041780.6 distance=0.89mm traversées=1500
+ATLAS_BATTEMENT pinky/thumb tour 15/18 score=30041780.6 distance=0.89mm traversées=1500 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 16/18 score=30041780.6 distance=0.89mm traversées=1500 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 17/18 score=30041777.0 distance=0.85mm traversées=1500
+ATLAS_BATTEMENT pinky/thumb tour 18/18 score=30041777.0 distance=0.85mm traversées=1500 (pas resserré)
+ATLAS_DEUX_TEMPS {"contact": "pinky/thumb", "apres_approche_mm": 1.2, "traversees_apres_approche": 2131, "apres_nettoyage_mm": 0.85, "traversees_apres_nettoyage": 1500, "axes_de_degagement": 1}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE pinky/thumb {"DEF_middle_03.L → DEF_index_meta.L": 270, "DEF_index_02.L → DEF_thumb_meta.L": 239, "DEF_index_meta.L → DEF_thumb_meta.L": 163, "DEF_middle_02.L → DEF_index_meta.L": 95, "DEF_index_03.L → DEF_thumb_meta.L": 79, "DEF_index_meta.L → DEF_hand.L": 76, "DEF_thumb_meta.L → DEF_hand.L": 73, "DEF_thumb_meta.L → DEF_index_02.L": 72, "DEF_thumb_meta.L → DEF_index_meta.L": 68, "DEF_middle_02.L → DEF_thumb_meta.L": 64, "DEF_middle_01.L → DEF_ring_meta.L": 61, "DEF_middle_03.L → DEF_thumb_meta.L": 41, "DEF_middle_01.L → DEF_index_01.L": 40, "DEF_index_01.L → DEF_middle_meta.L": 26, "DEF_index_meta.L → DEF_middle_02.L": 25, "DEF_thumb_meta.L → DEF_pinky_meta.L": 22, "DEF_thumb_meta.L → DEF_index_03.L": 20, "DEF_index_meta.L → DEF_middle_01.L": 13, "DEF_thumb_meta.L → DEF_middle_02.L": 12, "DEF_middle_meta.L → DEF_index_01.L": 12, "DEF_index_meta.L → DEF_middle_03.L": 9, "DEF_index_01.L → DEF_middle_01.L": 6, "DEF_middle_01.L → DEF_ring_01.L": 6, "DEF_ring_meta.L → DEF_middle_01.L": 4, "DEF_thumb_meta.L → DEF_middle_03.L": 3, "DEF_pinky_meta.L → DEF_thumb_meta.L": 1}
+ATLAS_CONTACT_HAND_PINKY_THUMB {"entre": "pinky et thumb", "distance_mm": 0.85, "orientation_locale": -0.287, "sommets_du_patch": 198, "sommets_a_moins_de_1_5_mm": 10, "penetration": 0}
+ATLAS_CRITERE OK  · Hand_Pinky_Thumb · les pulpes se touchent · mesuré 0.85 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · les pulpes se font face · mesuré -0.287 · exigé ≤ -0,50
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 1500} · exigé 0 sommet, pulpes ET main entière
+ATLAS_CORRECTIF_DEPART {"traversees": 1500, "penetration": 0, "distance_mm": 0.852, "face": -0.287, "norme_mm": 0.0}
+ATLAS_AMPLITUDES_CORRECTIVES {"depart": {"traversees": 1500, "penetration": 0, "distance_mm": 0.852, "face": -0.287, "norme_mm": 0.0}, "retenu": {"DEF_thumb_thenar_corr.L[0]": 3.0, "DEF_thumb_thenar_corr.L[1]": 3.0, "DEF_thumb_thenar_corr.L[2]": -3.0, "DEF_index_root_corr.L[0]": 2.0, "DEF_index_root_corr.L[1]": 2.0, "DEF_index_root_corr.L[2]": 2.0}, "final": {"traversees": 1350, "penetration": 0, "distance_mm": 0.852, "face": -0.287, "norme_mm": 15.0}, "regle": "traversees, puis distance, puis orientation, puis la plus PETITE norme — jamais une somme ponderee"}
+ATLAS_DRIVERS_CORRECTIFS {"crees": ["DEF_thumb_thenar_corr.L[0] = Thumb_Opposition x 3.000 mm", "DEF_thumb_thenar_corr.L[1] = Thumb_Opposition x 3.000 mm", "DEF_thumb_thenar_corr.L[2] = Thumb_Opposition x -3.000 mm", "DEF_index_root_corr.L[0] = PSD_PinkyThumb x 2.000 mm", "DEF_index_root_corr.L[1] = PSD_PinkyThumb x 2.000 mm", "DEF_index_root_corr.L[2] = PSD_PinkyThumb x 2.000 mm"], "regle": "un driver n'existe que s'il pilote quelque chose ; une amplitude nulle ne se cable pas, elle se constate"}
+ATLAS_CRITERE OK  · les correctifs restent sous 3 mm de deplacement · mesuré 3.00 mm · exigé ≤ 3,00 mm
+ATLAS_PINCE_AURICULAIRE_POUCE {"ecart_des_empreintes_mm": 0.85, "se_font_face": -0.287}
+ATLAS_DIVERGENCE k=0° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=2° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=4° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=6° → fermeture propre 0.6
+ATLAS_DIVERGENCE k=8° → fermeture propre 0.55
+ATLAS_DIVERGENCE k=10° → fermeture propre 0.5
+ATLAS_DIVERGENCE k=12° → fermeture propre 0.5
+ATLAS_DIVERGENCE_CHERCHEE {"balayage": {"0.0": 0.6, "2.0": 0.6, "4.0": 0.6, "6.0": 0.6, "8.0": 0.55, "10.0": 0.5, "12.0": 0.5}, "k_retenu_deg": 0.0, "fermeture_propre_atteinte": 0.6, "regle": "la plus PETITE amplitude qui atteint la fermeture la plus profonde"}
+ATLAS_CUP_POING cup=0.00 → fermeture propre 0.6
+ATLAS_CUP_POING cup=0.25 → fermeture propre 0.55
+ATLAS_CUP_POING cup=0.50 → fermeture propre 0.5
+ATLAS_CUP_POING cup=0.70 → fermeture propre 0.5
+ATLAS_CUP_POING cup=0.90 → fermeture propre 0.25
+ATLAS_CREUSEMENT_DU_POING {"balayage": {"0.0": 0.6, "0.25": 0.55, "0.5": 0.5, "0.7": 0.5, "0.9": 0.25}, "cup_retenu": 0.0, "fermeture_propre_atteinte": 0.6, "regle": "le plus PETIT creusement qui laisse aller le plus loin"}
+ATLAS_TRAVERSEES_DES_QUATRE_DOIGTS_SEULS {"0.0": {"total": 0}, "0.02": {"total": 0}, "0.04": {"total": 0}, "0.06": {"total": 0}, "0.08": {"total": 0}, "0.1": {"total": 0}, "0.12": {"total": 0}, "0.14": {"total": 0}, "0.16": {"total": 0}, "0.18": {"total": 0}, "0.2": {"total": 0}, "0.22": {"total": 0}, "0.24": {"total": 0}, "0.26": {"total": 0}, "0.28": {"total": 0}, "0.3": {"total": 0}, "0.32": {"total": 0}, "0.34": {"total": 0}, "0.36": {"total": 0}, "0.38": {"total": 0}, "0.4": {"total": 0}, "0.42": {"total": 0}, "0.44": {"total": 0}, "0.46": {"total": 0}, "0.48": {"total": 0}, "0.5": {"total": 0}, "0.52": {"total": 0}, "0.54": {"total": 0}, "0.56": {"total": 0}, "0.58": {"total": 0}, "0.6": {"total": 0}, "0.62": {"total": 1}}
+ATLAS_FERMETURE_RETENUE {"valeur": 0.6, "profondeur_propre_mesuree": 0.6, "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"}
+ATLAS_CRITERE ÉCHEC · le poing se ferme complètement sans traversée · mesuré 0.6 · exigé Fist = 1.0
+ATLAS_BATTEMENT thumb/index tour 1/10 score=345190.9 distance=26.59mm traversées=1770
+ATLAS_BATTEMENT thumb/index tour 2/10 score=155840.3 distance=5.58mm traversées=1860
+ATLAS_BATTEMENT thumb/index tour 3/10 score=127431.3 distance=2.76mm traversées=1824
+ATLAS_BATTEMENT thumb/index tour 4/10 score=127431.3 distance=2.76mm traversées=1824 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 5/10 score=121146.4 distance=3.01mm traversées=1645
+ATLAS_BATTEMENT thumb/index tour 6/10 score=121146.3 distance=3.01mm traversées=1645
+ATLAS_BATTEMENT thumb/index tour 7/10 score=121146.3 distance=3.01mm traversées=1645 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 8/10 score=116896.9 distance=1.70mm traversées=1745
+ATLAS_BATTEMENT thumb/index tour 9/10 score=114448.4 distance=1.78mm traversées=1699
+ATLAS_BATTEMENT thumb/index tour 10/10 score=110947.3 distance=2.12mm traversées=1596
+ATLAS_OU_CA_TRAVERSE_APPROCHE thumb/index {"DEF_ring_03.L → DEF_pinky_meta.L": 244, "DEF_thumb_meta.L → DEF_index_meta.L": 212, "DEF_middle_03.L → DEF_index_meta.L": 183, "DEF_ring_03.L → DEF_middle_meta.L": 183, "DEF_index_meta.L → DEF_thumb_meta.L": 154, "DEF_index_03.L → DEF_thumb_meta.L": 108, "DEF_ring_01.L → DEF_pinky_meta.L": 98, "DEF_index_01.L → DEF_middle_01.L": 59, "DEF_ring_02.L → DEF_pinky_meta.L": 59, "DEF_thumb_02.L → DEF_index_meta.L": 39, "DEF_index_meta.L → DEF_middle_01.L": 36, "DEF_middle_01.L → DEF_index_01.L": 31, "DEF_thumb_01.L → DEF_index_meta.L": 29, "DEF_middle_01.L → DEF_index_meta.L": 21, "DEF_pinky_meta.L → DEF_ring_02.L": 19, "DEF_pinky_meta.L → DEF_ring_01.L": 17, "DEF_middle_meta.L → DEF_ring_03.L": 16, "DEF_index_01.L → DEF_middle_meta.L": 14, "DEF_middle_meta.L → DEF_ring_01.L": 12, "DEF_middle_meta.L → DEF_index_01.L": 10, "DEF_ring_02.L → DEF_middle_meta.L": 10, "DEF_ring_01.L → DEF_middle_meta.L": 10, "DEF_thumb_meta.L → DEF_middle_meta.L": 7, "DEF_index_03.L → DEF_thumb_02.L": 5, "DEF_thumb_meta.L → DEF_hand.L": 5, "DEF_ring_01.L → DEF_middle_01.L": 5, "DEF_thumb_02.L → DEF_index_03.L": 3, "DEF_middle_01.L → DEF_ring_meta.L": 3, "DEF_middle_01.L → DEF_ring_01.L": 2, "DEF_ring_meta.L → DEF_middle_01.L": 1, "DEF_ring_01.L → DEF_pinky_01.L": 1}
+ATLAS_BATTEMENT thumb/index tour 1/18 score=31304412.6 distance=16.36mm traversées=1555
+ATLAS_BATTEMENT thumb/index tour 2/18 score=31222319.2 distance=14.00mm traversées=1552
+ATLAS_BATTEMENT thumb/index tour 3/18 score=30959752.9 distance=13.68mm traversées=1539
+ATLAS_BATTEMENT thumb/index tour 4/18 score=30959752.9 distance=13.68mm traversées=1539 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 5/18 score=30412276.1 distance=15.00mm traversées=1511
+ATLAS_BATTEMENT thumb/index tour 6/18 score=30412275.6 distance=15.00mm traversées=1511
+ATLAS_BATTEMENT thumb/index tour 7/18 score=30412275.6 distance=15.00mm traversées=1511 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 8/18 score=30409516.7 distance=14.70mm traversées=1511
+ATLAS_BATTEMENT thumb/index tour 9/18 score=30409516.1 distance=14.70mm traversées=1511
+ATLAS_BATTEMENT thumb/index tour 10/18 score=30409516.1 distance=14.70mm traversées=1511 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 11/18 score=30369516.1 distance=14.70mm traversées=1509
+ATLAS_BATTEMENT thumb/index tour 12/18 score=30369516.1 distance=14.70mm traversées=1509 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 13/18 score=30206485.6 distance=14.38mm traversées=1501
+ATLAS_BATTEMENT thumb/index tour 14/18 score=30186757.0 distance=14.45mm traversées=1500
+ATLAS_BATTEMENT thumb/index tour 15/18 score=30186757.0 distance=14.45mm traversées=1500 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 16/18 score=30146899.9 distance=14.47mm traversées=1498
+ATLAS_BATTEMENT thumb/index tour 17/18 score=30126899.9 distance=14.47mm traversées=1497
+ATLAS_BATTEMENT thumb/index tour 18/18 score=30126899.9 distance=14.47mm traversées=1497 (pas resserré)
+ATLAS_DEUX_TEMPS {"contact": "thumb/index", "apres_approche_mm": 2.12, "traversees_apres_approche": 1596, "apres_nettoyage_mm": 14.47, "traversees_apres_nettoyage": 1497, "axes_de_degagement": 0}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE thumb/index {"DEF_ring_03.L → DEF_pinky_meta.L": 272, "DEF_middle_03.L → DEF_index_meta.L": 205, "DEF_index_03.L → DEF_thumb_meta.L": 204, "DEF_ring_03.L → DEF_middle_meta.L": 152, "DEF_ring_01.L → DEF_pinky_meta.L": 94, "DEF_thumb_meta.L → DEF_index_meta.L": 88, "DEF_index_meta.L → DEF_thumb_meta.L": 74, "DEF_ring_02.L → DEF_pinky_meta.L": 65, "DEF_index_01.L → DEF_middle_01.L": 57, "DEF_index_meta.L → DEF_middle_01.L": 44, "DEF_middle_03.L → DEF_thumb_meta.L": 38, "DEF_middle_meta.L → DEF_ring_01.L": 37, "DEF_middle_meta.L → DEF_index_01.L": 23, "DEF_pinky_meta.L → DEF_ring_02.L": 21, "DEF_ring_01.L → DEF_middle_meta.L": 20, "DEF_index_01.L → DEF_middle_meta.L": 19, "DEF_middle_01.L → DEF_index_01.L": 18, "DEF_pinky_meta.L → DEF_ring_01.L": 17, "DEF_thumb_meta.L → DEF_index_03.L": 12, "DEF_middle_meta.L → DEF_ring_03.L": 12, "DEF_middle_01.L → DEF_index_meta.L": 8, "DEF_ring_02.L → DEF_middle_meta.L": 7, "DEF_middle_01.L → DEF_ring_01.L": 4, "DEF_middle_01.L → DEF_ring_meta.L": 3, "DEF_ring_01.L → DEF_middle_01.L": 3}
+ATLAS_APPROCHE_MEILLEURE {"contact": "thumb/index", "approche_mm": 2.12, "nettoyage_mm": 14.47, "retenu": "approche"}
+ATLAS_POUCE_DU_POING {"distance_a_l_index_mm": 2.12, "penetration": 41, "reglages": {"Fist": 1.0, "Thumb_Curl": 0.533, "Thumb_Opposition": 0.3}, "corrections_fk_deg": {"CTRL_index_01.L[2]": 4.7, "CTRL_middle_01.L[2]": 7.0, "CTRL_ring_01.L[2]": 7.0, "CTRL_pinky_01.L[2]": -14.0, "CTRL_thumb_meta.L[0]": -45.0, "CTRL_thumb_meta.L[1]": 50.0, "CTRL_thumb_meta.L[2]": 45.0, "CTRL_thumb_01.L[0]": 33.3, "CTRL_thumb_02.L[0]": 6.7}}
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 1/9 reste=1957
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 2/9 reste=1700
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 3/9 reste=1689
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 4/9 reste=1678
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 5/9 reste=1670
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 6/9 reste=1628
+ATLAS_BATTEMENT nettoyage Hand_Fist_75 tour 7/9 reste=1628 (pas resserré)
