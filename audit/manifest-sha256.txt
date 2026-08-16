@@ -145,7 +145,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-33492b68a20ccaec015f196fdbbcb5b6a905662bb3657399da13ed7d021f0a40  ./rig-main.py
+f5d0d53caa924a326dccc9e470dcce195338a7515bda11fcf9ba1c08a562a756  ./rig-main.py
 0f70ee328b3a0fc2ee18ae2807b76a3e70feb51b479cbeadf076e8da6c6c4277  ./verifier-rig.py
 3f2d92e4e91e1c3121616f3007a0a9bd3591b26a624b06bdbf86893034f7387d  ./videos/b17e548/LISEZ-MOI.md
 57433d06119ba8aaddf59f5054d13277a19333fcd5223da2d878d21d2f077de4  ./videos/b17e548/Neutral-vers-Hand_Cupped/0001.png
@@ -299,6 +299,8 @@ bd2a520da708b56d05a742254f2849bc54807f919b15e65d366d343d5ac27f65  ./videos/b17e5
 852d73c4384648939ae1acb8062445f20086ac7b8336db13455d050b765483ce  ./videos/b17e548/Neutral-vers-Hand_Point/0024.png
 241fdc969c0b65486af692e0202bbf869e874fbef91b4add36618094a74ba242  ./videos/b17e548/Neutral-vers-Hand_Point/0025.png
 2ff9fb7c20d2f54f778d8a4d481338474a921f96b285498daf096d95bddbbd1c  ./videos/b17e548/playblasts.html
+095d30ee944fa7689a00b7289b4a14c5de85b45a21d16021552e85002088a3bb  ./work/chat-3/corr/WIP-focus-cup-NON-VALIDE.blend
+1d6c7a0ad017f6145a1579db70bec772ec9f209f67e70bb5bbe27226bde19955  ./work/chat-3/corr/rapport-focus-cup.json
 4a743cb58d4295524157d58f50a649ca276944ce54cade5691f542cd72028bd3  ./work/chat-3/cup/WIP-focus-cup-NON-VALIDE.blend
 f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./work/chat-3/cup/rapport-focus-cup.json
 7c19b4015bbebb7563831f938407662b1c7699f67a96753bc3f55f3172a49c43  ./work/chat-3/weights/WIP-focus-cup-NON-VALIDE.blend

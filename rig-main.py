@@ -1719,16 +1719,28 @@ try:
         _s = sum((_pts_now[i] for i in masque), mathutils.Vector((0, 0, 0)))
         return _s / max(1, len(masque))
 
+    # ═══ ON NE SORT JAMAIS D'ICI EN MODE ÉDITION ═══
+    # Mesuré, et c'est ma faute : une exception attrapée pendant la création
+    # des os a laissé l'armature en ÉDITION. Tout ce qui suivait posait alors
+    # une armature figée — le test A/B a mesuré « compression 1,0 et zéro
+    # traversée » sur un poing qui ne s'est jamais fermé. Un `except` qui ne
+    # rend pas l'état qu'il a pris ne rattrape rien, il déplace la panne.
     bpy.context.view_layer.objects.active = rig
-    bpy.ops.object.mode_set(mode="EDIT")
-    _EB = arm.edit_bones
-    correctifs.ajouter_bone_correctif(
-        _EB, f"DEF_thumb_thenar_corr{SIDE}", _EB[f"DEF_thumb_meta{SIDE}"],
-        _centre(_ZONES["thenar"]), PALMAIRE_CUP, T)
-    correctifs.ajouter_bone_correctif(
-        _EB, f"DEF_index_root_corr{SIDE}", _EB[f"DEF_index_meta{SIDE}"],
-        _centre(_ZONES["index_root"]), PALMAIRE_CUP, T)
-    bpy.ops.object.mode_set(mode="OBJECT")
+    try:
+        bpy.ops.object.mode_set(mode="EDIT")
+        _EB = arm.edit_bones
+        # Le module attend le parent par NOM et un roll en RADIANS. Je lui
+        # passais un objet os et le vecteur `T` : deux fautes d'API que sa
+        # garde a refusées, comme elle devait.
+        correctifs.ajouter_bone_correctif(
+            _EB, f"DEF_thumb_thenar_corr{SIDE}", f"DEF_thumb_meta{SIDE}",
+            _centre(_ZONES["thenar"]), PALMAIRE_CUP, 0.0)
+        correctifs.ajouter_bone_correctif(
+            _EB, f"DEF_index_root_corr{SIDE}", f"DEF_index_meta{SIDE}",
+            _centre(_ZONES["index_root"]), PALMAIRE_CUP, 0.0)
+    finally:
+        if rig.mode != "OBJECT":
+            bpy.ops.object.mode_set(mode="OBJECT")
 
     correctifs.transferer_vers_correctif(
         geo, _ZONES["thenar"], f"DEF_thumb_meta{SIDE}",
@@ -1759,6 +1771,14 @@ try:
 except Exception as _e:                                       # noqa: BLE001
     # On n'avale pas l'échec : on le publie et on continue sans correctifs, de
     # sorte que le rapport dise pourquoi ils manquent au lieu de les taire.
+    # Et on REND L'ÉTAT : un mode laissé en édition fige tout ce qui suit.
+    try:
+        if rig.mode != "OBJECT":
+            bpy.context.view_layer.objects.active = rig
+            bpy.ops.object.mode_set(mode="OBJECT")
+    except Exception:
+        pass
+    forcer_evaluation()
     print("ATLAS_OS_CORRECTIFS_ECHEC " + json.dumps(str(_e), ensure_ascii=False))
     dire("os_correctifs", {"echec": str(_e)})
     CORRECTIFS_PRETS = False
