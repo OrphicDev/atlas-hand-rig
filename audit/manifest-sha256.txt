@@ -18,7 +18,7 @@ ce41564fdb22f2c8f52f7f51f47a849e295ad1fac8ee2c7948c801295c0fb6e4  ./audit/AUDIT_
 ae8154420f6e4006058a319512a74f513a507d541313ed1218a62d2d437957f0  ./audit/AUDIT_PACKET_HANDS_WIP.md
 f6d1abd70a4c5ecb2fa158447c87552024dfa74daa89cf70535d6611f843cf57  ./audit/wip-chat-1/audit-collisions.py
 19ce03c143fc33c253320f2959a75c7f5652087eb1d73fe3e657990d1fc07996  ./audit/wip-chat-1/collisions.json
-cb93066feb900fd09292b2bca6fc51c259c7db9b8a73d3fd208141b7252f06ec  ./enquetes/humain-rig-main.md
+e913029dc9431c8ff804aa0245ede48eba39bb77930fa74e4aedaa9ac28a5016  ./enquetes/humain-rig-main.md
 070e777e0974625d9f5a581ba71b13c3c12cbb9ae46ec0e2e5b9974d8c7b5afa  ./enquetes/humain-verifier-rig.md
 702b1dfa6d2c896638e213a07216752cd7cc9a0fa64a8b7657ec8d2c665b46a7  ./handoffs/HANDOFF_CHAT_2_HANDS.md
 1354ab0e6ea9f0d2a1a585d4235ca9fd837e38949ec1d591ed9de8ea5263beca  ./handoffs/HANDOFF_CHAT_2_NEXT.md

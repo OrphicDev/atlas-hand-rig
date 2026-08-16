@@ -67,6 +67,29 @@ paume**, donc aucune pose n'existait à trouver.
   n'existent pas sur ce fichier ; à `Spread = +1`, majeur et annulaire restent
   à 6,84 mm l'un de l'autre.
 
+- **Le creusement de la paume faisait l'inverse de son nom.** Mesure sur le rig
+  de `b17e548`, `Cup` de 0 a 1 : la fleche de l'arc passe de 29,99 a 19,10 mm
+  (elle s'APLATIT) et la largeur de 71,99 a 86,03 (la paume s'ELARGIT). Le
+  cerclage rouge de Sacha — les deux tetes metacarpiennes qui se rapprochent —
+  ne gagnait que 3 mm sur 102, puis repartait en arriere apres `Cup = 0,5`.
+
+  Et `creux_palmaire()` annoncait un progres de +0,98 mm, parce qu'il prend le
+  maximum de profondeur sous un plan FIGE a la pose de repos : un splay
+  l'augmente aussi. Il ne se trompait pas d'amplitude, il se trompait de SENS
+  sur le phenomene.
+
+  Eprouve ensuite axe par axe, drivers TUS — sans quoi les axes pilotes rendent
+  +0,00 partout et le tableau devient parfaitement coherent et parfaitement
+  faux. Deux causes : `CUP` pilotait l'axe 0 dans le sens qui aplatit, et
+  l'axe 2, le seul qui resserre, n'etait pilote par rien.
+
+- **2 375 sommets de paume n'avaient pas de proprietaire.** Le controle du
+  depot classe par groupe DOMINANT : un sommet a 51 % index et 49 % pouce est
+  range « index » sans hesiter et declare sain. L'audit a trouve un sommet
+  partage a parts egales entre le metacarpien du POUCE et celui de
+  l'AURICULAIRE — les deux bords opposes de la paume — et des dizaines a plus
+  de 90 mm de toute commissure.
+
 ## 3. CE QUE LA GÉOMÉTRIE DIT
 
 - Portée de la chaîne du pouce : **117,7 mm** pour une cible à 46,8 mm
@@ -107,6 +130,16 @@ c'est le placement des métacarpiens qu'il faut reprendre, et non la pose.
   la gauche retomberait faux sur la droite, dont la normale de paume est
   inversée. La construction s'arrête si les deux sens rendent le même éventail
   — une sonde qui ne peut pas échouer ne prouve rien.
+
+- **Une masse palmaire n'appartient qu'a DEUX RAYONS VOISINS.** Le melange
+  entre metacarpiens adjacents est demande par la regle 7 — la paume est une
+  chair continue — mais l'index et l'auriculaire ne partagent aucune chair sur
+  une main reelle. Ce controle-la ne parle ni de pose ni d'amplitude : il dit
+  si les poids decrivent encore une main.
+
+- **Un driver REECRIT sa voie.** Toute sonde qui pose une rotation a la main
+  sur un canal pilote doit d'abord le taire, et ECHOUER si taire n'a rien
+  change. Sans ca elle rend +0,00 partout, et ce zero se lit comme une mesure.
 
 - **L'INVARIANT : la chair de chaque doigt reste d'un seul tenant.** Deux
   transferts de poids successifs avaient déjà débité le pouce en morceaux cette
