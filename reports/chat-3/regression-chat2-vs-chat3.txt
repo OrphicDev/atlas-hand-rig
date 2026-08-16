@@ -1,0 +1,92 @@
+chat2           46 critères   32 ✓   14 ✗   reports/chat-2/p0-complet/journal-generation.txt
+chat3           58 critères   32 ✓   26 ✗   reports/chat-3/journal-generation-precedent.txt
+
+| critère                                                                     |     chat2     |     chat3     |
+| --------------------------------------------------------------------------- | ------------- | ------------- |
+| Hand_Pinch · les pulpes se touchent                                         |       ✓       |   ✗ 1.06 mm   |
+| Hand_Pinch · les pulpes se font face                                        |       ✓       |       ✓       |
+| Hand_Pinch · aucune interpénétration                                        |       ✓       |       ✓       |
+| Hand_OK · les pulpes se touchent                                            |   ✗ 2.43 mm   |   ✗ 2.18 mm   |
+| Hand_OK · les pulpes se font face                                           |       ✓       |       ✓       |
+| Hand_OK · aucune interpénétration                                           |       ✓       | ✗ {dans_les_… |
+| Hand_Pinky_Thumb · les pulpes se touchent                                   |   ✗ 2.66 mm   |   ✗ 8.20 mm   |
+| Hand_Pinky_Thumb · les pulpes se font face                                  |    ✗ -0.134   |       ✓       |
+| Hand_Pinky_Thumb · aucune interpénétration                                  | ✗ {dans_les_… | ✗ {dans_les_… |
+| Hand_Neutral · aucune auto-intersection                                     |       ✓       |       ✓       |
+| Hand_Relaxed · aucune auto-intersection                                     |       ✓       |       ✓       |
+| Hand_Open · aucune auto-intersection                                        |       ✓       |       ✓       |
+| Hand_Spread_Min · aucune auto-intersection                                  |       ✓       |       ✓       |
+| Hand_Fist · aucune auto-intersection                                        |       ✓       | ✗ [{entre: t… |
+| Hand_Fist_25 · aucune auto-intersection                                     |       ✓       |       ✓       |
+| Hand_Fist_50 · aucune auto-intersection                                     |       ✓       |       ✓       |
+| Hand_Fist_75 · aucune auto-intersection                                     | ✗ [{entre: t… | ✗ [{entre: t… |
+| Hand_Point · aucune auto-intersection                                       | ✗ [{entre: t… | ✗ [{entre: t… |
+| Hand_Pinch · aucune auto-intersection                                       |       ✓       |       ✓       |
+| Hand_OK · aucune auto-intersection                                          |       ✓       | ✗ [{entre: t… |
+| Hand_Cupped · aucune auto-intersection                                      | ✗ [{entre: r… |       ✓       |
+| Hand_Pinky_Thumb · aucune auto-intersection                                 | ✗ [{entre: t… | ✗ [{entre: t… |
+| transition Neutral→Hand_Fist · aucune auto-intersection                     |       ✓       | ✗ {0.2: [{en… |
+| transition Neutral→Hand_Point · aucune auto-intersection                    | ✗ {0.3: [{en… | ✗ {0.5: [{en… |
+| transition Neutral→Hand_Pinch · aucune auto-intersection                    |       ✓       |       ✓       |
+| transition Neutral→Hand_OK · aucune auto-intersection                       |       ✓       | ✗ {0.6: [{en… |
+| transition Neutral→Hand_Cupped · aucune auto-intersection                   | ✗ {1.0: [{en… |       ✓       |
+| transition Neutral→Hand_Pinky_Thumb · aucune auto-intersection              | ✗ {0.4: [{en… | ✗ {0.2: [{en… |
+| Hand_Point · aucune auto-intersection après nettoyage des transitions       | ✗ [{entre: t… | ✗ [{entre: t… |
+| Hand_Pinky_Thumb · aucune auto-intersection après nettoyage des transitions | ✗ [{entre: t… | ✗ [{entre: t… |
+| Pinch et OK sont deux gestes distincts                                      |       ✓       |       ✓       |
+| l'anneau du OK est lisible                                                  |       ✓       |    ✗ 0.0 mm   |
+| la paume creuse se creuse vraiment                                          |    ✗ 1.0 mm   |   ✗ -0.8 mm   |
+| retour exact au repos                                                       |       ✓       |       ✓       |
+| aucune contamination hors des commissures                                   |       ✓       |       ✓       |
+| compression de index au poing · minimum                                     |       ✓       |       ✓       |
+| compression de index au poing · percentile 1 %                              |       ✓       |       ✓       |
+| compression de middle au poing · minimum                                    |       ✓       |       ✓       |
+| compression de middle au poing · percentile 1 %                             |       ✓       |       ✓       |
+| compression de ring au poing · minimum                                      |       ✓       |    ✗ 0.216    |
+| compression de ring au poing · percentile 1 %                               |       ✓       |       ✓       |
+| compression de pinky au poing · minimum                                     |       ✓       |    ✗ 0.2281   |
+| compression de pinky au poing · percentile 1 %                              |       ✓       |       ✓       |
+| compression de thumb au poing · minimum                                     |       ✓       |    ✗ 0.098    |
+| compression de thumb au poing · percentile 1 %                              |       ✓       |    ✗ 0.4356   |
+| tous les drivers sont valides                                               |       ✓       |       ✓       |
+| aucun sommet partagé entre deux rayons non voisins                          |       —       |       ✓       |
+| Cup · la paume se voûte                                                     |       —       |       ✓       |
+| Cup · la paume se resserre                                                  |       —       |       ✓       |
+| Cup · l'auriculaire rejoint le pouce                                        |       —       |       ✓       |
+| Cup · le resserrement ne repart jamais en arrière                           |       —       |       ✓       |
+| Cup · la voûte ne s'effondre jamais en chemin                               |       —       |       ✓       |
+| Cup · aucune auto-intersection sur les 21 pas                               |       —       |       ✓       |
+| Cup · retour exact au repos                                                 |       —       |       ✓       |
+| le poing se ferme complètement sans traversée                               |       —       |     ✗ 0.6     |
+| Hand_Fist · aucune auto-intersection après nettoyage des transitions        |       —       | ✗ [{entre: t… |
+| Hand_OK · aucune auto-intersection après nettoyage des transitions          |       —       | ✗ [{entre: t… |
+| le diamètre utile distingue l'anneau du pincement                           |       —       | ✗ OK 0.0 mm … |
+
+Corrigés depuis la première série : 3
+  ✓ Hand_Pinky_Thumb · les pulpes se font face
+  ✓ Hand_Cupped · aucune auto-intersection
+  ✓ transition Neutral→Hand_Cupped · aucune auto-intersection
+Absents de la dernière série : 0
+Aggravations chiffrées (critère déjà en échec, mesure qui empire) : 8
+  ↓ Hand_Pinch · les pulpes se touchent · 0.79 → 1.06 · exigé ≤ 1.00 mm
+  ↓ Hand_Pinky_Thumb · les pulpes se touchent · 2.66 → 8.2 · exigé ≤ 1.00 mm
+  ↓ l'anneau du OK est lisible · 17.5 → 0 · exigé ≥ 14 mm d'ouverture
+  ↓ la paume creuse se creuse vraiment · 1 → -0.8 · exigé ≥ 6 mm de plus qu'au repos
+  ↓ compression de ring au poing · minimum · 0.5621 → 0.216 · exigé ≥ 0,25
+  ↓ compression de pinky au poing · minimum · 0.5377 → 0.2281 · exigé ≥ 0,25
+  ↓ compression de thumb au poing · minimum · 0.2872 → 0.098 · exigé ≥ 0,25
+  ↓ compression de thumb au poing · percentile 1 % · 0.5525 → 0.4356 · exigé ≥ 0,50
+RÉGRESSIONS : 11
+  ✗ Hand_Pinch · les pulpes se touchent · mesuré 1.06 mm
+  ✗ Hand_OK · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 148}
+  ✗ Hand_Fist · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 282}, {'entre': 'thumb/middle', 'sommets_dedans': 9}, {'entre': 'thumb/hand', 'sommets_dedans': 29}, {'entre': 'index/middle', 'sommets_dedans': 327}, {'entre': 'middle/ring', 'sommets_dedans': 237}, {'entre': 'ring/pinky', 'sommets_dedans': 443}]
+  ✗ Hand_OK · aucune auto-intersection · mesuré [{'entre': 'thumb/index', 'sommets_dedans': 95}, {'entre': 'thumb/pinky', 'sommets_dedans': 50}, {'entre': 'index/hand', 'sommets_dedans': 3}]
+  ✗ transition Neutral→Hand_Fist · aucune auto-intersection · mesuré {'0.2': [{'entre': 'thumb/index', 'sommets_dedans': 3}], '0.3': [{'entre': 'thumb/index', 'sommets_dedans': 20}], '0.4': [{'entre': 'thumb/index', 'sommets_dedans': 84}], '0.5': [{'entre': 'thumb/index', 'sommets_dedans': 120}], '0.6': [{'entre': 'thumb/index', 'sommets_dedans': 205}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 206}, {'entre': 'thumb/hand', 'sommets_dedans': 1}, {'entre': 'index/middle', 'sommets_dedans': 76}, {'entre': 'ring/pinky', 'sommets_dedans': 2}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 203}, {'entre': 'thumb/hand', 'sommets_dedans': 6}, {'entre': 'index/middle', 'sommets_dedans': 438}, {'entre': 'middle/ring', 'sommets_dedans': 418}, {'entre': 'ring/pinky', 'sommets_dedans': 319}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 197}, {'entre': 'thumb/middle', 'sommets_dedans': 3}, {'entre': 'thumb/hand', 'sommets_dedans': 21}, {'entre': 'index/middle', 'sommets_dedans': 332}, {'entre': 'middle/ring', 'sommets_dedans': 342}, {'entre': 'ring/pinky', 'sommets_dedans': 321}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 220}, {'entre': 'thumb/middle', 'sommets_dedans': 9}, {'entre': 'thumb/hand', 'sommets_dedans': 29}, {'entre': 'index/middle', 'sommets_dedans': 372}, {'entre': 'middle/ring', 'sommets_dedans': 283}, {'entre': 'ring/pinky', 'sommets_dedans': 419}]}
+  ✗ transition Neutral→Hand_OK · aucune auto-intersection · mesuré {'0.6': [{'entre': 'thumb/index', 'sommets_dedans': 19}], '0.7': [{'entre': 'thumb/index', 'sommets_dedans': 1857}, {'entre': 'thumb/pinky', 'sommets_dedans': 2}], '0.8': [{'entre': 'thumb/index', 'sommets_dedans': 1249}, {'entre': 'thumb/pinky', 'sommets_dedans': 14}], '0.9': [{'entre': 'thumb/index', 'sommets_dedans': 457}, {'entre': 'thumb/pinky', 'sommets_dedans': 32}, {'entre': 'index/hand', 'sommets_dedans': 1}], '1.0': [{'entre': 'thumb/index', 'sommets_dedans': 96}, {'entre': 'thumb/pinky', 'sommets_dedans': 50}, {'entre': 'index/hand', 'sommets_dedans': 3}]}
+  ✗ l'anneau du OK est lisible · mesuré 0.0 mm
+  ✗ compression de ring au poing · minimum · mesuré 0.216
+  ✗ compression de pinky au poing · minimum · mesuré 0.2281
+  ✗ compression de thumb au poing · minimum · mesuré 0.098
+  ✗ compression de thumb au poing · percentile 1 % · mesuré 0.4356
+
+Une correction qui casse un critère déjà propre n'est pas une correction.
