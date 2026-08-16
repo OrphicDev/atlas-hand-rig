@@ -3188,6 +3188,32 @@ for _nom_c, _a, _b, _axes, _fond in (
              "traversees": _mB.get("intersection_des_doigts"),
              "diametre_anneau_mm": round(diametre_anneau(), 1)}, ensure_ascii=False))
 
+        # ═══ ÉTAPE C : CHERCHER L'ANNEAU AILLEURS QUE DANS LE BASSIN DE A ═══
+        #
+        # Mesuré : A rend 0,81 mm SANS AUCUN anneau (0,0), et B — qui part de A
+        # et n'explore que ±30 % de la course autour de lui — trouve 8,1 mm
+        # d'anneau, une MEILLEURE orientation (−0,764 contre −0,699) et MOINS de
+        # traversées (79 contre 90), pour trois centièmes de millimètre de
+        # contact en trop (1,03 pour 1,00).
+        #
+        # Le classement a raison de préférer A : B viole un critère obligatoire
+        # de plus. Mais la faute n'est pas dans le classement, elle est dans la
+        # RECHERCHE. A est un optimum sans anneau — l'étape A ignore le trou,
+        # donc l'optimiseur plaque les deux pulpes l'une contre l'autre et le
+        # referme. B, ancrée à ±30 % de cet état, ne peut pas en sortir : elle
+        # ne peut qu'améliorer un anneau que A a écrasé.
+        #
+        # C repart de TOUTE la course, avec l'anneau obligatoire DÈS LE DÉBUT.
+        # Ce n'est pas la même recherche menée plus longtemps : c'est un autre
+        # bassin. Si aucun n'existe, C le dira, et ce sera un résultat.
+        ANNEAU_EXIGE[0] = SEUIL_ANNEAU_MM
+        _mC, _etatC, _vC = chercher_contact(_a, _b, _axes, _fond)
+        print("ATLAS_OK_ETAPE_C " + json.dumps(
+            {"distance_mm": round(_mC["distance_mm"], 2),
+             "face": round(_mC["face_local"], 3),
+             "traversees": _mC.get("intersection_des_doigts"),
+             "diametre_anneau_mm": round(diametre_anneau(), 1)}, ensure_ascii=False))
+
         # ═══ B N'EST PAS MEILLEUR PARCE QU'IL EST PLUS TARDIF ═══
         # C'est la faute exacte du chat 2, reprise ici : on gardait le second
         # état sans le comparer. On les départage sur les critères
@@ -3201,18 +3227,31 @@ for _nom_c, _a, _b, _axes, _fond in (
                     max(0.0, m["face_local"] - SEUIL_FACE),
                     max(0.0, SEUIL_ANNEAU_MM - anneau_mm))
 
-        poser_etat(*_etatA)
-        _rA = _rang_ok(_mA, diametre_anneau())
-        poser_etat(*_etatB)
-        _rB = _rang_ok(_mB, diametre_anneau())
-        if _rA < _rB:
-            print("ATLAS_OK_RETENU étape A — B ne l'améliore sur aucun "
-                  "critère obligatoire")
-            _m, _etat, _v = _mA, _etatA, _vA
-            poser_etat(*_etatA)
-        else:
-            print("ATLAS_OK_RETENU étape B")
-            _m, _etat, _v = _mB, _etatB, _vB
+        # L'anneau se mesure sur la pose POSÉE, jamais sur celle d'avant : un
+        # diamètre relevé pendant qu'un autre candidat est en place est un
+        # nombre qui décrit quelqu'un d'autre.
+        _candidats = []
+        for _lettre, _mX, _etatX, _vX in (("A", _mA, _etatA, _vA),
+                                          ("B", _mB, _etatB, _vB),
+                                          ("C", _mC, _etatC, _vC)):
+            poser_etat(*_etatX)
+            _anX = diametre_anneau()
+            _candidats.append((_rang_ok(_mX, _anX), _lettre, _mX, _etatX, _vX,
+                               _anX))
+        _candidats.sort(key=lambda c: c[0])
+        _rang, _gagnant, _m, _etat, _v, _anneau_gagnant = _candidats[0]
+        print("ATLAS_OK_RETENU " + json.dumps(
+            {"etape": _gagnant,
+             "distance_mm": round(_m["distance_mm"], 2),
+             "face": round(_m["face_local"], 3),
+             "diametre_anneau_mm": round(_anneau_gagnant, 1),
+             "traversees": _m.get("intersection_des_doigts"),
+             "violations_obligatoires": sum(_rang[:4]),
+             "classement": {c[1]: {"violations": sum(c[0][:4]),
+                                   "distance_mm": round(c[2]["distance_mm"], 2),
+                                   "anneau_mm": round(c[5], 1)}
+                            for c in _candidats}}, ensure_ascii=False))
+        poser_etat(*_etat)
         ANNEAU_EXIGE[0] = 0.0
     else:
         ANNEAU_EXIGE[0] = 0.0

@@ -87,6 +87,7 @@ d20c86907409a0d43207b27b0954d5c0e44ff0a8b05d378b45b841c1cda1e92e  ./mesures/rapp
 d1361015e6be1bd5edb576592231abd81400319614e340cbe618e1f7166c892a  ./mesures/rapport-rig.L.json
 cdb63f01abaff1d0f5e95f6161d143b89628d55adde7e02e2e835a9130366087  ./outils/anneau.py
 f8eb801b9cca4d5b404002edb27135ae3097aa08a7ae72dd7e2f87970e6c52e8  ./outils/comparer-rapports.py
+f161d9dfc22e05c921fced0f9d7477ec507b0ee2a69da1400e16bcea684c7328  ./outils/epreuve-classement-ok.py
 e0d83cdb532b06f88c3146ea2135bf29e1fc701a1ffc6769ad168cfec73a533f  ./outils/matrice-acceptation.py
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
 53c562039a43e192109d24e7c73129fb90bc2dbf052783dec9cca6c92aac233d  ./outils/rendus-poses.py
@@ -226,7 +227,8 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-bf71db7bd985caff17705795135355fb6786420ba8e0acd7e76ba09c1657944f  ./reports/chat-3/journal-generation.txt
+e9e0c8c84def0ae1ed93b27ef5df2d9db8bc213829ac5169dd8a274328734b16  ./reports/chat-3/journal-generation.txt
+e15cf689192cfc25bfced38e37455654915473d75e799df604eb68c552b084e9  ./reports/chat-3/journal-poing.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
@@ -396,7 +398,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-8af51ddbb1d4f393c78adeefe3cc107989d48739740e852fa4c412b3b72176f2  ./rig-main.py
+459cd881acd6b1a53d1b3a30c8f22bbdc2b3d578426a86651aeddf8d52b32ff2  ./rig-main.py
 0f70ee328b3a0fc2ee18ae2807b76a3e70feb51b479cbeadf076e8da6c6c4277  ./verifier-rig.py
 8b25c1f0e4c6b480d87bd1a13dcafbd19434aaf08fedc737e4732f3c83cc51ce  ./work/chat-3/corr/WIP-focus-cup-NON-VALIDE.blend
 bb68dfeed9a5c53bd13a4dfb8ae352ba20e523e27dd201db07a43c512012e50c  ./work/chat-3/corr/rapport-focus-cup.json
