@@ -14,7 +14,7 @@ d5d4686aab3e5ae08fa9f510aca0c9eed4425952be14fd5f1bc1e493f36e5dce  ./atelier/jaco
 f91e7e8b0e4359e0a68aa40b39185d85e8394e29ba4d6951161aca3132aaea88  ./atelier/miroir.py
 41e7fafd79cdbfcd00ec18aba8a912c16db85093659da6b2f699877bd9f2d275  ./atelier/portillon.py
 672196e2740046d086f89f23c132794ecbf156e5e837afc357ff4ca421145f69  ./atelier/transitions.py
-ce41564fdb22f2c8f52f7f51f47a849e295ad1fac8ee2c7948c801295c0fb6e4  ./audit/AUDIT_PACKET_HANDS.md
+09852770e54abd5e09dc8d2311276ca317fc9daa1a140a69129b57a9a64508b3  ./audit/AUDIT_PACKET_HANDS.md
 ae8154420f6e4006058a319512a74f513a507d541313ed1218a62d2d437957f0  ./audit/AUDIT_PACKET_HANDS_WIP.md
 f6d1abd70a4c5ecb2fa158447c87552024dfa74daa89cf70535d6611f843cf57  ./audit/wip-chat-1/audit-collisions.py
 19ce03c143fc33c253320f2959a75c7f5652087eb1d73fe3e657990d1fc07996  ./audit/wip-chat-1/collisions.json
@@ -132,7 +132,7 @@ f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat
 f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./reports/chat-3/journal-generation.txt
+c982a5cdb73609a8f4725e3e2352142a9990ca236789b20a924079ad0fef351a  ./reports/chat-3/journal-generation.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
