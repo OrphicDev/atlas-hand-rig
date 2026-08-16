@@ -16,7 +16,7 @@ f6d1abd70a4c5ecb2fa158447c87552024dfa74daa89cf70535d6611f843cf57  ./audit/wip-ch
 cb93066feb900fd09292b2bca6fc51c259c7db9b8a73d3fd208141b7252f06ec  ./enquetes/humain-rig-main.md
 070e777e0974625d9f5a581ba71b13c3c12cbb9ae46ec0e2e5b9974d8c7b5afa  ./enquetes/humain-verifier-rig.md
 702b1dfa6d2c896638e213a07216752cd7cc9a0fa64a8b7657ec8d2c665b46a7  ./handoffs/HANDOFF_CHAT_2_HANDS.md
-a64278007927ee3cbcb62fc24a4a9d1bf37e19ea5c029b8054f48f5d7770b198  ./handoffs/HANDOFF_CHAT_2_NEXT.md
+aa929be4694d7462b6ee8a1fb3edb3e04f0c3073b2407ef58c150fd2a6a9ed38  ./handoffs/HANDOFF_CHAT_2_NEXT.md
 aaa6c151561b63aa21d54a31ca72fe775ae012bfb7c13f3d7aabc33bed201d88  ./images/Hand_Cupped-auriculaire.png
 12df0f2b38634a0f7f44b4a4f82e32c0e28d4c052382ebd7849ca955d04f3ed1  ./images/Hand_Cupped-dos.png
 078dc048b858dec3f164f3946b4486dd22b507678a9783598752ce4ad7c6db09  ./images/Hand_Cupped-paume.png
@@ -82,6 +82,7 @@ d20c86907409a0d43207b27b0954d5c0e44ff0a8b05d378b45b841c1cda1e92e  ./mesures/rapp
 d1361015e6be1bd5edb576592231abd81400319614e340cbe618e1f7166c892a  ./mesures/rapport-rig.L.json
 f8eb801b9cca4d5b404002edb27135ae3097aa08a7ae72dd7e2f87970e6c52e8  ./outils/comparer-rapports.py
 be5326530e52a92eabd9a3cb4640979052f508f02d0f98b44d9ed820501fb98d  ./outils/playblast-transitions.py
+9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
 580669195f94f895459702a82adb299fc548fd5fa85e633e5129f0b16179dac4  ./outils/telecharger-mannequin.sh
 b12c468705cd728105d6278305e013e98280e372b0e143b709f1777e243a2ece  ./renders/wip-chat-1/planche-lumiere.html
@@ -105,9 +106,11 @@ b90884962aad98674ab6321691034c24affd41bb0d2881873eef229c2015c56c  ./renders/wip-
 edb73f57fa4763173c3f358e8d482c128fbaf929ff27d5b52c3f49d5f2c8494f  ./renders/wip-chat-1/preuves-lumiere/Hand_Neutral-pouce.png
 70dbb8a8f0b715a5a97beee1c52de788e84d9bcc0a732bb0f68360609864fea2  ./reports/chat-2/00-reprise-et-ecartement.md
 9c00e4212aea5685450a379cce5077bf159a5085638ef6afda6e6b9d33fdd0e7  ./reports/chat-2/01-les-causes.md
+b76be073a366e9f18297603afb73cd48cf8d21130ccc72dff65b9913de8eab43  ./reports/chat-2/02-ce-que-je-n-arrive-pas-a-faire.md
 564ccbcb3bb730d199d6efc27b9053a72373cc58461fba841e4cb2f077362afe  ./reports/chat-2/baseline/journal-ecartement-partiel.txt
 24e40802411eebd1968268963656f9b0efc3feb0db203596dd089dbcdbd28d69  ./reports/chat-2/baseline/journal-generation.txt
 9a77d8ff7d9a34bd7a1e44160099d9c86912283ef899458f521664344cd53749  ./reports/chat-2/baseline/rapport-rig.L.json
+7a34c1e2f8df17f835c1421559726d61325496346ca1a0bba1b3354905ca73b3  ./reports/chat-2/creux-b17e548.json
 d743ef9acef7cc687218828d4186a45da18ef8e220c88c0228ffd2596f105407  ./reports/chat-2/ecartement-b17e548.json
 db59c6da2e8e1bf6268409f6a77809abb697ecb70bcaac35c7c532fb777b5d92  ./reports/chat-2/ecartement-b17e548.txt
 7bf3a52f1a758fa73abe8744d2fd2b6d0e86b487ff4f9d5b7cd457b138f0ecf3  ./reports/chat-2/playblast-b17e548.txt
