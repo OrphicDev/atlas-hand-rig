@@ -787,7 +787,14 @@ PROPS = [("Fist", 0.0, 0.0, 1.0), ("Index_Curl", 0.0, 0.0, 1.0),
          ("Middle_Curl", 0.0, 0.0, 1.0), ("Ring_Curl", 0.0, 0.0, 1.0),
          ("Pinky_Curl", 0.0, 0.0, 1.0), ("Thumb_Curl", 0.0, 0.0, 1.0),
          ("Thumb_Opposition", 0.0, 0.0, 1.0), ("Spread", 0.0, -1.0, 1.0),
-         ("Cup", 0.0, 0.0, 1.0), ("Relax", 0.0, 0.0, 1.0)]
+         ("Cup", 0.0, 0.0, 1.0), ("Relax", 0.0, 0.0, 1.0),
+         # ═══ LES DEUX PROPRIÉTÉS CORRECTIVES DU §7.1 ═══
+         # Elles ne servent QUE aux derniers millimètres des deux contacts qui
+         # ne se règlent pas par la pose. Elles font partie de PROPS, donc
+         # `regler()` et `poser_etat()` les remettent à zéro dès qu'on ne les
+         # demande pas — sans quoi un correctif sculpté pour une pose
+         # contaminerait toutes les autres.
+         ("PSD_PinkyThumb", 0.0, 0.0, 1.0), ("PSD_OK", 0.0, 0.0, 1.0)]
 for nomp, defaut, mini, maxi in PROPS:
     pbh[nomp] = defaut
     try:
@@ -1453,6 +1460,12 @@ for _v in geo.data.vertices:
     else:
         _ambigus.append(_v.index)
 
+# L'ordre des rayons EN TRAVERS de la paume : c'est lui qui dit quels
+# métacarpiens sont voisins. Deux rayons éloignés de plus d'un rang ne
+# partagent aucune chair.
+_RANG_RAYON = {f"DEF_{_n}_meta{SIDE}": _i
+               for _i, _n in enumerate(["thumb", "index", "middle",
+                                        "ring", "pinky"])}
 _adj = correctifs._adjacence_du_maillage(geo)
 _dist = {}
 for _b, _graines in _noyaux.items():
@@ -1477,6 +1490,25 @@ else:
         _d = {b: _dd[_i] for b, _dd in _dist.items() if _i in _dd and b in _wm}
         if len(_d) < 2:
             continue
+        # ═══ UNE MASSE PALMAIRE N'APPARTIENT QU'À DEUX RAYONS VOISINS ═══
+        #
+        # Premier jet : je distribuais à TOUS les métacarpiens que la
+        # géodésique atteint. Mesuré, ça laissait 4 730 sommets partagés entre
+        # rayons NON VOISINS — index et auriculaire sur les sommets 0 à 3.
+        # Or ces deux-là ne se touchent nulle part sur une main : le sommet
+        # était atteint par les deux noyaux, donc il recevait les deux, et mon
+        # exposant n'y changeait rien puisqu'il opérait APRÈS.
+        #
+        # On ne garde que les DEUX plus proches, et seulement s'ils sont
+        # voisins dans l'ordre des rayons. Sinon le plus proche prend tout : un
+        # sommet que deux rayons éloignés se disputent n'a qu'un propriétaire
+        # possible, le plus proche par la surface.
+        _proches = sorted(_d.items(), key=lambda kv: kv[1])[:2]
+        if (len(_proches) == 2
+                and abs(_RANG_RAYON[_proches[0][0]]
+                        - _RANG_RAYON[_proches[1][0]]) > 1):
+            _proches = _proches[:1]
+        _d = dict(_proches)
         # Poids ∝ 1/(d + ε)³ : l'exposant TRANCHE au lieu de moyenner. C'est
         # tout l'objet de l'opération — un sommet à 0,000 d'écart doit sortir
         # avec un propriétaire, pas avec un demi-propriétaire de plus.
@@ -1489,6 +1521,36 @@ else:
             if _b not in _inv:
                 _gr_pau[_b].add([_i], 0.0, "REPLACE")
         _repeints += 1
+    # ═══ SAUTER UN SOMMET QU'ON NE SAIT PAS TRANCHER, C'EST LE LAISSER FAUX ═══
+    #
+    # La boucle géodésique fait `continue` quand la propagation n'atteint pas
+    # deux rayons. Mesuré : elle laissait 1 958 sommets partagés entre rayons
+    # NON VOISINS — index et auriculaire sur les sommets 0, 1, 3 — parce
+    # qu'elle les sautait au lieu de les résoudre.
+    #
+    # Or la règle anatomique ne dépend d'aucune propagation : une masse
+    # palmaire appartient à son rayon dominant et AU PLUS à ses voisins
+    # immédiats. L'index et l'auriculaire ne partagent aucune chair, quelle
+    # que soit la façon dont on mesure. On l'applique donc à TOUS les sommets
+    # palmaires, et la somme retirée revient au rayon dominant pour que le
+    # repos ne bouge pas.
+    _elagues = 0
+    for _v in geo.data.vertices:
+        _wm = {k: x for k, x in _poids_de(_v).items() if k in _META_PAUME}
+        if len(_wm) < 2:
+            continue
+        _tri = sorted(_wm.items(), key=lambda kv: -kv[1])
+        _dom_rayon = _RANG_RAYON[_tri[0][0]]
+        _a_couper = [b for b, _x in _tri[1:]
+                     if abs(_RANG_RAYON[b] - _dom_rayon) > 1]
+        if not _a_couper:
+            continue
+        _rendu = sum(_wm[b] for b in _a_couper)
+        for _b in _a_couper:
+            _gr_pau[_b].add([_v.index], 0.0, "REPLACE")
+        _gr_pau[_tri[0][0]].add([_v.index], _tri[0][1] + _rendu, "REPLACE")
+        _elagues += 1
+
     bpy.context.view_layer.objects.active = geo
     bpy.ops.object.mode_set(mode="OBJECT")
     bpy.ops.object.vertex_group_clean(group_select_mode="ALL", limit=0.005)
@@ -1527,6 +1589,7 @@ else:
                                "rangs_ecartes_de": _ecart_rang})
     dire("repeinture_palmaire", {
         "ambigus_avant": len(_ambigus), "repeints": _repeints,
+        "elagues_rayons_eloignes": _elagues,
         "ambigus_apres": _reste,
         "dont_entre_rayons_VOISINS": _voisins,
         "dont_entre_rayons_NON_VOISINS": len(_lointains),
