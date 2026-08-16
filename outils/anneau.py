@@ -500,24 +500,46 @@ def diametre_utile_anneau(rig, geo, SIDE, dom, palmaire, detail=None):
             f"{len(geo.data.vertices)} au repos : les index de `dom` ne "
             f"désignent plus les mêmes chairs")
 
-    xs, ys, ss, nus, nvs, nns, fam = [], [], [], [], [], [], []
-    for i, nom_groupe in dom.items():
-        f = famille(nom_groupe)
-        if f not in ("index", "thumb"):
-            continue
-        q = (pos[i] - O) * 1000.0            # en mm, relatif au plan
-        s = q.dot(N)
-        if abs(s) > TRANCHE_MM:
-            continue
-        # ── 5 · la projection 2D dans le plan ──
-        xs.append(q.dot(u))
-        ys.append(q.dot(v))
-        ss.append(s)
-        n = nrm[i]
-        nus.append(n.dot(u))
-        nvs.append(n.dot(v))
-        nns.append(n.dot(N))
-        fam.append(0 if f == "index" else 1)
+    # ═══ UNE ÉPAISSEUR FIXE LAISSE UN BORD VIDE (mesuré) ═══
+    #
+    # Sur `Hand_OK` du chat 3 : « 844 sommets d'index et 0 de pouce » dans une
+    # tranche de ±1,5 mm, alors que les pulpes sont à 2,18 mm l'une de l'autre.
+    # Quand les deux segments proximaux sont presque parallèles, leur produit
+    # vectoriel est minuscule et le repli sur la normale palmaire donne un plan
+    # qui n'est PAS celui de l'anneau : il rase l'index et rate le pouce.
+    #
+    # On épaissit donc la tranche jusqu'à ce que les DEUX bords soient garnis,
+    # et on publie l'épaisseur retenue. Une tranche élargie est une mesure
+    # moins fine ; une tranche vide d'un côté n'est pas une mesure du tout.
+    _epaisseur = TRANCHE_MM
+    while True:
+        xs, ys, ss, nus, nvs, nns, fam = [], [], [], [], [], [], []
+        for i, nom_groupe in dom.items():
+            f = famille(nom_groupe)
+            if f not in ("index", "thumb"):
+                continue
+            q = (pos[i] - O) * 1000.0        # en mm, relatif au plan
+            s = q.dot(N)
+            if abs(s) > _epaisseur:
+                continue
+            # ── 5 · la projection 2D dans le plan ──
+            xs.append(q.dot(u))
+            ys.append(q.dot(v))
+            ss.append(s)
+            n = nrm[i]
+            nus.append(n.dot(u))
+            nvs.append(n.dot(v))
+            nns.append(n.dot(N))
+            fam.append(0 if f == "index" else 1)
+        _ni = sum(1 for x in fam if x == 0)
+        _np_ = sum(1 for x in fam if x == 1)
+        if (_ni >= MIN_SOMMETS_PAR_BORD and _np_ >= MIN_SOMMETS_PAR_BORD) \
+                or _epaisseur >= 12.0:
+            if _epaisseur > TRANCHE_MM:
+                print(f"ATLAS_ANNEAU_TRANCHE_ELARGIE {_epaisseur:.1f} mm "
+                      f"(index {_ni}, pouce {_np_})")
+            break
+        _epaisseur += 1.5
 
     px = np.asarray(xs, dtype=np.float64)
     py = np.asarray(ys, dtype=np.float64)

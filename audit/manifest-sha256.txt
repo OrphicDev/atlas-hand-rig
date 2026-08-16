@@ -85,7 +85,7 @@ e3e19b0333029c552e2721465c2cdbf43d2d1d7c311e9cf9a574719929dc593e  ./images/gros-
 45e08157d547c46b3b5ffa1f6944cf1981dd06c2fe005b9de6292a44935805d0  ./mesures/enquete.md
 d20c86907409a0d43207b27b0954d5c0e44ff0a8b05d378b45b841c1cda1e92e  ./mesures/rapport-echec.json
 d1361015e6be1bd5edb576592231abd81400319614e340cbe618e1f7166c892a  ./mesures/rapport-rig.L.json
-711a4b909b2ee6222061f6aae83e601863f655e3becf3c5821d4d0c9737be985  ./outils/anneau.py
+cdb63f01abaff1d0f5e95f6161d143b89628d55adde7e02e2e835a9130366087  ./outils/anneau.py
 f8eb801b9cca4d5b404002edb27135ae3097aa08a7ae72dd7e2f87970e6c52e8  ./outils/comparer-rapports.py
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
@@ -128,8 +128,8 @@ f8da7796ec3ee1ab3cbc31103d932f909da222f6da8928dd7f21168a06d74763  ./reports/chat
 f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat-3/cup/01-balayage-cup.json
 f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation.txt
-333abec11a84735dffb055165e0a67b54c426302c17aab8406c67b3fa33a786d  ./reports/chat-3/rapport-echec.json
-156651ae085eca4d8b4d9874ae725861f3006939811d0a9e95a73179419ece4a  ./reports/chat-3/rapport-rig.L.json
+482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
+ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
 9c7b7ebb2cd6920ac16158b1faf932556f4de7ba6b87d8f1ab2e8baf0496edde  ./reports/chat-3/tableau-regression.txt
 cc3fab7a162e79a20ed2262003be77197b9c0f009e25cbc3c638b940867b2b4e  ./reports/chat-3/weights/audit-complet.json
 5dbc45b36e8c430053514695722e3200cecac63b4a5bd227c7b2ee7d6cff138b  ./reports/chat-3/weights/journal-audit.txt

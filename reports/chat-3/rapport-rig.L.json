@@ -207,7 +207,9 @@
       "Thumb_Opposition",
       "Spread",
       "Cup",
-      "Relax"
+      "Relax",
+      "PSD_PinkyThumb",
+      "PSD_OK"
     ],
     "melange_des_rotations": "ADD",
     "signe_de_flexion": 1.0,
@@ -267,9 +269,26 @@
     },
     "groupes": 20
   },
+  "repeinture_palmaire": {
+    "ambigus_avant": 12329,
+    "repeints": 10254,
+    "elagues_rayons_eloignes": 4095,
+    "ambigus_apres": 873,
+    "dont_entre_rayons_VOISINS": 873,
+    "dont_entre_rayons_NON_VOISINS": 0,
+    "exemples_non_voisins": [],
+    "noyaux": {
+      "DEF_index_meta.L": 5175,
+      "DEF_middle_meta.L": 1712,
+      "DEF_ring_meta.L": 1294,
+      "DEF_pinky_meta.L": 6278,
+      "DEF_thumb_meta.L": 3875
+    },
+    "regle": "chaque masse palmaire appartient au métacarpien dont elle est la plus proche EN SUIVANT LA SURFACE ; le mélange entre rayons VOISINS est légitime, entre rayons éloignés jamais"
+  },
   "phase_f_correction": {
-    "sommets_corriges": 2949,
-    "contamination_restante": 671,
+    "sommets_corriges": 2879,
+    "contamination_restante": 741,
     "chair_encore_d_un_seul_tenant": {
       "index": 1,
       "middle": 1,
@@ -280,16 +299,16 @@
   },
   "preserve_volume": {
     "sans": {
-      "intersections": 11903,
-      "compression_min": 0.0626,
-      "compression_p1": 0.2759,
-      "aretes_mesurees": 344724
+      "intersections": 14798,
+      "compression_min": 0.0976,
+      "compression_p1": 0.2652,
+      "aretes_mesurees": 348384
     },
     "avec": {
-      "intersections": 11750,
+      "intersections": 14703,
       "compression_min": 0.0147,
-      "compression_p1": 0.1388,
-      "aretes_mesurees": 344724
+      "compression_p1": 0.1389,
+      "aretes_mesurees": 348384
     },
     "retenu": false,
     "grandeurs_qui_regressent_avec": [
@@ -302,38 +321,38 @@
   "cup_amplitude_cherchee": {
     "recherche": {
       "1.0": {
-        "intersections": 16031,
+        "intersections": 18328,
         "gain_arc_mm": 43.88,
         "gain_largeur_mm": -20.61
       },
       "0.85": {
-        "intersections": 13943,
+        "intersections": 15090,
         "gain_arc_mm": 29.29,
         "gain_largeur_mm": -21.07
       },
       "0.7": {
-        "intersections": 9232,
-        "gain_arc_mm": 19.92,
+        "intersections": 10099,
+        "gain_arc_mm": 19.52,
         "gain_largeur_mm": -20.0
       },
       "0.55": {
-        "intersections": 3004,
-        "gain_arc_mm": 14.31,
+        "intersections": 3345,
+        "gain_arc_mm": 13.69,
         "gain_largeur_mm": -17.5
       },
       "0.45": {
-        "intersections": 319,
-        "gain_arc_mm": 11.35,
+        "intersections": 387,
+        "gain_arc_mm": 10.61,
         "gain_largeur_mm": -15.15
       },
       "0.35": {
-        "intersections": 4,
-        "gain_arc_mm": 8.6,
+        "intersections": 3,
+        "gain_arc_mm": 7.9,
         "gain_largeur_mm": -12.34
       },
       "0.3": {
         "intersections": 0,
-        "gain_arc_mm": 7.29,
+        "gain_arc_mm": 6.71,
         "gain_largeur_mm": -10.79
       }
     },
@@ -353,152 +372,152 @@
       },
       {
         "cup": 0.05,
-        "arc_mm": 30.33,
+        "arc_mm": 30.3,
         "largeur_mm": 71.41,
         "pouce_auriculaire_mm": 102.0,
         "intersections": 0
       },
       {
         "cup": 0.1,
-        "arc_mm": 30.68,
+        "arc_mm": 30.63,
         "largeur_mm": 70.83,
         "pouce_auriculaire_mm": 101.73,
         "intersections": 0
       },
       {
         "cup": 0.15,
-        "arc_mm": 31.02,
+        "arc_mm": 30.95,
         "largeur_mm": 70.25,
         "pouce_auriculaire_mm": 101.46,
         "intersections": 0
       },
       {
         "cup": 0.2,
-        "arc_mm": 31.38,
+        "arc_mm": 31.28,
         "largeur_mm": 69.68,
         "pouce_auriculaire_mm": 101.19,
         "intersections": 0
       },
       {
         "cup": 0.25,
-        "arc_mm": 31.73,
+        "arc_mm": 31.6,
         "largeur_mm": 69.11,
         "pouce_auriculaire_mm": 100.93,
         "intersections": 0
       },
       {
         "cup": 0.3,
-        "arc_mm": 32.08,
+        "arc_mm": 31.93,
         "largeur_mm": 68.54,
         "pouce_auriculaire_mm": 100.67,
         "intersections": 0
       },
       {
         "cup": 0.35,
-        "arc_mm": 32.44,
+        "arc_mm": 32.26,
         "largeur_mm": 67.98,
         "pouce_auriculaire_mm": 100.41,
         "intersections": 0
       },
       {
         "cup": 0.4,
-        "arc_mm": 32.8,
+        "arc_mm": 32.59,
         "largeur_mm": 67.43,
         "pouce_auriculaire_mm": 100.16,
         "intersections": 0
       },
       {
         "cup": 0.45,
-        "arc_mm": 33.16,
+        "arc_mm": 32.92,
         "largeur_mm": 66.88,
         "pouce_auriculaire_mm": 99.91,
         "intersections": 0
       },
       {
         "cup": 0.5,
-        "arc_mm": 33.52,
+        "arc_mm": 33.25,
         "largeur_mm": 66.33,
         "pouce_auriculaire_mm": 99.66,
         "intersections": 0
       },
       {
         "cup": 0.55,
-        "arc_mm": 33.88,
+        "arc_mm": 33.59,
         "largeur_mm": 65.79,
         "pouce_auriculaire_mm": 99.41,
         "intersections": 0
       },
       {
         "cup": 0.6,
-        "arc_mm": 34.25,
+        "arc_mm": 33.92,
         "largeur_mm": 65.25,
         "pouce_auriculaire_mm": 99.17,
         "intersections": 0
       },
       {
         "cup": 0.65,
-        "arc_mm": 34.62,
+        "arc_mm": 34.26,
         "largeur_mm": 64.72,
         "pouce_auriculaire_mm": 98.93,
         "intersections": 0
       },
       {
         "cup": 0.7,
-        "arc_mm": 34.99,
+        "arc_mm": 34.6,
         "largeur_mm": 64.2,
         "pouce_auriculaire_mm": 98.69,
         "intersections": 0
       },
       {
         "cup": 0.75,
-        "arc_mm": 35.36,
+        "arc_mm": 34.95,
         "largeur_mm": 63.68,
         "pouce_auriculaire_mm": 98.45,
         "intersections": 0
       },
       {
         "cup": 0.8,
-        "arc_mm": 35.74,
+        "arc_mm": 35.29,
         "largeur_mm": 63.17,
         "pouce_auriculaire_mm": 98.22,
         "intersections": 0
       },
       {
         "cup": 0.85,
-        "arc_mm": 36.12,
+        "arc_mm": 35.64,
         "largeur_mm": 62.67,
         "pouce_auriculaire_mm": 98.0,
         "intersections": 0
       },
       {
         "cup": 0.9,
-        "arc_mm": 36.5,
+        "arc_mm": 35.99,
         "largeur_mm": 62.17,
         "pouce_auriculaire_mm": 97.77,
         "intersections": 0
       },
       {
         "cup": 0.95,
-        "arc_mm": 36.88,
+        "arc_mm": 36.34,
         "largeur_mm": 61.68,
         "pouce_auriculaire_mm": 97.55,
         "intersections": 0
       },
       {
         "cup": 1.0,
-        "arc_mm": 37.27,
+        "arc_mm": 36.69,
         "largeur_mm": 61.2,
         "pouce_auriculaire_mm": 97.33,
         "intersections": 0
       }
     ],
-    "gain_arc_mm": 7.29,
+    "gain_arc_mm": 6.71,
     "gain_largeur_mm": -10.79,
     "gain_pouce_auriculaire_mm": -4.94,
     "pire_recul_de_largeur_mm": -0.48,
-    "pire_recul_de_fleche_mm": -0.34,
+    "pire_recul_de_fleche_mm": -0.32,
     "intersections_totales": 0,
-    "retour_au_repos_mm": 0.0401
+    "retour_au_repos_mm": 0.0
   },
   "retour_au_repos": {
     "ecart_max_mm": 0.0,
@@ -537,56 +556,56 @@
   },
   "contact_Hand_Pinch": {
     "entre": "index et thumb",
-    "distance_mm": 0.16,
-    "orientation_locale": -0.918,
-    "sommets_du_patch": 136,
-    "sommets_a_moins_de_1_5_mm": 40,
+    "distance_mm": 1.06,
+    "orientation_locale": -0.788,
+    "sommets_du_patch": 119,
+    "sommets_a_moins_de_1_5_mm": 3,
     "penetration": 0
   },
   "contact_Hand_OK": {
     "entre": "index et thumb",
-    "distance_mm": 0.9,
-    "orientation_locale": -0.655,
-    "sommets_du_patch": 77,
-    "sommets_a_moins_de_1_5_mm": 5,
+    "distance_mm": 2.18,
+    "orientation_locale": -0.633,
+    "sommets_du_patch": 75,
+    "sommets_a_moins_de_1_5_mm": 0,
     "penetration": 0
   },
   "contact_Hand_Pinky_Thumb": {
     "entre": "pinky et thumb",
-    "distance_mm": 1.9,
-    "orientation_locale": 0.433,
-    "sommets_du_patch": 156,
+    "distance_mm": 8.2,
+    "orientation_locale": -0.871,
+    "sommets_du_patch": 48,
     "sommets_a_moins_de_1_5_mm": 0,
-    "penetration": 15
+    "penetration": 0
   },
   "pince_auriculaire_pouce": {
-    "ecart_des_empreintes_mm": 1.9,
-    "se_font_face": 0.433
+    "ecart_des_empreintes_mm": 8.2,
+    "se_font_face": -0.871
   },
   "divergence_cherchee": {
     "balayage": {
-      "0.0": 0.55,
-      "2.0": 0.55,
-      "4.0": 0.55,
-      "6.0": 0.5,
-      "8.0": 0.5,
+      "0.0": 0.6,
+      "2.0": 0.6,
+      "4.0": 0.6,
+      "6.0": 0.6,
+      "8.0": 0.55,
       "10.0": 0.5,
       "12.0": 0.5
     },
     "k_retenu_deg": 0.0,
-    "fermeture_propre_atteinte": 0.55,
+    "fermeture_propre_atteinte": 0.6,
     "regle": "la plus PETITE amplitude qui atteint la fermeture la plus profonde"
   },
   "creusement_du_poing": {
     "balayage": {
-      "0.0": 0.55,
+      "0.0": 0.6,
       "0.25": 0.55,
       "0.5": 0.5,
-      "0.7": 0.3,
-      "0.9": 0.2
+      "0.7": 0.5,
+      "0.9": 0.25
     },
     "cup_retenu": 0.0,
-    "fermeture_propre_atteinte": 0.55,
+    "fermeture_propre_atteinte": 0.6,
     "regle": "le plus PETIT creusement qui laisse aller le plus loin"
   },
   "traversees_des_quatre_doigts_seuls": {
@@ -681,32 +700,35 @@
       "total": 0
     },
     "0.6": {
+      "total": 0
+    },
+    "0.62": {
       "total": 1
     }
   },
   "fermeture_retenue": {
-    "valeur": 0.58,
-    "profondeur_propre_mesuree": 0.58,
+    "valeur": 0.6,
+    "profondeur_propre_mesuree": 0.6,
     "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"
   },
   "pouce_du_poing": {
-    "distance_a_l_index_mm": 2.9,
+    "distance_a_l_index_mm": 10.44,
     "penetration": 0,
     "reglages": {
       "Fist": 1.0,
-      "Thumb_Curl": 0.563,
-      "Thumb_Opposition": 0.205
+      "Thumb_Curl": 0.357,
+      "Thumb_Opposition": 0.423
     },
     "corrections_fk_deg": {
-      "CTRL_index_01.L[2]": 0.8,
-      "CTRL_middle_01.L[2]": 6.4,
-      "CTRL_ring_01.L[2]": 8.0,
-      "CTRL_pinky_01.L[2]": -14.0,
-      "CTRL_thumb_meta.L[0]": -27.7,
-      "CTRL_thumb_meta.L[1]": 43.3,
-      "CTRL_thumb_meta.L[2]": 28.5,
-      "CTRL_thumb_01.L[0]": 21.8,
-      "CTRL_thumb_02.L[0]": 19.9
+      "CTRL_index_01.L[2]": -6.2,
+      "CTRL_middle_01.L[2]": 4.1,
+      "CTRL_ring_01.L[2]": 6.0,
+      "CTRL_pinky_01.L[2]": -13.2,
+      "CTRL_thumb_meta.L[0]": -20.0,
+      "CTRL_thumb_meta.L[1]": 59.8,
+      "CTRL_thumb_meta.L[2]": 36.8,
+      "CTRL_thumb_01.L[0]": 29.9,
+      "CTRL_thumb_02.L[0]": 34.3
     }
   },
   "poses_de_validation": {
@@ -735,51 +757,59 @@
       "auto_intersections": []
     },
     "Hand_Fist": {
-      "course_max_mm": 121.5,
-      "auriculaire_au_pouce_mm": 64.9,
-      "index_au_pouce_mm": 2.9,
+      "course_max_mm": 121.6,
+      "auriculaire_au_pouce_mm": 66.5,
+      "index_au_pouce_mm": 10.4,
       "auto_intersections": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 257
+          "sommets_dedans": 282
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 142
+          "sommets_dedans": 9
         },
         {
-          "entre": "thumb/ring",
-          "sommets_dedans": 16
+          "entre": "thumb/hand",
+          "sommets_dedans": 29
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 350
+          "sommets_dedans": 327
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 203
+          "sommets_dedans": 237
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 385
+          "sommets_dedans": 443
         }
       ],
       "auto_intersections_apres_transitions": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 536
+          "sommets_dedans": 220
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 9
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 29
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 248
+          "sommets_dedans": 372
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 371
+          "sommets_dedans": 283
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 302
+          "sommets_dedans": 419
         }
       ]
     },
@@ -796,96 +826,121 @@
       "auto_intersections": []
     },
     "Hand_Fist_75": {
-      "course_max_mm": 123.9,
-      "auriculaire_au_pouce_mm": 81.4,
-      "index_au_pouce_mm": 26.4,
+      "course_max_mm": 123.8,
+      "auriculaire_au_pouce_mm": 82.2,
+      "index_au_pouce_mm": 31.3,
       "auto_intersections": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 779
+          "sommets_dedans": 769
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets_dedans": 69
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 24
+          "sommets_dedans": 93
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 240
+          "sommets_dedans": 329
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 230
+          "sommets_dedans": 367
         }
       ]
     },
     "Hand_Point": {
-      "course_max_mm": 121.4,
-      "auriculaire_au_pouce_mm": 59.6,
-      "index_au_pouce_mm": 47.6,
+      "course_max_mm": 120.6,
+      "auriculaire_au_pouce_mm": 52.5,
+      "index_au_pouce_mm": 47.1,
       "auto_intersections": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 2
+          "sommets_dedans": 154
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 386
+          "sommets_dedans": 317
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 338
+          "sommets_dedans": 385
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 194
+          "sommets_dedans": 291
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 282
+          "sommets_dedans": 351
         }
       ],
       "auto_intersections_apres_transitions": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 2
+          "sommets_dedans": 151
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 383
+          "sommets_dedans": 298
         },
         {
           "entre": "thumb/ring",
-          "sommets_dedans": 19
+          "sommets_dedans": 6
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 342
+          "sommets_dedans": 382
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 289
+          "sommets_dedans": 418
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 320
+          "sommets_dedans": 364
         }
       ]
     },
     "Hand_Pinch": {
-      "course_max_mm": 68.9,
-      "auriculaire_au_pouce_mm": 89.2,
-      "index_au_pouce_mm": 0.2,
+      "course_max_mm": 70.8,
+      "auriculaire_au_pouce_mm": 91.8,
+      "index_au_pouce_mm": 1.1,
       "auto_intersections": []
     },
     "Hand_OK": {
-      "course_max_mm": 100.6,
-      "auriculaire_au_pouce_mm": 83.5,
-      "index_au_pouce_mm": 0.9,
-      "auto_intersections": [],
+      "course_max_mm": 100.9,
+      "auriculaire_au_pouce_mm": 83.8,
+      "index_au_pouce_mm": 2.2,
+      "auto_intersections": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 95
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 50
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 3
+        }
+      ],
       "auto_intersections_apres_transitions": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 75
+          "sommets_dedans": 96
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 50
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 3
         }
       ]
     },
@@ -896,119 +951,125 @@
       "auto_intersections": []
     },
     "Hand_Pinky_Thumb": {
-      "course_max_mm": 128.2,
-      "auriculaire_au_pouce_mm": 1.9,
-      "index_au_pouce_mm": 38.9,
+      "course_max_mm": 121.2,
+      "auriculaire_au_pouce_mm": 8.2,
+      "index_au_pouce_mm": 43.9,
       "auto_intersections": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 248
+          "sommets_dedans": 646
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 99
+          "sommets_dedans": 117
         },
         {
           "entre": "thumb/pinky",
-          "sommets_dedans": 76
+          "sommets_dedans": 18
         },
         {
           "entre": "thumb/hand",
-          "sommets_dedans": 35
+          "sommets_dedans": 76
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 314
+          "sommets_dedans": 491
         },
         {
           "entre": "index/hand",
-          "sommets_dedans": 2
+          "sommets_dedans": 76
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 353
-        },
-        {
-          "entre": "ring/pinky",
-          "sommets_dedans": 1
+          "sommets_dedans": 71
         }
       ],
       "auto_intersections_apres_transitions": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 157
+          "sommets_dedans": 592
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 71
         },
         {
           "entre": "thumb/pinky",
-          "sommets_dedans": 36
+          "sommets_dedans": 18
         },
         {
           "entre": "thumb/hand",
-          "sommets_dedans": 35
+          "sommets_dedans": 76
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 706
+          "sommets_dedans": 487
         },
         {
           "entre": "index/hand",
-          "sommets_dedans": 2
+          "sommets_dedans": 76
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 62
+          "sommets_dedans": 124
         }
       ]
     }
   },
   "transitions": {
     "Neutral→Hand_Fist": {
+      "0.2": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 3
+        }
+      ],
+      "0.3": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 20
+        }
+      ],
+      "0.4": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 84
+        }
+      ],
+      "0.5": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 120
+        }
+      ],
       "0.6": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 2
+          "sommets_dedans": 205
         }
       ],
       "0.7": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 6
+          "sommets_dedans": 206
         },
         {
           "entre": "thumb/hand",
-          "sommets_dedans": 5
+          "sommets_dedans": 1
         },
         {
-          "entre": "middle/ring",
+          "entre": "index/middle",
+          "sommets_dedans": 76
+        },
+        {
+          "entre": "ring/pinky",
           "sommets_dedans": 2
         }
       ],
       "0.8": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 13
-        },
-        {
-          "entre": "thumb/hand",
-          "sommets_dedans": 5
-        },
-        {
-          "entre": "index/middle",
-          "sommets_dedans": 200
-        },
-        {
-          "entre": "middle/ring",
-          "sommets_dedans": 292
-        },
-        {
-          "entre": "ring/pinky",
-          "sommets_dedans": 300
-        }
-      ],
-      "0.9": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 17
+          "sommets_dedans": 203
         },
         {
           "entre": "thumb/hand",
@@ -1016,65 +1077,95 @@
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 278
+          "sommets_dedans": 438
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 225
+          "sommets_dedans": 418
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 270
+          "sommets_dedans": 319
+        }
+      ],
+      "0.9": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 197
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 3
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 21
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 332
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 342
+        },
+        {
+          "entre": "ring/pinky",
+          "sommets_dedans": 321
         }
       ],
       "1.0": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 536
+          "sommets_dedans": 220
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 9
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 29
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 248
+          "sommets_dedans": 372
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 371
+          "sommets_dedans": 283
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 302
+          "sommets_dedans": 419
         }
       ]
     },
     "Neutral→Hand_Point": {
-      "0.3": [
-        {
-          "entre": "index/middle",
-          "sommets_dedans": 7
-        }
-      ],
-      "0.4": [
-        {
-          "entre": "index/middle",
-          "sommets_dedans": 88
-        }
-      ],
       "0.5": [
         {
           "entre": "index/middle",
-          "sommets_dedans": 146
+          "sommets_dedans": 75
         }
       ],
       "0.6": [
         {
+          "entre": "thumb/index",
+          "sommets_dedans": 12
+        },
+        {
           "entre": "index/middle",
-          "sommets_dedans": 162
+          "sommets_dedans": 138
         }
       ],
       "0.7": [
         {
+          "entre": "thumb/index",
+          "sommets_dedans": 57
+        },
+        {
           "entre": "index/middle",
-          "sommets_dedans": 175
+          "sommets_dedans": 163
         },
         {
           "entre": "middle/ring",
@@ -1083,64 +1174,72 @@
       ],
       "0.8": [
         {
+          "entre": "thumb/index",
+          "sommets_dedans": 116
+        },
+        {
           "entre": "thumb/middle",
-          "sommets_dedans": 442
+          "sommets_dedans": 77
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 480
+          "sommets_dedans": 192
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 218
+          "sommets_dedans": 524
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 291
+          "sommets_dedans": 333
         }
       ],
       "0.9": [
         {
+          "entre": "thumb/index",
+          "sommets_dedans": 138
+        },
+        {
           "entre": "thumb/middle",
-          "sommets_dedans": 374
+          "sommets_dedans": 95
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 352
+          "sommets_dedans": 359
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 185
+          "sommets_dedans": 370
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 248
+          "sommets_dedans": 301
         }
       ],
       "1.0": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 2
+          "sommets_dedans": 151
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 383
+          "sommets_dedans": 298
         },
         {
           "entre": "thumb/ring",
-          "sommets_dedans": 19
+          "sommets_dedans": 6
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 342
+          "sommets_dedans": 382
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 289
+          "sommets_dedans": 418
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 320
+          "sommets_dedans": 364
         }
       ]
     },
@@ -1149,132 +1248,278 @@
       "0.6": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 163
+          "sommets_dedans": 19
         }
       ],
       "0.7": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 184
+          "sommets_dedans": 1857
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 2
         }
       ],
       "0.8": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 521
+          "sommets_dedans": 1249
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 14
         }
       ],
       "0.9": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 403
-        }
-      ],
-      "1.0": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 75
-        }
-      ]
-    },
-    "Neutral→Hand_Cupped": "aucune collision",
-    "Neutral→Hand_Pinky_Thumb": {
-      "0.4": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 18
-        }
-      ],
-      "0.5": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 6
-        }
-      ],
-      "0.6": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 13
-        },
-        {
-          "entre": "thumb/middle",
-          "sommets_dedans": 174
-        }
-      ],
-      "0.7": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 22
-        },
-        {
-          "entre": "thumb/middle",
-          "sommets_dedans": 1723
-        }
-      ],
-      "0.8": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 1116
-        },
-        {
-          "entre": "thumb/middle",
-          "sommets_dedans": 131
-        },
-        {
-          "entre": "thumb/hand",
-          "sommets_dedans": 4
-        }
-      ],
-      "0.9": [
-        {
-          "entre": "thumb/index",
-          "sommets_dedans": 113
+          "sommets_dedans": 457
         },
         {
           "entre": "thumb/pinky",
           "sommets_dedans": 32
         },
         {
-          "entre": "thumb/hand",
-          "sommets_dedans": 18
-        },
-        {
-          "entre": "index/middle",
-          "sommets_dedans": 394
+          "entre": "index/hand",
+          "sommets_dedans": 1
         }
       ],
       "1.0": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 157
+          "sommets_dedans": 96
         },
         {
           "entre": "thumb/pinky",
-          "sommets_dedans": 36
-        },
-        {
-          "entre": "thumb/hand",
-          "sommets_dedans": 35
-        },
-        {
-          "entre": "index/middle",
-          "sommets_dedans": 706
+          "sommets_dedans": 50
         },
         {
           "entre": "index/hand",
-          "sommets_dedans": 2
+          "sommets_dedans": 3
+        }
+      ]
+    },
+    "Neutral→Hand_Cupped": "aucune collision",
+    "Neutral→Hand_Pinky_Thumb": {
+      "0.2": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 14
+        }
+      ],
+      "0.3": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 93
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 6
+        }
+      ],
+      "0.4": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 225
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 11
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 11
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 13
         },
         {
           "entre": "middle/ring",
+          "sommets_dedans": 20
+        }
+      ],
+      "0.5": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 325
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 830
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 23
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 137
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 25
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 29
+        }
+      ],
+      "0.6": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 1081
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 966
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 28
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 291
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 40
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 44
+        }
+      ],
+      "0.7": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 2079
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 958
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 30
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 7
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 443
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 52
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 63
+        }
+      ],
+      "0.8": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 1320
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 442
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 35
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 32
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 652
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 57
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 95
+        }
+      ],
+      "0.9": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 768
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 178
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 27
+        },
+        {
+          "entre": "thumb/hand",
           "sommets_dedans": 62
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 647
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 65
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 116
+        }
+      ],
+      "1.0": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 592
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 71
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 18
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 76
+        },
+        {
+          "entre": "index/middle",
+          "sommets_dedans": 487
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 76
+        },
+        {
+          "entre": "middle/ring",
+          "sommets_dedans": 124
         }
       ]
     }
   },
   "pinch_contre_ok": {
-    "ecart_maximal_entre_les_deux_poses_mm": 72.0,
-    "ouverture_de_l_anneau_pinch_mm": 16.8,
-    "ouverture_de_l_anneau_ok_mm": 0.2
+    "ecart_maximal_entre_les_deux_poses_mm": 74.9,
+    "diametre_utile_pinch_mm": 19.1,
+    "diametre_utile_ok_mm": 0.0,
+    "note": "diamètre du plus grand disque inscrit dans le trou, pas le minimum du contour",
+    "poses_sans_anneau_mesurable_pendant_la_recherche": 577
   },
   "creux_de_la_paume": {
     "au_repos_mm": 21.0,
@@ -1283,127 +1528,135 @@
   },
   "compression_au_poing": {
     "index": {
-      "min": 0.3707,
-      "p1": 0.7406,
+      "min": 0.3708,
+      "p1": 0.7405,
       "p5": 0.9284,
       "mediane": 1.0,
       "aretes": 4687,
       "arete_la_plus_comprimee": 30086,
       "position_mm": [
-        -401.5,
-        -128.4,
-        876.6
+        -401.6,
+        -126.1,
+        875.9
       ]
     },
     "middle": {
       "min": 0.2696,
-      "p1": 0.7482,
-      "p5": 0.9356,
+      "p1": 0.7481,
+      "p5": 0.9357,
       "mediane": 1.0,
       "aretes": 4659,
       "arete_la_plus_comprimee": 25741,
       "position_mm": [
         -404.0,
-        -110.9,
-        866.6
+        -110.0,
+        866.4
       ]
     },
     "ring": {
-      "min": 0.2161,
+      "min": 0.216,
       "p1": 0.6716,
-      "p5": 0.9186,
+      "p5": 0.9187,
       "mediane": 1.0,
       "aretes": 4608,
       "arete_la_plus_comprimee": 37502,
       "position_mm": [
         -411.8,
-        -84.5,
-        859.7
+        -83.8,
+        859.3
       ]
     },
     "pinky": {
       "min": 0.2281,
-      "p1": 0.57,
-      "p5": 0.9141,
+      "p1": 0.5701,
+      "p5": 0.9142,
       "mediane": 1.0,
       "aretes": 4384,
       "arete_la_plus_comprimee": 44234,
       "position_mm": [
         -409.1,
-        -62.3,
-        843.7
+        -62.4,
+        843.8
       ]
     },
     "thumb": {
-      "min": 0.0986,
-      "p1": 0.4305,
-      "p5": 0.8379,
+      "min": 0.098,
+      "p1": 0.4356,
+      "p5": 0.8395,
       "mediane": 1.0,
       "aretes": 4551,
       "arete_la_plus_comprimee": 49597,
       "position_mm": [
-        -397.9,
-        -138.1,
-        888.9
+        -387.7,
+        -136.1,
+        892.2
       ]
     }
   },
   "phase_g": {
     "compression_de_reference_poing": {
-      "thumb": 0.0986,
+      "thumb": 0.098,
       "pinky": 0.2281,
-      "index": 0.3707
+      "index": 0.3708
     },
     "compression_avant": {
-      "thumb": 0.1413,
-      "pinky": 0.6033,
-      "index": 0.4906
+      "thumb": 0.2763,
+      "pinky": 0.7505,
+      "index": 0.3708
     },
     "compression_apres": {
-      "thumb": 0.1362,
-      "pinky": 0.5958,
-      "index": 0.4257
+      "thumb": 0.2752,
+      "pinky": 0.7478,
+      "index": 0.2959
     },
     "gain": {
-      "thumb": -0.0051,
-      "pinky": -0.0075,
-      "index": -0.0649
+      "thumb": -0.0011,
+      "pinky": -0.0027,
+      "index": -0.0749
     },
     "verdict": "retiré — il n'améliorait pas la compression, il n'aurait fait que flouter",
     "sommets_dans_les_zones": 12581
   },
   "creux_entre_les_doigts": {
-    "sommets_a_deux_doigts_dans_le_creux": 671,
+    "sommets_a_deux_doigts_dans_le_creux": 741,
     "sommets_a_deux_doigts_ailleurs": 0,
     "lecture": "la règle 7 demande ce mélange à la base des doigts ; seuls les sommets « ailleurs » seraient un défaut"
   },
   "criteres_echoues": [
     {
-      "critere": "Cup · retour exact au repos",
-      "mesure": "0.0401 mm",
-      "seuil": "< 0,01 mm"
-    },
-    {
-      "critere": "Hand_Pinky_Thumb · les pulpes se touchent",
-      "mesure": "1.90 mm",
+      "critere": "Hand_Pinch · les pulpes se touchent",
+      "mesure": "1.06 mm",
       "seuil": "≤ 1.00 mm"
     },
     {
-      "critere": "Hand_Pinky_Thumb · les pulpes se font face",
-      "mesure": 0.433,
-      "seuil": "≤ -0,50"
+      "critere": "Hand_OK · les pulpes se touchent",
+      "mesure": "2.18 mm",
+      "seuil": "≤ 1.00 mm"
+    },
+    {
+      "critere": "Hand_OK · aucune interpénétration",
+      "mesure": {
+        "dans_les_pulpes": 0,
+        "dans_la_main_entiere": 148
+      },
+      "seuil": "0 sommet, pulpes ET main entière"
+    },
+    {
+      "critere": "Hand_Pinky_Thumb · les pulpes se touchent",
+      "mesure": "8.20 mm",
+      "seuil": "≤ 1.00 mm"
     },
     {
       "critere": "Hand_Pinky_Thumb · aucune interpénétration",
       "mesure": {
-        "dans_les_pulpes": 15,
-        "dans_la_main_entiere": 1128
+        "dans_les_pulpes": 0,
+        "dans_la_main_entiere": 1495
       },
       "seuil": "0 sommet, pulpes ET main entière"
     },
     {
       "critere": "le poing se ferme complètement sans traversée",
-      "mesure": 0.58,
+      "mesure": 0.6,
       "seuil": "Fist = 1.0"
     },
     {
@@ -1411,27 +1664,27 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 257
+          "sommets_dedans": 282
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 142
+          "sommets_dedans": 9
         },
         {
-          "entre": "thumb/ring",
-          "sommets_dedans": 16
+          "entre": "thumb/hand",
+          "sommets_dedans": 29
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 350
+          "sommets_dedans": 327
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 203
+          "sommets_dedans": 237
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 385
+          "sommets_dedans": 443
         }
       ],
       "seuil": "aucune"
@@ -1441,19 +1694,23 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 779
+          "sommets_dedans": 769
+        },
+        {
+          "entre": "thumb/ring",
+          "sommets_dedans": 69
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 24
+          "sommets_dedans": 93
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 240
+          "sommets_dedans": 329
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 230
+          "sommets_dedans": 367
         }
       ],
       "seuil": "aucune"
@@ -1463,23 +1720,41 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 2
+          "sommets_dedans": 154
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 386
+          "sommets_dedans": 317
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 338
+          "sommets_dedans": 385
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 194
+          "sommets_dedans": 291
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 282
+          "sommets_dedans": 351
+        }
+      ],
+      "seuil": "aucune"
+    },
+    {
+      "critere": "Hand_OK · aucune auto-intersection",
+      "mesure": [
+        {
+          "entre": "thumb/index",
+          "sommets_dedans": 95
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 50
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 3
         }
       ],
       "seuil": "aucune"
@@ -1489,35 +1764,31 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 248
+          "sommets_dedans": 646
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 99
+          "sommets_dedans": 117
         },
         {
           "entre": "thumb/pinky",
-          "sommets_dedans": 76
+          "sommets_dedans": 18
         },
         {
           "entre": "thumb/hand",
-          "sommets_dedans": 35
+          "sommets_dedans": 76
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 314
+          "sommets_dedans": 491
         },
         {
           "entre": "index/hand",
-          "sommets_dedans": 2
+          "sommets_dedans": 76
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 353
-        },
-        {
-          "entre": "ring/pinky",
-          "sommets_dedans": 1
+          "sommets_dedans": 71
         }
       ],
       "seuil": "aucune"
@@ -1525,52 +1796,58 @@
     {
       "critere": "transition Neutral→Hand_Fist · aucune auto-intersection",
       "mesure": {
+        "0.2": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 3
+          }
+        ],
+        "0.3": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 20
+          }
+        ],
+        "0.4": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 84
+          }
+        ],
+        "0.5": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 120
+          }
+        ],
         "0.6": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 2
+            "sommets_dedans": 205
           }
         ],
         "0.7": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 6
+            "sommets_dedans": 206
           },
           {
             "entre": "thumb/hand",
-            "sommets_dedans": 5
+            "sommets_dedans": 1
           },
           {
-            "entre": "middle/ring",
+            "entre": "index/middle",
+            "sommets_dedans": 76
+          },
+          {
+            "entre": "ring/pinky",
             "sommets_dedans": 2
           }
         ],
         "0.8": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 13
-          },
-          {
-            "entre": "thumb/hand",
-            "sommets_dedans": 5
-          },
-          {
-            "entre": "index/middle",
-            "sommets_dedans": 200
-          },
-          {
-            "entre": "middle/ring",
-            "sommets_dedans": 292
-          },
-          {
-            "entre": "ring/pinky",
-            "sommets_dedans": 300
-          }
-        ],
-        "0.9": [
-          {
-            "entre": "thumb/index",
-            "sommets_dedans": 17
+            "sommets_dedans": 203
           },
           {
             "entre": "thumb/hand",
@@ -1578,33 +1855,67 @@
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 278
+            "sommets_dedans": 438
           },
           {
             "entre": "middle/ring",
-            "sommets_dedans": 225
+            "sommets_dedans": 418
           },
           {
             "entre": "ring/pinky",
-            "sommets_dedans": 270
+            "sommets_dedans": 319
+          }
+        ],
+        "0.9": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 197
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets_dedans": 3
+          },
+          {
+            "entre": "thumb/hand",
+            "sommets_dedans": 21
+          },
+          {
+            "entre": "index/middle",
+            "sommets_dedans": 332
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 342
+          },
+          {
+            "entre": "ring/pinky",
+            "sommets_dedans": 321
           }
         ],
         "1.0": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 536
+            "sommets_dedans": 220
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets_dedans": 9
+          },
+          {
+            "entre": "thumb/hand",
+            "sommets_dedans": 29
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 248
+            "sommets_dedans": 372
           },
           {
             "entre": "middle/ring",
-            "sommets_dedans": 371
+            "sommets_dedans": 283
           },
           {
             "entre": "ring/pinky",
-            "sommets_dedans": 302
+            "sommets_dedans": 419
           }
         ]
       },
@@ -1613,34 +1924,30 @@
     {
       "critere": "transition Neutral→Hand_Point · aucune auto-intersection",
       "mesure": {
-        "0.3": [
-          {
-            "entre": "index/middle",
-            "sommets_dedans": 7
-          }
-        ],
-        "0.4": [
-          {
-            "entre": "index/middle",
-            "sommets_dedans": 88
-          }
-        ],
         "0.5": [
           {
             "entre": "index/middle",
-            "sommets_dedans": 146
+            "sommets_dedans": 75
           }
         ],
         "0.6": [
           {
+            "entre": "thumb/index",
+            "sommets_dedans": 12
+          },
+          {
             "entre": "index/middle",
-            "sommets_dedans": 162
+            "sommets_dedans": 138
           }
         ],
         "0.7": [
           {
+            "entre": "thumb/index",
+            "sommets_dedans": 57
+          },
+          {
             "entre": "index/middle",
-            "sommets_dedans": 175
+            "sommets_dedans": 163
           },
           {
             "entre": "middle/ring",
@@ -1649,64 +1956,72 @@
         ],
         "0.8": [
           {
+            "entre": "thumb/index",
+            "sommets_dedans": 116
+          },
+          {
             "entre": "thumb/middle",
-            "sommets_dedans": 442
+            "sommets_dedans": 77
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 480
+            "sommets_dedans": 192
           },
           {
             "entre": "middle/ring",
-            "sommets_dedans": 218
+            "sommets_dedans": 524
           },
           {
             "entre": "ring/pinky",
-            "sommets_dedans": 291
+            "sommets_dedans": 333
           }
         ],
         "0.9": [
           {
+            "entre": "thumb/index",
+            "sommets_dedans": 138
+          },
+          {
             "entre": "thumb/middle",
-            "sommets_dedans": 374
+            "sommets_dedans": 95
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 352
+            "sommets_dedans": 359
           },
           {
             "entre": "middle/ring",
-            "sommets_dedans": 185
+            "sommets_dedans": 370
           },
           {
             "entre": "ring/pinky",
-            "sommets_dedans": 248
+            "sommets_dedans": 301
           }
         ],
         "1.0": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 2
+            "sommets_dedans": 151
           },
           {
             "entre": "thumb/middle",
-            "sommets_dedans": 383
+            "sommets_dedans": 298
           },
           {
             "entre": "thumb/ring",
-            "sommets_dedans": 19
+            "sommets_dedans": 6
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 342
+            "sommets_dedans": 382
           },
           {
             "entre": "middle/ring",
-            "sommets_dedans": 289
+            "sommets_dedans": 418
           },
           {
             "entre": "ring/pinky",
-            "sommets_dedans": 320
+            "sommets_dedans": 364
           }
         ]
       },
@@ -1718,31 +2033,55 @@
         "0.6": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 163
+            "sommets_dedans": 19
           }
         ],
         "0.7": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 184
+            "sommets_dedans": 1857
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 2
           }
         ],
         "0.8": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 521
+            "sommets_dedans": 1249
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 14
           }
         ],
         "0.9": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 403
+            "sommets_dedans": 457
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 32
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 1
           }
         ],
         "1.0": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 75
+            "sommets_dedans": 96
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 50
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 3
           }
         ]
       },
@@ -1751,94 +2090,214 @@
     {
       "critere": "transition Neutral→Hand_Pinky_Thumb · aucune auto-intersection",
       "mesure": {
+        "0.2": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 14
+          }
+        ],
+        "0.3": [
+          {
+            "entre": "thumb/index",
+            "sommets_dedans": 93
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 6
+          }
+        ],
         "0.4": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 18
+            "sommets_dedans": 225
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 11
+          },
+          {
+            "entre": "index/middle",
+            "sommets_dedans": 11
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 13
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 20
           }
         ],
         "0.5": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 6
+            "sommets_dedans": 325
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets_dedans": 830
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 23
+          },
+          {
+            "entre": "index/middle",
+            "sommets_dedans": 137
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 25
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 29
           }
         ],
         "0.6": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 13
+            "sommets_dedans": 1081
           },
           {
             "entre": "thumb/middle",
-            "sommets_dedans": 174
+            "sommets_dedans": 966
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 28
+          },
+          {
+            "entre": "index/middle",
+            "sommets_dedans": 291
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 40
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 44
           }
         ],
         "0.7": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 22
+            "sommets_dedans": 2079
           },
           {
             "entre": "thumb/middle",
-            "sommets_dedans": 1723
+            "sommets_dedans": 958
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 30
+          },
+          {
+            "entre": "thumb/hand",
+            "sommets_dedans": 7
+          },
+          {
+            "entre": "index/middle",
+            "sommets_dedans": 443
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 52
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 63
           }
         ],
         "0.8": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 1116
+            "sommets_dedans": 1320
           },
           {
             "entre": "thumb/middle",
-            "sommets_dedans": 131
+            "sommets_dedans": 442
+          },
+          {
+            "entre": "thumb/pinky",
+            "sommets_dedans": 35
           },
           {
             "entre": "thumb/hand",
-            "sommets_dedans": 4
+            "sommets_dedans": 32
+          },
+          {
+            "entre": "index/middle",
+            "sommets_dedans": 652
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 57
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 95
           }
         ],
         "0.9": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 113
+            "sommets_dedans": 768
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets_dedans": 178
           },
           {
             "entre": "thumb/pinky",
-            "sommets_dedans": 32
+            "sommets_dedans": 27
           },
           {
             "entre": "thumb/hand",
-            "sommets_dedans": 18
+            "sommets_dedans": 62
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 394
+            "sommets_dedans": 647
+          },
+          {
+            "entre": "index/hand",
+            "sommets_dedans": 65
+          },
+          {
+            "entre": "middle/ring",
+            "sommets_dedans": 116
           }
         ],
         "1.0": [
           {
             "entre": "thumb/index",
-            "sommets_dedans": 157
+            "sommets_dedans": 592
+          },
+          {
+            "entre": "thumb/middle",
+            "sommets_dedans": 71
           },
           {
             "entre": "thumb/pinky",
-            "sommets_dedans": 36
+            "sommets_dedans": 18
           },
           {
             "entre": "thumb/hand",
-            "sommets_dedans": 35
+            "sommets_dedans": 76
           },
           {
             "entre": "index/middle",
-            "sommets_dedans": 706
+            "sommets_dedans": 487
           },
           {
             "entre": "index/hand",
-            "sommets_dedans": 2
+            "sommets_dedans": 76
           },
           {
             "entre": "middle/ring",
-            "sommets_dedans": 62
+            "sommets_dedans": 124
           }
         ]
       },
@@ -1849,19 +2308,27 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 536
+          "sommets_dedans": 220
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 9
+        },
+        {
+          "entre": "thumb/hand",
+          "sommets_dedans": 29
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 248
+          "sommets_dedans": 372
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 371
+          "sommets_dedans": 283
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 302
+          "sommets_dedans": 419
         }
       ],
       "seuil": "aucune"
@@ -1871,27 +2338,27 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 2
+          "sommets_dedans": 151
         },
         {
           "entre": "thumb/middle",
-          "sommets_dedans": 383
+          "sommets_dedans": 298
         },
         {
           "entre": "thumb/ring",
-          "sommets_dedans": 19
+          "sommets_dedans": 6
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 342
+          "sommets_dedans": 382
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 289
+          "sommets_dedans": 418
         },
         {
           "entre": "ring/pinky",
-          "sommets_dedans": 320
+          "sommets_dedans": 364
         }
       ],
       "seuil": "aucune"
@@ -1901,7 +2368,15 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 75
+          "sommets_dedans": 96
+        },
+        {
+          "entre": "thumb/pinky",
+          "sommets_dedans": 50
+        },
+        {
+          "entre": "index/hand",
+          "sommets_dedans": 3
         }
       ],
       "seuil": "aucune"
@@ -1911,34 +2386,43 @@
       "mesure": [
         {
           "entre": "thumb/index",
-          "sommets_dedans": 157
+          "sommets_dedans": 592
+        },
+        {
+          "entre": "thumb/middle",
+          "sommets_dedans": 71
         },
         {
           "entre": "thumb/pinky",
-          "sommets_dedans": 36
+          "sommets_dedans": 18
         },
         {
           "entre": "thumb/hand",
-          "sommets_dedans": 35
+          "sommets_dedans": 76
         },
         {
           "entre": "index/middle",
-          "sommets_dedans": 706
+          "sommets_dedans": 487
         },
         {
           "entre": "index/hand",
-          "sommets_dedans": 2
+          "sommets_dedans": 76
         },
         {
           "entre": "middle/ring",
-          "sommets_dedans": 62
+          "sommets_dedans": 124
         }
       ],
       "seuil": "aucune"
     },
     {
+      "critere": "le diamètre utile distingue l'anneau du pincement",
+      "mesure": "OK 0.0 mm contre Pinch 19.1 mm",
+      "seuil": "au moins 3 mm de plus pour le OK"
+    },
+    {
       "critere": "l'anneau du OK est lisible",
-      "mesure": "0.2 mm",
+      "mesure": "0.0 mm",
       "seuil": "≥ 14 mm d'ouverture"
     },
     {
@@ -1948,7 +2432,7 @@
     },
     {
       "critere": "compression de ring au poing · minimum",
-      "mesure": 0.2161,
+      "mesure": 0.216,
       "seuil": "≥ 0,25"
     },
     {
@@ -1958,12 +2442,12 @@
     },
     {
       "critere": "compression de thumb au poing · minimum",
-      "mesure": 0.0986,
+      "mesure": 0.098,
       "seuil": "≥ 0,25"
     },
     {
       "critere": "compression de thumb au poing · percentile 1 %",
-      "mesure": 0.4305,
+      "mesure": 0.4356,
       "seuil": "≥ 0,50"
     }
   ],
@@ -1985,7 +2469,9 @@
       "Thumb_Opposition",
       "Spread",
       "Cup",
-      "Relax"
+      "Relax",
+      "PSD_PinkyThumb",
+      "PSD_OK"
     ],
     "contraintes": [
       "COPY_TRANSFORMS",
