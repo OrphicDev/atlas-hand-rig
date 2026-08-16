@@ -3790,6 +3790,79 @@ if not SANS_RENDU:
         for _nv, _dir, _cote in VUES:
             rendre(f"{nom_pose}-{_nv}", _dir, cote=_cote)
         print(f"ATLAS_RENDU {nom_pose} — {len(VUES)} vues")
+
+    # ═══ L'OVERLAY DES SOMMETS TRAVERSANTS (§13) ═══
+    #
+    # Un tableau dit COMBIEN de sommets se traversent ; il ne dit jamais OÙ, et
+    # « 211 sommets » ne se corrige pas. Les sommets fautifs sont peints en
+    # rouge sur la chair, et la même caméra sert avant et après : deux cadrages
+    # différents rendraient la comparaison impossible à faire à l'œil, ce qui
+    # est précisément le travail de ces images.
+    _mat_rouge = bpy.data.materials.new("ATLAS_traversant")
+    _mat_rouge.use_nodes = True
+    _mat_rouge.node_tree.nodes["Principled BSDF"].inputs["Base Color"] \
+        .default_value = (0.85, 0.12, 0.10, 1.0)
+    geo.data.materials.append(_mat_rouge)
+    _idx_rouge = len(geo.data.materials) - 1
+
+    def rendre_overlay(nom_pose, reglages, os_pose, direction, nom_image):
+        poser_etat(reglages, os_pose)
+        _fautifs = set()
+        _p, _n = sommets_evalues()
+        _par = {}
+        for _i, _nm in _dom.items():
+            _f = famille(_nm)
+            if _f is not None:
+                _par.setdefault(_f, []).append(_i)
+        _arb = {}
+        for _f, _ii in _par.items():
+            _t = mathutils.kdtree.KDTree(len(_ii))
+            for _k, _i in enumerate(_ii):
+                _t.insert(_p[_i], _k)
+            _t.balance()
+            _arb[_f] = (_t, _ii)
+        _fams = [f for f in ("thumb", "index", "middle", "ring", "pinky",
+                             "hand") if f in _arb]
+        for _x in range(len(_fams)):
+            for _y in range(_x + 1, len(_fams)):
+                for _src, _dst in ((_fams[_x], _fams[_y]),
+                                   (_fams[_y], _fams[_x])):
+                    _tb, _ib = _arb[_dst]
+                    for _i in _par[_src]:
+                        _co, _k, _d = _tb.find(_p[_i])
+                        _j = _ib[_k]
+                        if (_d < 0.008
+                                and (_p[_j] - _p[_i]).dot(_n[_j])
+                                > PROFONDEUR_MINIMALE
+                                and (_p_repos_global[_i]
+                                     - _p_repos_global[_j]).length
+                                > ECART_REPOS_MINIMAL):
+                            _fautifs.add(_i)
+        # On peint les FACES dont tous les sommets sont fautifs : peindre une
+        # face dès qu'un sommet l'est étalerait le rouge sur des zones saines
+        # et rendrait l'image plus alarmante que la mesure.
+        _peintes = 0
+        for _poly in geo.data.polygons:
+            if all(v in _fautifs for v in _poly.vertices):
+                _poly.material_index = _idx_rouge
+                _peintes += 1
+        forcer_evaluation(geo)
+        rendre(nom_image, direction)
+        for _poly in geo.data.polygons:
+            _poly.material_index = 0
+        forcer_evaluation(geo)
+        return len(_fautifs), _peintes
+
+    _overlays = {}
+    for nom_pose, reglages, os_pose in POSES:
+        if nom_pose not in ("Hand_Pinch", "Hand_OK", "Hand_Pinky_Thumb",
+                            "Hand_Fist", "Hand_Point", "Hand_Cupped"):
+            continue
+        _nf, _np = rendre_overlay(nom_pose, reglages, os_pose, PALMAIRE,
+                                  f"overlay-{nom_pose}-paume")
+        _overlays[nom_pose] = {"sommets_traversants": _nf, "faces_peintes": _np}
+        print(f"ATLAS_OVERLAY {nom_pose} : {_nf} sommets, {_np} faces")
+    dire("overlays_de_traversee", _overlays)
     # Gros plans des trois contacts critiques et de la zone qui échoue.
     for nom_pose, reglages, os_pose in POSES:
         if nom_pose not in ("Hand_Pinch", "Hand_OK", "Hand_Pinky_Thumb",
