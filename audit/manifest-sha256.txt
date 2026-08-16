@@ -93,6 +93,7 @@ e0d83cdb532b06f88c3146ea2135bf29e1fc701a1ffc6769ad168cfec73a533f  ./outils/matri
 0da59c5bf7a38e62df552ff496068df87b089926f1c31c429c40ff282f4900ef  ./outils/playblast-transitions.py
 99fe022f6bc8dca1dfeecd760984ae32218f752dc68009532f29b458086cf4a9  ./outils/rendus-poses.py
 dae825130d79e5867f25d5c126c37e8587d970f8511361ec534128df629d85f8  ./outils/revue-visuelle.py
+01be046f1b6ef6ef9a898b751294cf33225a4124885578e7cf01ab64a2954a65  ./outils/rig-complet.py
 ada8da16f212510e8db8ececcaf2129b340179997e38c889ef359bf2b0d2f1ae  ./outils/sonde-cascade.py
 9f3dedbe6e03b23b3aa93a0eb588b3f49b355d7e9802b672fdcc691023784be8  ./outils/sonde-creux.py
 3dd0609ecb000c2d47cef7cc794445660a167c6a5c07799f09f260eccdbf988a  ./outils/sonde-ecartement.py
@@ -241,6 +242,10 @@ f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
 b48430ef17f5e82e95ef299cf973eff87d26f0493b4c7013c09104d66579fe3c  ./reports/chat-3/regression-chat2-vs-chat3.txt
 a0b95e4b85c63c8eac326c21fd2fa9e5ac4787b659e9c5a55c93315179ff5562  ./reports/chat-3/revue-visuelle.md
+19044dade7d20dd9ce80ec078b18d501b799e38999ebee8352e1eba6405aeb1e  ./reports/chat-3/rig-complet/01-plateau-vide.png
+e887d442405e3507dbe3bdf26eaa9dadc8f019f56384e8bbf01b84bf162502cc  ./reports/chat-3/rig-complet/02-humain-entier.png
+285b349548391ae8132755344f290f353595937b892fdcc2cfcc64f00177e8d0  ./reports/chat-3/rig-complet/03-squelette-seul.png
+c0f24328e43434b07daf17e829e3298c24311ab21b392fadc40c5c32760ae27c  ./reports/chat-3/rig-complet/04-squelette-dans-le-corps.png
 9c7b7ebb2cd6920ac16158b1faf932556f4de7ba6b87d8f1ab2e8baf0496edde  ./reports/chat-3/tableau-regression.txt
 220da7173c581c5b572871c5eb2d370500c7f5176037b70e625b5bac95e69a88  ./reports/chat-3/transitions/LISEZ-MOI.md
 e8e9d4475ddbb8b474da106df4e89da89d432c17006b306d8fde4f63e7d91373  ./reports/chat-3/transitions/Neutral-vers-Hand_Cupped/0001.png
