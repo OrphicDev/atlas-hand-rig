@@ -100,9 +100,63 @@ vérifications, deux réfutations dont un **invariant**.
 
 ## Ce qui reste
 
-1. **P1 — volumes et réalisme.** Effet « saucisse », dômes de jointures absents
-   au dos du poing, thénar/hypothénar, paume réellement creuse. Poids d'abord,
-   correctifs pilotés ensuite — jamais l'inverse.
+### 0. LA PAUME NE SE CREUSE PAS — elle fait l'inverse, et c'est diagnostiqué
+
+C'est le chantier le plus important qui reste, et il n'était dans aucune liste.
+Tout est mesuré ; il ne reste qu'à corriger. **Ne recommence pas l'enquête.**
+
+Mesuré par `outils/sonde-creux.py` sur le rig de `b17e548`, `Cup` de 0 à 1 :
+
+```
+grandeur du dépôt   21,00 → 21,98 mm   (+0,98)   ← annonce un progrès
+flèche de l'arc     29,99 → 19,10 mm   (−10,89)  ← l'arc S'APLATIT
+largeur de paume    71,99 → 86,03 mm   (+14,04)  ← la paume S'ÉLARGIT
+pouce ↔ auriculaire 102,27 → 99,13 → 101,39      ← 3 mm, puis ça repart
+```
+
+**Creuser la paume l'élargit.** Et `creux_palmaire()` lit un progrès parce
+qu'il prend le maximum de profondeur sous un plan **figé à la pose de repos** :
+un splay l'augmente aussi. Il ne se trompe pas d'amplitude, il se trompe de
+**sens sur le phénomène**. Le cerclage rouge de Sacha — les deux têtes
+métacarpiennes qui se rapprochent — n'est donc pas obtenu.
+
+Puis, **drivers tus** (indispensable, voir piège 6), ring et pinky tournés de
+±20° sur chaque axe local :
+
+```
+axe  angle   Δlargeur   Δarc   Δpouce-auriculaire
+  0    +20     +6,20   −8,88        −8,36     ← LE SENS ACTUEL DE CUP
+  0    −20     +1,42   +8,00        +5,02
+  1    ±20      0,00     ∓2          0,00     ← CUP_AXIAL ne sert à RIEN
+  2    +20    +12,94   +0,32       +10,03
+  2    −20    −13,19   −0,19       −10,35
+```
+
+**Deux causes, aucune connue avant :**
+
+1. `CUP` pilote l'axe 0 **dans le sens qui aplatit l'arc**. C'est la faute de
+   `Spread` à l'identique — un sens de rotation déduit d'une convention d'axes
+   au lieu d'être mesuré ;
+2. **l'axe qui fait converger les métacarpiens n'est piloté par rien.** L'axe 2
+   est le seul qui resserre la paume, et `CUP` ne le touche jamais.
+
+**Le correctif, et sa forme est imposée :** mesurer à la construction, comme la
+phase D mesure déjà `SIGNE_ECART`, quel couple (axe, signe) creuse l'arc et
+quel couple fait converger les têtes — puis piloter **les deux**. Ne retouche
+ni `CUP` ni `CUP_AXIAL` au jugé : un signe corrigé à la main sur la gauche
+retomberait faux sur la droite.
+
+**Un obstacle t'attend et il est réel :** la phase E borne l'axe Z des
+métacarpiens à **±8°**, ce qui écrêterait la convergence à moins de 6 mm des
+13 mesurés. Cette butée est aussi arbitraire que le reste — les articulations
+carpo-métacarpiennes des 4ᵉ et 5ᵉ rayons ont une mobilité réelle. Elle doit
+être **mesurée**, pas relevée d'un cran jusqu'à ce que le chiffre passe.
+
+### 1. Le reste de P1 — volumes et réalisme
+
+Effet « saucisse », dômes de jointures absents au dos du poing,
+thénar/hypothénar. Poids d'abord, correctifs pilotés ensuite — jamais
+l'inverse.
 2. **P1 — les rendus.** L'éclairage rasant est intégré (`4a68afc`) mais **jamais
    exécuté** : toutes les reconstructions du chat 2 ont tourné en mode `mesure`.
    Six vues par pose désormais (paume-A/B, dos-A/B, pouce, auriculaire) et trois
@@ -142,3 +196,17 @@ vérifications, deux réfutations dont un **invariant**.
    se lit comme une mesure.
 5. **Le seuil d'acceptation ne doit pas servir de zone franche** à l'optimiseur :
    il dépense la marge jusqu'au dernier centième et la franchit.
+6. **UN DRIVER RÉÉCRIT SA VOIE : il faut le taire pour sonder.** Le piège le
+   plus coûteux de ce chat, et il est déjà écrit page 2 du handoff précédent —
+   j'y suis tombé quand même. En posant une rotation à la main sur un axe
+   piloté par `Cup`, j'ai obtenu **+0,00 sur toutes les grandeurs** et j'ai
+   failli en conclure « cet axe ne creuse pas ». Le driver effaçait ma valeur
+   avant chaque mesure. Seul l'axe non piloté répondait, ce qui rendait le
+   tableau **parfaitement cohérent et parfaitement faux**.
+
+   Mets `driver.mute = True` le temps du test, rétablis après, et **fais
+   échouer la sonde si taire n'a rien changé** — sinon tu ne saurais pas que tu
+   n'atteins pas l'os que tu prétends tourner.
+
+   Règle générale, et elle vaut au-delà de ce dépôt : *un zéro cohérent est le
+   mensonge le plus difficile à voir.* Une sonde doit pouvoir échouer.
