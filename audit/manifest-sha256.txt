@@ -140,7 +140,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
 c3ba4cb2e806e1233fb3a4cadefc01ca7534eff5771db7fa1172d4c88ab07693  ./rig-main.py
-5105dc467514a2588db7bcf61c999c4410bde13d7226f33479f2ec7b27c88f3b  ./verifier-rig.py
+0f70ee328b3a0fc2ee18ae2807b76a3e70feb51b479cbeadf076e8da6c6c4277  ./verifier-rig.py
 3f2d92e4e91e1c3121616f3007a0a9bd3591b26a624b06bdbf86893034f7387d  ./videos/b17e548/LISEZ-MOI.md
 57433d06119ba8aaddf59f5054d13277a19333fcd5223da2d878d21d2f077de4  ./videos/b17e548/Neutral-vers-Hand_Cupped/0001.png
 a1fb5aa6353b4eb26423025f70a370b844db46462d933343d89281009bfa3222  ./videos/b17e548/Neutral-vers-Hand_Cupped/0002.png

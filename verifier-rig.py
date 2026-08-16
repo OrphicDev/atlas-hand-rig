@@ -427,6 +427,51 @@ drv = [d.data_path for d in (rig.animation_data.drivers
 exiger("tous les drivers sont valides", not drv, drv or "aucun invalide",
        "aucun invalide")
 
+# ═══ LES CORRECTIFS ET LES SHAPE KEYS (§12.1) ═══
+#
+# Un correctif de volume est un os déformant SANS contrôleur : rien ne le
+# surveille, et c'est précisément ce qui le rend dangereux. Au repos il doit
+# être rigoureusement à zéro — un correctif qui déplace la chair au repos
+# décale l'origine de TOUTES les autres mesures, sans qu'aucune d'elles ne le
+# signale.
+neutre()
+_corr_os = [pb for pb in rig.pose.bones if pb.name.endswith(f"_corr{SIDE}")]
+_corr_bouge = {}
+for _pb in _corr_os:
+    _dep = _pb.location.length * 1000.0
+    _rot = max(abs(math.degrees(x)) for x in _pb.rotation_euler)
+    if _dep > 0.001 or _rot > 0.01:
+        _corr_bouge[_pb.name] = {"translation_mm": round(_dep, 4),
+                                 "rotation_deg": round(_rot, 4)}
+resultat["os_correctifs"] = {"nombre": len(_corr_os),
+                             "non_nuls_au_repos": _corr_bouge or "aucun"}
+exiger("les os correctifs sont à zéro au repos", not _corr_bouge,
+       _corr_bouge or "aucun", "translation et rotation nulles")
+
+# Les shape keys : présence, valeur au repos, et driver valide. Une key
+# sculptée qui reste active au repos déforme la pose neutre en silence.
+_keys = (geo.data.shape_keys.key_blocks
+         if geo.data.shape_keys is not None else [])
+_keys_actives, _keys_sans_driver = {}, []
+_chemins_drv = {d.data_path for d in (geo.data.shape_keys.animation_data.drivers
+                                      if (geo.data.shape_keys is not None
+                                          and geo.data.shape_keys.animation_data)
+                                      else [])}
+for _k in list(_keys)[1:]:                       # [0] est le Basis
+    if abs(_k.value) > 1e-6:
+        _keys_actives[_k.name] = round(_k.value, 5)
+    if f'key_blocks["{_k.name}"].value' not in _chemins_drv:
+        _keys_sans_driver.append(_k.name)
+resultat["shape_keys"] = {
+    "nombre": max(0, len(_keys) - 1),
+    "actives_au_repos": _keys_actives or "aucune",
+    "sans_driver": _keys_sans_driver or "aucune"}
+exiger("aucune shape key active au repos", not _keys_actives,
+       _keys_actives or "aucune", "valeur nulle au repos")
+if len(_keys) > 1:
+    exiger("chaque shape key est pilotée", not _keys_sans_driver,
+           _keys_sans_driver or "aucune", "un driver par key")
+
 # ═══ VALIDE NE VEUT PAS DIRE FONCTIONNEL (§12.2) ═══
 #
 # `is_valid` dit que Blender sait évaluer l'expression. Il ne dit RIEN sur ce
