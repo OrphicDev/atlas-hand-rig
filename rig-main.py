@@ -1799,19 +1799,13 @@ try:
     # profondeur, puis la distance de contact, puis l'orientation, et seulement
     # ensuite la norme du deplacement — la plus petite correction qui fait le
     # travail, jamais la plus forte qui l'ecrase.
-    for _nom_corr, _prop_corr, _borne in (
-            (f"DEF_thumb_thenar_corr{SIDE}", "Thumb_Opposition", 0.003),
-            (f"DEF_index_root_corr{SIDE}", "PSD_PinkyThumb", 0.002)):
-        for _ax in (0, 1, 2):
-            correctifs.driver_translation_lineaire(
-                rig, _nom_corr, _ax, SIDE, _prop_corr, 0.0)
-    forcer_evaluation()
-    dire("drivers_correctifs", {
-        "os": [f"DEF_thumb_thenar_corr{SIDE}", f"DEF_index_root_corr{SIDE}"],
-        "amplitudes": "posees a zero — cherchees en phase H, quand les poses "
-                      "de contact existent et qu'on peut mesurer ce qu'elles "
-                      "gagnent",
-        "regle": "la plus PETITE correction qui fait le travail"})
+    # ═══ ON NE CREE PAS UN DRIVER D'AMPLITUDE NULLE ═══
+    # Premier montage : six drivers poses a zero, avec l'intention de les
+    # reecrire une fois l'amplitude cherchee. Le module a REFUSE — « un driver
+    # de constante zero ne pilote rien » — et il a raison : c'est exactement le
+    # champ rempli que rien ne lit, la faute que ce depot traque partout.
+    # Les drivers sont donc crees en phase H, et SEULEMENT pour les axes qu'une
+    # amplitude non nulle a gagnes.
     CORRECTIFS_PRETS = True
 except Exception as _e:                                       # noqa: BLE001
     # On n'avale pas l'échec : on le publie et on continue sans correctifs, de
@@ -3259,15 +3253,17 @@ for _nom_c, _a, _b, _axes, _fond in (
 # l'eminence thenar contre la base de l'index. Deux masses de chair doivent
 # ceder l'une devant l'autre, et aucune rotation d'os ne sait faire ca.
 if CORRECTIFS_PRETS and "Hand_Pinky_Thumb" in CONTACTS:
-    _drv_corr = {}
-    for _fc in (rig.animation_data.drivers if rig.animation_data else []):
-        for _nc in (f"DEF_thumb_thenar_corr{SIDE}", f"DEF_index_root_corr{SIDE}"):
-            if _fc.data_path == f'pose.bones["{_nc}"].location':
-                _drv_corr[(_nc, _fc.array_index)] = _fc
+    # Pendant la recherche, on pose les translations A LA MAIN : creer six
+    # drivers pour les essayer reviendrait a poser six constantes nulles, ce
+    # que le module refuse a juste titre.
+    _CORR_AXES = [(f"DEF_thumb_thenar_corr{SIDE}", _a) for _a in (0, 1, 2)] + \
+                 [(f"DEF_index_root_corr{SIDE}", _a) for _a in (0, 1, 2)]
+    _drv_corr = {c: None for c in _CORR_AXES}
 
     def _poser_amplitudes(vals):
-        for _cle, _fc in _drv_corr.items():
-            _fc.driver.expression = f"p * {vals.get(_cle, 0.0):.8f}"
+        for (_nc, _ax) in _CORR_AXES:
+            _pb = rig.pose.bones[_nc]
+            _pb.location[_ax] = vals.get((_nc, _ax), 0.0)
         forcer_evaluation()
 
     _props_pt = {**CONTACTS["Hand_Pinky_Thumb"]["props"],
@@ -3319,6 +3315,21 @@ if CORRECTIFS_PRETS and "Hand_Pinky_Thumb" in CONTACTS:
                   for k, v in _final.items()},
         "regle": "traversees, puis distance, puis orientation, puis la plus "
                  "PETITE norme — jamais une somme ponderee"})
+    # ═══ ET MAINTENANT LES DRIVERS, POUR LES SEULS AXES QUI SERVENT ═══
+    _poser_amplitudes({c: 0.0 for c in _CORR_AXES})
+    _crees = []
+    for (_nc, _ax), _v in _meilleur[1].items():
+        if abs(_v) < 1e-9:
+            continue
+        _prop = ("Thumb_Opposition" if "thenar" in _nc else "PSD_PinkyThumb")
+        correctifs.driver_translation_lineaire(rig, _nc, _ax, SIDE, _prop, _v)
+        _crees.append(f"{_nc}[{_ax}] = {_prop} x {_v * 1000:.3f} mm")
+    forcer_evaluation()
+    dire("drivers_correctifs", {
+        "crees": _crees or "aucun — aucune amplitude n'a rien gagne",
+        "regle": "un driver n'existe que s'il pilote quelque chose ; une "
+                 "amplitude nulle ne se cable pas, elle se constate"})
+
     _deplacement_max = max((abs(v) for v in _meilleur[1].values()), default=0.0)
     exiger("les correctifs restent sous 3 mm de deplacement",
            _deplacement_max <= 0.0031, f"{_deplacement_max * 1000:.2f} mm",
