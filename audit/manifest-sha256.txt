@@ -2,7 +2,7 @@
 632ffb15c383403d2b5b48106c2d16ca1d45c302261b5d2dfe2d3c5824d79d0a  ./.gitignore
 ca440d52a0427dda1b0d14bdccdaf8a0638a07cdfc4c6bd55839d4af9796aae6  ./CHANGELOG.md
 4b53037af4f5a080f34bec604117d2a848d0aae8fb2688e1e6d0460d4d488563  ./README.md
-4108fb86dce14b6c5dbbf9a6b2136b362eda53fb6414dc770962fe59ddf68be4  ./RIG_Hand.L-NON-VALIDE.blend
+484b3c32df0181e5bb10135d8e90f5b2aea8718b7506eb666987deebec4d0c5d  ./RIG_Hand.L-NON-VALIDE.blend
 1a34e015df76f20ea0e17c673ac897d323601eb4629ffedd7962edd8290d5ff6  ./STATUS.md
 9a64b81638bc93437f7554cf34105209bc02edf8b08e249d4c5a6d1101f647a3  ./atelier/articulations.py
 3dedc875895068d697d7a838a990cae29bb2d2d78c60b32ca8e0e8be16b3bf4c  ./atelier/eclairage.py
@@ -116,8 +116,13 @@ b76be073a366e9f18297603afb73cd48cf8d21130ccc72dff65b9913de8eab43  ./reports/chat
 7a34c1e2f8df17f835c1421559726d61325496346ca1a0bba1b3354905ca73b3  ./reports/chat-2/creux-b17e548.json
 d743ef9acef7cc687218828d4186a45da18ef8e220c88c0228ffd2596f105407  ./reports/chat-2/ecartement-b17e548.json
 db59c6da2e8e1bf6268409f6a77809abb697ecb70bcaac35c7c532fb777b5d92  ./reports/chat-2/ecartement-b17e548.txt
+f8da7796ec3ee1ab3cbc31103d932f909da222f6da8928dd7f21168a06d74763  ./reports/chat-2/p0-complet/journal-generation.txt
+7f0491eac7c6f41555a790130b74dc479a9a0e330068288dd3103c545a364d1c  ./reports/chat-2/p0-complet/rapport-echec.json
+765ad09ab2f08b3a274ba2ff1cea5c233dd3e68b76e9e5e3a067be61c9274651  ./reports/chat-2/p0-complet/rapport-rig.L.json
 7bf3a52f1a758fa73abe8744d2fd2b6d0e86b487ff4f9d5b7cd457b138f0ecf3  ./reports/chat-2/playblast-b17e548.txt
 188aa19ad00a5272ab2f178c82066c776ee1007bf28ca1030cbd0ada46fb34a9  ./reports/chat-2/verifier-e2d4b1c-ancien-blend.txt
+f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat-3/cup/01-balayage-cup.json
+f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
 aa69aea8cacef72452a29e6e975c199ce0802f34ce71747d319e0a15a1f38543  ./reports/wip-chat-1/agent-livraison.md
 d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-chat-1/agent-lumiere.md
 3292965e16191008cf772153b364583632ed4ad1f14f6584dc6aded774a21257  ./reports/wip-chat-1/agent-mesures.md
@@ -125,7 +130,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-6bd8d631967c0ce46d0a768a5b5c6fd1613f7921807b251c6e5aeb5101891964  ./rig-main.py
+2adeeb16ee3912a426379b6aab4666297bd21627089d0eb43eaa1619cc3e2b43  ./rig-main.py
 e4d3df9d6c59a95c0c2fb6c2dac68cbc087267a5e542d35f137faa3ca996efff  ./verifier-rig.py
 3f2d92e4e91e1c3121616f3007a0a9bd3591b26a624b06bdbf86893034f7387d  ./videos/b17e548/LISEZ-MOI.md
 57433d06119ba8aaddf59f5054d13277a19333fcd5223da2d878d21d2f077de4  ./videos/b17e548/Neutral-vers-Hand_Cupped/0001.png
@@ -279,3 +284,5 @@ bd2a520da708b56d05a742254f2849bc54807f919b15e65d366d343d5ac27f65  ./videos/b17e5
 852d73c4384648939ae1acb8062445f20086ac7b8336db13455d050b765483ce  ./videos/b17e548/Neutral-vers-Hand_Point/0024.png
 241fdc969c0b65486af692e0202bbf869e874fbef91b4add36618094a74ba242  ./videos/b17e548/Neutral-vers-Hand_Point/0025.png
 2ff9fb7c20d2f54f778d8a4d481338474a921f96b285498daf096d95bddbbd1c  ./videos/b17e548/playblasts.html
+4a743cb58d4295524157d58f50a649ca276944ce54cade5691f542cd72028bd3  ./work/chat-3/cup/WIP-focus-cup-NON-VALIDE.blend
+f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./work/chat-3/cup/rapport-focus-cup.json

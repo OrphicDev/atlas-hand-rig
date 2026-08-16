@@ -68,6 +68,7 @@ import humain                       # noqa: E402
 import articulations as A           # noqa: E402
 import mains                        # noqa: E402
 import portillon                    # noqa: E402
+import mesures_paume                # noqa: E402
 import eclairage                    # noqa: E402
 
 portillon.exiger("humain-rig-main")
@@ -1023,20 +1024,128 @@ for nom in NOMS4:
 # Le creusement agit sur les MÉTACARPIENS, faiblement côté index, fortement côté
 # auriculaire. C'est lui qui rapproche l'auriculaire du pouce — le cerclage
 # rouge de Sacha.
-CUP = {"index": 0.10, "middle": 0.25, "ring": 0.60, "pinky": 1.00}
-CUP_MAX = 22.0
-# Creuser une paume n'est pas fléchir quatre bases du même angle : les rayons
-# internes tournent AUSSI sur eux-mêmes, ce qui présente l'auriculaire au pouce
-# au lieu de simplement le rapprocher. Avec des bases désormais distinctes, ces
-# deux composantes ne pivotent plus autour d'un centre unique.
-CUP_AXIAL = {"index": 0.0, "middle": 0.05, "ring": 0.35, "pinky": 0.70}
+# ═══ CREUSER, C'EST DEUX MOUVEMENTS — ET AUCUN N'ÉTAIT LE BON ═══
+#
+# Mesuré sur le rig de `b17e548`, `Cup` de 0 à 1 :
+#
+#     flèche de l'arc     29,99 → 19,10 mm   (−10,89)  l'arc S'APLATIT
+#     largeur de paume    71,99 → 86,03 mm   (+14,04)  la paume S'ÉLARGIT
+#     pouce ↔ auriculaire 102,27 → 99,13 → 101,39      3 mm, puis ça repart
+#
+# Creuser la paume l'ÉLARGISSAIT. Et `creux_palmaire()` annonçait +0,98 mm,
+# donc un progrès : il prend le maximum de profondeur sous un plan FIGÉ à la
+# pose de repos, qu'un splay augmente aussi. Il ne se trompait pas d'amplitude,
+# il se trompait de SENS sur le phénomène.
+#
+# Éprouvé ensuite axe par axe, drivers tus :
+#
+#     axe  angle   Δlargeur   Δarc   Δpouce-auriculaire
+#       0    +20     +6,20   −8,88        −8,36     ← le sens qu'employait CUP
+#       0    −20     +1,42   +8,00        +5,02
+#       1    ±20      0,00     ∓2          0,00     ← CUP_AXIAL ne servait à RIEN
+#       2    −20    −13,19   −0,19       −10,35     ← piloté par PERSONNE
+#
+# Un creusement fait DEUX choses, et une seule ne suffit pas : il VOÛTE (la
+# flèche transverse augmente) et il RESSERRE (la largeur diminue, et le 5ᵉ rayon
+# se rapproche du pouce — le cerclage rouge de Sacha). La flexion des phalanges
+# n'est ni l'une ni l'autre.
+#
+# Les deux axes, leurs signes et leurs amplitudes ne sont donc plus écrits : ils
+# sont ÉLUS par la mesure, comme le sens de l'écartement. Sur la main droite le
+# repère est inversé et ces élections retomberont d'elles-mêmes.
+CUP_VOUTE = {"index": 0.05, "middle": 0.20, "ring": 0.60, "pinky": 1.00}
+CUP_CONVERGENCE = {"index": 0.00, "middle": 0.10, "ring": 0.55, "pinky": 1.00}
+META_CUP = [f"MCH_{_n}_meta_result{SIDE}" for _n in NOMS4]
+PALMAIRE_CUP = mesures_paume.direction_palmaire(rig, geo, SIDE, _dom)
+_SOMMETS_PAUME = mesures_paume.paume_sans_le_pouce(_dom, SIDE)
+au_repos()
+_tetes0 = mesures_paume.tetes_metacarpiennes(rig, SIDE)
+REF_CUP = {
+    "arc_mm": mesures_paume.arc_transverse(sommets_evalues()[0], _tetes0,
+                                           PALMAIRE_CUP, _SOMMETS_PAUME),
+    "largeur_mm": mesures_paume.largeur_paume(_tetes0),
+    "pouce_auriculaire_mm": mesures_paume.pouce_auriculaire(_tetes0)}
+
+
+def _mesurer_meta(axe, degres, facteurs):
+    """Pose les quatre métacarpiens sur un axe local et mesure la paume."""
+    poser_os({f"MCH_{_n}_meta_result{SIDE}":
+              tuple(degres * facteurs[_n] if k == axe else 0.0
+                    for k in range(3))
+              for _n in NOMS4})
+    _t = mesures_paume.tetes_metacarpiennes(rig, SIDE)
+    _p = sommets_evalues()[0]
+    return {"arc_mm": mesures_paume.arc_transverse(_p, _t, PALMAIRE_CUP,
+                                                   _SOMMETS_PAUME),
+            "largeur_mm": mesures_paume.largeur_paume(_t),
+            "pouce_auriculaire_mm": mesures_paume.pouce_auriculaire(_t)}
+
+
+_AMPLITUDES = (4.0, 8.0, 12.0, 16.0, 20.0, 24.0)
+_essais_cup = []
+for _axe in (0, 1, 2):
+    for _signe in (+1.0, -1.0):
+        for _amp in _AMPLITUDES:
+            _r = _mesurer_meta(_axe, _signe * _amp, CUP_VOUTE)
+            _rc = _mesurer_meta(_axe, _signe * _amp, CUP_CONVERGENCE)
+            _essais_cup.append({
+                "axe": _axe, "signe": _signe, "amplitude_deg": _amp,
+                "gain_arc_mm": _r["arc_mm"] - REF_CUP["arc_mm"],
+                "gain_largeur_mm": _rc["largeur_mm"] - REF_CUP["largeur_mm"],
+                "gain_pouce_auriculaire_mm": (_rc["pouce_auriculaire_mm"]
+                                              - REF_CUP["pouce_auriculaire_mm"])})
+au_repos()
+
+# ═══ UNE SONDE QUI NE PEUT PAS ÉCHOUER NE PROUVE RIEN ═══
+# Si aucun axe ne déplace la paume, on ne pilote rien et toute élection serait
+# un tirage au sort présenté comme une mesure.
+if max(abs(e["gain_largeur_mm"]) for e in _essais_cup) < 0.5:
+    raise RuntimeError("aucun axe métacarpien ne déplace la paume : la sonde "
+                       "de creusement n'atteint pas les os qu'elle tourne")
+
+# Voûte : le plus grand gain de flèche, à la plus petite amplitude à gain égal.
+_voute = max(_essais_cup,
+             key=lambda e: (round(e["gain_arc_mm"], 2), -e["amplitude_deg"]))
+# Convergence : la plus forte BAISSE de largeur, puis le meilleur rapprochement
+# pouce–auriculaire, puis la plus petite amplitude.
+_conv = min(_essais_cup,
+            key=lambda e: (round(e["gain_largeur_mm"], 2),
+                           round(e["gain_pouce_auriculaire_mm"], 2),
+                           e["amplitude_deg"]))
+AXE_VOUTE, SIGNE_VOUTE = _voute["axe"], _voute["signe"]
+CUP_VOUTE_DEG = _voute["amplitude_deg"]
+AXE_CONVERGENCE, SIGNE_CONVERGENCE = _conv["axe"], _conv["signe"]
+CUP_CONVERGENCE_DEG = _conv["amplitude_deg"]
+dire("cup_axes_elus", {
+    "reference": {k: round(v, 2) for k, v in REF_CUP.items()},
+    "voute": {"axe": AXE_VOUTE, "signe": SIGNE_VOUTE,
+              "amplitude_deg": CUP_VOUTE_DEG,
+              "gain_arc_mm": round(_voute["gain_arc_mm"], 2)},
+    "convergence": {"axe": AXE_CONVERGENCE, "signe": SIGNE_CONVERGENCE,
+                    "amplitude_deg": CUP_CONVERGENCE_DEG,
+                    "gain_largeur_mm": round(_conv["gain_largeur_mm"], 2),
+                    "gain_pouce_auriculaire_mm": round(
+                        _conv["gain_pouce_auriculaire_mm"], 2)},
+    "regle": "voûter = augmenter la flèche ; resserrer = diminuer la largeur"})
+if _voute["gain_arc_mm"] <= 0.5:
+    raise RuntimeError(f"aucun axe ne VOÛTE la paume : {_voute}")
+if _conv["gain_largeur_mm"] >= -0.5:
+    raise RuntimeError(f"aucun axe ne RESSERRE la paume : {_conv}")
+
 for nom in NOMS4:
-    driver(f"MCH_{nom}_meta_result{SIDE}", AXE_FLEXION,
-           f"cup * {SIGNE * math.radians(CUP_MAX) * CUP[nom]:.6f}", {"cup": "Cup"})
-    if CUP_AXIAL[nom]:
-        driver(f"MCH_{nom}_meta_result{SIDE}", 1,
-               f"cup * {-math.radians(CUP_MAX) * CUP_AXIAL[nom]:.6f}",
-               {"cup": "Cup"})
+    _m = f"MCH_{nom}_meta_result{SIDE}"
+    _a_voute = math.radians(CUP_VOUTE_DEG * CUP_VOUTE[nom] * SIGNE_VOUTE)
+    _a_conv = math.radians(CUP_CONVERGENCE_DEG * CUP_CONVERGENCE[nom]
+                           * SIGNE_CONVERGENCE)
+    # JAMAIS deux drivers sur le même index de rotation_euler : le second
+    # écraserait le premier en silence. Si les deux composantes tombent sur le
+    # même axe, on additionne leurs constantes avant d'en créer un seul.
+    if AXE_VOUTE == AXE_CONVERGENCE:
+        driver(_m, AXE_VOUTE, f"cup * {_a_voute + _a_conv:.6f}", {"cup": "Cup"})
+    else:
+        driver(_m, AXE_VOUTE, f"cup * {_a_voute:.6f}", {"cup": "Cup"})
+        if abs(_a_conv) > 1e-6:
+            driver(_m, AXE_CONVERGENCE, f"cup * {_a_conv:.6f}", {"cup": "Cup"})
 # Le pouce : flexion propre, et une opposition COMPOSÉE, comme l'exige le
 # tutoriel — « Ne pilote pas l'opposition uniquement avec une rotation sur un
 # seul axe. Le mouvement réel du pouce est oblique et composé. »
@@ -1123,6 +1232,22 @@ for nom in NOMS4 + ["thumb"]:
                 _bx = (min(_a2, _b2), max(_a2, _b2))
                 _by = (-math.radians(_cmc * 0.9), math.radians(_cmc * 0.9))
                 _bz = (-math.radians(8.0), math.radians(8.0))
+                # ═══ UNE BUTÉE QUI ÉCRÊTE CE QU'ON PILOTE NE PROTÈGE RIEN ═══
+                # Le ±8° uniforme sur Z coupait la convergence à moins de la
+                # moitié des 13 mm mesurés : le driver demandait un angle que
+                # la contrainte refusait, en silence. Chaque axe doit couvrir
+                # ce qu'il reçoit réellement, plus 2° de marge — et jamais
+                # au-delà de l'amplitude CMC déjà donnée à ce rayon, qui est
+                # la seule borne anatomique que ce dépôt ait mesurée.
+                _pilote = {AXE_VOUTE: CUP_VOUTE_DEG * CUP_VOUTE[nom],
+                           AXE_CONVERGENCE: CUP_CONVERGENCE_DEG
+                           * CUP_CONVERGENCE[nom]}
+                _bornes = [list(_bx), list(_by), list(_bz)]
+                for _ax, _ang in _pilote.items():
+                    _req = math.radians(min(26.0, abs(_ang) + 2.0))
+                    _bornes[_ax][0] = min(_bornes[_ax][0], -_req)
+                    _bornes[_ax][1] = max(_bornes[_ax][1], _req)
+                _bx, _by, _bz = (tuple(b) for b in _bornes)
             for cible in (cnom, mnom):
                 c = rig.pose.bones[cible].constraints.new("LIMIT_ROTATION")
                 c.owner_space = "LOCAL"
@@ -1590,17 +1715,21 @@ for _pv in (False, True):
     for _nom_e, _regl in _ETATS_AB:
         regler(**_regl)
         _inter_tot += sum(x["sommets_dedans"] for x in intersections(f"ab-{_nom_e}"))
-        # `compression()` prend UN nom d'os et rend des couples (ratio, arête).
-        # Lui passer la liste `DEF[doigt]` rendait une liste vide sur chaque
-        # doigt, donc aucune mesure — et le test aurait conclu sur du vide.
+        # ═══ J'AI SUPPOSÉ DEUX FOIS LA FORME DE compression() ═══
+        # D'abord en lui passant `DEF[doigt]`, une LISTE, alors qu'elle prend
+        # UN nom d'os : chaque doigt rendait du vide. Puis en la lisant comme
+        # une suite de couples (ratio, arête) : elle rend un DICT, et itérer un
+        # dict donne ses clés — d'où `too many values to unpack`. Deux fautes
+        # sur la même fonction, toutes deux évitables en l'ouvrant.
+        # Elle rend : min, p1, p5, mediane, aretes, arete_la_plus_comprimee.
         for _g in NOMS4 + ["thumb"]:
             for _os in DEF[_g]:
-                _c = sorted(r for r, _e in compression(_os))
-                if not _c:
+                _c = compression(_os)
+                if not _c or not _c.get("aretes"):
                     continue
-                _n_mes += len(_c)
-                _comp_min = min(_comp_min, _c[0])
-                _comp_p1 = min(_comp_p1, _c[max(0, len(_c) // 100)])
+                _n_mes += _c["aretes"]
+                _comp_min = min(_comp_min, _c["min"])
+                _comp_p1 = min(_comp_p1, _c["p1"])
     regler()
     if _n_mes == 0:
         raise RuntimeError("le test A/B de Preserve Volume n'a mesuré aucune "
@@ -1614,8 +1743,30 @@ for _pv in (False, True):
 # collisions, ensuite la compression minimale, ensuite le percentile 1 %. En
 # cas d'égalité stricte, on garde True — le cahier tranche ainsi, parce que la
 # conservation du volume est ce qu'on cherche.
-def _rang_ab(v):
-    return (v["intersections"], -v["compression_min"], -v["compression_p1"])
+# ═══ « TRUE SAUF SI LE RAPPORT PROUVE UNE RÉGRESSION » ═══
+#
+# Mon premier classement était lexicographique — collisions, puis compression,
+# puis percentile — et il retenait True sur ces mesures :
+#
+#     sans : 11 903 traversées | compression min 0,0626 | p1 0,2759
+#     avec : 11 750 traversées | compression min 0,0147 | p1 0,1388
+#
+# Soit 153 collisions gagnées sur 11 903 — 1,3 % — payées par une compression
+# minimale QUATRE FOIS pire. 0,0147 veut dire une arête écrasée à 1,5 % de sa
+# longueur de repos, quand ce dépôt exige 0,25 au minimum. Un ordre strict
+# laissait donc un gain marginal dominer un effondrement de volume.
+#
+# La règle du cahier est plus juste et plus simple : on garde la conservation
+# de volume SAUF si une grandeur stricte régresse. Ici deux régressent.
+def _regresse(avec, sans):
+    out = []
+    for k, meilleur_si_grand in (("intersections", False),
+                                 ("compression_min", True),
+                                 ("compression_p1", True)):
+        pire = (avec[k] < sans[k]) if meilleur_si_grand else (avec[k] > sans[k])
+        if pire:
+            out.append(k)
+    return out
 
 
 # Et une contre-épreuve du test lui-même : si les deux réglages rendent
@@ -1624,15 +1775,164 @@ def _rang_ab(v):
 if _ab[True] == _ab[False]:
     raise RuntimeError("Preserve Volume actif et inactif rendent des mesures "
                        f"identiques : {_ab[True]} — le test ne distingue rien")
-PRESERVE_VOLUME = True if _rang_ab(_ab[True]) <= _rang_ab(_ab[False]) else False
+_regressions_pv = _regresse(_ab[True], _ab[False])
+PRESERVE_VOLUME = not _regressions_pv
 MODIF_ARMATURE.use_deform_preserve_volume = PRESERVE_VOLUME
 forcer_evaluation(geo)
 regler()
 dire("preserve_volume", {
     "sans": _ab[False], "avec": _ab[True], "retenu": PRESERVE_VOLUME,
-    "regle": "collisions, puis compression minimale, puis percentile 1 % ; "
-             "égalité stricte → True",
+    "grandeurs_qui_regressent_avec": _regressions_pv or "aucune",
+    "regle": "on garde la conservation de volume SAUF si une grandeur stricte "
+             "régresse ; sur ce maillage les quaternions duaux pincent plus "
+             "qu'ils ne préservent",
     "gele": "ne plus toucher après création des shape keys"})
+
+# ═══ L'AMPLITUDE SE CHERCHE SOUS CONTRAINTE DE PROPRETÉ ═══
+#
+# L'élection des axes (phase D) ne pouvait pas compter les traversées :
+# `intersections()` n'existe qu'ici. Elle a donc classé sur le seul gain, et
+# retenu la plus FORTE amplitude du balayage — 24°. Mesuré : la paume se voûte
+# de +44,74 mm et se resserre de −20,61, mais elle se traverse 16 119 fois sur
+# les 21 pas, propre seulement jusqu'à `Cup = 0,20`.
+#
+# Le cahier met `intersections > 0` en PREMIÈRE clé du classement, et il a
+# raison : un gain obtenu en faisant se traverser la chair n'est pas un gain.
+# Les axes et les signes élus sont justes — ils sont confirmés par deux sondes
+# indépendantes — donc on ne rejoue pas l'élection : on cherche la plus GRANDE
+# amplitude qui reste propre sur tout le trajet.
+_DRIVERS_CUP = {}
+for _fc in (rig.animation_data.drivers if rig.animation_data else []):
+    for _n in NOMS4:
+        if _fc.data_path == f'pose.bones["MCH_{_n}_meta_result{SIDE}"].rotation_euler':
+            _DRIVERS_CUP[(_n, _fc.array_index)] = _fc
+if not _DRIVERS_CUP:
+    raise RuntimeError("les drivers de creusement sont introuvables : la "
+                       "recherche d'amplitude ne pilote rien")
+
+
+def _appliquer_cup(echelle):
+    for (_n, _ax), _fc in _DRIVERS_CUP.items():
+        _av = math.radians(CUP_VOUTE_DEG * echelle * CUP_VOUTE[_n] * SIGNE_VOUTE)
+        _ac = math.radians(CUP_CONVERGENCE_DEG * echelle * CUP_CONVERGENCE[_n]
+                           * SIGNE_CONVERGENCE)
+        if AXE_VOUTE == AXE_CONVERGENCE:
+            _fc.driver.expression = f"cup * {_av + _ac:.6f}"
+        elif _ax == AXE_VOUTE:
+            _fc.driver.expression = f"cup * {_av:.6f}"
+        else:
+            _fc.driver.expression = f"cup * {_ac:.6f}"
+    forcer_evaluation()
+
+
+def _balayer_cup():
+    _out = []
+    for _k in range(21):
+        _c = _k / 20.0
+        regler(Cup=_c)
+        _t = mesures_paume.tetes_metacarpiennes(rig, SIDE)
+        _p = sommets_evalues()[0]
+        _out.append({
+            "cup": round(_c, 2),
+            "arc_mm": round(mesures_paume.arc_transverse(_p, _t, PALMAIRE_CUP,
+                                                         _SOMMETS_PAUME), 2),
+            "largeur_mm": round(mesures_paume.largeur_paume(_t), 2),
+            "pouce_auriculaire_mm": round(mesures_paume.pouce_auriculaire(_t), 2),
+            "intersections": sum(x["sommets_dedans"]
+                                 for x in intersections(f"cup{_c:.2f}"))})
+    regler()
+    return _out
+
+
+_recherche_amplitude = {}
+CUP_ECHELLE = None
+for _e in (1.0, 0.85, 0.7, 0.55, 0.45, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1):
+    _appliquer_cup(_e)
+    _bal = _balayer_cup()
+    _it = sum(x["intersections"] for x in _bal)
+    _g_arc = _bal[-1]["arc_mm"] - _bal[0]["arc_mm"]
+    _g_lar = _bal[-1]["largeur_mm"] - _bal[0]["largeur_mm"]
+    _recherche_amplitude[_e] = {"intersections": _it,
+                                "gain_arc_mm": round(_g_arc, 2),
+                                "gain_largeur_mm": round(_g_lar, 2)}
+    print(f"ATLAS_CUP_AMPLITUDE échelle={_e:.2f} "
+          f"traversées={_it:6d} arc={_g_arc:+6.2f} largeur={_g_lar:+6.2f}")
+    if _it == 0:
+        CUP_ECHELLE = _e
+        break
+if CUP_ECHELLE is None:
+    # On garde la plus petite essayée : la construction échouera au critère, et
+    # c'est ce qu'elle doit faire — mais elle ira au bout et livrera ses mesures
+    # au lieu de mourir ici.
+    CUP_ECHELLE = 0.1
+_appliquer_cup(CUP_ECHELLE)
+dire("cup_amplitude_cherchee", {
+    "recherche": {str(k): v for k, v in _recherche_amplitude.items()},
+    "echelle_retenue": CUP_ECHELLE,
+    "voute_deg_effectif": round(CUP_VOUTE_DEG * CUP_ECHELLE, 2),
+    "convergence_deg_effectif": round(CUP_CONVERGENCE_DEG * CUP_ECHELLE, 2),
+    "regle": "la plus GRANDE amplitude qui ne fait se traverser la paume à "
+             "aucun des 21 pas"})
+
+# ═══ LE BALAYAGE DE CUP, ET SES SEPT CRITÈRES ═══
+#
+# Vingt et un pas, et on juge le TRAJET autant que l'arrivée : une paume qui
+# atteindrait la bonne forme en passant par une mauvaise ne serait pas creuse,
+# elle serait chanceuse. Le chat 2 a mesuré un pouce–auriculaire qui se
+# rapproche jusqu'à `Cup = 0,5` puis REPART — c'est exactement ce qu'un
+# contrôle sur la seule arrivée ne peut pas voir.
+_balayage_cup = _balayer_cup()
+regler()
+_p_apres_cup, _ = sommets_evalues()
+_retour_cup = max((a - b).length for a, b in zip(_p_repos_global,
+                                                 _p_apres_cup)) * 1000
+
+_c0, _c1 = _balayage_cup[0], _balayage_cup[-1]
+_recul_largeur = max((_balayage_cup[i + 1]["largeur_mm"]
+                      - _balayage_cup[i]["largeur_mm"])
+                     for i in range(len(_balayage_cup) - 1))
+_recul_arc = max((_balayage_cup[i]["arc_mm"] - _balayage_cup[i + 1]["arc_mm"])
+                 for i in range(len(_balayage_cup) - 1))
+_inter_cup = sum(e["intersections"] for e in _balayage_cup)
+dire("balayage_cup", {
+    "pas": _balayage_cup,
+    "gain_arc_mm": round(_c1["arc_mm"] - _c0["arc_mm"], 2),
+    "gain_largeur_mm": round(_c1["largeur_mm"] - _c0["largeur_mm"], 2),
+    "gain_pouce_auriculaire_mm": round(_c1["pouce_auriculaire_mm"]
+                                       - _c0["pouce_auriculaire_mm"], 2),
+    "pire_recul_de_largeur_mm": round(_recul_largeur, 2),
+    "pire_recul_de_fleche_mm": round(_recul_arc, 2),
+    "intersections_totales": _inter_cup,
+    "retour_au_repos_mm": round(_retour_cup, 4)})
+exiger("Cup · la paume se voûte", _c1["arc_mm"] - _c0["arc_mm"] >= 6.0,
+       f'{_c1["arc_mm"] - _c0["arc_mm"]:+.2f} mm', "≥ +6 mm de flèche")
+exiger("Cup · la paume se resserre", _c1["largeur_mm"] - _c0["largeur_mm"] <= -6.0,
+       f'{_c1["largeur_mm"] - _c0["largeur_mm"]:+.2f} mm', "≤ −6 mm de largeur")
+exiger("Cup · l'auriculaire rejoint le pouce",
+       _c1["pouce_auriculaire_mm"] - _c0["pouce_auriculaire_mm"] <= -4.0,
+       f'{_c1["pouce_auriculaire_mm"] - _c0["pouce_auriculaire_mm"]:+.2f} mm',
+       "≤ −4 mm")
+exiger("Cup · le resserrement ne repart jamais en arrière",
+       _recul_largeur <= 0.5, f"{_recul_largeur:+.2f} mm", "≤ 0,50 mm par pas")
+exiger("Cup · la voûte ne s'effondre jamais en chemin",
+       _recul_arc <= 0.5, f"{_recul_arc:+.2f} mm", "≤ 0,50 mm par pas")
+exiger("Cup · aucune auto-intersection sur les 21 pas",
+       _inter_cup == 0, _inter_cup, "0 sommet")
+exiger("Cup · retour exact au repos", _retour_cup < 0.01,
+       f"{_retour_cup:.4f} mm", "< 0,01 mm")
+
+if not en_focus("all"):
+    # ═══ UN FICHIER DE FOCUS N'EST JAMAIS VALIDE ═══
+    # Il existe pour apprendre vite, pas pour livrer. Son nom le dit, et le
+    # rapport aussi, pour qu'aucune relecture ultérieure ne s'y trompe.
+    with open(os.path.join(DOSSIER, f"rapport-focus-{FOCUS}.json"), "w",
+              encoding="utf-8") as _f:
+        json.dump(rapport, _f, ensure_ascii=False, indent=2)
+    _wip = os.path.join(DOSSIER, f"WIP-focus-{FOCUS}-NON-VALIDE.blend")
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(_wip))
+    print(f"ATLAS_FOCUS_TERMINE {FOCUS} → {_wip}")
+    print(f"\n{len(ECHECS_ACCEPTATION)} critère(s) obligatoire(s) en échec.")
+    sys.exit(2 if ECHECS_ACCEPTATION else 0)
 
 # La contre-épreuve du seuil : une fermeture pleine SANS écartement fait
 # franchement se traverser les doigts. Si la tolérance y voyait peu de chose,
