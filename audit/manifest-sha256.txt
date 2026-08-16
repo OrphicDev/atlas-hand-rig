@@ -226,7 +226,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 6addba07c1444eafd3ed4958e46efbb15e0f5142eb4df541d92e45521de2e502  ./reports/chat-3/final/revue-images-b17e548.json
 4bb1aca24d2a1f15b5369ee30d411db2e7f82e59e603417c59deb23ae642eb79  ./reports/chat-3/final/revue-images.json
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
-280ff4a13b106f2c70e31062f214efd5ed6f22f56acb2b147e49e6e27a98dc1d  ./reports/chat-3/journal-generation.txt
+bf71db7bd985caff17705795135355fb6786420ba8e0acd7e76ba09c1657944f  ./reports/chat-3/journal-generation.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
 ffd7ea7c2d20a9f378e9b3ab34236618bfdd588cb2d8177c4796976007d79778  ./reports/chat-3/rapport-rig.L.json
@@ -396,7 +396,7 @@ d4069e1a5b2f8d4cbfd418a985f100a54dae43a55c8408e826adb50ef7f94880  ./reports/wip-
 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  ./reports/wip-chat-1/smoke-test-code-sortie.txt
 f051dcbfc44e64479bb69c862bbd7bcbe28a81eefb812cd109dc44b3b65dd618  ./reports/wip-chat-1/smoke-test-resume.md
 6c63cd9ef2c0981d00a9b203b9529cc773e0375828ad519c53b788563e81f59e  ./reports/wip-chat-1/smoke-test-verificateur.txt
-b8fb61b33ee1c0ee80aa5c2186ba4c88e9aac2738a83f075db4b1bd6f41f0b9c  ./rig-main.py
+8af51ddbb1d4f393c78adeefe3cc107989d48739740e852fa4c412b3b72176f2  ./rig-main.py
 0f70ee328b3a0fc2ee18ae2807b76a3e70feb51b479cbeadf076e8da6c6c4277  ./verifier-rig.py
 8b25c1f0e4c6b480d87bd1a13dcafbd19434aaf08fedc737e4732f3c83cc51ce  ./work/chat-3/corr/WIP-focus-cup-NON-VALIDE.blend
 bb68dfeed9a5c53bd13a4dfb8ae352ba20e523e27dd201db07a43c512012e50c  ./work/chat-3/corr/rapport-focus-cup.json

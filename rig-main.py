@@ -1984,8 +1984,12 @@ def intersections(pose_nom, familles=None):
     return trouve
 
 
-def ou_ca_traverse():
+def ou_ca_traverse(familles=None):
     """Quels OS portent les sommets qui se traversent, et non quelles familles.
+
+    `familles` restreint la question, comme dans `intersections` : sans lui, on
+    ne pouvait pas demander « où les QUATRE DOIGTS se traversent entre eux »,
+    et le diagnostic du poing arrivait noyé sous le pouce et la paume.
 
     « thumb/index » ne dit pas s'il s'agit de deux doigts qui se croisent ou de
     l'éminence thénar qui se replie contre la base de l'index — deux défauts
@@ -1998,7 +2002,7 @@ def ou_ca_traverse():
     par = {}
     for i, nm in _dom.items():
         f = famille(nm)
-        if f is not None:
+        if f is not None and (familles is None or f in familles):
             par.setdefault(f, []).append(i)
     arbres = {}
     for f, idx in par.items():
@@ -3391,20 +3395,54 @@ def _profondeur_propre(pas=0.05, cup=0.0):
     `cup` entre dans la mesure parce qu'une paume qui se creuse présente les
     rayons internes différemment : la fermeture propre n'est pas la même à
     plat et en coupe.
+
+    ═══ LE BALAYAGE VA JUSQU'AU BOUT, MÊME APRÈS LA PREMIÈRE TRAVERSÉE ═══
+
+    Cette fonction s'arrêtait au PREMIER niveau non nul et rendait le niveau
+    d'avant. C'était supposer la courbe monotone — plus le poing se ferme, plus
+    il se traverse — sans l'avoir jamais vérifié.
+
+    Mesuré : la courbe vaut 0 partout jusqu'à 0,60, puis **1** à 0,62. UN
+    sommet. La fonction rendait donc 0,60 et n'a jamais regardé 0,64, 0,70,
+    0,80. Le dépôt écrivait « 820 traversées à 0,7 » et « fermeture retenue
+    0,6 » comme si c'était la même mesure : ce sont deux points d'une courbe
+    dont personne n'avait vu le milieu.
+
+    Le VERDICT ne change pas — on rend toujours le dernier niveau tel que TOUS
+    les niveaux jusqu'à lui sont propres, parce qu'un poing qui se traverse en
+    chemin ne se rattrape pas d'avoir l'air propre plus loin. Mais la courbe
+    entière est rendue, et avec elle de quoi distinguer un accident d'un mur.
     """
-    _f = 0.0
     _detail = {}
+    _f = 0.0
+    _niveaux = []
     while _f <= 1.0 + 1e-9:
-        regler(Fist=_f, Cup=cup)
-        _ii = intersections(f"fist{_f:.2f}", familles=_QUATRE)
-        _t = sum(x["sommets_dedans"] for x in _ii)
-        _detail[round(_f, 2)] = _t
-        if _t:
-            regler()
-            return round(_f - pas, 2), _detail
+        _niveaux.append(round(_f, 2))
         _f += pas
+    _premier_sale = None
+    for _n in _niveaux:
+        regler(Fist=_n, Cup=cup)
+        _ii = intersections(f"fist{_n:.2f}", familles=_QUATRE)
+        _t = sum(x["sommets_dedans"] for x in _ii)
+        _detail[_n] = _t
+        if _t and _premier_sale is None:
+            _premier_sale = _n
+            # Le seul endroit où l'on peut encore demander OÙ ça traverse :
+            # une fois la boucle finie, la pose est perdue.
+            _detail["__ou__"] = ou_ca_traverse(familles=_QUATRE)
     regler()
-    return 1.0, _detail
+    if _premier_sale is None:
+        return 1.0, _detail
+    # dernier niveau tel que TOUT ce qui précède est propre
+    _propre = 0.0
+    for _n in _niveaux:
+        if _detail[_n]:
+            break
+        _propre = _n
+    _apres = {n: _detail[n] for n in _niveaux if n > _premier_sale}
+    _detail["__apres_le_premier_sale__"] = _apres
+    _detail["__mur__"] = bool(_apres) and min(_apres.values()) > 0
+    return round(_propre, 2), _detail
 
 
 # ═══ K_DIVERGENCE SE CHERCHE, IL NE SE POSE PAS ═══
@@ -3472,9 +3510,30 @@ dire("creusement_du_poing", {
     "regle": "le plus PETIT creusement qui laisse aller le plus loin"})
 
 _prof_finale, _diag_poing_detail = _profondeur_propre(pas=0.02, cup=CUP_POING)
-_diag_poing = {f: {"total": t} for f, t in _diag_poing_detail.items()}
+_courbe_poing = {f: t for f, t in _diag_poing_detail.items()
+                 if isinstance(f, float)}
+_diag_poing = {f: {"total": t} for f, t in _courbe_poing.items()}
 regler()
 dire("traversees_des_quatre_doigts_seuls", _diag_poing)
+
+# ═══ LA COURBE ENTIÈRE, ET CE QU'ELLE DIT DU BLOCAGE ═══
+# Un accident isolé et un mur ne se corrigent pas au même endroit : le premier
+# est un sommet mal peint ou une butée à un dixième de degré près, le second
+# est une anatomie qui ne passe pas. On les distingue, on ne les devine pas.
+_sales = sorted(f for f, t in _courbe_poing.items() if t)
+dire("courbe_du_poing", {
+    "premier_niveau_sale": _sales[0] if _sales else None,
+    "traversees_a_ce_niveau": _courbe_poing[_sales[0]] if _sales else 0,
+    "niveaux_sales": len(_sales),
+    "niveaux_mesures": len(_courbe_poing),
+    "apres_le_premier_sale": _diag_poing_detail.get(
+        "__apres_le_premier_sale__", {}),
+    "mur": _diag_poing_detail.get("__mur__"),
+    "ou_ca_traverse_au_premier_sale": _diag_poing_detail.get("__ou__", {}),
+    "lecture": ("mur : toutes les fermetures plus franches traversent aussi"
+                if _diag_poing_detail.get("__mur__")
+                else "accident : au moins une fermeture plus franche est propre"
+                if _sales else "aucune traversée sur toute la course")})
 
 # ═══ UNE FERMETURE À 0,6 EST UN DIAGNOSTIC, JAMAIS UNE LIVRAISON ═══
 #
@@ -3483,12 +3542,26 @@ dire("traversees_des_quatre_doigts_seuls", _diag_poing)
 # retombait sur sa valeur de repli. Le « poing réaliste mesuré » du dépôt était
 # une constante écrite en dur qu'aucune mesure n'avait jamais choisie, et
 # personne ne pouvait le voir puisque le nombre semblait venir d'un calcul.
-_propres = [f for f, m in _diag_poing.items() if m["total"] == 0]
-FERMETURE = max(_propres) if _propres else None
+#
+# ═══ ET « LE PLUS GRAND NIVEAU PROPRE » N'EST PAS « JUSQU'OÙ ÇA FERME » ═══
+#
+# `max(_propres)` était juste tant que le balayage s'arrêtait à la première
+# traversée : le dictionnaire ne contenait alors QUE des niveaux propres. Depuis
+# que la courbe va jusqu'au bout, ce même `max` rendrait 1,0 dès qu'un seul
+# niveau élevé se trouve propre — en enjambant les traversées du milieu. Un
+# poing qui se traverse en chemin ne se rattrape pas d'avoir l'air propre plus
+# loin : on prend le dernier niveau tel que TOUT ce qui précède est propre,
+# c'est-à-dire exactement ce que `_profondeur_propre` rend maintenant.
+FERMETURE = _prof_finale if not _sales or _sales[0] > 0.0 else None
+if FERMETURE is not None and _courbe_poing.get(FERMETURE, 0):
+    FERMETURE = None
 dire("fermeture_retenue", {
     "valeur": FERMETURE,
     "profondeur_propre_mesuree": _prof_finale,
-    "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"})
+    "plus_grand_niveau_propre_isole": max(
+        (f for f, t in _courbe_poing.items() if not t), default=None),
+    "raison": ("le dernier niveau tel que TOUT ce qui précède est propre, "
+               "quatre doigts SEULS")})
 exiger("le poing se ferme complètement sans traversée",
        FERMETURE is not None and abs(FERMETURE - 1.0) < 1e-6,
        FERMETURE if FERMETURE is not None else "aucun niveau propre",
