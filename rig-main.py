@@ -105,6 +105,46 @@ for _arg in args:
 def en_focus(*noms):
     return FOCUS == "all" or FOCUS in noms
 
+
+FOCUS_CONNUS = ("cup", "weights", "pinky", "fist", "ok", "all")
+if FOCUS not in FOCUS_CONNUS:
+    raise SystemExit(f"ATLAS_REFUS focus={FOCUS} inconnu — attendus "
+                     f"{'|'.join(FOCUS_CONNUS)}. Un focus mal orthographié "
+                     "tombait silencieusement dans la première sortie venue "
+                     "et rendait « 0 critère en échec ».")
+
+
+def fin_de_focus(nom):
+    """S'arrêter ICI, et seulement si c'est ICI que la question se pose.
+
+    ═══ CINQ MODES ANNONCÉS, UN SEUL QUI EXISTAIT ═══
+
+    La sortie était écrite `if not en_focus("all")`, posée une seule fois, à la
+    fin de la section `Cup`. Elle se déclenchait donc pour TOUT focus autre que
+    `all` : `focus=fist` s'arrêtait avant d'avoir touché au poing, `focus=ok`
+    avant d'avoir cherché l'anneau, `focus=weights` avant la repeinture — et
+    chacun rendait un `.blend`, un rapport et la ligne « 0 critère obligatoire
+    en échec ». Quatre des six modes du README étaient des synonymes de
+    `focus=cup` qui répondaient à côté de la question posée, avec l'aplomb
+    d'une mesure.
+
+    C'est le défaut de ce dépôt dans sa forme la plus pure : non pas une
+    réponse fausse, mais une réponse à une autre question.
+    """
+    if FOCUS != nom:
+        return
+    with open(os.path.join(DOSSIER, f"rapport-focus-{FOCUS}.json"), "w",
+              encoding="utf-8") as _f:
+        json.dump(rapport, _f, ensure_ascii=False, indent=2)
+    # ═══ UN FICHIER DE FOCUS N'EST JAMAIS VALIDE ═══
+    # Il existe pour apprendre vite, pas pour livrer. Son nom le dit, et le
+    # rapport aussi, pour qu'aucune relecture ultérieure ne s'y trompe.
+    _wip = os.path.join(DOSSIER, f"WIP-focus-{FOCUS}-NON-VALIDE.blend")
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(_wip))
+    print(f"ATLAS_FOCUS_TERMINE {FOCUS} → {_wip}")
+    print(f"\n{len(ECHECS_ACCEPTATION)} critère(s) obligatoire(s) en échec.")
+    sys.exit(2 if ECHECS_ACCEPTATION else 0)
+
 rapport = {"cote": "gauche" if COTE == "g" else "droite", "side": SIDE}
 
 
@@ -699,6 +739,10 @@ SIGNE = -1.0 if SENS_FLEXION < 0 else 1.0
 # troisième axe — `rotation_euler.z` — tourne donc autour de la normale de la
 # paume : c'est lui qui écarte les doigts.
 AXE_FLEXION, AXE_ECART = 0, 2
+# Le troisième axe n'avait pas de nom, et ce qui n'a pas de nom ne se cherche
+# pas : la vrille n'était ouverte que sur `CTRL_thumb_meta`, où elle est
+# désignée par son numéro au milieu d'une liste.
+AXE_VRILLE = 1
 
 bpy.ops.object.mode_set(mode="EDIT")
 EB = arm.edit_bones
@@ -1208,6 +1252,25 @@ def borne(deg_ext, deg_flex):
 LIM = {"01": borne(20.0, 90.0), "02": borne(0.0, 110.0), "03": borne(10.0, 80.0)}
 LIM_POUCE = {"01": borne(0.0, 60.0), "02": borne(0.0, 80.0)}
 ECART_MAX = math.radians(15.0)
+# ═══ LA VRILLE N'EST PAS NULLE PARTOUT : LA MCP N'EST PAS UNE CHARNIÈRE ═══
+#
+# La butée posait `min_y = max_y = 0` sur les TROIS articulations d'un doigt,
+# au motif qu'« une phalange ne vrille pas ». C'est exact pour la PIP et la
+# DIP, qui sont de vraies charnières à un degré de liberté. C'est faux pour la
+# métacarpo-phalangienne, qui est CONDYLIENNE : elle autorise une rotation
+# axiale passive, faible mais réelle, et c'est elle qui permet à une pulpe de
+# se présenter à plat contre une autre.
+#
+# Conséquence mesurée : `Hand_Pinky_Thumb` échoue sur l'ORIENTATION des pulpes
+# (−0,287 pour −0,50 exigé) et sur rien d'autre d'orientable. Les seuls canaux
+# capables de tourner une pulpe étaient les trois degrés du `thumb_meta` et le
+# creusement — le côté auriculaire n'en avait aucun.
+#
+# 10° : la borne basse de ce que la littérature accorde à la MCP en rotation
+# axiale passive. On préfère la borne basse parce qu'une vrille trop généreuse
+# fabrique des poses que la recherche adorerait et qu'un animateur trouverait
+# fausses.
+VRILLE_MCP_MAX = math.radians(10.0)
 
 _poses_limitees = 0
 for nom in NOMS4 + ["thumb"]:
@@ -1281,9 +1344,10 @@ for nom in NOMS4 + ["thumb"]:
             c.owner_space = "LOCAL"
             c.use_limit_x = c.use_limit_y = c.use_limit_z = True
             c.min_x, c.max_x = lo, hi
-            c.min_y = c.max_y = 0.0          # aucune vrille sur une phalange
-            # PIP et DIP sont des CHARNIÈRES : pas d'écartement. Seule la
-            # métacarpo-phalangienne en autorise un, et modéré.
+            # PIP et DIP sont des CHARNIÈRES : ni vrille ni écartement. Seule
+            # la métacarpo-phalangienne, condylienne, en autorise, et modérés.
+            v = VRILLE_MCP_MAX if suf == "01" else 0.0
+            c.min_y, c.max_y = -v, v
             e = ECART_MAX if suf == "01" else 0.0
             c.min_z, c.max_z = -e, e
             _poses_limitees += 1
@@ -1292,7 +1356,10 @@ for nom in NOMS4 + ["thumb"]:
         pb = rig.pose.bones[cnom]
         pb.lock_location = (True, True, True)
         pb.lock_scale = (True, True, True)
-        pb.lock_rotation = (False, True, suf != "01")
+        # Le verrou d'ergonomie doit suivre la butée, sinon l'axe existe dans la
+        # contrainte et reste grisé dans l'interface : un canal cherchable par
+        # le script et inaccessible à l'animateur n'est pas un canal.
+        pb.lock_rotation = (False, suf != "01", suf != "01")
 
 dire("phase_e", {"contraintes_de_butee": _poses_limitees,
                  "mcp_deg": [round(math.degrees(x), 1) for x in LIM["01"]],
@@ -1675,6 +1742,10 @@ dire("phase_f_correction", {
     "sommets_corriges": _corriges,
     "contamination_restante": _reste,
     "chair_encore_d_un_seul_tenant": {k: v[0] for k, v in _ent2.items()}})
+
+# La repeinture a rendu son verdict : `focus=weights` s'arrête ici, et pas
+# trois cents lignes plus haut à la fin de `Cup`.
+fin_de_focus("weights")
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -2290,18 +2361,7 @@ exiger("Cup · aucune auto-intersection sur les 21 pas",
 exiger("Cup · retour exact au repos", _retour_cup < 0.01,
        f"{_retour_cup:.4f} mm", "< 0,01 mm")
 
-if not en_focus("all"):
-    # ═══ UN FICHIER DE FOCUS N'EST JAMAIS VALIDE ═══
-    # Il existe pour apprendre vite, pas pour livrer. Son nom le dit, et le
-    # rapport aussi, pour qu'aucune relecture ultérieure ne s'y trompe.
-    with open(os.path.join(DOSSIER, f"rapport-focus-{FOCUS}.json"), "w",
-              encoding="utf-8") as _f:
-        json.dump(rapport, _f, ensure_ascii=False, indent=2)
-    _wip = os.path.join(DOSSIER, f"WIP-focus-{FOCUS}-NON-VALIDE.blend")
-    bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(_wip))
-    print(f"ATLAS_FOCUS_TERMINE {FOCUS} → {_wip}")
-    print(f"\n{len(ECHECS_ACCEPTATION)} critère(s) obligatoire(s) en échec.")
-    sys.exit(2 if ECHECS_ACCEPTATION else 0)
+fin_de_focus("cup")
 
 # La contre-épreuve du seuil : une fermeture pleine SANS écartement fait
 # franchement se traverser les doigts. Si la tolérance y voyait peu de chose,
@@ -3037,7 +3097,16 @@ PKY = [# Pour rejoindre l'auriculaire, le pouce traverse la paume : il passe don
        ("os", (f"CTRL_thumb_meta{SIDE}", 2), -45.0, 45.0),
        ("os", (f"CTRL_index_01{SIDE}", AXE_ECART), -20.0, 20.0),
        ("os", (f"CTRL_middle_01{SIDE}", AXE_ECART), -20.0, 20.0),
-       ("os", (f"CTRL_pinky_01{SIDE}", AXE_ECART), -20.0, 20.0)]
+       ("os", (f"CTRL_pinky_01{SIDE}", AXE_ECART), -20.0, 20.0),
+       # ═══ LA VRILLE DES DEUX MCP EN CONTACT ═══
+       # Cette pose n'échoue plus que sur l'ORIENTATION des pulpes (−0,287
+       # pour −0,50 exigé) : la distance est tenue à 0,9 mm. Or aucun canal ne
+       # tournait une pulpe du côté auriculaire — la butée mettait la vrille à
+       # zéro sur les trois articulations de chaque doigt, y compris la MCP qui
+       # est condylienne et non charnière. L'axe est ouvert à ±10° et cherché
+       # ici, sur les deux doigts qui doivent se présenter l'un à l'autre.
+       ("os", (f"CTRL_pinky_01{SIDE}", AXE_VRILLE), -10.0, 10.0),
+       ("os", (f"CTRL_thumb_01{SIDE}", AXE_VRILLE), -10.0, 10.0)]
 
 # ═══ PINCH ET OK NE SONT PAS LE MÊME GESTE ═══
 #
@@ -3139,7 +3208,42 @@ ANNEAU = [("prop", "Index_Curl", 0.62, 1.0),
           ("os", (f"CTRL_index_01{SIDE}", AXE_ECART), -15.0, 15.0),
           ("os", (f"CTRL_thumb_01{SIDE}", AXE_ECART), -10.0, 10.0)]
 
+# ═══ LA VRILLE DOIT DÉPLACER DE LA CHAIR, PAS SEULEMENT EXISTER ═══
+#
+# Piège n°12 du dépôt, dans sa version la plus coûteuse : ouvrir un axe dans
+# une butée, l'ajouter aux axes de recherche, le voir figurer dans le rapport —
+# et qu'aucun sommet ne bouge parce qu'un `lock_rotation`, un `use_y` de
+# COPY_ROTATION ou une seconde butée sur le MCH le ramène à zéro plus loin.
+# L'optimiseur explorerait alors un canal mort et rendrait un score identique
+# à toutes ses valeurs, sans jamais s'en plaindre.
+#
+# On ne lit donc pas le code : on tord, et on regarde si ça bouge.
+_vrille_bouge = {}
+for _b_vrille in (f"CTRL_pinky_01{SIDE}", f"CTRL_thumb_01{SIDE}",
+                  f"CTRL_index_01{SIDE}"):
+    poser_etat({})
+    _av, _ = sommets_evalues()
+    poser_etat({}, {(_b_vrille, AXE_VRILLE): 10.0})
+    _ap, _ = sommets_evalues()
+    _vrille_bouge[_b_vrille] = round(
+        max((a - b).length for a, b in zip(_ap, _av)) * 1000.0, 3)
+poser_etat({})
+dire("vrille_mcp_lue", {
+    "course_max_mm_a_10_deg": _vrille_bouge,
+    "borne_deg": round(math.degrees(VRILLE_MCP_MAX), 1)})
+_vrille_morte = [b for b, c in _vrille_bouge.items() if c < 0.1]
+if _vrille_morte:
+    raise SystemExit(
+        "ATLAS_REFUS la vrille de la MCP est ouverte dans la butée mais ne "
+        f"déplace aucune chair sur {_vrille_morte} — un axe cherchable qui ne "
+        "bouge rien fait explorer un canal mort à l'optimiseur, qui rendra le "
+        "même score à toutes ses valeurs sans jamais s'en plaindre.")
+
 CONTACTS = {}
+# ═══ `focus=ok` ET `focus=pinky` DOIVENT CHERCHER DEUX CHOSES DIFFÉRENTES ═══
+# Sans ce filtre, les deux relanceraient les trois contacts et ne se
+# distingueraient que par le nom du fichier produit — c'est-à-dire pas du tout.
+_FOCUS_DU_CONTACT = {"Hand_OK": "ok", "Hand_Pinky_Thumb": "pinky"}
 for _nom_c, _a, _b, _axes, _fond in (
         # Pincement : les trois autres doigts relâchés, pas enroulés.
         ("Hand_Pinch", "index", "thumb", PINCH, {}),
@@ -3154,6 +3258,8 @@ for _nom_c, _a, _b, _axes, _fond in (
         # explorer celles où l'index barre le chemin.
         ("Hand_Pinky_Thumb", "pinky", "thumb", PKY,
          {"Index_Curl": 0.95, "Middle_Curl": 0.95})):
+    if FOCUS in ("ok", "pinky") and _FOCUS_DU_CONTACT.get(_nom_c) != FOCUS:
+        continue
     if _nom_c == "Hand_OK":
         # ═══ TROIS ÉTAPES, PARCE QUE LES DEUX EXIGENCES SE COMBATTENT ═══
         #
@@ -3282,6 +3388,11 @@ for _nom_c, _a, _b, _axes, _fond in (
            {"dans_les_pulpes": _m["penetration"],
             "dans_la_main_entiere": _m.get("intersection_des_doigts")},
            "0 sommet, pulpes ET main entière")
+
+# `focus=ok` et `focus=pinky` s'arrêtent ici — après avoir cherché LEUR
+# contact, et pas celui du voisin.
+fin_de_focus("ok")
+fin_de_focus("pinky")
 
 # ═══════════════════════════════════════════════════════════════════
 #   L'AMPLITUDE DES CORRECTIFS DE VOLUME (§7.4)
@@ -3607,6 +3718,10 @@ exiger("le poing se ferme complètement sans traversée",
        "Fist = 1.0")
 if FERMETURE is None:
     FERMETURE = _prof_finale
+
+# Le poing a rendu sa courbe entière et son verdict : `focus=fist` s'arrête
+# ici. C'est la première fois qu'il s'arrête après avoir regardé un poing.
+fin_de_focus("fist")
 
 # ═══ HAND_FIST EST CHERCHÉE, PLUS POSÉE À LA MAIN ═══
 # `Fist=1, Thumb_Curl=1, Thumb_Opposition=0.6` plaquait les trois articulations

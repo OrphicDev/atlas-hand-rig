@@ -54,6 +54,8 @@ les autotests, hors Blender, à chaque exécution.
 | `outils/playblast-transitions.py` | les six séquences de transition |
 | `outils/revue-visuelle.py` | ce qu'une image montre, avant qu'on la note |
 | `outils/comparer-rapports.py` | le tableau de régression |
+| `outils/epreuve-classement-ok.py` | le classement des trois candidats du OK, hors Blender |
+| `outils/epreuve-focus.py` | chaque mode ciblé s'arrête-t-il à SA section ? |
 | `outils/matrice-acceptation.py` | la matrice du cahier, **produite** et jamais recopiée |
 | `reports/chat-3/final/poses/` | 78 rendus, six vues par pose |
 | `reports/chat-3/transitions/` | 150 images, six séquences |
@@ -88,9 +90,15 @@ blender --background --factory-startup --python-exit-code 1 \
   --python rig-main.py -- work homme g 110 mesure focus=cup
 ```
 
-`focus=cup|weights|pinky|fist|ok|all`. **Le fichier qu'un focus produit n'a
-jamais le droit de s'appeler valide** : il existe pour apprendre, et toute
-correction retenue doit être rejouée par `focus=all`.
+`focus=cup|weights|pinky|fist|ok|all`, et chacun s'arrête à SA section :
+`weights` après la repeinture, `cup` après le creusement, `ok` et `pinky` après
+LEUR contact, `fist` après la courbe du poing. Les contacts étant cherchés
+avant le poing dans le pipeline réel, `focus=fist` est le plus long des cinq.
+Un nom mal orthographié est refusé, pas traité comme le premier venu.
+
+**Le fichier qu'un focus produit n'a jamais le droit de s'appeler valide** : il
+existe pour apprendre, et toute correction retenue doit être rejouée par
+`focus=all`.
 
 `--python-exit-code 1` n'est pas décoratif : sans lui, les scripts sortent en
 code 0 après un plantage, et un échec se lit comme un succès.
@@ -133,6 +141,17 @@ Chacun a coûté des heures, et aucun n'aurait planté bruyamment.
     thénar.
 12. **Un driver de constante nulle ne pilote rien** : c'est un champ rempli au
     contrat que rien ne lit à l'arrivée.
+13. **Une mesure qui s'arrête au premier échec suppose la courbe monotone.** Le
+    poing plafonnait à 0,60 pour **un** sommet traversant à 0,62, et personne
+    n'avait jamais regardé 0,64.
+14. **Un mode ciblé qui répond à côté de la question est pire qu'un mode
+    absent.** Quatre des six `focus=` s'arrêtaient à la fin de `Cup` et
+    rendaient « 0 critère obligatoire en échec » — pour une section qu'ils
+    n'avaient pas atteinte.
+15. **Un axe verrouillé par une butée reste cherchable par l'optimiseur.** La
+    vrille est ouverte à ±10° sur la MCP, condylienne, et à 0 sur la PIP et la
+    DIP qui sont des charnières ; un garde tord chaque os et refuse de
+    continuer si aucune chair ne bouge.
 
 ---
 

@@ -1170,3 +1170,5 @@ ATLAS_POSES_DE_VALIDATION {"Hand_Neutral": {"course_max_mm": 0.0, "auriculaire_a
 ATLAS_TRANSITION_A_NETTOYER Hand_Fist ronde 1 : {"0.2": 5, "0.3": 25, "0.4": 68, "0.5": 155, "0.6": 218, "0.7": 1812, "0.8": 1515, "0.9": 1475, "1.0": 1596}
 ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 1/6 reste=5612 sur 9 étapes
 ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 2/6 reste=5359 sur 9 étapes
+ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 3/6 reste=5216 sur 9 étapes
+ATLAS_BATTEMENT transition Hand_Fist ronde 1 tour 4/6 reste=5076 sur 9 étapes
