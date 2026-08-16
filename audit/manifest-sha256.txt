@@ -10,6 +10,7 @@ d8a20981c960507f157a6a6a1f72ca7c38b1b3efe1f0a2497a1d8501c17d2340  ./atelier/corr
 5056cc710aca9e136408b449f5aaed0edddba200d97f18e9e97560aba79a655e  ./atelier/humain.py
 3a3f6cfa6337dd9ce3fbf569a6fcb974471891136b6907a3faa7884b82a83a4d  ./atelier/mains.py
 52c7bef2e84d847d70463aecf9ecc0a7dcb2f9a188792eedb8fe156658a54538  ./atelier/mesures_paume.py
+f91e7e8b0e4359e0a68aa40b39185d85e8394e29ba4d6951161aca3132aaea88  ./atelier/miroir.py
 41e7fafd79cdbfcd00ec18aba8a912c16db85093659da6b2f699877bd9f2d275  ./atelier/portillon.py
 672196e2740046d086f89f23c132794ecbf156e5e837afc357ff4ca421145f69  ./atelier/transitions.py
 ce41564fdb22f2c8f52f7f51f47a849e295ad1fac8ee2c7948c801295c0fb6e4  ./audit/AUDIT_PACKET_HANDS.md
