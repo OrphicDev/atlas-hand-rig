@@ -4020,7 +4020,30 @@ for _cible in _TRANSITIONS:
     if _cible not in _POSES_D:
         continue
     _pr, _o = _POSES_D[_cible]
-    if etapes_fautives(_pr, _o):
+    # ═══ UNE TRANSITION NE PEUT PAS ÊTRE PLUS PROPRE QUE SON ARRIVÉE ═══
+    #
+    # L'étape t = 1,0 EST la pose finale. Si celle-ci se traverse, aucun réglage
+    # du trajet ne rendra la transition propre : le nettoyeur cherche alors
+    # pendant des rondes entières une chose qui n'existe pas, et son échec se
+    # lit comme un échec de transition alors que c'est un échec de POSE.
+    #
+    # Mesuré sur `Hand_Fist` : le trajet passe de 218 traversées à t = 0,6 à
+    # 1812 à t = 0,7, et la pose d'arrivée en compte 1596 à elle seule. Trois
+    # rondes de six tours ont tourné là-dessus sans jamais pouvoir aboutir.
+    #
+    # On le dit, et on n'y passe pas d'heures. Le critère de transition échoue
+    # quand même — mais en nommant sa vraie cause.
+    poser_etat(_pr, _o)
+    _inter_arrivee = intersections(f"{_cible}@1.0")
+    _n_arrivee = sum(x["sommets_dedans"] for x in _inter_arrivee)
+    if _n_arrivee:
+        print(f"ATLAS_TRANSITION_BLOQUEE_PAR_ARRIVEE {_cible} : "
+              + json.dumps({"sommets_a_l_arrivee": _n_arrivee,
+                            "detail": _inter_arrivee,
+                            "lecture": "l'étape t = 1,0 EST la pose finale ; "
+                                       "aucun réglage du trajet ne peut la "
+                                       "rendre propre"}, ensure_ascii=False))
+    if etapes_fautives(_pr, _o) and not _n_arrivee:
         _o, _info = nettoyer_transition(_cible, _pr, _o, AXES_NETTOYAGE)
         _POSES_D[_cible] = (_pr, _o)
         POSES = [(n, p, (_o if n == _cible else oo)) for n, p, oo in POSES]

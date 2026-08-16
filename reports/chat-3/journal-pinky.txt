@@ -26,3 +26,7 @@ ATLAS_SONDE_INTERSECTION {"au_repos": "aucune", "verdict": "utilisable"}
 ATLAS_PRESERVE_VOLUME {"sans": {"intersections": 14798, "compression_min": 0.0976, "compression_p1": 0.2652, "aretes_mesurees": 348384}, "avec": {"intersections": 14703, "compression_min": 0.0147, "compression_p1": 0.1389, "aretes_mesurees": 348384}, "retenu": false, "grandeurs_qui_regressent_avec": ["compression_min", "compression_p1"], "regle": "on garde la conservation de volume SAUF si une grandeur stricte régresse ; sur ce maillage les quaternions duaux pincent plus qu'ils ne préservent", "gele": "ne plus toucher après création des shape keys"}
 ATLAS_CUP_AMPLITUDE échelle=1.00 traversées= 18327 arc=+43.88 largeur=-20.61
 ATLAS_CUP_AMPLITUDE échelle=0.85 traversées= 15089 arc=+29.29 largeur=-21.07
+ATLAS_CUP_AMPLITUDE échelle=0.70 traversées= 10099 arc=+19.52 largeur=-20.00
+ATLAS_CUP_AMPLITUDE échelle=0.55 traversées=  3345 arc=+13.69 largeur=-17.50
+ATLAS_CUP_AMPLITUDE échelle=0.45 traversées=   387 arc=+10.61 largeur=-15.15
+ATLAS_CUP_AMPLITUDE échelle=0.35 traversées=     3 arc= +7.90 largeur=-12.34
