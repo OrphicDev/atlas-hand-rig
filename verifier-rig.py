@@ -261,8 +261,42 @@ for _nom in sorted(ACTIONS):
 # du geste : l'audit a relevé 355 traversées à l'étape 0,9 de Neutral→Fist,
 # alors que les deux extrémités sont nettes.
 resultat["transitions"] = {}
+# ═══ UNE ACTION PRÉSENTE NE SE REMPLACE PAS PAR UNE DROITE (§11.3) ═══
+#
+# Ce vérificateur RECALCULAIT la transition — la pose cible multipliée par la
+# fraction. Il mesurait donc un mouvement que personne n'anime, et un
+# contournement lui était invisible par construction : le pouce d'un poing
+# passe par l'extérieur, la droite coupe le coin et traverse l'index.
+#
+# Quand l'action `Neutral_to_<pose>` existe, on joue SES images. Elle fait
+# autorité, et la substituer serait juger autre chose que ce qui est livré.
+try:
+    import transitions as _trans_mod
+except Exception:                                            # noqa: BLE001
+    _trans_mod = None
+
+resultat["transitions_reelles"] = {}
 for _cible in ("Hand_Fist", "Hand_Point", "Hand_Pinch", "Hand_OK",
                "Hand_Cupped", "Hand_Pinky_Thumb"):
+    _nom_act = f"Neutral_to_{_cible}"
+    if _nom_act in ACTIONS and _trans_mod is not None:
+        _act_r = ACTIONS[_nom_act]
+        _fr = {}
+        for _img in range(1, _trans_mod.IMAGES_TUTO + 1):
+            _trans_mod.rejouer(rig, SIDE, _act_r, _img)
+            _t = traversees()
+            if _t:
+                _fr[str(_img)] = _t
+        neutre()
+        resultat["transitions_reelles"][_nom_act] = _fr or "aucune"
+        exiger(f"{_nom_act} · aucune auto-intersection sur ses images",
+               not _fr, _fr or "aucune", "aucune à chaque image")
+        continue
+    # Pas d'action réelle : on retombe sur l'échantillonnage linéaire, et on le
+    # DIT. Un repli silencieux ferait passer une mesure dégradée pour la bonne.
+    if _cible in ACTIONS:
+        print(f"ATLAS_TRANSITION_SANS_ACTION {_cible} — "
+              f"échantillonnage linéaire de repli, moins sévère")
     if _cible not in ACTIONS:
         continue
     _fautes = {}

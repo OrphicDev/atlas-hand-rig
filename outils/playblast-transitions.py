@@ -39,6 +39,10 @@ _ici = os.path.dirname(os.path.abspath(__file__))
 _racine = os.path.dirname(_ici)
 sys.path.insert(0, os.path.join(_racine, "atelier"))
 import eclairage                                              # noqa: E402
+try:
+    import transitions as _trans_mod
+except Exception:                                            # noqa: BLE001
+    _trans_mod = None
 
 _args = sys.argv[sys.argv.index("--") + 1:]
 FICHIER = _args[0]
@@ -187,6 +191,35 @@ for _cible in TRANSITIONS:
     if _cible not in ACTIONS:
         print(f"ATLAS_PLAYBLAST_ABSENTE {_cible}")
         continue
+    # ═══ FILMER LA VRAIE ACTION QUAND ELLE EXISTE (§11.3) ═══
+    # Sinon on filmerait une droite recalculée pendant que le vérificateur
+    # juge une courbe qui contourne — deux mouvements différents portant le
+    # même nom, et la vidéo ne prouverait rien de ce qui est mesuré.
+    _nom_act = f"Neutral_to_{_cible}"
+    if _nom_act in ACTIONS and _trans_mod is not None:
+        _dossier_seq = os.path.join(DOSSIER, f"Neutral-vers-{_cible}")
+        os.makedirs(_dossier_seq, exist_ok=True)
+        sc.render.image_settings.file_format = "PNG"
+        _n_img = _trans_mod.IMAGES_TUTO
+        _ecrites = []
+        for _f in range(1, _n_img + 1):
+            _trans_mod.rejouer(rig, SIDE, ACTIONS[_nom_act], _f)
+            _png = os.path.join(_dossier_seq, f"{_f:04d}.png")
+            eclairage.rendre(_png, sc)
+            if os.path.exists(_png) and os.path.getsize(_png) > 1024:
+                _ecrites.append(_png)
+        ok = len(_ecrites) == _n_img
+        print(f"ATLAS_PLAYBLAST {_cible} (ACTION RÉELLE) : "
+              f"{len(_ecrites)}/{_n_img} images — "
+              f"{'complet' if ok else 'INCOMPLET'}")
+        _fait.append({"transition": f"Neutral→{_cible}",
+                      "dossier": os.path.relpath(_dossier_seq, DOSSIER),
+                      "images": len(_ecrites), "attendues": _n_img,
+                      "source": "action réelle", "ecrit": ok})
+        neutre()
+        continue
+    print(f"ATLAS_PLAYBLAST_SANS_ACTION {_cible} — interpolation linéaire de "
+          f"repli, ce n'est PAS le mouvement que le vérificateur juge")
     rot, props = lire_pose(_cible)
     # On CUIT la transition en clés : une par image, à la fraction exacte que
     # le vérificateur mesure. La vidéo montre alors le mouvement mesuré, pas
