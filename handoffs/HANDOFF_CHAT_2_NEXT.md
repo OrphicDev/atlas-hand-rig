@@ -210,3 +210,70 @@ l'inverse.
 
    Règle générale, et elle vaut au-delà de ce dépôt : *un zéro cohérent est le
    mensonge le plus difficile à voir.* Une sonde doit pouvoir échouer.
+
+---
+
+# CHAT 3 — CE QUI A CHANGE
+
+Le cahier du chat 3 est **entierement ecrit en code**. Ce qui reste est de la
+mesure, pas de l'ecriture.
+
+## Ce qui est acquis et prouve
+
+| | mesure |
+| --- | --- |
+| `Cup` voute et resserre | arc **+6,71 mm**, largeur **−10,79**, 7 criteres sur 7 |
+| le cerclage rouge | **−4,94 mm** (etait −0,88) |
+| poids repeints | **0 sommet** entre rayons non voisins (etait 12 329 ambigus) |
+| os correctifs | crees, repos deplace de **0,00013 mm** |
+| la chaine va au bout | un `.blend` sort enfin |
+
+## Ce qui resiste, et ce que je sais de chacun
+
+- **`Hand_Pinky_Thumb`** — la pose EXISTE (0,10 mm a l'approche), le nettoyage
+  ne la tient pas. Les os correctifs sont en place mais leur amplitude n'est
+  pas encore cherchee : c'est le §7.4, et c'est la prochaine marche.
+- **`Hand_OK`** — l'anneau et le contact sont antagonistes. La recherche en
+  trois etapes est ecrite (§10.3) et jamais encore prouvee. Attention : sur le
+  dernier `.blend`, NI le OK NI le Pinch n'ont d'anneau mesurable — le module
+  refuse, et ce refus est le resultat.
+- **le poing** — 0,6 maximum, les quatre doigts SEULS se traversent 820 fois a
+  0,7. `K_DIVERGENCE` est desormais cherche ; s'il ne suffit pas, c'est un
+  probleme de volume et non de pose.
+- **aucun rendu Cycles** n'a encore ete produit par ces scripts.
+
+## Les pieges que j'ai payes, en plus des cinq du chat 2
+
+6. **Un driver reecrit sa voie.** Sonder un canal pilote sans le taire rend
+   +0,00 partout et un tableau parfaitement coherent et parfaitement faux.
+7. **Un `except` qui ne rend pas l'etat ne rattrape rien.** Une exception a
+   laisse l'armature en mode EDITION ; tout ce qui suivait a mesure une main
+   immobile — compression 1,0, zero traversee — sur un poing jamais ferme.
+8. **Une origine relevee avant que l'origine soit decidee n'est pas une
+   origine.** Le repos capture avant le test A/B de Preserve Volume donnait
+   0,0401 mm de derive.
+9. **Compter la mauvaise chose.** Mon critere de repeinture punissait le
+   melange entre rayons VOISINS, que le cahier declare legitime.
+10. **Une tranche a un seul bord fabrique un anneau.** 19 mm de diametre utile
+    attribues a un PINCEMENT, parce que le contour n'avait qu'un cote.
+11. **Un masque geodesique trop large deplace la paume** au lieu de corriger le
+    thenar : 10 896 sommets, soit un cinquieme de la main.
+
+## Les instruments ajoutes
+
+`outils/` : sonde-creux, sonde-poids-main, anneau, revue-visuelle,
+matrice-acceptation.
+`atelier/` : mesures_paume, correctifs, transitions, jacobienne, miroir.
+
+Cinquante et un refus exerces par les autotests purs. Trois modules ont ete
+ecrits par agents PUIS REFUTES par un second agent : onze defauts reels
+trouves, dont une garde placee apres une normalisation donc aveugle, et une
+contre-epreuve qui testait IEEE 754.
+
+## La regle qui resume tout
+
+Le verificateur etendu, lance sur le fichier que l'ancien jugeait
+« 22 reussis / 9 echoues », rend cinq echecs de plus — au chiffre pres ce que
+les sondes avaient trouve a la main.
+
+**Le rig n'etait pas moins casse avant. L'instrument ne regardait pas.**
