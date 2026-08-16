@@ -1,0 +1,786 @@
+{
+ "dossier": "images",
+ "images": 60,
+ "mesures": [
+  {
+   "fichier": "Hand_Cupped-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.2959,
+   "luminance_max": 0.8781,
+   "amplitude": 0.5822,
+   "relief_local": 0.015
+  },
+  {
+   "fichier": "Hand_Cupped-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.451,
+   "luminance_max": 0.8468,
+   "amplitude": 0.3957,
+   "relief_local": 0.0195
+  },
+  {
+   "fichier": "Hand_Cupped-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4679,
+   "luminance_max": 0.8625,
+   "amplitude": 0.3945,
+   "relief_local": 0.0207
+  },
+  {
+   "fichier": "Hand_Cupped-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3464,
+   "luminance_max": 0.891,
+   "amplitude": 0.5447,
+   "relief_local": 0.0139
+  },
+  {
+   "fichier": "Hand_Fist-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3376,
+   "luminance_max": 0.8518,
+   "amplitude": 0.5142,
+   "relief_local": 0.0124
+  },
+  {
+   "fichier": "Hand_Fist-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3894,
+   "luminance_max": 0.8549,
+   "amplitude": 0.4655,
+   "relief_local": 0.0116
+  },
+  {
+   "fichier": "Hand_Fist-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3794,
+   "luminance_max": 0.8714,
+   "amplitude": 0.492,
+   "relief_local": 0.0119
+  },
+  {
+   "fichier": "Hand_Fist-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3659,
+   "luminance_max": 0.8753,
+   "amplitude": 0.5095,
+   "relief_local": 0.0124
+  },
+  {
+   "fichier": "Hand_Fist_25-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3184,
+   "luminance_max": 0.8597,
+   "amplitude": 0.5413,
+   "relief_local": 0.0123
+  },
+  {
+   "fichier": "Hand_Fist_25-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4162,
+   "luminance_max": 0.8585,
+   "amplitude": 0.4423,
+   "relief_local": 0.0152
+  },
+  {
+   "fichier": "Hand_Fist_25-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4289,
+   "luminance_max": 0.8636,
+   "amplitude": 0.4347,
+   "relief_local": 0.0172
+  },
+  {
+   "fichier": "Hand_Fist_25-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.342,
+   "luminance_max": 0.8899,
+   "amplitude": 0.5479,
+   "relief_local": 0.0131
+  },
+  {
+   "fichier": "Hand_Fist_50-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3205,
+   "luminance_max": 0.8597,
+   "amplitude": 0.5392,
+   "relief_local": 0.0107
+  },
+  {
+   "fichier": "Hand_Fist_50-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4098,
+   "luminance_max": 0.8585,
+   "amplitude": 0.4488,
+   "relief_local": 0.0135
+  },
+  {
+   "fichier": "Hand_Fist_50-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4151,
+   "luminance_max": 0.8675,
+   "amplitude": 0.4524,
+   "relief_local": 0.0139
+  },
+  {
+   "fichier": "Hand_Fist_50-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3385,
+   "luminance_max": 0.8899,
+   "amplitude": 0.5514,
+   "relief_local": 0.0109
+  },
+  {
+   "fichier": "Hand_Fist_75-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3146,
+   "luminance_max": 0.8518,
+   "amplitude": 0.5373,
+   "relief_local": 0.0101
+  },
+  {
+   "fichier": "Hand_Fist_75-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4012,
+   "luminance_max": 0.8557,
+   "amplitude": 0.4546,
+   "relief_local": 0.0119
+  },
+  {
+   "fichier": "Hand_Fist_75-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.409,
+   "luminance_max": 0.8625,
+   "amplitude": 0.4534,
+   "relief_local": 0.0142
+  },
+  {
+   "fichier": "Hand_Fist_75-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3324,
+   "luminance_max": 0.8899,
+   "amplitude": 0.5575,
+   "relief_local": 0.0104
+  },
+  {
+   "fichier": "Hand_Neutral-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.311,
+   "luminance_max": 0.8518,
+   "amplitude": 0.5408,
+   "relief_local": 0.0133
+  },
+  {
+   "fichier": "Hand_Neutral-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4339,
+   "luminance_max": 0.8664,
+   "amplitude": 0.4325,
+   "relief_local": 0.0192
+  },
+  {
+   "fichier": "Hand_Neutral-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4546,
+   "luminance_max": 0.8703,
+   "amplitude": 0.4157,
+   "relief_local": 0.02
+  },
+  {
+   "fichier": "Hand_Neutral-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.338,
+   "luminance_max": 0.895,
+   "amplitude": 0.5569,
+   "relief_local": 0.0133
+  },
+  {
+   "fichier": "Hand_OK-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3259,
+   "luminance_max": 0.8597,
+   "amplitude": 0.5338,
+   "relief_local": 0.0139
+  },
+  {
+   "fichier": "Hand_OK-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4089,
+   "luminance_max": 0.8557,
+   "amplitude": 0.4468,
+   "relief_local": 0.0142
+  },
+  {
+   "fichier": "Hand_OK-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4188,
+   "luminance_max": 0.8675,
+   "amplitude": 0.4487,
+   "relief_local": 0.0152
+  },
+  {
+   "fichier": "Hand_OK-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3634,
+   "luminance_max": 0.8821,
+   "amplitude": 0.5187,
+   "relief_local": 0.0139
+  },
+  {
+   "fichier": "Hand_Open-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.31,
+   "luminance_max": 0.8468,
+   "amplitude": 0.5368,
+   "relief_local": 0.013
+  },
+  {
+   "fichier": "Hand_Open-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4303,
+   "luminance_max": 0.8585,
+   "amplitude": 0.4283,
+   "relief_local": 0.0189
+  },
+  {
+   "fichier": "Hand_Open-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4533,
+   "luminance_max": 0.8703,
+   "amplitude": 0.417,
+   "relief_local": 0.0194
+  },
+  {
+   "fichier": "Hand_Open-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3364,
+   "luminance_max": 0.895,
+   "amplitude": 0.5585,
+   "relief_local": 0.013
+  },
+  {
+   "fichier": "Hand_Pinch-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3259,
+   "luminance_max": 0.8597,
+   "amplitude": 0.5338,
+   "relief_local": 0.0139
+  },
+  {
+   "fichier": "Hand_Pinch-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4089,
+   "luminance_max": 0.8557,
+   "amplitude": 0.4468,
+   "relief_local": 0.0142
+  },
+  {
+   "fichier": "Hand_Pinch-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4188,
+   "luminance_max": 0.8675,
+   "amplitude": 0.4487,
+   "relief_local": 0.0152
+  },
+  {
+   "fichier": "Hand_Pinch-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3634,
+   "luminance_max": 0.8821,
+   "amplitude": 0.5187,
+   "relief_local": 0.0139
+  },
+  {
+   "fichier": "Hand_Pinky_Thumb-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.323,
+   "luminance_max": 0.8507,
+   "amplitude": 0.5277,
+   "relief_local": 0.0136
+  },
+  {
+   "fichier": "Hand_Pinky_Thumb-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3905,
+   "luminance_max": 0.8468,
+   "amplitude": 0.4562,
+   "relief_local": 0.0113
+  },
+  {
+   "fichier": "Hand_Pinky_Thumb-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3904,
+   "luminance_max": 0.8636,
+   "amplitude": 0.4732,
+   "relief_local": 0.0129
+  },
+  {
+   "fichier": "Hand_Pinky_Thumb-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.358,
+   "luminance_max": 0.8742,
+   "amplitude": 0.5162,
+   "relief_local": 0.0128
+  },
+  {
+   "fichier": "Hand_Point-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.329,
+   "luminance_max": 0.8507,
+   "amplitude": 0.5217,
+   "relief_local": 0.012
+  },
+  {
+   "fichier": "Hand_Point-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3874,
+   "luminance_max": 0.8507,
+   "amplitude": 0.4633,
+   "relief_local": 0.0118
+  },
+  {
+   "fichier": "Hand_Point-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3957,
+   "luminance_max": 0.8675,
+   "amplitude": 0.4718,
+   "relief_local": 0.0131
+  },
+  {
+   "fichier": "Hand_Point-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3603,
+   "luminance_max": 0.8781,
+   "amplitude": 0.5179,
+   "relief_local": 0.0127
+  },
+  {
+   "fichier": "Hand_Relaxed-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3258,
+   "luminance_max": 0.8625,
+   "amplitude": 0.5366,
+   "relief_local": 0.0137
+  },
+  {
+   "fichier": "Hand_Relaxed-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4164,
+   "luminance_max": 0.8557,
+   "amplitude": 0.4393,
+   "relief_local": 0.0153
+  },
+  {
+   "fichier": "Hand_Relaxed-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.4301,
+   "luminance_max": 0.8625,
+   "amplitude": 0.4323,
+   "relief_local": 0.0174
+  },
+  {
+   "fichier": "Hand_Relaxed-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3454,
+   "luminance_max": 0.8899,
+   "amplitude": 0.5445,
+   "relief_local": 0.0142
+  },
+  {
+   "fichier": "Hand_Spread_Min-auriculaire.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3121,
+   "luminance_max": 0.8557,
+   "amplitude": 0.5437,
+   "relief_local": 0.0135
+  },
+  {
+   "fichier": "Hand_Spread_Min-dos.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.436,
+   "luminance_max": 0.8675,
+   "amplitude": 0.4315,
+   "relief_local": 0.0196
+  },
+  {
+   "fichier": "Hand_Spread_Min-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.456,
+   "luminance_max": 0.8703,
+   "amplitude": 0.4143,
+   "relief_local": 0.0202
+  },
+  {
+   "fichier": "Hand_Spread_Min-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.3395,
+   "luminance_max": 0.895,
+   "amplitude": 0.5554,
+   "relief_local": 0.0135
+  },
+  {
+   "fichier": "gros-plan-Hand_Fist-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.6881,
+   "luminance_max": 0.8585,
+   "amplitude": 0.1704,
+   "relief_local": 0.0105
+  },
+  {
+   "fichier": "gros-plan-Hand_Fist-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.5654,
+   "luminance_max": 0.8585,
+   "amplitude": 0.2931,
+   "relief_local": 0.0152
+  },
+  {
+   "fichier": "gros-plan-Hand_OK-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.5878,
+   "luminance_max": 0.8557,
+   "amplitude": 0.2679,
+   "relief_local": 0.011
+  },
+  {
+   "fichier": "gros-plan-Hand_OK-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.586,
+   "luminance_max": 0.8557,
+   "amplitude": 0.2698,
+   "relief_local": 0.0143
+  },
+  {
+   "fichier": "gros-plan-Hand_Pinch-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.5878,
+   "luminance_max": 0.8557,
+   "amplitude": 0.2679,
+   "relief_local": 0.011
+  },
+  {
+   "fichier": "gros-plan-Hand_Pinch-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.586,
+   "luminance_max": 0.8557,
+   "amplitude": 0.2698,
+   "relief_local": 0.0143
+  },
+  {
+   "fichier": "gros-plan-Hand_Pinky_Thumb-paume.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.6406,
+   "luminance_max": 0.8664,
+   "amplitude": 0.2258,
+   "relief_local": 0.0093
+  },
+  {
+   "fichier": "gros-plan-Hand_Pinky_Thumb-pouce.png",
+   "sujet_pct": 100.0,
+   "ecretage_pct": 0.0,
+   "bouchage_pct": 0.0,
+   "luminance_moyenne": 0.8238,
+   "luminance_max": 0.895,
+   "amplitude": 0.0712,
+   "relief_local": 0.0038
+  }
+ ],
+ "fautives": {
+  "Hand_Cupped-auriculaire.png": [
+   "relief local 0.015 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Cupped-dos.png": [
+   "relief local 0.019 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Cupped-pouce.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist-auriculaire.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist-dos.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist-paume.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist-pouce.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_25-auriculaire.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_25-dos.png": [
+   "relief local 0.015 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_25-paume.png": [
+   "relief local 0.017 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_25-pouce.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_50-auriculaire.png": [
+   "relief local 0.011 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_50-dos.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_50-paume.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_50-pouce.png": [
+   "relief local 0.011 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_75-auriculaire.png": [
+   "relief local 0.010 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_75-dos.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_75-paume.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Fist_75-pouce.png": [
+   "relief local 0.010 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Neutral-auriculaire.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Neutral-dos.png": [
+   "relief local 0.019 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Neutral-pouce.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_OK-auriculaire.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_OK-dos.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_OK-paume.png": [
+   "relief local 0.015 — aucun modelé là où il faut juger"
+  ],
+  "Hand_OK-pouce.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Open-auriculaire.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Open-dos.png": [
+   "relief local 0.019 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Open-paume.png": [
+   "relief local 0.019 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Open-pouce.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinch-auriculaire.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinch-dos.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinch-paume.png": [
+   "relief local 0.015 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinch-pouce.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinky_Thumb-auriculaire.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinky_Thumb-dos.png": [
+   "relief local 0.011 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinky_Thumb-paume.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Pinky_Thumb-pouce.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Point-auriculaire.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Point-dos.png": [
+   "relief local 0.012 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Point-paume.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Point-pouce.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Relaxed-auriculaire.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Relaxed-dos.png": [
+   "relief local 0.015 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Relaxed-paume.png": [
+   "relief local 0.017 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Relaxed-pouce.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Spread_Min-auriculaire.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Spread_Min-dos.png": [
+   "relief local 0.020 — aucun modelé là où il faut juger"
+  ],
+  "Hand_Spread_Min-pouce.png": [
+   "relief local 0.013 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_Fist-paume.png": [
+   "relief local 0.011 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_Fist-pouce.png": [
+   "relief local 0.015 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_OK-paume.png": [
+   "relief local 0.011 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_OK-pouce.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_Pinch-paume.png": [
+   "relief local 0.011 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_Pinch-pouce.png": [
+   "relief local 0.014 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_Pinky_Thumb-paume.png": [
+   "relief local 0.009 — aucun modelé là où il faut juger"
+  ],
+  "gros-plans/gros-plan-Hand_Pinky_Thumb-pouce.png": [
+   "amplitude de luminance 0.071 — image plate",
+   "relief local 0.004 — aucun modelé là où il faut juger"
+  ]
+ },
+ "seuils": {
+  "ecretage_pct": 2.0,
+  "amplitude": 0.1,
+  "sujet_pct": 4.0,
+  "relief_local": 0.02
+ }
+}
