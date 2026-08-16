@@ -42,3 +42,134 @@ ATLAS_RETOUR_AU_REPOS {"ecart_max_mm": 0.0, "course_du_poing_mm": 121.5, "verdic
 ATLAS_EMPREINTES {"thumb": {"sommets": 760, "part_de_la_phalange": 0.33}, "index": {"sommets": 743, "part_de_la_phalange": 0.31}, "pinky": {"sommets": 638, "part_de_la_phalange": 0.29}}
 ATLAS_PHASE_H_PRETE
 ATLAS_OPPOSITION_MESUREE {"angles_du_metacarpien_deg": [50.0, 48.1, 0.0], "ecart_des_empreintes_mm": 0.99, "se_font_face": -0.98, "creusement": 0.6, "repli_auriculaire": 0.4, "ce_que_j_avais_suppose_deg": [40.0, -55.0, 22.0]}
+ATLAS_BATTEMENT index/thumb tour 1/10 score=17663.1 distance=2.81mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 2/10 score=813.2 distance=0.95mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 3/10 score=813.2 distance=0.95mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 4/10 score=813.2 distance=0.95mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 5/10 score=813.2 distance=0.95mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/10 score=809.2 distance=0.90mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 7/10 score=282.5 distance=0.16mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 8/10 score=282.5 distance=0.16mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 9/10 score=282.5 distance=0.16mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 10/10 score=282.5 distance=0.16mm traversées=0 (pas resserré)
+ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb {}
+ATLAS_BATTEMENT index/thumb tour 1/18 score=244.8 distance=0.77mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 2/18 score=244.8 distance=0.77mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 3/18 score=244.8 distance=0.77mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 4/18 score=238.6 distance=0.58mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 5/18 score=238.6 distance=0.58mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/18 score=238.6 distance=0.58mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 7/18 score=238.6 distance=0.58mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 8/18 score=199.9 distance=0.51mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 9/18 score=178.3 distance=0.54mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 10/18 score=127.6 distance=0.31mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 11/18 score=127.6 distance=0.31mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 12/18 score=127.6 distance=0.31mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 13/18 score=127.6 distance=0.31mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 14/18 score=127.5 distance=0.33mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 15/18 score=127.5 distance=0.33mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 16/18 score=124.5 distance=0.13mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 17/18 score=124.2 distance=0.15mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 18/18 score=124.1 distance=0.16mm traversées=0
+ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 0.16, "traversees_apres_approche": 0, "apres_nettoyage_mm": 0.16, "traversees_apres_nettoyage": 0, "axes_de_degagement": 3}
+ATLAS_CONTACT_HAND_PINCH {"entre": "index et thumb", "distance_mm": 0.16, "orientation_locale": -0.918, "sommets_du_patch": 136, "sommets_a_moins_de_1_5_mm": 40, "penetration": 0}
+ATLAS_CRITERE OK  · Hand_Pinch · les pulpes se touchent · mesuré 0.16 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_Pinch · les pulpes se font face · mesuré -0.918 · exigé ≤ -0,50
+ATLAS_CRITERE OK  · Hand_Pinch · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 0} · exigé 0 sommet, pulpes ET main entière
+ATLAS_BATTEMENT index/thumb tour 1/10 score=26389.3 distance=0.97mm traversées=339
+ATLAS_BATTEMENT index/thumb tour 2/10 score=25769.7 distance=0.61mm traversées=328
+ATLAS_BATTEMENT index/thumb tour 3/10 score=25769.7 distance=0.61mm traversées=328 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 4/10 score=25651.4 distance=0.54mm traversées=328
+ATLAS_BATTEMENT index/thumb tour 5/10 score=25651.4 distance=0.54mm traversées=328 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 6/10 score=17799.6 distance=2.22mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 7/10 score=8101.2 distance=0.77mm traversées=20
+ATLAS_BATTEMENT index/thumb tour 8/10 score=6411.1 distance=0.72mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 9/10 score=6409.7 distance=0.64mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 10/10 score=6397.7 distance=0.57mm traversées=0
+ATLAS_OU_CA_TRAVERSE_APPROCHE index/thumb {}
+ATLAS_BATTEMENT index/thumb tour 1/18 score=26621.8 distance=1.00mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 2/18 score=26589.4 distance=0.59mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 3/18 score=26541.0 distance=0.72mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 4/18 score=26527.5 distance=0.78mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 5/18 score=26425.8 distance=0.81mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 6/18 score=26389.6 distance=0.93mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 7/18 score=26389.6 distance=0.93mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 8/18 score=26389.6 distance=0.93mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 9/18 score=26389.6 distance=0.93mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 10/18 score=26358.5 distance=0.93mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 11/18 score=26358.5 distance=0.93mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 12/18 score=26358.5 distance=0.93mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 13/18 score=26358.4 distance=0.93mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 14/18 score=26358.4 distance=0.93mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 15/18 score=26358.4 distance=0.93mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 16/18 score=26358.4 distance=0.93mm traversées=0
+ATLAS_BATTEMENT index/thumb tour 17/18 score=26358.4 distance=0.93mm traversées=0 (pas resserré)
+ATLAS_BATTEMENT index/thumb tour 18/18 score=26342.6 distance=0.90mm traversées=0
+ATLAS_DEUX_TEMPS {"contact": "index/thumb", "apres_approche_mm": 0.57, "traversees_apres_approche": 0, "apres_nettoyage_mm": 0.9, "traversees_apres_nettoyage": 0, "axes_de_degagement": 3}
+ATLAS_CONTACT_HAND_OK {"entre": "index et thumb", "distance_mm": 0.9, "orientation_locale": -0.655, "sommets_du_patch": 77, "sommets_a_moins_de_1_5_mm": 5, "penetration": 0}
+ATLAS_CRITERE OK  · Hand_OK · les pulpes se touchent · mesuré 0.90 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE OK  · Hand_OK · les pulpes se font face · mesuré -0.655 · exigé ≤ -0,50
+ATLAS_CRITERE OK  · Hand_OK · aucune interpénétration · mesuré {'dans_les_pulpes': 0, 'dans_la_main_entiere': 0} · exigé 0 sommet, pulpes ET main entière
+ATLAS_BATTEMENT pinky/thumb tour 1/10 score=276886.7 distance=19.97mm traversées=1613
+ATLAS_BATTEMENT pinky/thumb tour 2/10 score=123494.3 distance=5.91mm traversées=1240
+ATLAS_BATTEMENT pinky/thumb tour 3/10 score=98010.9 distance=4.34mm traversées=1058
+ATLAS_BATTEMENT pinky/thumb tour 4/10 score=98010.9 distance=4.34mm traversées=1058 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 5/10 score=96220.9 distance=4.09mm traversées=1067
+ATLAS_BATTEMENT pinky/thumb tour 6/10 score=96220.9 distance=4.09mm traversées=1067
+ATLAS_BATTEMENT pinky/thumb tour 7/10 score=96220.9 distance=4.09mm traversées=1067 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 8/10 score=88052.0 distance=2.94mm traversées=1111
+ATLAS_BATTEMENT pinky/thumb tour 9/10 score=83075.3 distance=2.60mm traversées=1079
+ATLAS_BATTEMENT pinky/thumb tour 10/10 score=80979.8 distance=1.90mm traversées=1128
+ATLAS_OU_CA_TRAVERSE_APPROCHE pinky/thumb {"DEF_middle_03.L → DEF_ring_meta.L": 304, "DEF_middle_03.L → DEF_index_meta.L": 161, "DEF_index_meta.L → DEF_thumb_meta.L": 98, "DEF_middle_01.L → DEF_index_meta.L": 85, "DEF_middle_03.L → DEF_thumb_meta.L": 75, "DEF_index_03.L → DEF_thumb_meta.L": 70, "DEF_thumb_meta.L → DEF_index_meta.L": 62, "DEF_thumb_02.L → DEF_pinky_03.L": 41, "DEF_pinky_03.L → DEF_thumb_02.L": 35, "DEF_thumb_meta.L → DEF_hand.L": 35, "DEF_middle_01.L → DEF_ring_meta.L": 31, "DEF_middle_02.L → DEF_thumb_meta.L": 21, "DEF_index_meta.L → DEF_middle_01.L": 17, "DEF_middle_02.L → DEF_index_meta.L": 17, "DEF_index_01.L → DEF_middle_01.L": 16, "DEF_ring_meta.L → DEF_middle_03.L": 10, "DEF_index_meta.L → DEF_middle_02.L": 8, "DEF_middle_01.L → DEF_index_01.L": 8, "DEF_thumb_meta.L → DEF_index_03.L": 7, "DEF_index_02.L → DEF_thumb_meta.L": 7, "DEF_middle_01.L → DEF_ring_01.L": 6, "DEF_thumb_meta.L → DEF_index_02.L": 4, "DEF_thumb_meta.L → DEF_middle_02.L": 2, "DEF_middle_meta.L → DEF_index_01.L": 2, "DEF_ring_01.L → DEF_middle_01.L": 2, "DEF_thumb_meta.L → DEF_middle_03.L": 1, "DEF_index_meta.L → DEF_hand.L": 1, "DEF_hand.L → DEF_index_meta.L": 1, "DEF_ring_01.L → DEF_pinky_01.L": 1}
+ATLAS_BATTEMENT pinky/thumb tour 1/18 score=23139014.3 distance=17.82mm traversées=1146
+ATLAS_BATTEMENT pinky/thumb tour 2/18 score=20250534.9 distance=19.08mm traversées=1001
+ATLAS_BATTEMENT pinky/thumb tour 3/18 score=20006687.4 distance=3.50mm traversées=996
+ATLAS_BATTEMENT pinky/thumb tour 4/18 score=20005217.0 distance=3.36mm traversées=996
+ATLAS_BATTEMENT pinky/thumb tour 5/18 score=19904947.7 distance=3.30mm traversées=991
+ATLAS_BATTEMENT pinky/thumb tour 6/18 score=19904947.0 distance=3.30mm traversées=991
+ATLAS_BATTEMENT pinky/thumb tour 7/18 score=19904947.0 distance=3.30mm traversées=991 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 8/18 score=19844827.5 distance=3.29mm traversées=988
+ATLAS_BATTEMENT pinky/thumb tour 9/18 score=19807348.7 distance=3.57mm traversées=986
+ATLAS_BATTEMENT pinky/thumb tour 10/18 score=19806227.5 distance=3.45mm traversées=986
+ATLAS_BATTEMENT pinky/thumb tour 11/18 score=19806226.7 distance=3.45mm traversées=986
+ATLAS_BATTEMENT pinky/thumb tour 12/18 score=19806226.7 distance=3.45mm traversées=986 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 13/18 score=19698878.2 distance=2.62mm traversées=981
+ATLAS_BATTEMENT pinky/thumb tour 14/18 score=19638878.2 distance=2.62mm traversées=978
+ATLAS_BATTEMENT pinky/thumb tour 15/18 score=19638878.2 distance=2.62mm traversées=978 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 16/18 score=19578878.2 distance=2.62mm traversées=975
+ATLAS_BATTEMENT pinky/thumb tour 17/18 score=19578878.2 distance=2.62mm traversées=975 (pas resserré)
+ATLAS_BATTEMENT pinky/thumb tour 18/18 score=19559249.6 distance=2.66mm traversées=974
+ATLAS_DEUX_TEMPS {"contact": "pinky/thumb", "apres_approche_mm": 1.9, "traversees_apres_approche": 1128, "apres_nettoyage_mm": 2.66, "traversees_apres_nettoyage": 974, "axes_de_degagement": 1}
+ATLAS_OU_CA_TRAVERSE_NETTOYAGE pinky/thumb {"DEF_middle_03.L → DEF_ring_meta.L": 284, "DEF_middle_03.L → DEF_index_meta.L": 184, "DEF_index_meta.L → DEF_thumb_meta.L": 98, "DEF_middle_01.L → DEF_index_meta.L": 83, "DEF_middle_03.L → DEF_thumb_meta.L": 81, "DEF_middle_02.L → DEF_thumb_meta.L": 52, "DEF_thumb_meta.L → DEF_index_meta.L": 47, "DEF_middle_01.L → DEF_ring_meta.L": 27, "DEF_thumb_meta.L → DEF_hand.L": 22, "DEF_middle_02.L → DEF_index_meta.L": 19, "DEF_index_01.L → DEF_middle_01.L": 18, "DEF_index_meta.L → DEF_middle_01.L": 17, "DEF_index_meta.L → DEF_middle_02.L": 13, "DEF_middle_01.L → DEF_index_01.L": 7, "DEF_ring_meta.L → DEF_middle_03.L": 7, "DEF_index_03.L → DEF_thumb_meta.L": 6, "DEF_middle_meta.L → DEF_index_01.L": 2, "DEF_hand.L → DEF_index_meta.L": 2, "DEF_middle_01.L → DEF_ring_01.L": 2, "DEF_thumb_meta.L → DEF_middle_03.L": 1, "DEF_thumb_meta.L → DEF_middle_02.L": 1, "DEF_index_meta.L → DEF_hand.L": 1}
+ATLAS_APPROCHE_MEILLEURE {"contact": "pinky/thumb", "approche_mm": 1.9, "nettoyage_mm": 2.66, "retenu": "approche"}
+ATLAS_CONTACT_HAND_PINKY_THUMB {"entre": "pinky et thumb", "distance_mm": 1.9, "orientation_locale": 0.433, "sommets_du_patch": 156, "sommets_a_moins_de_1_5_mm": 0, "penetration": 15}
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · les pulpes se touchent · mesuré 1.90 mm · exigé ≤ 1.00 mm
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · les pulpes se font face · mesuré 0.433 · exigé ≤ -0,50
+ATLAS_CRITERE ÉCHEC · Hand_Pinky_Thumb · aucune interpénétration · mesuré {'dans_les_pulpes': 15, 'dans_la_main_entiere': 1128} · exigé 0 sommet, pulpes ET main entière
+ATLAS_PINCE_AURICULAIRE_POUCE {"ecart_des_empreintes_mm": 1.9, "se_font_face": 0.433}
+ATLAS_DIVERGENCE k=0° → fermeture propre 0.55
+ATLAS_DIVERGENCE k=2° → fermeture propre 0.55
+ATLAS_DIVERGENCE k=4° → fermeture propre 0.55
+ATLAS_DIVERGENCE k=6° → fermeture propre 0.5
+ATLAS_DIVERGENCE k=8° → fermeture propre 0.5
+ATLAS_DIVERGENCE k=10° → fermeture propre 0.5
+ATLAS_DIVERGENCE k=12° → fermeture propre 0.5
+ATLAS_DIVERGENCE_CHERCHEE {"balayage": {"0.0": 0.55, "2.0": 0.55, "4.0": 0.55, "6.0": 0.5, "8.0": 0.5, "10.0": 0.5, "12.0": 0.5}, "k_retenu_deg": 0.0, "fermeture_propre_atteinte": 0.55, "regle": "la plus PETITE amplitude qui atteint la fermeture la plus profonde"}
+ATLAS_CUP_POING cup=0.00 → fermeture propre 0.55
+ATLAS_CUP_POING cup=0.25 → fermeture propre 0.55
+ATLAS_CUP_POING cup=0.50 → fermeture propre 0.5
+ATLAS_CUP_POING cup=0.70 → fermeture propre 0.3
+ATLAS_CUP_POING cup=0.90 → fermeture propre 0.2
+ATLAS_CREUSEMENT_DU_POING {"balayage": {"0.0": 0.55, "0.25": 0.55, "0.5": 0.5, "0.7": 0.3, "0.9": 0.2}, "cup_retenu": 0.0, "fermeture_propre_atteinte": 0.55, "regle": "le plus PETIT creusement qui laisse aller le plus loin"}
+ATLAS_TRAVERSEES_DES_QUATRE_DOIGTS_SEULS {"0.0": {"total": 0}, "0.02": {"total": 0}, "0.04": {"total": 0}, "0.06": {"total": 0}, "0.08": {"total": 0}, "0.1": {"total": 0}, "0.12": {"total": 0}, "0.14": {"total": 0}, "0.16": {"total": 0}, "0.18": {"total": 0}, "0.2": {"total": 0}, "0.22": {"total": 0}, "0.24": {"total": 0}, "0.26": {"total": 0}, "0.28": {"total": 0}, "0.3": {"total": 0}, "0.32": {"total": 0}, "0.34": {"total": 0}, "0.36": {"total": 0}, "0.38": {"total": 0}, "0.4": {"total": 0}, "0.42": {"total": 0}, "0.44": {"total": 0}, "0.46": {"total": 0}, "0.48": {"total": 0}, "0.5": {"total": 0}, "0.52": {"total": 0}, "0.54": {"total": 0}, "0.56": {"total": 0}, "0.58": {"total": 0}, "0.6": {"total": 1}}
+ATLAS_FERMETURE_RETENUE {"valeur": 0.58, "profondeur_propre_mesuree": 0.58, "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"}
+ATLAS_CRITERE ÉCHEC · le poing se ferme complètement sans traversée · mesuré 0.58 · exigé Fist = 1.0
+ATLAS_BATTEMENT thumb/index tour 1/10 score=337810.9 distance=26.59mm traversées=1647
+ATLAS_BATTEMENT thumb/index tour 2/10 score=164480.3 distance=5.58mm traversées=2004
+ATLAS_BATTEMENT thumb/index tour 3/10 score=121311.3 distance=2.76mm traversées=1722
+ATLAS_BATTEMENT thumb/index tour 4/10 score=121311.3 distance=2.76mm traversées=1722 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 5/10 score=116646.4 distance=3.01mm traversées=1570
+ATLAS_BATTEMENT thumb/index tour 6/10 score=116529.5 distance=1.46mm traversées=1770
+ATLAS_BATTEMENT thumb/index tour 7/10 score=116529.5 distance=1.46mm traversées=1770 (pas resserré)
+ATLAS_BATTEMENT thumb/index tour 8/10 score=105547.3 distance=2.12mm traversées=1506
+ATLAS_BATTEMENT thumb/index tour 9/10 score=103459.9 distance=1.33mm traversées=1570
