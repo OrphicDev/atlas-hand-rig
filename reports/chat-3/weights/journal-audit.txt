@@ -1,0 +1,63 @@
+00:00.262  blend            | Read blend: "/Users/orphicagency/Projet de développement/atlas-hand-rig-chat2/RIG_Hand.L-NON-VALIDE.blend"
+
+Fichier   : RIG_Hand.L-NON-VALIDE.blend
+Maillage  : GEO_Hand.L · 54019 sommets · 21 groupes
+Os        : 20 groupes déformants, 1 masque(s) : ['ZONES_ARTICULAIRES']
+Poids distribué hors os (masques) : 3198.976 sur 12581 sommet(s)
+Disques de commissure : 4639 sommets exemptés (8.6% du maillage, rayon 22 mm)
+
+── Répartition par famille dominante (classement du dépôt) ──
+   famille   sommets  morceaux  plus gros
+     index      9743         1       9743
+    middle      7916         1       7916
+      ring      7695         1       7695
+     pinky     10632         1      10632
+     thumb      7974         1       7974
+      hand     10059         1      10059
+
+── Nombre d'influences déformantes par sommet ──
+  1 influence(s) : 13299 sommets
+  2 influence(s) : 20826 sommets
+  3 influence(s) : 12782 sommets
+  4 influence(s) : 7112 sommets
+
+── L'AMBIGUÏTÉ DU CLASSEMENT ──
+Sommets dont les deux groupes dominants sont séparés de moins de 0.15 : 3724
+  · dont les deux dominants appartiennent à DEUX FAMILLES : 2375
+Sommets dont les deux FAMILLES dominantes sont séparées de moins de 0.15 : 2281
+Sommets que le dépôt range dans une famille alors qu'une autre pèse plus une fois sommée : 87
+  sommet  46798 · DEF_thumb_meta.L 0.344 vs DEF_index_meta.L 0.344 · écart 0.000 · commissure à 34.1 mm
+  sommet  46229 · DEF_middle_meta.L 0.396 vs DEF_index_meta.L 0.396 · écart 0.000 · commissure à 22.6 mm
+  sommet  50524 · DEF_middle_meta.L 0.368 vs DEF_ring_meta.L 0.368 · écart 0.000 · commissure à 92.0 mm
+  sommet  36663 · DEF_pinky_meta.L 0.356 vs DEF_hand.L 0.356 · écart 0.000 · commissure à 94.8 mm
+  sommet  35497 · DEF_hand.L 0.322 vs DEF_thumb_meta.L 0.322 · écart 0.000 · commissure à 92.2 mm
+  sommet  11049 · DEF_index_meta.L 0.389 vs DEF_middle_meta.L 0.389 · écart 0.000 · commissure à 97.6 mm
+  sommet  43107 · DEF_middle_meta.L 0.337 vs DEF_index_meta.L 0.336 · écart 0.000 · commissure à 101.2 mm
+  sommet  51848 · DEF_ring_meta.L 0.472 vs DEF_middle_meta.L 0.472 · écart 0.000 · commissure à 73.3 mm
+  sommet  51465 · DEF_thumb_meta.L 0.301 vs DEF_pinky_meta.L 0.301 · écart 0.001 · commissure à 57.4 mm
+  sommet  10639 · DEF_ring_meta.L 0.358 vs DEF_pinky_meta.L 0.357 · écart 0.001 · commissure à 46.0 mm
+  sommet  10877 · DEF_thumb_meta.L 0.311 vs DEF_hand.L 0.310 · écart 0.001 · commissure à 66.7 mm
+  sommet  32427 · DEF_index_meta.L 0.431 vs DEF_thumb_meta.L 0.431 · écart 0.001 · commissure à 35.8 mm
+  sommet  46041 · DEF_pinky_meta.L 0.448 vs DEF_ring_meta.L 0.447 · écart 0.001 · commissure à 27.1 mm
+  sommet   8486 · DEF_pinky_meta.L 0.500 vs DEF_ring_meta.L 0.499 · écart 0.001 · commissure à 63.7 mm
+  sommet  44875 · DEF_ring_meta.L 0.305 vs DEF_pinky_meta.L 0.304 · écart 0.001 · commissure à 18.0 mm
+  sommet   8980 · DEF_index_meta.L 0.500 vs DEF_hand.L 0.499 · écart 0.001 · commissure à 119.0 mm
+  sommet  32123 · DEF_index_meta.L 0.501 vs DEF_hand.L 0.499 · écart 0.001 · commissure à 122.8 mm
+  sommet  50883 · DEF_middle_meta.L 0.408 vs DEF_ring_meta.L 0.407 · écart 0.001 · commissure à 29.2 mm
+  sommet  34046 · DEF_index_meta.L 0.459 vs DEF_middle_meta.L 0.458 · écart 0.001 · commissure à 89.1 mm
+  sommet  36647 · DEF_pinky_meta.L 0.367 vs DEF_hand.L 0.365 · écart 0.001 · commissure à 91.3 mm
+  … et 2355 autres (liste complète dans le JSON)
+
+── Les quatre critères du §6.7 ──
+OK    · somme des poids déformants à 1,00 ± 0,02 · mesuré 0 hors tolérance + 0 sans aucun poids déformant · exigé 0 sommet
+OK    · au plus 4 influences de déformation · mesuré 0 sommet(s) au-delà · exigé 0 sommet à plus de 4
+OK    · aucune phalange étrangère hors commissure · mesuré 0 sommet(s) au seuil 0.01 (68 au seuil 0.005) · exigé 0 sommet
+OK    · chaque famille de doigt en un seul morceau · mesuré {'index': 1, 'middle': 1, 'ring': 1, 'pinky': 1, 'thumb': 1} · exigé 1 morceau par doigt
+
+ATLAS_SONDE_POIDS {"fichier": "RIG_Hand.L-NON-VALIDE.blend", "maillage": "GEO_Hand.L", "sommets": 54019, "groupes_deformants": ["DEF_hand.L", "DEF_index_01.L", "DEF_index_02.L", "DEF_index_03.L", "DEF_index_meta.L", "DEF_middle_01.L", "DEF_middle_02.L", "DEF_middle_03.L", "DEF_middle_meta.L", "DEF_pinky_01.L", "DEF_pinky_02.L", "DEF_pinky_03.L", "DEF_pinky_meta.L", "DEF_ring_01.L", "DEF_ring_02.L", "DEF_ring_03.L", "DEF_ring_meta.L", "DEF_thumb_01.L", "DEF_thumb_02.L", "DEF_thumb_meta.L"], "groupes_masques_exclus_de_la_somme": ["ZONES_ARTICULAIRES"], "poids_total_hors_os": 3198.9757, "sommets_ou_les_deux_sommes_different": 12581, "seuils": {"export": 0.005, "famille": 0.01, "tolerance_somme": 0.02, "influences_max": 4, "ambiguite": 0.15, "rayon_commissure_mm": 22.0}, "commissures_mm": [[-437.9, -123.8, 855.8], [-443.5, -102.8, 846.4], [-440.7, -80.4, 839.0]], "sommets_exemptes_par_les_commissures": 4639, "part_du_maillage_exemptee": 0.0859, "histogramme_influences": {"1": 13299, "2": 20826, "3": 12782, "4": 7112}, "familles": {"index": {"morceaux": 1, "plus_gros": 9743, "sommets": 9743}, "middle": {"morceaux": 1, "plus_gros": 7916, "sommets": 7916}, "ring": {"morceaux": 1, "plus_gros": 7695, "sommets": 7695}, "pinky": {"morceaux": 1, "plus_gros": 10632, "sommets": 10632}, "thumb": {"morceaux": 1, "plus_gros": 7974, "sommets": 7974}}, "sommets_par_famille_dominante": {"hand": 10059, "pinky": 10632, "ring": 7695, "middle": 7916, "index": 9743, "thumb": 7974}, "ambiguite": {"seuil": 0.15, "sommets_a_ecart_de_groupes_faible": 3724, "dont_deux_familles_differentes": 2375, "sommets_a_ecart_de_familles_faible": 2281, "sommets_dont_la_famille_change_si_on_somme": 87}, "verdicts": {"somme_hors_tolerance": 0, "sans_aucun_poids_deformant": 0, "trop_d_influences": 0, "phalange_etrangere_hors_commissure": 0, "phalange_etrangere_au_seuil_d_export": 68, "familles_fragmentees": "aucune"}, "echecs": [], "contre_epreuves": {"deux_dominants_sur_le_cas_51_49": "écart 0,02, familles index/thumb", "deux_dominants_sur_une_influence_unique": "pas de second concurrent : second poids et écart rendus None, jamais 0,0", "influence_unique_legere_0_10_non_declaree_ambigue": "éprouvé SOUS le seuil, seul endroit où un écart fabriqué se voit", "ecart_ambigu_mord_encore_sur_0_05": true, "partition_deformants_masques_fermee_sur_chaque_sommet": "os + masques = total relu sur v.groups, à 1e-6", "sommets_ou_le_filtre_a_retire_du_poids": 12581, "poids_total_retire_par_le_filtre": 3198.9757, "le_filtre_avait_de_quoi_mordre": true, "morceaux_sur_famille_puis_famille_plus_un_sommet_isole": "1 → 2 sur pinky", "distance_de_chaque_commissure_a_la_chair_mm": [5.5, 3.8, 0.4], "part_du_maillage_exemptee_par_les_commissures": 0.0859}}
+écrit : reports/chat-3/weights/audit-complet.json
+
+Les quatre critères de poids passent. Reste 2375 sommet(s) dont le classement se joue à moins de 0.15 entre deux familles : ils passent les critères, mais leur appartenance n'est pas un fait.
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:30:33)
+
+Blender quit
