@@ -3738,7 +3738,8 @@ if not SANS_RENDU:
     PLANS = {"paume": PALMAIRE, "dos": -PALMAIRE,
              "pouce": Tp, "auriculaire": -Tp}
 
-    def rendre(nom_image, direction, cadre=0.205, vise_sur=None, cote=1):
+    def rendre(nom_image, direction, cadre=0.205, vise_sur=None, cote=1,
+               source_deg=None):
         """Une image, sous lumière rasante mesurée, et son histogramme.
 
         `direction` va de la cible vers la caméra : c'est donc aussi la
@@ -3757,8 +3758,23 @@ if not SANS_RENDU:
             _ii = [i for i, n in _dom.items() if n != f"DEF_hand{SIDE}"]
             vise = sum((_p[i] for i in _ii), mathutils.Vector((0, 0, 0))) / len(_ii)
         eclairage.cadrer(geo, direction, vise, cadre, scene=sc)
+        # ═══ UN GROS PLAN DEMANDE UNE LUMIÈRE PLUS DURE ═══
+        #
+        # Le module dimensionne la source proportionnellement à la distance :
+        # son ANGLE APPARENT reste donc 12° à toutes les échelles. Sur un plan
+        # large c'est doux et juste. Sur un gros plan à 55 mm, les jointures et
+        # les plis sont EUX-MÊMES à l'échelle de ce flou, et l'ombre qui devrait
+        # les révéler s'étale dessus.
+        #
+        # Mesuré par `outils/revue-visuelle.py` sur les huit gros plans de
+        # `b17e548` : relief local 0,009 à 0,015 pour 0,020 exigé. LES HUIT,
+        # pas seulement celui que le chat 1 avait relevé — donc ce n'est pas
+        # une image ratée, c'est un réglage inadapté à l'échelle.
+        _regl = ({"key_angle_source_deg": source_deg}
+                 if source_deg is not None else None)
         _e = eclairage.eclairer_rasant(vise, direction, direction, cote,
-                                       largeur_sujet=cadre, scene=sc)
+                                       largeur_sujet=cadre, scene=sc,
+                                       reglages=_regl)
         _chemin = os.path.join(DOSSIER, f"{nom_image}.png")
         _h = eclairage.rendre(_chemin, sc)
         # ═══ PAS DE VALEUR PAR DÉFAUT SUR UNE MESURE ═══
@@ -3883,7 +3899,7 @@ if not SANS_RENDU:
         for plan, direction in (("paume", PLANS["paume"]),
                                 ("pouce", PLANS["pouce"])):
             rendre(f"gros-plan-{nom_pose}-{plan}", direction, cadre=0.055,
-                   vise_sur=_cible_gp)
+                   vise_sur=_cible_gp, source_deg=4.0)
         print(f"ATLAS_GROS_PLAN {nom_pose}")
     regler()
 
@@ -3907,7 +3923,7 @@ if not SANS_RENDU:
     # brûlée ni bouchée, elle est simplement illisible. Seuil pris sur la série
     # elle-même et non inventé : le pire des 60 rendus de `b17e548` valait 5,86,
     # le deuxième 16,38. Un écart de trois pour un, donc la coupure est nette.
-    _plates = {k: v["luminance_max"] - v["luminance_moyenne"]
+    _plates = {k: round(v["luminance_max"] - v["luminance_moyenne"], 4)
                for k, v in _histos.items()
                if v["luminance_max"] - v["luminance_moyenne"] < 0.10}
     exiger("aucune image sans relief lisible", not _plates,
