@@ -28,6 +28,7 @@ import json
 import math
 import os
 import sys
+from contextlib import contextmanager
 
 import bmesh
 # ═══ NE PAS TAMPONNER LA SORTIE ═══
@@ -79,6 +80,25 @@ MOIGNON = float(args[3]) / 1000.0 if len(args) > 3 else 0.110
 SANS_RENDU = "mesure" in args
 SIDE = ".L" if COTE == "g" else ".R"
 os.makedirs(DOSSIER, exist_ok=True)
+
+# ═══ UN MODE CIBLÉ, PARCE QU'UNE RECONSTRUCTION COMPLÈTE COÛTE DEUX HEURES ═══
+#
+# Mesuré : la reconstruction complète en mode `mesure` prend 53 min seule sur la
+# machine, et plus de deux heures dès que le nettoyage des transitions entre en
+# jeu. Apprendre quoi que ce soit sur `Cup` en payant deux heures par essai est
+# impossible — c'est ce qui a fait que `Cup` n'a jamais été éprouvé.
+#
+# `focus=` s'arrête dès que la question posée a sa réponse. Le fichier qu'il
+# produit n'a JAMAIS le droit de s'appeler valide : il existe pour apprendre
+# vite, et toute correction retenue doit être rejouée par `focus=all`.
+FOCUS = "all"
+for _arg in args:
+    if _arg.startswith("focus="):
+        FOCUS = _arg.split("=", 1)[1].strip().lower()
+
+
+def en_focus(*noms):
+    return FOCUS == "all" or FOCUS in noms
 
 rapport = {"cote": "gauche" if COTE == "g" else "droite", "side": SIDE}
 
@@ -478,6 +498,72 @@ bpy.ops.object.select_all(action="DESELECT")
 geo.select_set(True); rig.select_set(True)
 bpy.context.view_layer.objects.active = rig
 bpy.ops.object.parent_set(type="ARMATURE_AUTO")
+
+# ═══ LA CONSERVATION DE VOLUME EST UN CHOIX, DONC ELLE SE MESURE ═══
+#
+# `use_deform_preserve_volume` fait passer la déformation en quaternions duaux
+# au lieu d'une interpolation linéaire de matrices. Elle évite une part de
+# l'écrasement aux articulations — l'effet « saucisse » que le cahier interdit.
+#
+# Ce n'est PAS un substitut aux poids ni aux correctifs, et ce n'est pas une
+# case à cocher par principe : la déformation par quaternions duaux gonfle les
+# vrilles là où la linéaire les écrase. Le réglage est donc figé par un test
+# A/B mesuré (plus bas), et plus jamais touché une fois les shape keys créées —
+# sinon leurs deltas, sculptés sur une déformation, s'appliqueraient à une autre.
+MODIF_ARMATURE = next(m for m in geo.modifiers
+                      if m.type == "ARMATURE" and m.object == rig)
+MODIF_ARMATURE.use_deform_preserve_volume = True
+MODIF_ARMATURE.show_in_editmode = True
+MODIF_ARMATURE.show_on_cage = True
+
+
+def forcer_evaluation(quoi=None):
+    """La seule façon de lire un maillage à jour en mode fond.
+
+    ═══ LES DRIVERS NE S'ÉVALUENT PAS SANS CHANGEMENT D'IMAGE ═══
+    Sans ces quatre lignes on mesure une main IMMOBILE — et une main immobile
+    revient toujours exactement à sa pose de repos, donc elle passe tous les
+    contrôles. C'est le piège le plus coûteux de ce dépôt, et il a été payé
+    plusieurs fois. Une seule fonction, appelée partout, pour qu'il ne puisse
+    plus être oublié à un endroit.
+    """
+    o = quoi if quoi is not None else rig
+    o.update_tag()
+    o.data.update_tag()
+    _sc = bpy.context.scene
+    _sc.frame_set(_sc.frame_current)
+    bpy.context.view_layer.update()
+
+
+@contextmanager
+def drivers_rotation_mutes(noms_os):
+    """Taire les drivers de rotation le temps de sonder leurs canaux.
+
+    ═══ UN DRIVER RÉÉCRIT SA VOIE ═══
+    Mesuré, et j'y suis tombé : en posant une rotation à la main sur un axe
+    piloté par `Cup`, on obtient +0,00 sur TOUTES les grandeurs et on conclut
+    « cet axe ne fait rien ». Le driver efface la valeur avant qu'elle soit
+    mesurée. Seul un axe non piloté répond, ce qui rend le tableau parfaitement
+    cohérent ET parfaitement faux.
+
+    L'appelant DOIT contre-éprouver : si taire n'a rien changé, c'est qu'on
+    n'atteint pas le canal qu'on prétend tester.
+    """
+    chemins = {f'pose.bones["{n}"].rotation_euler' for n in noms_os}
+    fcs = [fc for fc in (rig.animation_data.drivers
+                         if rig.animation_data else [])
+           if fc.data_path in chemins]
+    etat = [(fc, fc.mute) for fc in fcs]
+    try:
+        for fc in fcs:
+            fc.mute = True
+        forcer_evaluation()
+        yield len(fcs)
+    finally:
+        for fc, ancien in etat:
+            fc.mute = ancien
+        forcer_evaluation()
+
 
 _ng = {g.index: g.name for g in geo.vertex_groups}
 _dom = {}
@@ -879,6 +965,43 @@ if _ecart_muet:
     raise RuntimeError(f"l'écartement ne sépare pas {_ecart_muet} : "
                        f"gains mesurés {_gain_ecart}")
 
+# ═══ LA DIVERGENCE EXISTAIT DANS LE CODE ET NE PILOTAIT RIEN ═══
+#
+# `DIVERGENCE` est écrit depuis le chat 1, avec son commentaire expliquant que
+# les doigts s'écartent en se fermant — c'est ce qui les empêche de se
+# pénétrer. Mais aucun driver ne le lisait : la constante était morte, et la
+# fermeture reposait entièrement sur des corrections FK cherchées pose par
+# pose. D'où des doigts qui se traversent 820 fois dès `Fist = 0,7`.
+#
+# On l'ajoute au driver d'écartement, en SOMME LINÉAIRE — jamais en produit de
+# deux variables, l'évaluateur de Blender échouerait en silence. Et son signe
+# se mesure, pour la même raison que celui de l'écartement : sur la main
+# droite, le repère est inversé.
+_essai_div = {}
+for _s in (+1.0, -1.0):
+    poser_os({f"MCH_{_n}_01_result{SIDE}": (0.0, 0.0, _s * DIVERGENCE[_n] * 10.0)
+              for _n in NOMS4})
+    _essai_div[_s] = eventail_des_bouts(sommets_evalues()[0])
+au_repos()
+SIGNE_DIVERGENCE = max(_essai_div, key=lambda s: sum(_essai_div[s].values()))
+_gain_div = {c: _essai_div[SIGNE_DIVERGENCE][c] - _eventail_repos[c]
+             for c in _eventail_repos}
+dire("sens_de_la_divergence", {
+    "eventail_a_plus_DIVERGENCE_mm": {c: round(v, 2)
+                                      for c, v in _essai_div[+1.0].items()},
+    "eventail_a_moins_DIVERGENCE_mm": {c: round(v, 2)
+                                       for c, v in _essai_div[-1.0].items()},
+    "signe_retenu": SIGNE_DIVERGENCE,
+    "gain_du_sens_retenu_mm": {c: round(v, 2) for c, v in _gain_div.items()},
+    "regle": "diverger en fermant doit ÉCARTER les bouts de doigts voisins"})
+if abs(sum(_essai_div[+1.0].values())
+       - sum(_essai_div[-1.0].values())) < 1.0:
+    raise RuntimeError("les deux sens de divergence rendent le même éventail : "
+                       "la sonde ne mesure pas ce qu'elle prétend")
+_div_muet = [c for c, g in _gain_div.items() if g <= 0.5]
+if _div_muet:
+    raise RuntimeError(f"la divergence ne sépare pas {_div_muet} : {_gain_div}")
+
 for nom in NOMS4:
     # ═══ PAS DE PRODUIT DE DEUX VARIABLES DANS UN DRIVER ═══
     # J'avais écrit `fist * div * K`. Mesuré : la propriété était bien lue
@@ -894,8 +1017,9 @@ for nom in NOMS4:
     # totalement silencieux — la rotation restait à +0,00° sans le moindre
     # message.
     driver(f"MCH_{nom}_01_result{SIDE}", AXE_ECART,
-           f"spread * {SIGNE_ECART * math.radians(ECART[nom]):.6f}",
-           {"spread": "Spread"})
+           f"spread * {SIGNE_ECART * math.radians(ECART[nom]):.6f}"
+           f" + fist * {SIGNE_DIVERGENCE * math.radians(K_DIVERGENCE[0] * DIVERGENCE[nom]):.6f}",
+           {"spread": "Spread", "fist": "Fist"})
 # Le creusement agit sur les MÉTACARPIENS, faiblement côté index, fortement côté
 # auriculaire. C'est lui qui rapproche l'auriculaire du pouce — le cerclage
 # rouge de Sacha.
@@ -1443,6 +1567,73 @@ print("ATLAS_SONDE_INTERSECTION " + json.dumps(
 if _faux_positifs:
     raise RuntimeError(f"sonde d'intersection non fiable : {_faux_positifs}")
 
+# ═══ PRESERVE VOLUME SE MESURE, IL NE SE COCHE PAS ═══
+#
+# Le cahier l'exige : figer ce choix par un test A/B AVANT toute shape key,
+# parce qu'un delta sculpté sur une déformation ne vaut rien sur l'autre. La
+# déformation par quaternions duaux évite l'écrasement des articulations, mais
+# elle gonfle les vrilles là où l'interpolation linéaire les écrase — donc rien
+# ne dit d'avance qu'elle est meilleure SUR CE MAILLAGE.
+#
+# On compare sur des états franchement déformés, pas au repos : au repos les
+# deux méthodes coïncident par construction, et un test qui ne peut pas
+# distinguer ne prouve rien.
+_ETATS_AB = [("poing", {"Fist": 1.0}),
+             ("paume_creuse", {"Cup": 1.0}),
+             ("opposition", {"Thumb_Opposition": 1.0}),
+             ("poing_et_creux", {"Fist": 0.8, "Cup": 0.8})]
+_ab = {}
+for _pv in (False, True):
+    MODIF_ARMATURE.use_deform_preserve_volume = _pv
+    forcer_evaluation(geo)
+    _inter_tot, _comp_min, _comp_p1, _n_mes = 0, 1.0, 1.0, 0
+    for _nom_e, _regl in _ETATS_AB:
+        regler(**_regl)
+        _inter_tot += sum(x["sommets_dedans"] for x in intersections(f"ab-{_nom_e}"))
+        # `compression()` prend UN nom d'os et rend des couples (ratio, arête).
+        # Lui passer la liste `DEF[doigt]` rendait une liste vide sur chaque
+        # doigt, donc aucune mesure — et le test aurait conclu sur du vide.
+        for _g in NOMS4 + ["thumb"]:
+            for _os in DEF[_g]:
+                _c = sorted(r for r, _e in compression(_os))
+                if not _c:
+                    continue
+                _n_mes += len(_c)
+                _comp_min = min(_comp_min, _c[0])
+                _comp_p1 = min(_comp_p1, _c[max(0, len(_c) // 100)])
+    regler()
+    if _n_mes == 0:
+        raise RuntimeError("le test A/B de Preserve Volume n'a mesuré aucune "
+                           "arête : il ne peut rien trancher")
+    _ab[_pv] = {"intersections": _inter_tot,
+                "compression_min": round(_comp_min, 4),
+                "compression_p1": round(_comp_p1, 4),
+                "aretes_mesurees": _n_mes}
+
+# Le classement est lexicographique et il suit l'ordre du cahier : d'abord les
+# collisions, ensuite la compression minimale, ensuite le percentile 1 %. En
+# cas d'égalité stricte, on garde True — le cahier tranche ainsi, parce que la
+# conservation du volume est ce qu'on cherche.
+def _rang_ab(v):
+    return (v["intersections"], -v["compression_min"], -v["compression_p1"])
+
+
+# Et une contre-épreuve du test lui-même : si les deux réglages rendent
+# exactement les mêmes nombres, c'est que le modificateur n'a pas été relu — un
+# test qui ne peut pas distinguer ne tranche rien.
+if _ab[True] == _ab[False]:
+    raise RuntimeError("Preserve Volume actif et inactif rendent des mesures "
+                       f"identiques : {_ab[True]} — le test ne distingue rien")
+PRESERVE_VOLUME = True if _rang_ab(_ab[True]) <= _rang_ab(_ab[False]) else False
+MODIF_ARMATURE.use_deform_preserve_volume = PRESERVE_VOLUME
+forcer_evaluation(geo)
+regler()
+dire("preserve_volume", {
+    "sans": _ab[False], "avec": _ab[True], "retenu": PRESERVE_VOLUME,
+    "regle": "collisions, puis compression minimale, puis percentile 1 % ; "
+             "égalité stricte → True",
+    "gele": "ne plus toucher après création des shape keys"})
+
 # La contre-épreuve du seuil : une fermeture pleine SANS écartement fait
 # franchement se traverser les doigts. Si la tolérance y voyait peu de chose,
 # elle masquerait de vrais défauts et serait à jeter.
@@ -1668,6 +1859,12 @@ ANNEAU_EXIGE = [0.0]        # ouverture minimale du trou, en mm (0 = sans objet)
 # chose que son juge ne peut réussir que par chance.
 SEUIL_CONTACT_MM = 1.0
 SEUIL_FACE = -0.5
+# ═══ UN SEUL SEUIL D'ANNEAU, ET C'EST LE CONTRAT ═══
+# Le dépôt en portait DEUX : l'optimiseur visait 16 mm, le verdict exigeait 14.
+# Une recherche qui vise autre chose que son juge ne réussit que par chance, et
+# viser 16 pour n'en devoir que 14 a coûté le contact du OK — l'optimiseur
+# achetait de l'anneau avec de la distance jusqu'à franchir le seuil.
+SEUIL_ANNEAU_MM = 14.0
 
 
 def optimiser_contact(doigt_a, doigt_b, axes, base_props=None, tours=13):
@@ -1944,6 +2141,35 @@ def chercher_contact(doigt_a, doigt_b, axes, base_props=None, presentation=True)
     if m2.get("intersection_des_doigts"):
         print(f"ATLAS_OU_CA_TRAVERSE_NETTOYAGE {doigt_a}/{doigt_b} "
               + json.dumps(ou_ca_traverse(), ensure_ascii=False))
+
+    # ═══ LE SECOND ÉTAT N'EST PAS MEILLEUR PARCE QU'IL EST PLUS TARDIF ═══
+    #
+    # Mesuré sur `Hand_OK`, deux fois : l'approche rendait 0,53 mm PROPRE et le
+    # nettoyage rendait 1,04 mm ; puis, après élargissement des axes, l'approche
+    # rendait 0,87 mm propre et le nettoyage 2,43 mm. Le nettoyage DÉGRADAIT un
+    # contact déjà bon, et on gardait quand même son résultat — uniquement
+    # parce qu'il venait après.
+    #
+    # On compare donc explicitement les deux états sur les critères
+    # OBLIGATOIRES, dans l'ordre du cahier, et on rend le meilleur.
+    def _rang(m):
+        _anneau = m.get("ouverture_anneau_mm", ANNEAU_EXIGE[0])
+        return (1 if (m.get("intersection_des_doigts") or m["penetration"]) else 0,
+                1 if m["distance_mm"] > SEUIL_CONTACT_MM else 0,
+                1 if m["face_local"] > SEUIL_FACE else 0,
+                1 if (ANNEAU_EXIGE[0] and _anneau < ANNEAU_EXIGE[0]) else 0,
+                max(0.0, m["distance_mm"] - SEUIL_CONTACT_MM),
+                max(0.0, m["face_local"] - SEUIL_FACE),
+                max(0.0, ANNEAU_EXIGE[0] - _anneau) if ANNEAU_EXIGE[0] else 0.0)
+
+    if _rang(m1) < _rang(m2):
+        print("ATLAS_APPROCHE_MEILLEURE " + json.dumps(
+            {"contact": f"{doigt_a}/{doigt_b}",
+             "approche_mm": round(m1["distance_mm"], 2),
+             "nettoyage_mm": round(m2["distance_mm"], 2),
+             "retenu": "approche"}, ensure_ascii=False))
+        poser_etat(*etat1)
+        return m1, etat1, v1
     return m2, etat2, v2
 
 
@@ -2198,7 +2424,7 @@ for _nom_c, _a, _b, _axes, _fond in (
         # explorer celles où l'index barre le chemin.
         ("Hand_Pinky_Thumb", "pinky", "thumb", PKY,
          {"Index_Curl": 0.95, "Middle_Curl": 0.95})):
-    ANNEAU_EXIGE[0] = 16.0 if _nom_c == "Hand_OK" else 0.0
+    ANNEAU_EXIGE[0] = SEUIL_ANNEAU_MM if _nom_c == "Hand_OK" else 0.0
     _m, _etat, _v = chercher_contact(_a, _b, _axes, _fond)
     ANNEAU_EXIGE[0] = 0.0
     CONTACTS[_nom_c] = {"mesure": _m, "props": _etat[0], "os": _etat[1]}
@@ -2275,26 +2501,118 @@ DIVERGENCE_RETENUE = 0.0
 # On restreint donc la question aux quatre doigts, ce qui est ce qu'elle a
 # toujours prétendu être.
 _QUATRE = ("index", "middle", "ring", "pinky")
-_diag_poing = {}
-for _f in (0.6, 0.7, 0.8, 0.9, 1.0):
-    regler(Fist=_f)
-    _ii = intersections(f"fist{_f}", familles=_QUATRE)
-    _diag_poing[_f] = {"total": sum(x["sommets_dedans"] for x in _ii),
-                       "detail": _ii,
-                       # On garde le compte AVEC le pouce au repos : il ne
-                       # décide plus de la fermeture, mais il dit quand le
-                       # pouce devra s'écarter pour laisser passer.
-                       "avec_le_pouce_au_repos": sum(
-                           x["sommets_dedans"] for x in intersections(f"fistT{_f}"))}
+
+
+def _profondeur_propre(pas=0.05, cup=0.0):
+    """Jusqu'où les quatre doigts se ferment SANS se traverser entre eux.
+
+    `cup` entre dans la mesure parce qu'une paume qui se creuse présente les
+    rayons internes différemment : la fermeture propre n'est pas la même à
+    plat et en coupe.
+    """
+    _f = 0.0
+    _detail = {}
+    while _f <= 1.0 + 1e-9:
+        regler(Fist=_f, Cup=cup)
+        _ii = intersections(f"fist{_f:.2f}", familles=_QUATRE)
+        _t = sum(x["sommets_dedans"] for x in _ii)
+        _detail[round(_f, 2)] = _t
+        if _t:
+            regler()
+            return round(_f - pas, 2), _detail
+        _f += pas
+    regler()
+    return 1.0, _detail
+
+
+# ═══ K_DIVERGENCE SE CHERCHE, IL NE SE POSE PAS ═══
+#
+# La divergence est désormais pilotée par `Fist` (phase D). Son amplitude
+# décide jusqu'où les doigts peuvent se fermer sans se pénétrer : c'est
+# exactement la grandeur que le chat 1 avait laissée à 8° sans jamais
+# l'éprouver, pendant que la fermeture plafonnait à 0,6.
+#
+# On retient la PLUS PETITE amplitude qui atteint la fermeture la plus
+# profonde : au-delà, on écarterait les doigts plus que nécessaire et le poing
+# cesserait d'être un poing.
+_DRIVERS_ECART = {}
+for _n in NOMS4:
+    for _fc in (rig.animation_data.drivers if rig.animation_data else []):
+        if (_fc.data_path == f'pose.bones["MCH_{_n}_01_result{SIDE}"].rotation_euler'
+                and _fc.array_index == AXE_ECART):
+            _DRIVERS_ECART[_n] = _fc
+
+
+def _poser_k(k):
+    for _n, _fc in _DRIVERS_ECART.items():
+        _fc.driver.expression = (
+            f"spread * {SIGNE_ECART * math.radians(ECART[_n]):.6f}"
+            f" + fist * {SIGNE_DIVERGENCE * math.radians(k * DIVERGENCE[_n]):.6f}")
+    forcer_evaluation()
+
+
+if len(_DRIVERS_ECART) != len(NOMS4):
+    raise RuntimeError("les drivers d'écartement sont introuvables : la "
+                       f"recherche de K_DIVERGENCE ne pilote rien ({_DRIVERS_ECART})")
+
+_balayage_k = {}
+for _k in (0.0, 2.0, 4.0, 6.0, 8.0, 10.0, 12.0):
+    _poser_k(_k)
+    _prof, _det = _profondeur_propre()
+    _balayage_k[_k] = {"fermeture_propre": _prof, "detail": _det}
+    print(f"ATLAS_DIVERGENCE k={_k:.0f}° → fermeture propre {_prof}")
+_meilleure = max(v["fermeture_propre"] for v in _balayage_k.values())
+K_DIVERGENCE[0] = min(k for k, v in _balayage_k.items()
+                      if v["fermeture_propre"] >= _meilleure - 1e-9)
+_poser_k(K_DIVERGENCE[0])
+dire("divergence_cherchee", {
+    "balayage": {str(k): v["fermeture_propre"] for k, v in _balayage_k.items()},
+    "k_retenu_deg": K_DIVERGENCE[0],
+    "fermeture_propre_atteinte": _meilleure,
+    "regle": "la plus PETITE amplitude qui atteint la fermeture la plus profonde"})
+
+# ═══ LE CREUSEMENT DU POING SE CHERCHE AUSSI ═══
+# Une paume creuse présente les rayons internes autrement : la fermeture propre
+# n'est pas la même à plat qu'en coupe. On ne pose donc pas `Cup = 0,7` comme
+# graine, on regarde lequel laisse aller le plus loin.
+_balayage_cup_poing = {}
+for _c in (0.0, 0.25, 0.5, 0.7, 0.9):
+    _p, _ = _profondeur_propre(cup=_c)
+    _balayage_cup_poing[_c] = _p
+    print(f"ATLAS_CUP_POING cup={_c:.2f} → fermeture propre {_p}")
+_meilleur_cup = max(_balayage_cup_poing.values())
+CUP_POING = min(c for c, p in _balayage_cup_poing.items()
+                if p >= _meilleur_cup - 1e-9)
+dire("creusement_du_poing", {
+    "balayage": {str(c): p for c, p in _balayage_cup_poing.items()},
+    "cup_retenu": CUP_POING,
+    "fermeture_propre_atteinte": _meilleur_cup,
+    "regle": "le plus PETIT creusement qui laisse aller le plus loin"})
+
+_prof_finale, _diag_poing_detail = _profondeur_propre(pas=0.02, cup=CUP_POING)
+_diag_poing = {f: {"total": t} for f, t in _diag_poing_detail.items()}
 regler()
 dire("traversees_des_quatre_doigts_seuls", _diag_poing)
-# On retient la fermeture la plus franche qui reste propre : le tutoriel range
-# « Fist = 1 provoque une intersection massive » dans les défauts interdits,
-# donc la fermeture réaliste de CE maillage est celle que la mesure désigne.
-FERMETURE = max([f for f, v in _diag_poing.items() if v["total"] == 0] or [0.6])
+
+# ═══ UNE FERMETURE À 0,6 EST UN DIAGNOSTIC, JAMAIS UNE LIVRAISON ═══
+#
+# L'ancienne ligne était `max([...] or [0.6])`. Mesuré : AUCUN niveau n'était
+# propre — 0,6 en comptait déjà 1 — donc la liste était vide et le code
+# retombait sur sa valeur de repli. Le « poing réaliste mesuré » du dépôt était
+# une constante écrite en dur qu'aucune mesure n'avait jamais choisie, et
+# personne ne pouvait le voir puisque le nombre semblait venir d'un calcul.
+_propres = [f for f, m in _diag_poing.items() if m["total"] == 0]
+FERMETURE = max(_propres) if _propres else None
 dire("fermeture_retenue", {
     "valeur": FERMETURE,
-    "raison": "la plus franche qui ne traverse pas, mesurée sans le pouce"})
+    "profondeur_propre_mesuree": _prof_finale,
+    "raison": "la plus franche qui ne traverse pas, quatre doigts SEULS"})
+exiger("le poing se ferme complètement sans traversée",
+       FERMETURE is not None and abs(FERMETURE - 1.0) < 1e-6,
+       FERMETURE if FERMETURE is not None else "aucun niveau propre",
+       "Fist = 1.0")
+if FERMETURE is None:
+    FERMETURE = _prof_finale
 
 # ═══ HAND_FIST EST CHERCHÉE, PLUS POSÉE À LA MAIN ═══
 # `Fist=1, Thumb_Curl=1, Thumb_Opposition=0.6` plaquait les trois articulations
@@ -2307,7 +2625,10 @@ _AXES_POING = [
     # intersection massive » dans les défauts interdits, donc la fermeture
     # réaliste de CE maillage est celle que la mesure désigne, pas 1,0 par
     # principe.
-    ("prop", "Fist", 0.55, 1.0),
+    # ═══ L'OPTIMISEUR DU POUCE NE PEUT PLUS ROUVRIR LES DOIGTS ═══
+    # Il pouvait descendre Fist jusqu'à 0,55 pour améliorer SON contact : le
+    # poing livré cessait alors d'être un poing pour qu'un pouce touche mieux.
+    # La fermeture est fixée à 1,0 et cherchée ailleurs.
     # Et l'écartement des quatre doigts pendant la fermeture : c'est lui qui
     # les empêche de se pénétrer, et il se cherche sur les contrôleurs.
     ("os", (f"CTRL_index_01{SIDE}", AXE_ECART), -14.0, 14.0),
@@ -2325,8 +2646,12 @@ _m_poing, _etat_poing, _ = chercher_contact(
      ("os", (f"CTRL_thumb_meta{SIDE}", 2), -45.0, 45.0),
      ("os", (f"CTRL_thumb_01{SIDE}", 0), -40.0, 40.0),
      ("os", (f"CTRL_thumb_02{SIDE}", 0), -40.0, 40.0)],
-    {}, presentation=False)
-POSE_POING = (_etat_poing[0], _etat_poing[1])
+    # La fermeture est IMPOSÉE au fond de la recherche, plus laissée à
+    # l'optimiseur : on construit d'abord les quatre doigts, puis on cherche le
+    # pouce autour d'eux. Le creusement suit la fermeture retenue.
+    {"Fist": 1.0, "Cup": CUP_POING}, presentation=False)
+POSE_POING = ({**_etat_poing[0], "Fist": 1.0, "Cup": CUP_POING},
+              _etat_poing[1])
 dire("pouce_du_poing", {
     "distance_a_l_index_mm": round(_m_poing["distance_mm"], 2),
     "penetration": _m_poing["penetration"],
@@ -2563,8 +2888,8 @@ if "Hand_Pinch" in _POSES_D and "Hand_OK" in _POSES_D:
         "ouverture_de_l_anneau_ok_mm": round(_anneau_ok, 1)})
     exiger("Pinch et OK sont deux gestes distincts", _ecart_gestes > 15.0,
            f"{_ecart_gestes:.1f} mm", "> 15 mm d'écart")
-    exiger("l'anneau du OK est lisible", _anneau_ok >= 14.0,
-           f"{_anneau_ok:.1f} mm", "≥ 14 mm d'ouverture")
+    exiger("l'anneau du OK est lisible", _anneau_ok >= SEUIL_ANNEAU_MM,
+           f"{_anneau_ok:.1f} mm", f"≥ {SEUIL_ANNEAU_MM:.0f} mm d'ouverture")
 
 # ═══ LA PAUME DOIT VRAIMENT SE CREUSER ═══
 if "Hand_Cupped" in _POSES_D:
