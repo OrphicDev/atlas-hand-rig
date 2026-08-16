@@ -1,4 +1,4 @@
-STATUS: NON-VALIDE — CHAT 2 EN COURS
+STATUS: NON-VALIDE — CHAT 3 EN COURS
 
 Ce dépôt n'est pas dans un état livrable. Ce fichier existe pour qu'aucun
 lecteur ne puisse s'y tromper.
@@ -23,6 +23,64 @@ lecteur ne puisse s'y tromper.
 
 `main` et `wip/chat-1-honest-probe` n'ont pas bougé. Aucun force push, aucune
 réécriture d'historique, aucun merge, aucun tag.
+
+---
+
+## Chat 3 — ce qui est acquis, et ce qui ne l'est pas
+
+Le cahier du chat 3 est **entierement ecrit en code**. Ce qui reste n'est plus
+de l'ecriture mais de la mesure : une reconstruction qui aboutisse sur tous les
+criteres, puis les rendus Cycles, puis la main droite.
+
+### Les quatre blocages du chat 2, et ou ils en sont
+
+| blocage | avant | maintenant |
+| --- | --- | --- |
+| `Cup` aplatit et elargit la paume | arc −10,89 mm, largeur +14,04 | **arc +6,71, largeur −10,79** |
+| le cerclage rouge de Sacha | −0,88 mm | **−4,94 mm** |
+| poids sans proprietaire | 12 329 ambigus, dont pouce/auriculaire | **0 entre rayons non voisins** |
+| la generation plante | code 1, aucun `.blend` | **va au bout** |
+
+### Ce qui resiste encore
+
+- `Hand_Pinky_Thumb` — la pose existe geometriquement (0,10 mm a l'approche) et
+  le nettoyage ne la tient pas ;
+- `Hand_OK` — l'anneau et le contact sont antagonistes ; la recherche en trois
+  etapes est ecrite, pas encore prouvee ;
+- le poing ne se ferme pas au-dela de 0,6 — les quatre doigts seuls se
+  traversent 820 fois a 0,7 ;
+- **aucun rendu Cycles n'a encore ete produit par ces scripts.**
+
+### Ce que le chat 3 a ajoute aux instruments
+
+| outil | ce qu'il repond |
+| --- | --- |
+| `outils/sonde-creux.py` | la paume se creuse-t-elle vraiment, et quel axe la creuse |
+| `outils/sonde-poids-main.py` | quels sommets n'ont pas de proprietaire |
+| `outils/anneau.py` | le diametre UTILE du trou, pas le minimum du contour |
+| `outils/revue-visuelle.py` | ce qu'une image montre, avant de la noter |
+| `outils/matrice-acceptation.py` | la matrice du cahier, produite et jamais recopiee |
+| `atelier/mesures_paume.py` | arc, largeur, convergence — sur la pose courante |
+| `atelier/correctifs.py` | masques geodesiques, transfert de poids, shape keys sparse |
+| `atelier/transitions.py` | de vraies actions, pas une interpolation recalculee |
+| `atelier/jacobienne.py` | convertir un deplacement voulu en delta de cle |
+| `atelier/miroir.py` | la main droite se transfere, avec une table de signes mesuree |
+
+Cinquante et un refus sont exerces par les autotests purs, hors Blender.
+
+### La lecon de ce chat, et elle vaut au-dela du rig
+
+Le verificateur etendu, lance sur le fichier que l'ancien jugeait
+« 22 reussis / 9 echoues », rend desormais cinq echecs de plus — au chiffre
+pres ce que les sondes avaient trouve a la main.
+
+**Le rig n'etait pas moins casse avant. L'instrument ne regardait pas.**
+
+Onze fautes du meme genre ont ete trouvees dans les modules ecrits par agents,
+et au moins huit dans mon propre travail. Aucune n'aurait plante : une garde
+placee apres une normalisation, une contre-epreuve qui testait IEEE 754, un
+`except` qui laissait l'armature en mode edition et faisait mesurer une main
+immobile. Toutes auraient rendu un verdict credible.
 
 ---
 
