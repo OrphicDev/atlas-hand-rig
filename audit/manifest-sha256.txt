@@ -132,6 +132,7 @@ f8da7796ec3ee1ab3cbc31103d932f909da222f6da8928dd7f21168a06d74763  ./reports/chat
 188aa19ad00a5272ab2f178c82066c776ee1007bf28ca1030cbd0ada46fb34a9  ./reports/chat-2/verifier-e2d4b1c-ancien-blend.txt
 f975bad4571a2c53a37df57d4e2487d445a458600c7cc13dc1e76dedc76d225d  ./reports/chat-3/cup/01-balayage-cup.json
 f37e465ed8ea5f7e3c913443b25be91f1a4e9b19cbe30baa8c7b22c042e2c38b  ./reports/chat-3/cup/journal-focus-cup.txt
+bbc438c09f7c7aa448cfb56225032b10d35c81e96e8bf0e8ecd20df98a0ec06d  ./reports/chat-3/final/RAPPORT-FINAL.md
 35469b7364db0e48a062fee4e5112878f9a4b8ee59bd1654aaa9fb3476415963  ./reports/chat-3/final/journal-rendus.txt
 8e97ee9f6c071aea2fce654aa406af52e5d54fb7cbc9f3420ad04ba75e9e3ab7  ./reports/chat-3/final/planches/planche-Hand_Cupped.png
 9f177d0a0fb07484784743b24415694f5cad6ff5ad2795561e65401c8bcee341  ./reports/chat-3/final/planches/planche-Hand_Fist.png
@@ -230,7 +231,7 @@ ad52b1935138bb7c494401b0cd5c4622da725a5bb4233dc07455df8be8b85e38  ./reports/chat
 913200f72157af9ac8b94dcb772fb02eae1e69fbe7029077cb8fa1c836e06f6f  ./reports/chat-3/journal-generation-a859527-partiel.txt
 81bd9993551b47d3db9b70c620ffa29e77c74dc905f60261f8e0c8a851c23563  ./reports/chat-3/journal-generation-precedent.txt
 913200f72157af9ac8b94dcb772fb02eae1e69fbe7029077cb8fa1c836e06f6f  ./reports/chat-3/journal-generation.txt
-ed16e4e750e0ec84e8c4ab8b2037b965a69b7679594dbcc0e04bc571d9d517af  ./reports/chat-3/journal-pinky.txt
+4b81b18fca74ebf54c2698a4275ea17eaf6aec55d24ae800fe1a40c83b6d30d8  ./reports/chat-3/journal-pinky.txt
 2a8364ed7efd63b58223e081a5409ee921fd3875d82d86a13edeab0187610026  ./reports/chat-3/journal-poing.txt
 f8a80e4838ab355bfc7fdcdfb2c1a04950307ef2f2e4eb919b4cd4018d32af32  ./reports/chat-3/matrice-acceptation.md
 482872126f419d837505b4ce7aea0c8e91edbdfef8d3d699420945a325f01151  ./reports/chat-3/rapport-echec.json
